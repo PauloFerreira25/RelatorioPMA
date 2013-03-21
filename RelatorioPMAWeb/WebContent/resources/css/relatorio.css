@@ -1,32 +1,49 @@
 @CHARSET "UTF-8";
 
 div {
-	position: relative;
 	border-color: #ff0000;
 	border-width: 1px;
-	border-style:solid;
+	border-style: solid;
 }
 
-.ladoesquerdo{
-	width: 0px;
+#ladoesquerdo {
+	float: left;
 }
 
-.meio{
-	float:left;
+#ladodireito {
+	float: left;
 }
 
-.ladodireito{
-	float:right;
+#rodape {
+	clear: both;
 }
 
+#capa{
+	background-image: url("#{resource['images:t0.png']}"); 
+	background-repeat: no-repeat;
+}
+
+.titulo {
+	font-size: 50px;
+}
+
+.centro {
+	text-align: center;
+}
+
+.logocapa {
+	
+}
+
+.capasize {
+	min-height: 500px;
+}
 
 body {
 	background-color: #ffffff;
 	color: #000000;
 	font-family: Arial, Helvetica, sans-serif;
-	margin: 2px 0px 2px 0px;
 	padding: 0px;
-	
 }
 
 body,td,th,input,textarea,select,a {
@@ -35,4 +52,12 @@ body,td,th,input,textarea,select,a {
 
 a:hover {
 	text-decoration: none;
+}
+
+@page :left {
+	margin: 0px;
+}
+
+@page :right {
+	margin: 0px;
 }
