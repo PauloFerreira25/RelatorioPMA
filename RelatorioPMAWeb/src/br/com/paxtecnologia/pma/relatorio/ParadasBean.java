@@ -12,9 +12,10 @@ import br.com.paxtecnologia.pma.relatorio.vo.ParadasVO;
 @ManagedBean(name = "paradasBean")
 public class ParadasBean {
 
-	private List<ParadasVO> listaItem = new ArrayList<ParadasVO>();
+	private List<ParadasVO> listaItem;
 
 	public List<ParadasVO> getListaResumo() {
+		listaItem = new ArrayList<ParadasVO>();
 		ParadasVO a = new ParadasVO();
 		a.setTipo("Paradas Evitadas");
 		a.setSigla("PE");
