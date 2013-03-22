@@ -19,12 +19,14 @@ div {
 }
 
 #capa{
-	background-image: url("#{resource['images:t0.png']}"); 
+	background-image: url("images/t0.png");
+	background-size:100%;
 	background-repeat: no-repeat;
 }
 
 .titulo {
 	font-size: 50px;
+	page-break-after:always 
 }
 
 .centro {
@@ -36,8 +38,13 @@ div {
 }
 
 .capasize {
-	min-height: 500px;
+	height: 900px;	
 }
+
+.capasize_individual {
+	height: 30%;	
+}
+
 
 body {
 	background-color: #ffffff;
