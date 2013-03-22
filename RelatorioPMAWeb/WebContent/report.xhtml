@@ -6,38 +6,22 @@
 
 <h:head>
 	<h:outputStylesheet library="css" name="relatorio.css" />
+	<h:outputStylesheet library="css" name="table-style.css" />
 </h:head>
 <h:body>
 	<div id='topo'>
 		<ui:include src="relatorio/capa.xhtml" />
 	</div>
 	<div id='meio'>
-			<ui:include src="relatorio/sumario.xhtml" />
-			<div id='introducao'></div>
-			<div id='resumoatendimento'>
-				<div id='indicadores'></div>
-				<div id='chamados'>
-					<div id='chamadossolicitantes'></div>
-					<div id='tipochado'></div>
-					<div id='chamadoemaberto'></div>
-					<div id='chamadofechado'></div>
-					<div id='chamadohost'></div>
-				</div>
-			</div>
-			<div id='worload'>
-				<div id='principaltimeframe'></div>
-				<div id='outrostimeframe'></div>
-				<div id='principaloutrostimeframe'></div>
-			</div>
-			<div id='resumodeparadas'>
-				<div id='paradasevitadas'></div>
-				<div id='paradasnaoprogramadas'></div>
-				<div id='programadassestrategicas'></div>
-				<div id='paradasprogramadas'></div>
-				<div id='totais'></div>
-			</div>
-			<div id='conclusao'></div>
+		<ui:include src="relatorio/sumario.xhtml" />
+		<ui:include src="relatorio/introducao.xhtml" />
+		<ui:include src="relatorio/resumoatendimento.xhtml" />
+		<ui:include src="relatorio/worload.xhtml" />
+		<ui:include src="relatorio/resumodeparadas.xhtml" />
+		<ui:include src="relatorio/conclusao.xhtml" />
 	</div>
-	<div id='rodape'></div>
+	<div id='rodape'>
+		<ui:include src="relatorio/rodape.xhtml" />
+	</div>
 </h:body>
 </html>
