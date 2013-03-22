@@ -59,6 +59,7 @@ body {
 	color: #000000;
 	font-family: Arial, Helvetica, sans-serif;
 	padding: 0px;
+	margin: 0px;
 }
 
 body,td,th,input,textarea,select,a {
@@ -71,8 +72,10 @@ a:hover {
 
 @page :left {
 	margin: 0px;
+	padding: 0px;
 }
 
 @page :right {
 	margin: 0px;
+	padding: 0px;
 }
