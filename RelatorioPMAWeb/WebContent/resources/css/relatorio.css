@@ -18,15 +18,18 @@ div {
 	clear: both;
 }
 
-#capa{
+#capa {
 	background-image: url("images/t0.png");
-	background-size:100%;
+	background-size: 100%;
 	background-repeat: no-repeat;
 }
 
 .titulo {
 	font-size: 50px;
-	page-break-after:always 
+}
+
+.quebrapagina {
+	page-break-after: always;
 }
 
 .centro {
@@ -38,13 +41,12 @@ div {
 }
 
 .capasize {
-	height: 900px;	
+	height: 900px;
 }
 
 .capasize_individual {
-	height: 30%;	
+	height: 30%;
 }
-
 
 body {
 	background-color: #ffffff;
