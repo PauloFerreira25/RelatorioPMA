@@ -3,13 +3,46 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<div id='resumoatendimento'>
-				<div id='indicadores'></div>
-				<div id='chamados'>
-					<div id='chamadossolicitantes'></div>
-					<div id='tipochado'></div>
-					<div id='chamadoemaberto'></div>
-					<div id='chamadofechado'></div>
-					<div id='chamadohost'></div>
-				</div>
-			</div>
+		<h:outputText value="2. Resumo do Atendimento" />
+		<div id='indicadores'>
+			<h:outputText
+				value="Estamos trabalhando há
+03 dia(s) sem paradas
+Operacionais
+----------------------------------------------------------------------------------
+Evitamos 00 paradas operacionais 
+nos últimos 03 dias." />
+			<h:outputText value="No mês corrente temos:" />
+			<h:dataTable value="#{paradasBean.listaResumo}" var="i"
+				styleClass="order-table" headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row">
+
+				<h:column>
+					<f:facet name="header">Tipo</f:facet>
+					<h:outputText value="#{i.tipo}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Sigla</f:facet>
+					<h:outputText value="#{i.sigla}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Quantidade</f:facet>
+					<h:outputText value="#{i.qtde}" />
+				</h:column>
+
+			</h:dataTable>
+			<h:outputText
+				value="Abaixo podemos acompanhar alguns dados estatísticos do atendimento prestado:" />
+		</div>
+		<div id='chamados'>
+			<h:outputText value="2.1 Indicadores do Atendimento" />
+			<div id='chamadossolicitantes'></div>
+			<div id='tipochado'></div>
+			<div id='chamadoemaberto'></div>
+			<div id='chamadofechado'></div>
+			<div id='chamadohost'></div>
+		</div>
+	</div>
 </ui:composition>
