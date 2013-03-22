@@ -2,13 +2,15 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	<div id='capa' class="capasize">
-			<div id='banner' class="capasize_individual"></div>
+	<div class="capasize">
+			<div id='banner' class="capasize_individual">
+				<h:graphicImage library="images" name="t4.png" width="100%" height="100%"/>
+			</div>
 			<div id='logocliente' class="centro capasize_individual">
 				<h:graphicImage library="images" name="#{capaBean.logoCliente}"
 					styleClass="logocapa " />
 			</div>
-			<div id='titul1' class="centro ">
+			<div id='titul1' class="centro capasize_individual">
 				<h:outputText styleClass="titulo centro"
 					value="#{capaBean.tituloRelatorio}" />
 			</div>
@@ -17,11 +19,13 @@
 					value="#{capaBean.subtituloRelatorio}" />
 			</div>
 			<div id='rodapecapa'>
-				<div id='textoversao'>
+				<div id='textoversao' class="capasize_individual">
 					<h:outputText value="#{capaBean.dataCriacao}" />
 					<h:outputText value="#{capaBean.textoVersao}" />
 				</div>
-				<div id='imagemrodape'></div>
+				<div id='imagemrodape' class="capasize_individual">
+					<h:graphicImage library="images" name="t2.png" width="100%" height="100%"/>
+				</div>
 			</div>
 		</div>
 </ui:composition>

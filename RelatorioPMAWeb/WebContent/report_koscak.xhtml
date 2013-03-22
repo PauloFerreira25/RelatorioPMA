@@ -9,70 +9,34 @@
 </h:head>
 <h:body>
 	<div id='topo'>
-		<div id='capa' class="capasize">
-			<div id='banner' class="capasize_individual">
-			</div>
-			<div id='logocliente' class="centro capasize_individual">
-				<h:graphicImage library="images" name="logo_alatur.png"
-					styleClass="logocapa " />
-			</div>
-			<div id='titul1' class="centro ">
-				<h:outputText styleClass="titulo centro" value="SUPORTE" />
-			</div>
-			<div id='titul2' class="centro capasize_individual">
-				<h:outputText styleClass="titulo centro" value="- Fevereiro / 2013-" />
-			</div>
-			<div id='rodapecapa'>
-				<div id='textoversao'>
-					<h:outputText value="Data de criaçao: 01 de março de 2013" />
-					<h:outputText value="Versao 1.0" />
-				</div>
-				<div id='imagemrodape'></div>
-			</div>
-		</div>
+		<ui:include src="relatorio/capa.xhtml" />
 	</div>
 	<div id='meio'>
-<!-- 		<div id='ladoesquerdo'> -->
-<!-- 			<h:graphicImage library="images" name="t3_l.png" /> -->
-<!-- 		</div> -->
-		<div id='ladodireito'>
-			<div id='relatorio'>
-				<div class="page-break"> ---- Quebra de Página ----</div>
-				<div id='sumario'>
-					<h1>adasdasdda</h1>
+			<ui:include src="relatorio/sumario.xhtml" />
+			<div id='introducao'></div>
+			<div id='resumoatendimento'>
+				<div id='indicadores'></div>
+				<div id='chamados'>
+					<div id='chamadossolicitantes'></div>
+					<div id='tipochado'></div>
+					<div id='chamadoemaberto'></div>
+					<div id='chamadofechado'></div>
+					<div id='chamadohost'></div>
 				</div>
-				<div class="page-break"> ---- Quebra de Página ----</div>
-				<div id='introducao'>
-					<h1 >adasdasdda</h1>
-				</div>
-				<div id='resumoatendimento'>
-				<div class="page-break"> ---- Quebra de Página ----</div>
-					<div id='indicadores'>
-						<h1 >adasdasdda</h1>
-					</div>
-					<div id='chamados'>
-						<div id='chamadossolicitantes'></div>
-						<div id='tipochado'></div>
-						<div id='chamadoemaberto'></div>
-						<div id='chamadofechado'></div>
-						<div id='chamadohost'></div>
-					</div>
-				</div>
-				<div id='worload'>
-					<div id='principaltimeframe'></div>
-					<div id='outrostimeframe'></div>
-					<div id='principaloutrostimeframe'></div>
-				</div>
-				<div id='resumodeparadas'>
-					<div id='paradasevitadas'></div>
-					<div id='paradasnaoprogramadas'></div>
-					<div id='programadassestrategicas'></div>
-					<div id='paradasprogramadas'></div>
-					<div id='totais'></div>
-				</div>
-				<div id='conclusao'></div>
 			</div>
-		</div>
+			<div id='worload'>
+				<div id='principaltimeframe'></div>
+				<div id='outrostimeframe'></div>
+				<div id='principaloutrostimeframe'></div>
+			</div>
+			<div id='resumodeparadas'>
+				<div id='paradasevitadas'></div>
+				<div id='paradasnaoprogramadas'></div>
+				<div id='programadassestrategicas'></div>
+				<div id='paradasprogramadas'></div>
+				<div id='totais'></div>
+			</div>
+			<div id='conclusao'></div>
 	</div>
 	<div id='rodape'></div>
 </h:body>
