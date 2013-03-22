@@ -8,30 +8,11 @@
 	<h:outputStylesheet library="css" name="relatorio.css" />
 </h:head>
 <h:body>
-	<div id='topo'></div>
+	<div id='topo'>
+		<ui:include src="relatorio/capa.xhtml" />
+	</div>
 	<div id='meio'>
-		<div id='capa' class="capasize">
-			<div id='banner' class="capasize_individual"></div>
-			<div id='logocliente' class="centro capasize_individual">
-				<h:graphicImage library="images" name="#{capaBean.logoCliente}"
-					styleClass="logocapa " />
-			</div>
-			<div id='titul1' class="centro ">
-				<h:outputText styleClass="titulo centro" value="#{capaBean.tituloRelatorio}" />
-			</div>
-			<div id='titul2' class="centro capasize_individual">
-				<h:outputText styleClass="titulo centro" value="#{capaBean.subtituloRelatorio}" />
-			</div>
-			<div id='rodapecapa'>
-				<div id='textoversao'>
-					<h:outputText value="#{capaBean.dataCriacao}" />
-					<h:outputText value="#{capaBean.textoVersao}" />
-				</div>
-				<div id='imagemrodape'></div>
-			</div>
-		</div>
-		<div id='relatorio'>
-			<div id='sumario'></div>
+			<ui:include src="relatorio/sumario.xhtml" />
 			<div id='introducao'></div>
 			<div id='resumoatendimento'>
 				<div id='indicadores'></div>
@@ -56,7 +37,6 @@
 				<div id='totais'></div>
 			</div>
 			<div id='conclusao'></div>
-		</div>
 	</div>
 	<div id='rodape'></div>
 </h:body>

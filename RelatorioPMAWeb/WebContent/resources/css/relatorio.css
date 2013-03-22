@@ -24,6 +24,12 @@ div {
 	background-repeat: no-repeat;
 }
 
+#meio {
+	background-image: url("images/t0.png");
+	background-size: 100%;
+	background-repeat: repeat-x;
+}
+
 .titulo {
 	font-size: 50px;
 }
