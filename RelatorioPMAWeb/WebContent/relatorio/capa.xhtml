@@ -4,13 +4,13 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<div class="capasize">
 			<div id='banner' class="capasize_individual">
-				<h:graphicImage library="images" name="t4.png" />
+				<h:graphicImage library="images" name="t4.png" width="100%" height="100%"/>
 			</div>
 			<div id='logocliente' class="centro capasize_individual">
 				<h:graphicImage library="images" name="#{capaBean.logoCliente}"
 					styleClass="logocapa " />
 			</div>
-			<div id='titul1' class="centro capasize_individual">
+			<div id='titul1' class="centro">
 				<h:outputText styleClass="titulo centro"
 					value="#{capaBean.tituloRelatorio}" />
 			</div>
@@ -21,11 +21,10 @@
 			<div id='rodapecapa'>
 				<div id='textoversao' class="capasize_individual">
 					<h:outputText value="#{capaBean.dataCriacao}" />
-					<br />
 					<h:outputText value="#{capaBean.textoVersao}" />
 				</div>
-				<div id='imagemrodape'>
-					<h:graphicImage library="images" name="t2.png"/>
+				<div id='imagemrodape' class="capasize_individual">
+					<h:graphicImage library="images" name="t2.png" width="100%" height="100%"/>
 				</div>
 			</div>
 		</div>
