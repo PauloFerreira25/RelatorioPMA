@@ -3,7 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<div id='resumoatendimento'>
-		<h:outputText value="2. Resumo do Atendimento" />
+		<h:outputText value="Resumo do Atendimento" />
 		<div id='indicadores'>
 			<h:outputText
 				value="Estamos trabalhando há
@@ -37,9 +37,58 @@ nos últimos 03 dias." />
 				value="Abaixo podemos acompanhar alguns dados estatísticos do atendimento prestado:" />
 		</div>
 		<div id='chamados'>
-			<h:outputText value="2.1 Indicadores do Atendimento" />
-			<div id='chamadossolicitantes'></div>
-			<div id='tipochado'></div>
+			<h:outputText value="Indicadores do Atendimento" />
+			<h:dataTable value="#{atendimentoBean.listaGeral}" var="i"
+				styleClass="order-table" headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row">
+
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+					<h:outputText value="#{i.tipo}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Quantidade</f:facet>
+					<h:outputText value="#{i.qtde}" />
+				</h:column>
+
+			</h:dataTable>
+			<div id='chamadossolicitantes'>
+			<h:outputText value="Chamados por Solicitante" />
+			<h:dataTable value="#{atendimentoBean.listaSolicitante}" var="i"
+				styleClass="order-table" headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row">
+
+				<h:column>
+					<f:facet name="header">Solicitante</f:facet>
+					<h:outputText value="#{i.tipo}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Quantidade de Chamados Abertos</f:facet>
+					<h:outputText value="#{i.qtde}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">% de Chamados Abertos</f:facet>
+					<h:outputText value="#{i.tipo}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Quantidade de Chamados Fechados</f:facet>
+					<h:outputText value="#{i.qtde}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">% de Chamados Fechados</f:facet>
+					<h:outputText value="#{i.tipo}" />
+				</h:column>
+
+			</h:dataTable>
+			</div>
+			<div id='tipochado'>
+			<h:outputText value="Tipo de Chamados" />
+			</div>
 			<div id='chamadoemaberto'></div>
 			<div id='chamadofechado'></div>
 			<div id='chamadohost'></div>
