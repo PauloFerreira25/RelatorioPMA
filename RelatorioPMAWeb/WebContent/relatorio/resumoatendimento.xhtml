@@ -193,6 +193,11 @@ nos últimos 03 dias." />
 				</h:dataTable>
 			</div>
 			<div id='chamadohost'>
+				<h:outputScript library="js" name="jquery.js" target="head" />
+				<h:outputScript library="js" name="jquery.flot.js" target="head" />
+				<h:outputScript library="js" name="jquery.flot.pie.js" target="head" />
+				<h:outputStylesheet library="css" name="grafico.css" target="head" />
+
 				<h:outputText value="Chamados por Host" />
 				<h:dataTable value="#{atendimentoHostBean.listaHost}" var="i"
 					styleClass="order-table" headerClass="order-table-header"
@@ -227,35 +232,48 @@ nos últimos 03 dias." />
 						<h:outputText value="#{i.porcentoFechado}" />
 						<f:facet name="footer">#{atendimentoHostBean.totalPorcentoFechados}</f:facet>
 					</h:column>
+
 				</h:dataTable>
-				<h:outputScript library="js" name="jquery.js" />
-				<h:outputScript library="js" name="jquery.flot.js" />
-				<h:outputScript library="js" name="jquery.flot.pie.js" />
-				<script type="text/javascript"> //<![CDATA[ 
-				// data
-				/*var data = [
-				{ label: "Series1",  data: 10},
-				{ label: "Series2",  data: 30},
-				{ label: "Series3",  data: 90},
-				{ label: "Series4",  data: 70},
-				{ label: "Series5",  data: 80},
-				{ label: "Series6",  data: 110}
-			];*/
-			
-			// graphHost
-			$.plot($("#graphHost"), data, 
-			{
-				series: {
-					pie: { 
-						show: true
-					}
-				},
-				legend: {
-					show: false
-				}
-			});
-                     //]]> </script>
-				<div id="graphHost" class="graph"></div>
+
+				<script type="text/javascript">
+					//<![CDATA[
+					$(function () {	
+						dataAbertos = #{atendimentoHostBean.graficoAbertos}
+						dataFechados = #{atendimentoHostBean.graficoAbertos}
+		
+						// graphHost
+						$.plot($("#graphHostAbertos"), dataAbertos, 
+						{
+							series: {
+								pie: { 
+									show: true
+								}
+							},
+							legend: {
+								show: false
+							}
+						});
+
+						$.plot($("#graphHostFechados"), dataFechados, 
+								{
+									series: {
+										pie: { 
+											show: true
+										}
+									},
+									legend: {
+										show: false
+									}
+								});
+					});
+					//]]> 
+				</script>
+				<div id="graficos">
+				<h:outputText value="Chamados por Host abertos" />
+				<div id="graphHostAbertos" class="graph" ></div>
+				<h:outputText value="Chamados por Host fechados" />
+				<div id="graphHostFechados" class="graph"></div>
+				</div>
 			</div>
 		</div>
 	</div>

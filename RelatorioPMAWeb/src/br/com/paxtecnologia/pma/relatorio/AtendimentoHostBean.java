@@ -62,5 +62,18 @@ public class AtendimentoHostBean {
 
 		return listaHost;
 	}
+	
+	public String getGraficoAbertos(){
+		String saida = new String();
+		saida = "[{ label: \"Series1\",  data: 10},{ label: \"Series2\",  data: 30},{ label: \"Series6\",  data: 110}]";
+		return saida;
+	}
+	
+
+	public String getGraficoFechados(){
+		String saida = new String();
+		saida = "[{ label: \"Series1\",  data: 10},{ label: \"Series2\",  data: 30},{ label: \"Series6\",  data: 110}]";
+		return saida;
+	}
 
 }

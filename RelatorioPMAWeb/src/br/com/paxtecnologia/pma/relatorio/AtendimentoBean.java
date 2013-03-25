@@ -124,7 +124,7 @@ public class AtendimentoBean {
 		listaTipoChamado.add(a);
 
 		TipoChamadosVO b = new TipoChamadosVO();
-		b.setTipo("Mudança");
+		b.setTipo("MudanÃ§a");
 		b.setQtdeAberto(1);
 		b.setPorcentoAberto(7.14);
 		b.setQtdeFechado(2);
@@ -147,7 +147,7 @@ public class AtendimentoBean {
 
 		ChamadoVO a = new ChamadoVO();
 		a.setIdChamado("VERZANI-219");
-		a.setTitulo("[oracle3] Criação relatório");
+		a.setTitulo("[oracle3] CriaÃ§Ã£o relatÃ³rio");
 		a.setDataAbertura("09 Jan 2013");
 		a.setStatus("Open");
 		a.setTipoChamado("Task");
@@ -155,7 +155,7 @@ public class AtendimentoBean {
 
 		ChamadoVO b = new ChamadoVO();
 		b.setIdChamado("VERZANI-220");
-		b.setTitulo("[oracle2] Criação relatório");
+		b.setTitulo("[oracle2] Criaï¿½ï¿½o relatï¿½rio");
 		b.setDataAbertura("12 Jan 2013");
 		b.setStatus("Open");
 		b.setTipoChamado("Task");
@@ -163,7 +163,7 @@ public class AtendimentoBean {
 
 		ChamadoVO c = new ChamadoVO();
 		c.setIdChamado("VERZANI-221");
-		c.setTitulo("[oracle1] Criação relatório");
+		c.setTitulo("[oracle1] Criaï¿½ï¿½o relatï¿½rio");
 		c.setDataAbertura("15 Jan 2013");
 		c.setStatus("Reopened");
 		c.setTipoChamado("Task");
@@ -177,7 +177,7 @@ public class AtendimentoBean {
 
 		ChamadoVO a = new ChamadoVO();
 		a.setIdChamado("VERZANI-219");
-		a.setTitulo("[oracle3] Criação relatório");
+		a.setTitulo("[oracle3] Criaï¿½ï¿½o relatï¿½rio");
 		a.setDataAbertura("09 Jan 2013");
 		a.setStatus("Open");
 		a.setTipoChamado("Task");
@@ -185,7 +185,7 @@ public class AtendimentoBean {
 
 		ChamadoVO b = new ChamadoVO();
 		b.setIdChamado("VERZANI-220");
-		b.setTitulo("[oracle2] Criação relatório");
+		b.setTitulo("[oracle2] Criaï¿½ï¿½o relatï¿½rio");
 		b.setDataAbertura("12 Jan 2013");
 		b.setStatus("Open");
 		b.setTipoChamado("Task");
@@ -193,7 +193,7 @@ public class AtendimentoBean {
 
 		ChamadoVO c = new ChamadoVO();
 		c.setIdChamado("VERZANI-221");
-		c.setTitulo("[oracle1] Criação relatório");
+		c.setTitulo("[oracle1] Criaï¿½ï¿½o relatï¿½rio");
 		c.setDataAbertura("15 Jan 2013");
 		c.setStatus("Reopened");
 		c.setTipoChamado("Task");
