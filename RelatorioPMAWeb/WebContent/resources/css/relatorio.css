@@ -1,9 +1,17 @@
 @CHARSET "UTF-8";
 
 div {
-	border-color: #BBBBBB;
+	border-color: #bbbbbbb;
 	border-width: 1px;
 	border-style: solid;
+}
+
+#ladoesquerdo {
+	float: left;
+}
+
+#ladodireito {
+	float: left;
 }
 
 #rodape {
@@ -15,15 +23,23 @@ div {
 }
 
 .quebrapagina {
-	page-break-after: always;
+	page-break-before: always;
 }
 
 .centro {
 	text-align: center;
 }
 
+.logocapa {
+	
+}
+
+.capasize {
+	height: 1024px;
+}
+
 .capasize_individual {
-	height: 200px;
+	height: 30.1%;
 }
 
 body {
@@ -32,6 +48,9 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	padding: 0px;
 	margin: 0px;
+}
+
+body,td,th,input,textarea,select,a {
 	font-size: 12px;
 }
 
