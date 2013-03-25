@@ -12,7 +12,7 @@ public class CapaBean {
 	private String subtituloRelatorio = "- Fevereiro / 2013-";
 	private String dataCriacao = "Data de criaçao: 01 de março de 2013";
 	private String textoVersao = "Versao 1.0";
-	private String remover = "Versao 1.0";
+	
 
 	public String getLogoCliente() {
 		return logoCliente;
