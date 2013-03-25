@@ -228,6 +228,34 @@ nos últimos 03 dias." />
 						<f:facet name="footer">#{atendimentoBean.totalPorcentoFechados}</f:facet>
 					</h:column>
 				</h:dataTable>
+				<h:outputScript library="js" name="jquery.js" />
+				<h:outputScript library="js" name="jquery.flot.js" />
+				<h:outputScript library="js" name="jquery.flot.pie.js" />
+				<script type="text/javascript"> //<![CDATA[ 
+				// data
+				/*var data = [
+				{ label: "Series1",  data: 10},
+				{ label: "Series2",  data: 30},
+				{ label: "Series3",  data: 90},
+				{ label: "Series4",  data: 70},
+				{ label: "Series5",  data: 80},
+				{ label: "Series6",  data: 110}
+			];*/
+			
+			// graphHost
+			$.plot($("#graphHost"), data, 
+			{
+				series: {
+					pie: { 
+						show: true
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+                     //]]> </script>
+				<div id="graphHost" class="graph"></div>
 			</div>
 		</div>
 	</div>
