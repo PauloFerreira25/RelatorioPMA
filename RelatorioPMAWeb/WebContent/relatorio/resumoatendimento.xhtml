@@ -44,12 +44,12 @@ nos últimos 03 dias." />
 
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
-					<h:outputText value="#{i.tipo}" />
+					<h:outputText value="#{i.texto}" />
 				</h:column>
 
 				<h:column>
 					<f:facet name="header">Quantidade</f:facet>
-					<h:outputText value="#{i.qtde}" />
+					<h:outputText value="#{i.valor}" />
 				</h:column>
 
 			</h:dataTable>
@@ -61,7 +61,7 @@ nos últimos 03 dias." />
 
 					<h:column>
 						<f:facet name="header">Solicitante</f:facet>
-						<h:outputText value="#{i.tipo}" />
+						<h:outputText value="#{i.solictante}" />
 					</h:column>
 
 					<h:column>
@@ -126,27 +126,27 @@ nos últimos 03 dias." />
 
 					<h:column>
 						<f:facet name="header">ID Chamado</f:facet>
-						<h:outputText value="#{i.tipo}" />
+						<h:outputText value="#{i.idChamado}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Titulo</f:facet>
-						<h:outputText value="#{i.qtdeAberto}" />
+						<h:outputText value="#{i.titulo}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Data de Abertura</f:facet>
-						<h:outputText value="#{i.porcentoAberto}" />
+						<h:outputText value="#{i.dataAbertura}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Status</f:facet>
-						<h:outputText value="#{i.qtdeFechado}" />
+						<h:outputText value="#{i.status}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Tipo de Chamado</f:facet>
-						<h:outputText value="#{i.porcentoFechado}" />
+						<h:outputText value="#{i.tipoChamado}" />
 					</h:column>
 				</h:dataTable>
 			</div>
@@ -158,27 +158,27 @@ nos últimos 03 dias." />
 
 					<h:column>
 						<f:facet name="header">ID Chamado</f:facet>
-						<h:outputText value="#{i.tipo}" />
+						<h:outputText value="#{i.idChamado}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Titulo</f:facet>
-						<h:outputText value="#{i.qtdeAberto}" />
+						<h:outputText value="#{i.titulo}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Data de Abertura</f:facet>
-						<h:outputText value="#{i.porcentoAberto}" />
+						<h:outputText value="#{i.dataAbertura}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Status</f:facet>
-						<h:outputText value="#{i.qtdeFechado}" />
+						<h:outputText value="#{i.status}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Tipo de Chamado</f:facet>
-						<h:outputText value="#{i.porcentoFechado}" />
+						<h:outputText value="#{i.tipoChamado}" />
 					</h:column>
 				</h:dataTable>
 			</div>
