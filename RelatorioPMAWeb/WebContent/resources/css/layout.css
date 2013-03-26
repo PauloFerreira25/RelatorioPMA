@@ -6,6 +6,11 @@ div {
 	border-style: solid;
 }
 
+#indicadores,#chamados,#chamadossolicitantes,#tipochamado,#chamadoemaberto,#chamadofechado,#chamadohost
+	{
+	page-break-inside: avoid;
+}
+
 #ladoesquerdo {
 	float: left;
 }
