@@ -6,7 +6,7 @@ div {
 	border-style: solid;
 }
 
-#indicadores,#chamados,#chamadossolicitantes,#tipochamado,#chamadoemaberto,#chamadofechado,#chamadohost
+#indicadores,#chamadossolicitantes,#tipochamado,#chamadoemaberto,#chamadofechado,#chamadohost
 	{
 	page-break-inside: avoid;
 }
@@ -43,4 +43,11 @@ body,td,th,input,textarea,select,a {
 @page :right {
 	margin: 0px;
 	padding: 0px;
+}
+
+#graficoesquerda {
+    float: left;
+}
+#graficodireita {
+    float: right;
 }

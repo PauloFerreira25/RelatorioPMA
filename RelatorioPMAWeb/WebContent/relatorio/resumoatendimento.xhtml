@@ -101,8 +101,8 @@ nos últimos 03 dias." />
 				<p class="sub-titulo2">2.3 Tipo de Chamados</p>
 				<h:dataTable value="#{atendimentoBean.listaTipoChamado}" var="i"
 					styleClass="default-table" headerClass="default-table-header"
-				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer">
+					rowClasses="default-table-odd-row,default-table-even-row"
+					footerClass="default-table-footer">
 
 					<h:column>
 						<f:facet name="header">Tipo de Chamado</f:facet>
@@ -139,8 +139,8 @@ nos últimos 03 dias." />
 				<p class="sub-titulo2">2.4 Chamados em Aberto</p>
 				<h:dataTable value="#{atendimentoBean.listaChamadoAberto}" var="i"
 					styleClass="default-table" headerClass="default-table-header"
-				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer">
+					rowClasses="default-table-odd-row,default-table-even-row"
+					footerClass="default-table-footer">
 
 					<h:column>
 						<f:facet name="header">ID Chamado</f:facet>
@@ -172,8 +172,8 @@ nos últimos 03 dias." />
 				<p class="sub-titulo2">2.5 Chamados em Fechado</p>
 				<h:dataTable value="#{atendimentoBean.listaChamadoFechado}" var="i"
 					styleClass="default-table" headerClass="default-table-header"
-				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer">
+					rowClasses="default-table-odd-row,default-table-even-row"
+					footerClass="default-table-footer">
 
 					<h:column>
 						<f:facet name="header">ID Chamado</f:facet>
@@ -210,8 +210,8 @@ nos últimos 03 dias." />
 				<p class="sub-titulo2">2.6 Chamados por Host</p>
 				<h:dataTable value="#{atendimentoHostBean.listaHost}" var="i"
 					styleClass="default-table" headerClass="default-table-header"
-				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer">
+					rowClasses="default-table-odd-row,default-table-even-row"
+					footerClass="default-table-footer">
 
 					<h:column>
 						<f:facet name="header">Hostname</f:facet>
@@ -279,10 +279,14 @@ nos últimos 03 dias." />
 					//]]> 
 				</script>
 				<div id="graficos">
-					<h:outputText value="Chamados por Host abertos" />
-					<div id="graphHostAbertos" class="graph"></div>
-					<h:outputText value="Chamados por Host fechados" />
-					<div id="graphHostFechados" class="graph"></div>
+					<div id="graficoesquerda">
+						<h:outputText value="Chamados por Host abertos" />
+						<div id="graphHostAbertos" class="graph"></div>
+					</div>
+					<div id="graficodireita">
+						<h:outputText value="Chamados por Host fechados" />
+						<div id="graphHostFechados" class="graph"></div>
+					</div>
 				</div>
 			</div>
 		</div>
