@@ -54,9 +54,96 @@
 
 			</h:dataTable>
 		</div>
-		<div id='paradasnaoprogramadas'></div>
-		<div id='programadassestrategicas'></div>
-		<div id='paradasprogramadas'></div>
+		<div id='paradasnaoprogramadas'>
+		<p class="sub-titulo2">4.1 Paradas Não Programadas (PNP)</p>
+		<h:outputText value="Paradas que ocorreram no ambiente de forma bruta, sem conhecimento da equipe técnica." />
+		<h:dataTable value="#{paradasBean.listaParadasNaoProgramadas}" var="i"
+				styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
+
+				<h:column>
+					<f:facet name="header">Data</f:facet>
+					<h:outputText value="#{i.data}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Tempo</f:facet>
+					<h:outputText value="#{i.horas}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Host</f:facet>
+					<h:outputText value="#{i.host}" />
+				</h:column>
+						
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+					<h:outputText value="#{i.host}" />
+				</h:column>
+
+			</h:dataTable>
+		</div>
+		<div id='programadassestrategicas'>
+		<p class="sub-titulo2">4.3 Paradas Programadas Estratégicas (PPE)</p>
+		<h:outputText value="Consideramos paradas programadas estratégicas as situações de necessidade de manutenção no ambiente, onde é possível sua execução sem causar indisponibilidade no mesmo." />
+		<h:dataTable value="#{paradasBean.listaParadasProgramadasEstrategicas}" var="i"
+				styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
+
+				<h:column>
+					<f:facet name="header">Data</f:facet>
+					<h:outputText value="#{i.data}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Tempo</f:facet>
+					<h:outputText value="#{i.horas}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Host</f:facet>
+					<h:outputText value="#{i.host}" />
+				</h:column>
+						
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+					<h:outputText value="#{i.host}" />
+				</h:column>
+
+			</h:dataTable>
+			</div>
+		<div id='paradasprogramadas'>
+		<p class="sub-titulo2">4.4 Paradas Programadas (PP)</p>
+		<h:outputText value="Consideramos paradas programas as situações de necessidade de manutenção no ambiente, porém gerando indisponibilidade no mesmo." />
+		<h:dataTable value="#{paradasBean.listaParadasProgramadas}" var="i"
+				styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
+
+				<h:column>
+					<f:facet name="header">Data</f:facet>
+					<h:outputText value="#{i.data}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Tempo</f:facet>
+					<h:outputText value="#{i.horas}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Host</f:facet>
+					<h:outputText value="#{i.host}" />
+				</h:column>
+						
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+					<h:outputText value="#{i.host}" />
+				</h:column>
+
+			</h:dataTable>
+			</div>
 		<div id='totais'></div>
 	</div>
 </ui:composition>
