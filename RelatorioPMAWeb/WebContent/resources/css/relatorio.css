@@ -22,6 +22,13 @@ div {
 	font-size: 50px;
 }
 
+.sub-titulo1 {
+	font-size: 25px;
+}
+.sub-titulo2 {
+	font-size: 20px;
+}
+
 .quebrapagina {
 	page-break-before: always;
 }
@@ -31,7 +38,8 @@ div {
 }
 
 .logocapa {
-	
+	margin-top: 200px;
+	margin-bottom: 200px;
 }
 
 .capasize {
