@@ -3,7 +3,57 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<div id='resumodeparadas'>
-		<div id='paradasevitadas'></div>
+		<p class="sub-titulo1">4. Resumo de Paradas</p>
+		<div id='paradasevitadas'>
+			<p class="sub-titulo2">4.1 Paradas Evitadas (PE)</p>
+			<h:outputText
+				value="Consideramos paradas evitadas, atuações executadas no ambiente depois de detectadas pelo monitoramento acionando a equipe técnica que tomou alguma ação para evitar a parada." />
+			<h:outputText value="Último ano:" />
+			<h:dataTable value="#{paradasBean.listaUltimosAnosHoras}" var="i"
+				styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
+
+				<h:column>
+					<f:facet name="header">Ano</f:facet>
+					<h:outputText value="#{i.ano}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Horas</f:facet>
+					<h:outputText value="#{i.horas}" />
+				</h:column>
+
+			</h:dataTable>
+			<h:outputText value="Acumulado do ano:" />
+			<h:outputText value="Dados do mês:" />
+			<h:dataTable value="#{paradasBean.listaParadasEvitadas}" var="i"
+				styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
+
+				<h:column>
+					<f:facet name="header">Data</f:facet>
+					<h:outputText value="#{i.data}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Tempo</f:facet>
+					<h:outputText value="#{i.horas}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Host</f:facet>
+					<h:outputText value="#{i.host}" />
+				</h:column>
+						
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+					<h:outputText value="#{i.host}" />
+				</h:column>
+
+			</h:dataTable>
+		</div>
 		<div id='paradasnaoprogramadas'></div>
 		<div id='programadassestrategicas'></div>
 		<div id='paradasprogramadas'></div>
