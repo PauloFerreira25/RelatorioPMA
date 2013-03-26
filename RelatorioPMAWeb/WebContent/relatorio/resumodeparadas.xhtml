@@ -2,6 +2,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:outputScript library="js" name="jquery.js" target="head" />
+	<h:outputScript library="js" name="jquery.flot.js" target="head" />
+	<h:outputStylesheet library="css" name="grafico.css" target="head" />
+
 	<div id='resumodeparadas'>
 		<p class="sub-titulo1">4. Resumo de Paradas</p>
 		<div id='paradasevitadas'>
@@ -26,6 +30,7 @@
 
 			</h:dataTable>
 			<h:outputText value="Acumulado do ano:" />
+			<div id="graficoAcumuladoAno" class="graph-med"></div>
 			<h:outputText value="Dados do mês:" />
 			<h:dataTable value="#{paradasBean.listaParadasEvitadas}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
@@ -36,7 +41,7 @@
 					<f:facet name="header">Nº Chamado</f:facet>
 					<h:outputText value="#{i.idchamado}" />
 				</h:column>
-				
+
 				<h:column>
 					<f:facet name="header">Data</f:facet>
 					<h:outputText value="#{i.data}" />
@@ -56,7 +61,7 @@
 					<f:facet name="header">Descrição</f:facet>
 					<h:outputText value="#{i.descricao}" />
 				</h:column>
-				
+
 
 			</h:dataTable>
 		</div>
@@ -161,11 +166,91 @@
 				value="A PNP esta diretamente relacionada ao PE, onde PNP gera Downtime e PE gera downtime evitado, sendo assim:" />
 			<h:outputText value="PNP: 129 min" />
 			<h:outputText value="PE: 0 min" />
+			<div id="graficoPNPPE" class="graph-med"></div>
+
 
 			<h:outputText
 				value="A PP esta diretamente relacionada ao PPE, onde PP gera Downtime e PPE gera downtime evitado, sendo assim:" />
 			<h:outputText value="PP: 0 min" />
 			<h:outputText value="PPE: 6 min" />
+			<div id="graficoPPEPP" class="graph-med"></div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+	//<![CDATA[
+$(function () {
+    var d1 = [[1,-1],[2,-5],[3,-6],[4,0],[5,0],[6,-5],[7,-6],[8,-7],[9,-9],[10,-1],[11,-2],[12,-5]];
+    var d2 = [[1,5],[2,1],[3,4],[4,8],[5,2],[6,0],[7,0],[8,1],[9,4],[10,2],[11,5],[12,8]];
+    var d3 = [];
+
+    for (var i = 0; i <12; i += 1)
+        d3.push([i, d2[i][1] - d1[i][1]]);
+                       
+    $.plot($("#graficoPNPPE"), [
+        {
+            label: "PNP", color:"red", data: d1,
+            bars: { show: true },
+	},
+	{
+            label: "PE", color:"blue", data: d2,
+            bars: { show: true }
+	},
+	{
+            label: "Saldo", color:"yellow", data: d3,
+            lines: { show: true },
+	    points: { show: true }
+	}
+	
+    ]
+);
+});
+//]]> 
+</script>
+	<script type="text/javascript">
+	//<![CDATA[
+$(function () {
+    var d1 = [[1,-1],[2,-5],[3,-6],[4,0],[5,0],[6,-5],[7,-6],[8,-7],[9,-9],[10,-1],[11,-2],[12,-5]];
+    var d2 = [[1,5],[2,1],[3,4],[4,8],[5,2],[6,0],[7,0],[8,1],[9,4],[10,2],[11,5],[12,8]];
+    var d3 = [];
+
+    for (var i = 0; i <12; i += 1)
+        d3.push([i, d2[i][1] - d1[i][1]]);
+                       
+    $.plot($("#graficoPPEPP"), [
+        {
+            label: "PPE", color:"red", data: d1,
+            bars: { show: true },
+	},
+	{
+            label: "PP", color:"blue", data: d2,
+            bars: { show: true }
+	},
+	{
+            label: "Saldo", color:"yellow", data: d3,
+            lines: { show: true },
+	    points: { show: true }
+	}
+	
+    ]
+);
+});
+//]]> 
+</script>
+	<script type="text/javascript">
+	//<![CDATA[
+$(function () {
+    var d1 = [];
+    for (var i = 0; i <= 12; i += 1)
+        d1.push([i, Math.sin(i)]);
+                       
+    $.plot($("#graficoAcumuladoAno"), [
+        {
+           label: "Parada Evitadas", color:"blue", data: d1,
+            bars: { show: true }
+        }
+    ]);
+});
+//]]> 
+</script>
 </ui:composition>

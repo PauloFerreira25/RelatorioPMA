@@ -18,7 +18,7 @@ nos últimos 03 dias." />
 			<h:dataTable value="#{paradasBean.listaResumo}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer">
+				footerClass="default-table-footer" columnClasses="celluleLeft,celluleCenter,celluleCenter">
 
 				<h:column>
 					<f:facet name="header">Tipo</f:facet>
@@ -27,7 +27,7 @@ nos últimos 03 dias." />
 
 				<h:column>
 					<f:facet name="header">Sigla</f:facet>
-					<h:outputText value="#{i.sigla}" />
+					<h:outputText value="#{i.sigla}"/>
 				</h:column>
 
 				<h:column>

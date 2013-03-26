@@ -15,6 +15,7 @@
 	background: none repeat scroll 0 0 #E5E5E5;
 	border-bottom: 1px solid #BBBBBB;
 	padding: 2px;
+	font-stretch: normal;
 }
 
 .default-table-odd-row {
@@ -36,21 +37,13 @@
 }
 
 .celluleLeft {
-	font-family: verdana, arial, helvetica, sans-serif;
-	font-size: 13px;
 	text-align: left;
-	text-transform: uppercase;
 }
 
 .celluleRight {
-	font-family: verdana, arial, helvetica, sans-serif;
-	font-size: 13px;
 	text-align: right;
 }
 
 .celluleCenter {
-	font-family: verdana, arial, helvetica, sans-serif;
-	font-size: 13px;
 	text-align: center;
-	text-transform: uppercase;
 }
