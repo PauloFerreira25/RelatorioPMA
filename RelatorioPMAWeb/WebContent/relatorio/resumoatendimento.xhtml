@@ -16,9 +16,9 @@ nos últimos 03 dias." />
 				<h:outputText value="No mês corrente temos:" />
 			</p>
 			<h:dataTable value="#{paradasBean.listaResumo}" var="i"
-				styleClass="order-table center-table"
-				headerClass="order-table-header"
-				rowClasses="order-table-odd-row,order-table-even-row">
+				styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
 
 				<h:column>
 					<f:facet name="header">Tipo</f:facet>
@@ -38,14 +38,14 @@ nos últimos 03 dias." />
 			</h:dataTable>
 			<br />
 			<h:outputText
-				value="Abaixo podemos acompanhar alguns dados estatísticos do atendimento prestado:"/>
+				value="Abaixo podemos acompanhar alguns dados estatísticos do atendimento prestado:" />
 		</div>
 		<div id='chamados'>
 			<p class="sub-titulo2">2.1 Indicadores do Atendimento</p>
 			<h:dataTable value="#{atendimentoBean.listaGeral}" var="i"
-				styleClass="order-table center-table"
-				headerClass="order-table-header"
-				rowClasses="order-table-odd-row,order-table-even-row">
+				styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
 
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
@@ -61,9 +61,9 @@ nos últimos 03 dias." />
 			<div id='chamadossolicitantes'>
 				<p class="sub-titulo2">2.2 Chamados por Solicitante</p>
 				<h:dataTable value="#{atendimentoBean.listaSolicitante}" var="i"
-					styleClass="order-table center-table"
-					headerClass="order-table-header"
-					rowClasses="order-table-odd-row,order-table-even-row">
+					styleClass="default-table" headerClass="default-table-header"
+					rowClasses="default-table-odd-row,default-table-even-row"
+					footerClass="default-table-footer">
 
 					<h:column>
 						<f:facet name="header">Solicitante</f:facet>
@@ -100,9 +100,9 @@ nos últimos 03 dias." />
 			<div id='tipochamado'>
 				<p class="sub-titulo2">2.3 Tipo de Chamados</p>
 				<h:dataTable value="#{atendimentoBean.listaTipoChamado}" var="i"
-					styleClass="order-table center-table"
-					headerClass="order-table-header"
-					rowClasses="order-table-odd-row,order-table-even-row">
+					styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
 
 					<h:column>
 						<f:facet name="header">Tipo de Chamado</f:facet>
@@ -138,9 +138,9 @@ nos últimos 03 dias." />
 			<div id='chamadoemaberto'>
 				<p class="sub-titulo2">2.4 Chamados em Aberto</p>
 				<h:dataTable value="#{atendimentoBean.listaChamadoAberto}" var="i"
-					styleClass="order-table center-table"
-					headerClass="order-table-header"
-					rowClasses="order-table-odd-row,order-table-even-row">
+					styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
 
 					<h:column>
 						<f:facet name="header">ID Chamado</f:facet>
@@ -171,9 +171,9 @@ nos últimos 03 dias." />
 			<div id='chamadofechado'>
 				<p class="sub-titulo2">2.5 Chamados em Fechado</p>
 				<h:dataTable value="#{atendimentoBean.listaChamadoFechado}" var="i"
-					styleClass="order-table center-table"
-					headerClass="order-table-header"
-					rowClasses="order-table-odd-row,order-table-even-row">
+					styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
 
 					<h:column>
 						<f:facet name="header">ID Chamado</f:facet>
@@ -207,11 +207,11 @@ nos últimos 03 dias." />
 				<h:outputScript library="js" name="jquery.flot.pie.js" target="head" />
 				<h:outputStylesheet library="css" name="grafico.css" target="head" />
 
-				<p class="sub-titulo2">2.6 Chamados por Host </p>
+				<p class="sub-titulo2">2.6 Chamados por Host</p>
 				<h:dataTable value="#{atendimentoHostBean.listaHost}" var="i"
-					styleClass="order-table center-table"
-					headerClass="order-table-header"
-					rowClasses="order-table-odd-row,order-table-even-row">
+					styleClass="default-table" headerClass="default-table-header"
+				rowClasses="default-table-odd-row,default-table-even-row"
+				footerClass="default-table-footer">
 
 					<h:column>
 						<f:facet name="header">Hostname</f:facet>
