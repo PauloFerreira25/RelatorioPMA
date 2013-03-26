@@ -46,7 +46,7 @@
 					<f:facet name="header">Host</f:facet>
 					<h:outputText value="#{i.host}" />
 				</h:column>
-						
+
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
 					<h:outputText value="#{i.host}" />
@@ -55,10 +55,12 @@
 			</h:dataTable>
 		</div>
 		<div id='paradasnaoprogramadas'>
-		<p class="sub-titulo2">4.1 Paradas Não Programadas (PNP)</p>
-		<h:outputText value="Paradas que ocorreram no ambiente de forma bruta, sem conhecimento da equipe técnica." />
-		<h:dataTable value="#{paradasBean.listaParadasNaoProgramadas}" var="i"
-				styleClass="default-table" headerClass="default-table-header"
+			<p class="sub-titulo2">4.1 Paradas Não Programadas (PNP)</p>
+			<h:outputText
+				value="Paradas que ocorreram no ambiente de forma bruta, sem conhecimento da equipe técnica." />
+			<h:dataTable value="#{paradasBean.listaParadasNaoProgramadas}"
+				var="i" styleClass="default-table"
+				headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer">
 
@@ -76,7 +78,7 @@
 					<f:facet name="header">Host</f:facet>
 					<h:outputText value="#{i.host}" />
 				</h:column>
-						
+
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
 					<h:outputText value="#{i.host}" />
@@ -85,9 +87,11 @@
 			</h:dataTable>
 		</div>
 		<div id='programadassestrategicas'>
-		<p class="sub-titulo2">4.3 Paradas Programadas Estratégicas (PPE)</p>
-		<h:outputText value="Consideramos paradas programadas estratégicas as situações de necessidade de manutenção no ambiente, onde é possível sua execução sem causar indisponibilidade no mesmo." />
-		<h:dataTable value="#{paradasBean.listaParadasProgramadasEstrategicas}" var="i"
+			<p class="sub-titulo2">4.3 Paradas Programadas Estratégicas (PPE)</p>
+			<h:outputText
+				value="Consideramos paradas programadas estratégicas as situações de necessidade de manutenção no ambiente, onde é possível sua execução sem causar indisponibilidade no mesmo." />
+			<h:dataTable
+				value="#{paradasBean.listaParadasProgramadasEstrategicas}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer">
@@ -106,18 +110,19 @@
 					<f:facet name="header">Host</f:facet>
 					<h:outputText value="#{i.host}" />
 				</h:column>
-						
+
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
 					<h:outputText value="#{i.host}" />
 				</h:column>
 
 			</h:dataTable>
-			</div>
+		</div>
 		<div id='paradasprogramadas'>
-		<p class="sub-titulo2">4.4 Paradas Programadas (PP)</p>
-		<h:outputText value="Consideramos paradas programas as situações de necessidade de manutenção no ambiente, porém gerando indisponibilidade no mesmo." />
-		<h:dataTable value="#{paradasBean.listaParadasProgramadas}" var="i"
+			<p class="sub-titulo2">4.4 Paradas Programadas (PP)</p>
+			<h:outputText
+				value="Consideramos paradas programas as situações de necessidade de manutenção no ambiente, porém gerando indisponibilidade no mesmo." />
+			<h:dataTable value="#{paradasBean.listaParadasProgramadas}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer">
@@ -136,14 +141,25 @@
 					<f:facet name="header">Host</f:facet>
 					<h:outputText value="#{i.host}" />
 				</h:column>
-						
+
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
 					<h:outputText value="#{i.host}" />
 				</h:column>
 
 			</h:dataTable>
-			</div>
-		<div id='totais'></div>
+		</div>
+		<div id='totais'>
+			<p class="sub-titulo2">4.5 Totais</p>
+			<h:outputText
+				value="A PNP esta diretamente relacionada ao PE, onde PNP gera Downtime e PE gera downtime evitado, sendo assim:" />
+			<h:outputText value="PNP: 129 min" />
+			<h:outputText value="PE: 0 min" />
+
+			<h:outputText
+				value="A PP esta diretamente relacionada ao PPE, onde PP gera Downtime e PPE gera downtime evitado, sendo assim:" />
+			<h:outputText value="PP: 0 min" />
+			<h:outputText value="PPE: 6 min" />
+		</div>
 	</div>
 </ui:composition>
