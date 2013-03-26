@@ -6,12 +6,12 @@
 
 .sub-titulo1 {
 	font-size: 25px;
-	margin-left: 2px;
-	margin-right: 2px;
+	padding-top:10px;
 }
 
 .sub-titulo2 {
 	font-size: 20px;
+	padding-top:10px;
 }
 
 .quebrapagina {
@@ -23,11 +23,13 @@
 }
 
 .logocapa {
-	margin-top: -30%; /* half main elements height*/
+	margin-top: -30%;
 }
 
 .capasize {
 	height: 900px;
+	margin:-10px;
+
 }
 
 .capasize_individual {
@@ -37,3 +39,4 @@
 a:hover {
 	text-decoration: none;
 }
+
