@@ -33,13 +33,17 @@ div {
 	page-break-before: always;
 }
 
+#indicadores,#chamados,#chamadossolicitantes,#tipochamado,#chamadoemaberto,#chamadofechado,#chamadohost
+	{
+	page-break-inside: avoid;
+}
+
 .centro {
 	text-align: center;
 }
 
 .logocapa {
-	margin-top: 200px;
-	margin-bottom: 200px;
+	margin-top:-30%;/* half main elements height*/
 }
 
 .capasize {

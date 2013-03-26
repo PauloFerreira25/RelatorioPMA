@@ -3,48 +3,51 @@
 	margin-right: auto;
 }
 
-.order-table{
-border-collapse:collapse;
+.order-table {
+	border-collapse: collapse;
 }
 
-.order-table-header{
-text-align:center;
-background:none repeat scroll 0 0 #E5E5E5;
-border-bottom:1px solid #BBBBBB;
-padding:16px;
+.order-table-header {
+	text-align: center;
+	background: none repeat scroll 0 0 #E5E5E5;
+	border-bottom: 1px solid #BBBBBB;
+	padding: 16px;
 }
 
-.order-table-odd-row{
-background:none repeat scroll 0 0 #FFFFFF;
-border-top:1px solid #BBBBBB;
+.order-table-odd-row {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-top: 1px solid #BBBBBB;
 }
 
-.order-table-even-row{
-background:none repeat scroll 0 0 #F9F9F9;
-border-top:1px solid #BBBBBB;
+.order-table-even-row {
+	background: none repeat scroll 0 0 #F9F9F9;
+	border-top: 1px solid #BBBBBB;
 }
 
 .evenRow {
-background-color: #F5F5DC;
+	background-color: #F5F5DC;
 }
+
 .oddRow {
-background-color: #FFE4C4;
+	background-color: #FFE4C4;
 }
 
 .celluleLeft {
-font-family:verdana,arial,helvetica,sans-serif;
-font-size:13px;
-text-align: left;
-text-transform: uppercase;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	text-align: left;
+	text-transform: uppercase;
 }
+
 .celluleRight {
-font-family:verdana,arial,helvetica,sans-serif;
-font-size:13px;
-text-align: right;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	text-align: right;
 }
+
 .celluleCenter {
-font-family:verdana,arial,helvetica,sans-serif;
-font-size:13px;
-text-align: center;
-text-transform: uppercase;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	text-align: center;
+	text-transform: uppercase;
 }
