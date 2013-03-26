@@ -25,6 +25,7 @@ div {
 .sub-titulo1 {
 	font-size: 25px;
 }
+
 .sub-titulo2 {
 	font-size: 20px;
 }
@@ -33,10 +34,6 @@ div {
 	page-break-before: always;
 }
 
-#indicadores,#chamados,#chamadossolicitantes,#tipochamado,#chamadoemaberto,#chamadofechado,#chamadohost
-	{
-	page-break-inside: avoid;
-}
 
 .centro {
 	text-align: center;

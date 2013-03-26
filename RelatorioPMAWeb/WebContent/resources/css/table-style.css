@@ -1,3 +1,8 @@
+#indicadores,#chamados,#chamadossolicitantes,#tipochamado,#chamadoemaberto,#chamadofechado,#chamadohost
+	{
+	page-break-inside: avoid;
+}
+
 .center-table {
 	margin-left: auto;
 	margin-right: auto;

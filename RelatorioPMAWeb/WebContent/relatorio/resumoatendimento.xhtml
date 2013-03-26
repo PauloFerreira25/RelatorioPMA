@@ -2,8 +2,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	<div id='resumoatendimento'>
-		<h:outputText value="2. Resumo do Atendimento" class="sub-titulo1 quebrapagina"/>
+	<div id='resumoatendimento' class="quebrapagina">
+		<p class="sub-titulo1">2. Resumo do Atendimento</p>
 		<div id='indicadores'>
 			<h:outputText
 				value="Estamos trabalhando há
@@ -12,9 +12,12 @@ Operacionais
 ----------------------------------------------------------------------------------
 Evitamos 00 paradas operacionais 
 nos últimos 03 dias." />
-			<p><h:outputText value="No mês corrente temos:" /></p>
+			<p>
+				<h:outputText value="No mês corrente temos:" />
+			</p>
 			<h:dataTable value="#{paradasBean.listaResumo}" var="i"
-				styleClass="order-table center-table" headerClass="order-table-header"
+				styleClass="order-table center-table"
+				headerClass="order-table-header"
 				rowClasses="order-table-odd-row,order-table-even-row">
 
 				<h:column>
@@ -33,14 +36,16 @@ nos últimos 03 dias." />
 				</h:column>
 
 			</h:dataTable>
+			<br />
 			<h:outputText
-				value="Abaixo podemos acompanhar alguns dados estatísticos do atendimento prestado:" />
+				value="Abaixo podemos acompanhar alguns dados estatísticos do atendimento prestado:"/>
 		</div>
 		<div id='chamados'>
-			<h:outputText value="2.1 Indicadores do Atendimento" class="sub-titulo2" />
+			<p class="sub-titulo2">2.1 Indicadores do Atendimento</p>
 			<h:dataTable value="#{atendimentoBean.listaGeral}" var="i"
-				styleClass="order-table center-table" headerClass="order-table-header"
-				rowClasses="order-table-odd-row,order-table-even-row" >
+				styleClass="order-table center-table"
+				headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row">
 
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
@@ -54,9 +59,10 @@ nos últimos 03 dias." />
 
 			</h:dataTable>
 			<div id='chamadossolicitantes'>
-				<h:outputText value="2.2 Chamados por Solicitante" class="sub-titulo2" />
+				<p class="sub-titulo2">2.2 Chamados por Solicitante</p>
 				<h:dataTable value="#{atendimentoBean.listaSolicitante}" var="i"
-					styleClass="order-table center-table" headerClass="order-table-header"
+					styleClass="order-table center-table"
+					headerClass="order-table-header"
 					rowClasses="order-table-odd-row,order-table-even-row">
 
 					<h:column>
@@ -92,9 +98,10 @@ nos últimos 03 dias." />
 				</h:dataTable>
 			</div>
 			<div id='tipochamado'>
-				<h:outputText value="2.3 Tipo de Chamados" class="sub-titulo2" />
+				<p class="sub-titulo2">2.3 Tipo de Chamados</p>
 				<h:dataTable value="#{atendimentoBean.listaTipoChamado}" var="i"
-					styleClass="order-table center-table" headerClass="order-table-header"
+					styleClass="order-table center-table"
+					headerClass="order-table-header"
 					rowClasses="order-table-odd-row,order-table-even-row">
 
 					<h:column>
@@ -129,9 +136,10 @@ nos últimos 03 dias." />
 				</h:dataTable>
 			</div>
 			<div id='chamadoemaberto'>
-				<h:outputText value="2.4 Chamados em Aberto" class="sub-titulo2" />
+				<p class="sub-titulo2">2.4 Chamados em Aberto</p>
 				<h:dataTable value="#{atendimentoBean.listaChamadoAberto}" var="i"
-					styleClass="order-table center-table" headerClass="order-table-header"
+					styleClass="order-table center-table"
+					headerClass="order-table-header"
 					rowClasses="order-table-odd-row,order-table-even-row">
 
 					<h:column>
@@ -161,9 +169,10 @@ nos últimos 03 dias." />
 				</h:dataTable>
 			</div>
 			<div id='chamadofechado'>
-				<h:outputText value="2.5 Chamados em Fechado" class="sub-titulo2" />
+				<p class="sub-titulo2">2.5 Chamados em Fechado</p>
 				<h:dataTable value="#{atendimentoBean.listaChamadoFechado}" var="i"
-					styleClass="order-table center-table" headerClass="order-table-header"
+					styleClass="order-table center-table"
+					headerClass="order-table-header"
 					rowClasses="order-table-odd-row,order-table-even-row">
 
 					<h:column>
@@ -198,9 +207,10 @@ nos últimos 03 dias." />
 				<h:outputScript library="js" name="jquery.flot.pie.js" target="head" />
 				<h:outputStylesheet library="css" name="grafico.css" target="head" />
 
-				<h:outputText value="2.6 Chamados por Host" class="sub-titulo2 center-table" />
+				<p class="sub-titulo2">2.6 Chamados por Host </p>
 				<h:dataTable value="#{atendimentoHostBean.listaHost}" var="i"
-					styleClass="order-table center-table" headerClass="order-table-header"
+					styleClass="order-table center-table"
+					headerClass="order-table-header"
 					rowClasses="order-table-odd-row,order-table-even-row">
 
 					<h:column>
@@ -269,10 +279,10 @@ nos últimos 03 dias." />
 					//]]> 
 				</script>
 				<div id="graficos">
-				<h:outputText value="Chamados por Host abertos" />
-				<div id="graphHostAbertos" class="graph" ></div>
-				<h:outputText value="Chamados por Host fechados" />
-				<div id="graphHostFechados" class="graph"></div>
+					<h:outputText value="Chamados por Host abertos" />
+					<div id="graphHostAbertos" class="graph"></div>
+					<h:outputText value="Chamados por Host fechados" />
+					<div id="graphHostFechados" class="graph"></div>
 				</div>
 			</div>
 		</div>
