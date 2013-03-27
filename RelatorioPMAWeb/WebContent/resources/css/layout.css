@@ -32,6 +32,15 @@ body,td,th,input,textarea,select,a {
 	margin-left: 50%;
 }
 
+grafico-barra-esquerda {
+	float: left;
+	width: 80%;
+}
+
+grafico-direita-esquerda {
+	margin-left: 20%;
+}
+
 #meio-esquerda {
 	float: left;
 	width: 50px;
