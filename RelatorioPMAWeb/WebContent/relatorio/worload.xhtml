@@ -130,8 +130,11 @@ $(function () {
 			<h:outputText
 				value="O gráfico abaixo representa o workload através das sessões no database Oracle para o owner “senior” através de 3 distintos time frames." />
 			<h:outputText value="Mês corrente:" />
+			<br />
 			<div id="placeholder1" class="graph-gnd"></div>
+			<br />
 			<h:outputText value="Anual:" />
+			<br />
 			<div id="placeholder2" class="graph-gnd"></div>
 		</div>
 		<div id='outrostimeframe'>
@@ -139,25 +142,38 @@ $(function () {
 			<h:outputText
 				value="O gráfico abaixo representa o workload através das sessões no database Oracle para os owners “não senior”, ou seja, todos os demais, através de 3 distintos time frames." />
 			<h:outputText value="Mês corrente:" />
+			<br />
 			<div id="placeholder3" class="graph-gnd"></div>
+			<br />
 			<h:outputText value="Anual:" />
+			<br />
 			<div id="placeholder4" class="graph-gnd"></div>
 		</div>
 		<div id='principaloutrostimeframe'>
-			<p class="sub-titulo2">Senior X Não Senior</p>
-			<h:outputText
-				value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “senior” contra os owners “não senior” para o time frame 24 horas." />
-			<h:outputText value="Mês corrente:" />
-			<div id="placeholder5" class="graph-gnd"></div>
-			<h:outputText value="Anual:" />
-			<div id="placeholder6" class="graph-gnd"></div>
-			<h:outputText
-				value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “senior” contra os owners “não senior” para o time frame horário comercial (8-18)." />
-			<h:outputText value="Mês corrente:" />
-			<div id="placeholder7" class="graph-gnd"></div>
-			<h:outputText value="Anual:" />
-			<div id="placeholder8" class="graph-gnd"></div>
-
+			<div id='principaloutrostimeframe1'>
+				<p class="sub-titulo2">Senior X Não Senior</p>
+				<h:outputText
+					value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “senior” contra os owners “não senior” para o time frame 24 horas." />
+				<h:outputText value="Mês corrente:" />
+				<br />
+				<div id="placeholder5" class="graph-gnd"></div>
+				<br />
+				<h:outputText value="Anual:" />
+				<br />
+				<div id="placeholder6" class="graph-gnd"></div>
+			</div>
+			<div id='principaloutrostimeframe2'>
+				<p class="sub-titulo2"></p>
+				<h:outputText
+					value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “senior” contra os owners “não senior” para o time frame horário comercial (8-18)." />
+				<h:outputText value="Mês corrente:" />
+				<br />
+				<div id="placeholder7" class="graph-gnd"></div>
+				<br />
+				<h:outputText value="Anual:" />
+				<br />
+				<div id="placeholder8" class="graph-gnd"></div>
+			</div>
 		</div>
 	</div>
 </ui:composition>
