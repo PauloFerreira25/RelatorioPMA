@@ -31,3 +31,17 @@ body,td,th,input,textarea,select,a {
 #graficodireita {
 	margin-left: 50%;
 }
+
+#meio-esquerda {
+	float: left;
+	width: 50px;
+}
+
+#meio-direita img {
+	height: 1120px;
+	padding: 10px;
+}
+
+#meio-direita {
+	margin-left: 50px;
+}

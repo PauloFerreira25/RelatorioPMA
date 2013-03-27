@@ -15,12 +15,25 @@
 		<ui:include src="relatorio/capa.xhtml" />
 	</div>
 	<div id='meio' class="quebrapagina">
-		<ui:include src="relatorio/sumario.xhtml" />
-		<ui:include src="relatorio/introducao.xhtml" />
-		<ui:include src="relatorio/resumoatendimento.xhtml" />
-		<ui:include src="relatorio/worload.xhtml" />
-		<ui:include src="relatorio/resumodeparadas.xhtml" />
-		<ui:include src="relatorio/conclusao.xhtml" />
+		<div id='meio-esquerda'>
+			<h:graphicImage library="images" name="t3_l.png" />
+			<h:graphicImage library="images" name="t3_l.png" />
+			<h:graphicImage library="images" name="t3_l.png" />
+			<h:graphicImage library="images" name="t3_l.png" />
+			<h:graphicImage library="images" name="t3_l.png" />
+			<h:graphicImage library="images" name="t3_l.png" />
+			<h:graphicImage library="images" name="t3_l.png" />
+
+
+		</div>
+		<div id='meio-direita'>
+			<ui:include src="relatorio/sumario.xhtml" />
+			<ui:include src="relatorio/introducao.xhtml" />
+			<ui:include src="relatorio/resumoatendimento.xhtml" />
+			<ui:include src="relatorio/worload.xhtml" />
+			<ui:include src="relatorio/resumodeparadas.xhtml" />
+			<ui:include src="relatorio/conclusao.xhtml" />
+		</div>
 	</div>
 	<div id='rodape'>
 		<ui:include src="relatorio/rodape.xhtml" />
