@@ -80,7 +80,7 @@ nos últimos 03 dias." />
 
 					<h:column>
 						<f:facet name="header">% de Chamados Abertos</f:facet>
-						<h:outputText value="#{i.porcentoAberto}" />
+						<h:outputText value="#{i.porcentoAberto}" > <f:convertNumber type="percent" /> </h:outputText>
 						<f:facet name="footer">#{atendimentoBean.totalPorcentoAbertos}</f:facet>
 					</h:column>
 
