@@ -1,26 +1,13 @@
 @CHARSET "UTF-8";
 
 div {
-	border-color: #bbbbbbb;
-	border-width: 1px;
+	border-color: #ffffff;
 	border-style: solid;
 }
 
 #indicadores,#chamadossolicitantes,#tipochamado,#chamadoemaberto,#chamadofechado,#chamadohost
 	{
 	page-break-inside: avoid;
-}
-
-#ladoesquerdo {
-	float: left;
-}
-
-#ladodireito {
-	float: left;
-}
-
-#rodape {
-	clear: both;
 }
 
 body {
@@ -36,11 +23,11 @@ body,td,th,input,textarea,select,a {
 	font-size: 12px;
 }
 
-
 #graficoesquerda {
-    float: left; 
-    width: 50%;
+	float: left;
+	width: 50%;
 }
+
 #graficodireita {
-    margin-left: 50%;
+	margin-left: 50%;
 }

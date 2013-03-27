@@ -78,7 +78,7 @@ public class ParadasBean {
 		a.setData("19/02/2013");
 		a.setHoras(0.34);
 		a.setHost("oracle2");
-		a.setDescricao("Partição /u01 deu problema");
+		a.setDescricao("Partiï¿½ï¿½o /u01 deu problema");
 		listaParadasEvitadas.add(a);
 		
 		return listaParadasEvitadas;
@@ -93,7 +93,7 @@ public class ParadasBean {
 		a.setData("13/02/2013");
 		a.setHoras(0.50);
 		a.setHost("oracle2");
-		a.setDescricao("Lentidão");
+		a.setDescricao("Lentidï¿½o");
 		listaParadasNaoProgramadas.add(a);
 		
 		return listaParadasNaoProgramadas;

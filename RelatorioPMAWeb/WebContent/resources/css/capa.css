@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+
+#capasize {
+	border-color: #ff0000;
+}
+
+#banner{
+	height: 630px;
+	border-color: #00ff00;
+}
+
+#titulos {
+	height: 200px;
+	border-color: #0000ff;
+}
+
+#rodapecapa {
+	height: 150px;
+	border-color: #00ffff;
+}
+#caparodapeimg{
+	height: 100px;
+	width: 100%;
+}
+
+#capabannerimg{
+	height: 200px;
+	width: 100%;
+}
+#logocliente{
+	padding-top: 150px;
+}
