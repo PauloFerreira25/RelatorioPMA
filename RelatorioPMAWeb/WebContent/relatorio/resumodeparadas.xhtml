@@ -16,7 +16,7 @@
 			<h:dataTable value="#{paradasBean.listaUltimosAnosHoras}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer">
+				footerClass="default-table-footer" columnClasses="celluleLeft,celluleCenter">
 
 				<h:column>
 					<f:facet name="header">Ano</f:facet>
@@ -35,7 +35,7 @@
 			<h:dataTable value="#{paradasBean.listaParadasEvitadas}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer">
+				footerClass="default-table-footer" columnClasses="celluleLeft,celluleLeft,celluleCenter,celluleLeft,celluleLeft">
 
 				<h:column>
 					<f:facet name="header">Nº Chamado</f:facet>
@@ -48,7 +48,7 @@
 				</h:column>
 
 				<h:column>
-					<f:facet name="header">Tempo</f:facet>
+					<f:facet name="header">Tempo (h)</f:facet>
 					<h:outputText value="#{i.horas}" />
 				</h:column>
 
@@ -66,14 +66,14 @@
 			</h:dataTable>
 		</div>
 		<div id='paradasnaoprogramadas'>
-			<p class="sub-titulo2">4.1 Paradas Não Programadas (PNP)</p>
+			<p class="sub-titulo2">4.2 Paradas Não Programadas (PNP)</p>
 			<h:outputText
 				value="Paradas que ocorreram no ambiente de forma bruta, sem conhecimento da equipe técnica." />
 			<h:dataTable value="#{paradasBean.listaParadasNaoProgramadas}"
-				var="i" styleClass="default-table"
-				headerClass="default-table-header"
+				var="i" 
+				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer">
+				footerClass="default-table-footer" columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft">
 
 				<h:column>
 					<f:facet name="header">Data</f:facet>
@@ -81,7 +81,7 @@
 				</h:column>
 
 				<h:column>
-					<f:facet name="header">Tempo</f:facet>
+					<f:facet name="header">Tempo (h)</f:facet>
 					<h:outputText value="#{i.horas}" />
 				</h:column>
 
@@ -105,7 +105,7 @@
 				value="#{paradasBean.listaParadasProgramadasEstrategicas}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer">
+				footerClass="default-table-footer" columnClasses="celluleLeft,celluleLeft,celluleCenter,celluleLeft,celluleLeft">
 
 				<h:column>
 					<f:facet name="header">Data</f:facet>
@@ -113,7 +113,7 @@
 				</h:column>
 
 				<h:column>
-					<f:facet name="header">Tempo</f:facet>
+					<f:facet name="header">Tempo (h)</f:facet>
 					<h:outputText value="#{i.horas}" />
 				</h:column>
 
@@ -144,7 +144,7 @@
 				</h:column>
 
 				<h:column>
-					<f:facet name="header">Tempo</f:facet>
+					<f:facet name="header">Tempo (h)</f:facet>
 					<h:outputText value="#{i.horas}" />
 				</h:column>
 
