@@ -2,14 +2,14 @@ package br.com.paxtecnologia.pma.relatorio.vo;
 
 public class TimeframeVO {
 
-	private Double tF;
+	private String tf;
 
-	public Double gettF() {
-		return tF;
+	public String getTf() {
+		return tf;
 	}
 
-	public void settF(Double tF) {
-		this.tF = tF;
+	public void setTf(String tf) {
+		this.tf = tf;
 	}
 	
 	
