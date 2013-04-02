@@ -26,3 +26,11 @@ a:hover {
 	text-decoration: none;
 }
 
+.formato1 {
+	font-size: 19px;
+}
+
+.formato2 {
+	font-size: 40px;
+	color: red;
+}

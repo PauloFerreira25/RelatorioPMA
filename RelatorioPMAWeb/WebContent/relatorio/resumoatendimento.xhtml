@@ -5,20 +5,33 @@
 	<div id='resumoatendimento' class="quebrapagina">
 		<p class="sub-titulo1">2. Resumo do Atendimento</p>
 		<div id='indicadores'>
-			<h:outputText
-				value="Estamos trabalhando há
-03 dia(s) sem paradas
-Operacionais
-----------------------------------------------------------------------------------
-Evitamos 00 paradas operacionais 
-nos últimos 03 dias." />
+			<div id='sem_parada' class="centro">
+				<h:outputText value="Estamos trabalhando há " class="formato1" />
+				<h:outputText value="356" class="formato2" />
+				<h:outputText value=" dia(s)" class="formato1" />
+				<br />
+				<h:outputText value="sem paradas operacionais" class="formato1" />
+				<br />
+				<h:outputText
+					value="----------------------------------------------------------------------------------"
+					class="formato1" />
+				<br />
+				<h:outputText value="Evitamos " class="formato1" />
+				<h:outputText value="10" class="formato2" />
+				<h:outputText value=" paradas operacionais " class="formato1" />
+				<br />
+				<h:outputText value=" nos últimos " class="formato1" />
+				<h:outputText value="356" class="formato2" />
+				<h:outputText value=" dias." class="formato1" />
+			</div>
 			<p>
 				<h:outputText value="No mês corrente temos:" />
 			</p>
 			<h:dataTable value="#{paradasBean.listaResumo}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer" columnClasses="celluleLeft,celluleCenter,celluleCenter">
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft,celluleCenter,celluleCenter">
 
 				<h:column>
 					<f:facet name="header">Tipo</f:facet>
@@ -27,7 +40,7 @@ nos últimos 03 dias." />
 
 				<h:column>
 					<f:facet name="header">Sigla</f:facet>
-					<h:outputText value="#{i.sigla}"/>
+					<h:outputText value="#{i.sigla}" />
 				</h:column>
 
 				<h:column>
@@ -45,7 +58,8 @@ nos últimos 03 dias." />
 			<h:dataTable value="#{atendimentoBean.listaGeral}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer" columnClasses="celluleLeft,celluleCenter">
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft,celluleCenter">
 
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
@@ -63,7 +77,7 @@ nos últimos 03 dias." />
 				<h:dataTable value="#{atendimentoBean.listaSolicitante}" var="i"
 					styleClass="default-table" headerClass="default-table-header"
 					rowClasses="default-table-odd-row,default-table-even-row"
-					footerClass="default-table-footer" 
+					footerClass="default-table-footer"
 					columnClasses="celluleLeft,celluleCenter,celluleCenter,celluleCenter,celluleCenter">
 
 					<h:column footerClass="default-table-footer celluleLeft">
@@ -80,7 +94,9 @@ nos últimos 03 dias." />
 
 					<h:column>
 						<f:facet name="header">% de Chamados Abertos</f:facet>
-						<h:outputText value="#{i.porcentoAberto}" > <f:convertNumber type="percent" /> </h:outputText>
+						<h:outputText value="#{i.porcentoAberto}">
+							<f:convertNumber type="percent" />
+						</h:outputText>
 						<f:facet name="footer">#{atendimentoBean.totalPorcentoAbertos}</f:facet>
 					</h:column>
 
@@ -103,7 +119,8 @@ nos últimos 03 dias." />
 				<h:dataTable value="#{atendimentoBean.listaTipoChamado}" var="i"
 					styleClass="default-table" headerClass="default-table-header"
 					rowClasses="default-table-odd-row,default-table-even-row"
-					footerClass="default-table-footer" columnClasses="celluleLeft,celluleCenter,celluleCenter,celluleCenter,celluleCenter">
+					footerClass="default-table-footer"
+					columnClasses="celluleLeft,celluleCenter,celluleCenter,celluleCenter,celluleCenter">
 
 					<h:column footerClass="default-table-footer celluleLeft">
 						<f:facet name="header">Tipo de Chamado</f:facet>
@@ -141,7 +158,8 @@ nos últimos 03 dias." />
 				<h:dataTable value="#{atendimentoBean.listaChamadoAberto}" var="i"
 					styleClass="default-table" headerClass="default-table-header"
 					rowClasses="default-table-odd-row,default-table-even-row"
-					footerClass="default-table-footer" columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft">
+					footerClass="default-table-footer"
+					columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft">
 
 					<h:column>
 						<f:facet name="header">ID Chamado</f:facet>
@@ -174,7 +192,8 @@ nos últimos 03 dias." />
 				<h:dataTable value="#{atendimentoBean.listaChamadoFechado}" var="i"
 					styleClass="default-table" headerClass="default-table-header"
 					rowClasses="default-table-odd-row,default-table-even-row"
-					footerClass="default-table-footer" columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft">
+					footerClass="default-table-footer"
+					columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft">
 
 					<h:column>
 						<f:facet name="header">ID Chamado</f:facet>
@@ -212,7 +231,8 @@ nos últimos 03 dias." />
 				<h:dataTable value="#{atendimentoHostBean.listaHost}" var="i"
 					styleClass="default-table" headerClass="default-table-header"
 					rowClasses="default-table-odd-row,default-table-even-row"
-					footerClass="default-table-footer" columnClasses="celluleLeft,celluleCenter,celluleCenter,celluleCenter,celluleCenter">
+					footerClass="default-table-footer"
+					columnClasses="celluleLeft,celluleCenter,celluleCenter,celluleCenter,celluleCenter">
 
 					<h:column footerClass="default-table-footer celluleLeft">
 						<f:facet name="header">Hostname</f:facet>

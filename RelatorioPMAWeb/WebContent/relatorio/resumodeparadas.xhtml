@@ -16,7 +16,8 @@
 			<h:dataTable value="#{paradasBean.listaUltimosAnosHoras}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer" columnClasses="celluleLeft,celluleCenter">
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft,celluleCenter">
 
 				<h:column>
 					<f:facet name="header">Ano</f:facet>
@@ -35,7 +36,8 @@
 			<h:dataTable value="#{paradasBean.listaParadasEvitadas}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer" columnClasses="celluleLeft,celluleLeft,celluleCenter,celluleLeft,celluleLeft">
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft,celluleLeft,celluleCenter,celluleLeft,celluleLeft">
 
 				<h:column>
 					<f:facet name="header">Nº Chamado</f:facet>
@@ -70,10 +72,11 @@
 			<h:outputText
 				value="Paradas que ocorreram no ambiente de forma bruta, sem conhecimento da equipe técnica." />
 			<h:dataTable value="#{paradasBean.listaParadasNaoProgramadas}"
-				var="i" 
-				styleClass="default-table" headerClass="default-table-header"
+				var="i" styleClass="default-table"
+				headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer" columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft">
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft">
 
 				<h:column>
 					<f:facet name="header">Data</f:facet>
@@ -105,8 +108,8 @@
 				value="#{paradasBean.listaParadasProgramadasEstrategicas}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer" columnClasses="celluleLeft,celluleLeft,celluleCenter,celluleLeft,celluleLeft">
-
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft">
 				<h:column>
 					<f:facet name="header">Data</f:facet>
 					<h:outputText value="#{i.data}" />
@@ -136,7 +139,8 @@
 			<h:dataTable value="#{paradasBean.listaParadasProgramadas}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
-				footerClass="default-table-footer">
+				footerClass="default-table-footer"
+				columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft">>
 
 				<h:column>
 					<f:facet name="header">Data</f:facet>
@@ -166,14 +170,24 @@
 				value="A PNP esta diretamente relacionada ao PE, onde PNP gera Downtime e PE gera downtime evitado, sendo assim:" />
 			<h:outputText value="PNP: 129 min" />
 			<h:outputText value="PE: 0 min" />
-			<div id="graficoPNPPE" class="graph-med"></div>
+			<div id="princapaloutros_comercial_mes">
+				<div id="graficoPNPPE" class="graph-med"></div>
+				<div align="center">
+					<div id="graficoPNPPE-legenda"></div>
+				</div>
+			</div>
 
 
 			<h:outputText
 				value="A PP esta diretamente relacionada ao PPE, onde PP gera Downtime e PPE gera downtime evitado, sendo assim:" />
 			<h:outputText value="PP: 0 min" />
 			<h:outputText value="PPE: 6 min" />
-			<div id="graficoPPEPP" class="graph-med"></div>
+			<div id="princapaloutros_comercial_mes">
+				<div id="graficoPPEPP" class="graph-med"></div>
+				<div align="center">
+					<div id="graficoPPEPP-legenda"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -186,7 +200,14 @@ $(function () {
 
     for (var i = 0; i <12; i += 1)
         d3.push([i, d2[i][1] - d1[i][1]]);
-                       
+
+    var options = {
+            legend:{         
+                container:$("#graficoPNPPE-legenda"),
+                noColumns:3,
+            }
+    }
+    
     $.plot($("#graficoPNPPE"), [
         {
             label: "PNP", color:"red", data: d1,
@@ -202,7 +223,7 @@ $(function () {
 	    points: { show: true }
 	}
 	
-    ]
+    ],options
 );
 });
 //]]> 
@@ -216,6 +237,13 @@ $(function () {
 
     for (var i = 0; i <12; i += 1)
         d3.push([i, d2[i][1] - d1[i][1]]);
+
+    var options = {
+            legend:{         
+                container:$("#graficoPPEPP-legenda"),
+                noColumns:3,
+            }
+    }
                        
     $.plot($("#graficoPPEPP"), [
         {
@@ -232,7 +260,7 @@ $(function () {
 	    points: { show: true }
 	}
 	
-    ]
+    ],options
 );
 });
 //]]> 

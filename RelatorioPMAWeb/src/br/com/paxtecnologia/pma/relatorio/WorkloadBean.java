@@ -13,8 +13,6 @@ import br.com.paxtecnologia.pma.relatorio.vo.TimeframeVO;
 public class WorkloadBean {
 	
 	private List<TimeframeVO> listaPrincipalXtimeframe_mesTF1;
-	private List<TimeframeVO> listaPrincipalXtimeframe_mesTF2;
-	private List<TimeframeVO> listaPrincipalXtimeframe_mesTF3;
 	
 	
 	public List <TimeframeVO> getListaPrincipalXtimeframe_mes() {
@@ -35,6 +33,12 @@ public class WorkloadBean {
 		
 	return listaPrincipalXtimeframe_mesTF1;
 	} 
+	
+	public String getPrincipal_tf1(){
+		String saida = new String();
+		saida = "[{ label: \"TF1: 8 - 18 Horas\",  data: 25},{ label: \"TF1: 8 - 18 Horas\",  data: 20},{ label: \"TF1: 8 - 18 Horas\",  data: 25}]";
+		return saida;
+	}
 	
 	
 }
