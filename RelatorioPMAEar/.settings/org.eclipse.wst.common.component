@@ -9,5 +9,8 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="joda-time-2.2.jar" deploy-path="lib" handle="module:/classpath/lib/EarContent/lib/joda-time-2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
