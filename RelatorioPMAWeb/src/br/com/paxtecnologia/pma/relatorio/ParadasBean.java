@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasPorTipoVO;
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasVO;
+import br.com.paxtecnologia.pma.relatorio.vo.SemParadasVO;
 import br.com.paxtecnologia.pma.relatorio.vo.UltimoAnoVO;
 
 @ViewScoped
@@ -20,6 +21,21 @@ public class ParadasBean {
 	private List<ParadasPorTipoVO> listaParadasNaoProgramadas;
 	private List<ParadasPorTipoVO> listaParadasProgramadasEstrategicas;
 	private List<ParadasPorTipoVO> listaParadasProgramadas;
+	private List<SemParadasVO> listaSemParadas;
+	
+	public List<SemParadasVO> getListaSemParadas(){
+		
+		listaSemParadas = new ArrayList<SemParadasVO>();
+		
+		SemParadasVO a = new SemParadasVO();
+		a.setDiasTrabalhados(356);
+		a.setParadasEvitadas(10);
+		a.setDiasSemParadas(356);
+		listaSemParadas.add(a);
+		
+		return listaSemParadas;
+		
+	}
 
 	public List<UltimoAnoVO> getListaUltimosAnosHoras(){
 		
