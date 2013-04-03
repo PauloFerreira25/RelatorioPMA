@@ -2,6 +2,7 @@ package br.com.paxtecnologia.pma.relatorio;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -89,16 +90,26 @@ public class ParadasBean {
 	}
 
 	public List<ParadasPorTipoVO> getListaParadasEvitadas() {
-		listaParadasEvitadas = new ArrayList<ParadasPorTipoVO>();
-
-		ParadasPorTipoVO a = new ParadasPorTipoVO();
-		a.setIdchamado("VERZANI-250");
-		a.setData("19/02/2013");
-		a.setHoras(0.34);
-		a.setHost("oracle2");
-		a.setDescricao("Parti��o /u01 deu problema");
-		listaParadasEvitadas.add(a);
-
+		System.out.println("OI");
+		if (this.listaParadasEvitadas == null) {
+			listaParadasEvitadas = new ArrayList<ParadasPorTipoVO>();
+			@SuppressWarnings("rawtypes")
+			Map<Integer, Map> paradasEvitadas = paradasEjb
+					.getListaParadasEvitadas();
+			for (Integer key : paradasEvitadas.keySet()) {
+				System.out.println("Key : " + key.toString() + " Value : "
+						+ paradasEvitadas.get(key));
+				@SuppressWarnings("unchecked")
+				Map<String, Object> chamado = paradasEvitadas.get(key);
+				ParadasPorTipoVO a = new ParadasPorTipoVO();
+				a.setIdchamado((String) chamado.get("Idchamado"));
+				a.setData((String) chamado.get("Data"));
+				a.setHoras((Double) chamado.get("Horas"));
+				a.setHost((String) chamado.get("Host"));
+				a.setDescricao((String) chamado.get("Descricao"));
+				listaParadasEvitadas.add(a);
+			}
+		}
 		return listaParadasEvitadas;
 
 	}
