@@ -17,11 +17,11 @@ public class ParadasEjb {
 
 	private ParadasDAO paradasDao = new ParadasDAO();
 
-	public Integer getDiasTrabalhados() {
+	public Integer getDiasTrabalhados(Integer clienteID, Integer mesRelatorio) {
 		Calendar gc = paradasDao.getDataUltimoPNP();
 		Calendar gregorianCalendar = new GregorianCalendar();
 		DateTime start = new DateTime(gc.getTime());
-		DateTime end = new DateTime(gregorianCalendar.getTime());
+		DateTime end = new DateTime(gregorianCalendar);
 		int days = Days.daysBetween(start, end).getDays();
 		System.out.println("Days Between " + gc.getTime() + " : "
 				+ gregorianCalendar.getTime() + " - " + days);

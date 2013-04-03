@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import br.com.paxtecnologia.pma.relatorio.ejb.ParadasEjb;
@@ -21,6 +22,12 @@ public class ParadasBean {
 	@EJB
 	private ParadasEjb paradasEjb;
 
+	@ManagedProperty(value = "#{clientesBean.idCliente}")
+	private Integer idCliente;
+	
+	@ManagedProperty(value = "#{clientesBean.idMes}")
+	private Integer mesRelatorio;
+
 	private List<ParadasVO> listaItem;
 	private List<UltimoAnoVO> listaUltimosAnosHoras;
 	private List<ParadasPorTipoVO> listaParadasEvitadas;
@@ -29,12 +36,22 @@ public class ParadasBean {
 	private List<ParadasPorTipoVO> listaParadasProgramadas;
 	private List<SemParadasVO> listaSemParadas;
 
+	public void setMesRelatorio(Integer mesRelatorio) {
+		this.mesRelatorio = mesRelatorio;
+	}
+
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+
 	public List<SemParadasVO> getListaSemParadas() {
 
 		listaSemParadas = new ArrayList<SemParadasVO>();
 
 		SemParadasVO a = new SemParadasVO();
-		a.setDiasTrabalhados(paradasEjb.getDiasTrabalhados());
+
+		a.setDiasTrabalhados(paradasEjb.getDiasTrabalhados(idCliente,
+				mesRelatorio));
 		a.setParadasEvitadas(10);
 		a.setDiasSemParadas(356);
 		listaSemParadas.add(a);
@@ -90,15 +107,12 @@ public class ParadasBean {
 	}
 
 	public List<ParadasPorTipoVO> getListaParadasEvitadas() {
-		System.out.println("OI");
 		if (this.listaParadasEvitadas == null) {
 			listaParadasEvitadas = new ArrayList<ParadasPorTipoVO>();
 			@SuppressWarnings("rawtypes")
 			Map<Integer, Map> paradasEvitadas = paradasEjb
 					.getListaParadasEvitadas();
 			for (Integer key : paradasEvitadas.keySet()) {
-				System.out.println("Key : " + key.toString() + " Value : "
-						+ paradasEvitadas.get(key));
 				@SuppressWarnings("unchecked")
 				Map<String, Object> chamado = paradasEvitadas.get(key);
 				ParadasPorTipoVO a = new ParadasPorTipoVO();

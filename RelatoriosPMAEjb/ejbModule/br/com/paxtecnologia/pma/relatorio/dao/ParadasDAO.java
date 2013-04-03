@@ -2,18 +2,21 @@ package br.com.paxtecnologia.pma.relatorio.dao;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.sql.Date;
 
 public class ParadasDAO {
 	private DataSourcePMA connection;
 
 	public Calendar getDataUltimoPNP() {
 		connection = new DataSourcePMA();
-		//query com o banco
-		java.sql.Date data = new java.sql.Date(1985, 01, 25);
-		Calendar gc = new GregorianCalendar();
-		gc.setTime(data);
+		// query com o banco
+		Date data = new Date(0);
+		data.valueOf("1985-1-25");
+		System.out.println("Data Nova " + data);
+		Calendar cal = new GregorianCalendar(data.getYear(), data.getMonth(),
+				data.getDate());
 		// devolve resultado da query
-		return gc;
+		return cal;
 	}
 
 }

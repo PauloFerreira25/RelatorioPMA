@@ -1,14 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-</h:head> 
-<h:body> 
-<div id='topo'></div>
-<div id='meio'></div>
-<div id='rodape'></div>
-</h:body> 
+</h:head>
+<h:body>
+	<h:form id="report">
+		<h:selectOneListbox value="#{clientesBean.idCliente}">
+			<f:selectItems value="#{clientesBean.listaIdClientes}" var="i"
+				itemLabel="#{i.label}" itemValue="#{i.value}" />
+		</h:selectOneListbox>
+		<h:selectOneListbox value="#{clientesBean.idMes}">
+			<f:selectItems value="#{clientesBean.listaIdMes}" var="i"
+				itemLabel="#{i.label}" itemValue="#{i.value}" />
+		</h:selectOneListbox>
+		<h:commandButton id="reportButton" action="report" value="go" />
+	</h:form>
+</h:body>
 </html>
