@@ -17,8 +17,8 @@ public class ParadasEjb {
 
 	private ParadasDAO paradasDao = new ParadasDAO();
 
-	public Integer getDiasTrabalhados(Integer clienteID, Integer mesRelatorio) {
-		Calendar gc = paradasDao.getDataUltimoPNP();
+	public Integer getDiasTrabalhados(Integer clienteID, String mesRelatorio) {
+		Calendar gc = paradasDao.getDataUltimoPNP(Integer clienteID, String mesRelatorio);
 		Calendar gregorianCalendar = new GregorianCalendar();
 		DateTime start = new DateTime(gc.getTime());
 		DateTime end = new DateTime(gregorianCalendar);

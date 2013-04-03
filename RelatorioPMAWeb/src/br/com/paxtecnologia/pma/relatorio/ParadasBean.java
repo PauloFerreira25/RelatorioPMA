@@ -25,8 +25,8 @@ public class ParadasBean {
 	@ManagedProperty(value = "#{clientesBean.idCliente}")
 	private Integer idCliente;
 	
-	@ManagedProperty(value = "#{clientesBean.idMes}")
-	private Integer mesRelatorio;
+	@ManagedProperty(value = "#{clientesBean.mesRelatorio}")
+	private String mesRelatorio;
 
 	private List<ParadasVO> listaItem;
 	private List<UltimoAnoVO> listaUltimosAnosHoras;
@@ -36,7 +36,7 @@ public class ParadasBean {
 	private List<ParadasPorTipoVO> listaParadasProgramadas;
 	private List<SemParadasVO> listaSemParadas;
 
-	public void setMesRelatorio(Integer mesRelatorio) {
+	public void setMesRelatorio(String mesRelatorio) {
 		this.mesRelatorio = mesRelatorio;
 	}
 

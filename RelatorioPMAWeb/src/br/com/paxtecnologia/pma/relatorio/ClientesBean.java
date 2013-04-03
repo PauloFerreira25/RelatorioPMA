@@ -10,10 +10,10 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class ClientesBean {
 
-	private String cliente;
-	private String mes;
+	private String idCliente;
+	private String mesRelatorio;
 	private List<ItemVO> listaIdClientes;
-	private List<ItemVO> listaIdMes;
+	private List<MesVO> listaIdMes;
 
 	public static class ItemVO {
 		public String label;
@@ -34,12 +34,23 @@ public class ClientesBean {
 
 	}
 
-	public String getIdCliente() {
-		return cliente;
-	}
+	public static class MesVO {
+		public String label;
+		public String value;
 
-	public String getIdMes() {
-		return mes;
+		public MesVO(String label, String value) {
+			this.label = label;
+			this.value = value;
+		}
+
+		public String getLabel() {
+			return label;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
 	}
 
 	public List<ItemVO> getListaIdClientes() {
@@ -49,19 +60,28 @@ public class ClientesBean {
 		return listaIdClientes;
 	}
 
-	public List<ItemVO> getListaIdMes() {
-		listaIdMes = new ArrayList<ItemVO>();
-		listaIdMes.add(new ItemVO("Jan", 1));
-		listaIdMes.add(new ItemVO("Fev", 2));
+	public List<MesVO> getListaIdMes() {
+		listaIdMes = new ArrayList<MesVO>();
+		listaIdMes.add(new MesVO("Jan", "2013-01-01"));
+		listaIdMes.add(new MesVO("Fev", "2013-02-01"));
 		return listaIdMes;
 	}
 
-	public void setIdCliente(String cliente) {
-		this.cliente = cliente;
+	public String getIdCliente() {
+		return idCliente;
 	}
 
-	public void setIdMes(String mes) {
-		this.mes = mes;
+	public void setIdCliente(String idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public String getMesRelatorio() {
+		return mesRelatorio;
+	}
+
+	public void setMesRelatorio(String mesRelatorio) {
+
+		this.mesRelatorio = mesRelatorio;
 	}
 
 }
