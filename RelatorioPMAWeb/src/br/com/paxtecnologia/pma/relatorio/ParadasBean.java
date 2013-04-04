@@ -11,7 +11,6 @@ import javax.faces.bean.ViewScoped;
 import br.com.paxtecnologia.pma.relatorio.ejb.ParadasEjb;
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasPorTipoVO;
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasVO;
-import br.com.paxtecnologia.pma.relatorio.vo.SemParadasVO;
 import br.com.paxtecnologia.pma.relatorio.vo.UltimoAnoVO;
 
 @ViewScoped
@@ -33,7 +32,24 @@ public class ParadasBean {
 	private List<ParadasPorTipoVO> listaParadasNaoProgramadas;
 	private List<ParadasPorTipoVO> listaParadasProgramadasEstrategicas;
 	private List<ParadasPorTipoVO> listaParadasProgramadas;
-	private List<SemParadasVO> listaSemParadas;
+	private Integer diasTrabalhados;
+	private Integer qtdeParadasEvitadasTotal;
+
+	public Integer getDiasTrabalhados() {
+		if (diasTrabalhados == null) {
+			diasTrabalhados = paradasEjb.getDiasTrabalhados(idCliente,
+					mesRelatorio);
+		}
+		return diasTrabalhados;
+	}
+
+	public Integer getQtdeParadasEvitadasTotal() {
+		if (qtdeParadasEvitadasTotal == null) {
+			qtdeParadasEvitadasTotal = paradasEjb.getQtdeParadaEvitadasTotal(
+					idCliente, mesRelatorio);
+		}
+		return qtdeParadasEvitadasTotal;
+	}
 
 	public void setMesRelatorio(String mesRelatorio) {
 		this.mesRelatorio = mesRelatorio;
@@ -41,23 +57,6 @@ public class ParadasBean {
 
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
-	}
-
-	public List<SemParadasVO> getListaSemParadas() {
-		if (listaSemParadas == null) {
-			listaSemParadas = new ArrayList<SemParadasVO>();
-			SemParadasVO a = new SemParadasVO();
-			a.setDiasTrabalhados(paradasEjb.getDiasTrabalhados(idCliente,
-					mesRelatorio));
-			a.setParadasEvitadas(paradasEjb.getQtdeParadaEvitadasTotal(idCliente,
-					mesRelatorio));
-			a.setDiasSemParadas(paradasEjb.getDiasTrabalhados(idCliente,
-					mesRelatorio));
-			listaSemParadas.add(a);
-		}
-
-		return listaSemParadas;
-
 	}
 
 	public List<UltimoAnoVO> getListaUltimosAnosHoras() {

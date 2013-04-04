@@ -7,7 +7,7 @@
 		<div id='indicadores'>
 			<div id='sem_parada' class="centro">
 				<h:outputText value="Estamos trabalhando há " class="formato1" />
-				<h:outputText value="#{paradasBean.listaSemParadas.get(0).diasTrabalhados}" class="formato2" />
+				<h:outputText value="#{paradasBean.diasTrabalhados}" class="formato2" />
 				<h:outputText value=" dia(s)" class="formato1" />
 				<br />
 				<h:outputText value="sem paradas operacionais" class="formato1" />
@@ -17,11 +17,11 @@
 					class="formato1" />
 				<br />
 				<h:outputText value="Evitamos " class="formato1" />
-				<h:outputText value="#{paradasBean.listaSemParadas.get(0).paradasEvitadas}" class="formato2" />
+				<h:outputText value="#{paradasBean.qtdeParadasEvitadasTotal}" class="formato2" />
 				<h:outputText value=" paradas operacionais " class="formato1" />
 				<br />
 				<h:outputText value=" nos últimos " class="formato1" />
-				<h:outputText value="#{paradasBean.listaSemParadas.get(0).diasSemParadas}" class="formato2" />
+				<h:outputText value="#{paradasBean.diasTrabalhados}" class="formato2" />
 				<h:outputText value=" dias." class="formato1" />
 			</div>
 			<p>
