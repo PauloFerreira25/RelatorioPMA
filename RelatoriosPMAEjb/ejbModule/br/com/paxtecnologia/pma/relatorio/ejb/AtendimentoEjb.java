@@ -149,7 +149,7 @@ public class AtendimentoEjb {
 
 		ChamadoVO b = new ChamadoVO();
 		b.setIdChamado("VERZANI-220");
-		b.setTitulo("[oracle2] Cria��o relat�rio");
+		b.setTitulo("[oracle3] Criação relatório");
 		b.setDataAbertura("12 Jan 2013");
 		b.setStatus("Open");
 		b.setTipoChamado("Task");
@@ -157,7 +157,7 @@ public class AtendimentoEjb {
 
 		ChamadoVO c = new ChamadoVO();
 		c.setIdChamado("VERZANI-221");
-		c.setTitulo("[oracle1] Cria��o relat�rio");
+		c.setTitulo("[oracle3] Criação relatório");
 		c.setDataAbertura("15 Jan 2013");
 		c.setStatus("Reopened");
 		c.setTipoChamado("Task");
@@ -171,7 +171,7 @@ public class AtendimentoEjb {
 
 		ChamadoVO a = new ChamadoVO();
 		a.setIdChamado("VERZANI-219");
-		a.setTitulo("[oracle3] Cria��o relat�rio");
+		a.setTitulo("[oracle3] Criação relatório");
 		a.setDataAbertura("09 Jan 2013");
 		a.setStatus("Open");
 		a.setTipoChamado("Task");
@@ -179,7 +179,7 @@ public class AtendimentoEjb {
 
 		ChamadoVO b = new ChamadoVO();
 		b.setIdChamado("VERZANI-220");
-		b.setTitulo("[oracle2] Cria��o relat�rio");
+		b.setTitulo("[oracle3] Criação relatório");
 		b.setDataAbertura("12 Jan 2013");
 		b.setStatus("Open");
 		b.setTipoChamado("Task");
@@ -187,7 +187,7 @@ public class AtendimentoEjb {
 
 		ChamadoVO c = new ChamadoVO();
 		c.setIdChamado("VERZANI-221");
-		c.setTitulo("[oracle1] Cria��o relat�rio");
+		c.setTitulo("[oracle3] Criação relatório");
 		c.setDataAbertura("15 Jan 2013");
 		c.setStatus("Reopened");
 		c.setTipoChamado("Task");
