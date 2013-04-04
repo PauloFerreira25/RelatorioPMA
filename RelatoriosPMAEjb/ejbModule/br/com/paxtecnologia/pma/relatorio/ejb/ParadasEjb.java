@@ -38,6 +38,11 @@ public class ParadasEjb {
 		return days;
 	}
 
+	public Integer getQtdeParadaEvitadasTotal(Integer idCliente,
+			String mesRelatorio) {
+		return paradasDao.getQtdeParadaEvitadasTotal(idCliente, mesRelatorio);
+	}
+
 	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente,
 			String mesRelatorio) {
 		if (listaUltimosAnosHoras == null) {
@@ -50,43 +55,44 @@ public class ParadasEjb {
 
 	public Integer getQtdeParadaProgramadas(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeParadaProgramadas == null){
-			if (listaParadasProgramadas==null){
+		if (qtdeParadaProgramadas == null) {
+			if (listaParadasProgramadas == null) {
 				getListaParadasProgramadas(idCliente, mesRelatorio);
 			}
-			qtdeParadaProgramadas=listaParadasProgramadas.size();
+			qtdeParadaProgramadas = listaParadasProgramadas.size();
 		}
 		return qtdeParadaProgramadas;
 	}
 
 	public Integer getQtdeProgramadasEstrategicas(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeProgramadasEstrategicas == null){
-			if (listaParadasProgramadas==null){
+		if (qtdeProgramadasEstrategicas == null) {
+			if (listaParadasProgramadas == null) {
 				getListaParadasProgramadasEstrategicas(idCliente, mesRelatorio);
 			}
-			qtdeProgramadasEstrategicas=listaParadasProgramadasEstrategicas.size();
+			qtdeProgramadasEstrategicas = listaParadasProgramadasEstrategicas
+					.size();
 		}
 		return qtdeProgramadasEstrategicas;
 	}
 
 	public Integer getQtdeParadaNaoProgramadas(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeParadaNaoProgramadas == null){
-			if (listaParadasProgramadas==null){
+		if (qtdeParadaNaoProgramadas == null) {
+			if (listaParadasProgramadas == null) {
 				getListaParadasNaoProgramadas(idCliente, mesRelatorio);
 			}
-			qtdeParadaNaoProgramadas=listaParadasNaoProgramadas.size();
+			qtdeParadaNaoProgramadas = listaParadasNaoProgramadas.size();
 		}
 		return qtdeParadaNaoProgramadas;
 	}
 
 	public Integer getQtdeParadaEvitadas(Integer idCliente, String mesRelatorio) {
-		if (qtdeParadaEvitadas == null){
-			if (listaParadasEvitadas==null){
+		if (qtdeParadaEvitadas == null) {
+			if (listaParadasEvitadas == null) {
 				getListaParadasEvitadas(idCliente, mesRelatorio);
 			}
-			qtdeParadaEvitadas=listaParadasEvitadas.size();
+			qtdeParadaEvitadas = listaParadasEvitadas.size();
 		}
 		return qtdeParadaEvitadas;
 	}
@@ -131,4 +137,5 @@ public class ParadasEjb {
 		return listaParadasProgramadas;
 
 	}
+
 }

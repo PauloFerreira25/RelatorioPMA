@@ -1,6 +1,8 @@
 package br.com.paxtecnologia.pma.relatorio.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -35,5 +37,39 @@ public class DataSourcePMA {
 			e.printStackTrace();
 		}
 		return con;
+	}
+	
+	public PreparedStatement getPreparedStatement(String sql){
+		PreparedStatement pstmt = null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pstmt;
+	}
+	
+	public ResultSet executaQuery(PreparedStatement pstmt) {
+		ResultSet rs = null;
+		try {
+			rs = pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+
+	}
+	public Boolean closeConnection(PreparedStatement pstmt){
+		try {
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
 	}
 }
