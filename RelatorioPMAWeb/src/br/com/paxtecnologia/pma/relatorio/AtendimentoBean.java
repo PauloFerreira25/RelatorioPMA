@@ -37,6 +37,14 @@ public class AtendimentoBean {
 	private Double totalPorcentoFechados;
 	private Integer totalChamadosFechados;
 
+	public void setMesRelatorio(String mesRelatorio) {
+		this.mesRelatorio = mesRelatorio;
+	}
+
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+	
 	public Integer getTotalChamadosAbertos() {
 		if (totalChamadosAbertos == null){
 			totalChamadosAbertos = atendimentoEjb.getQtdeChamadosAbertos(idCliente,mesRelatorio);

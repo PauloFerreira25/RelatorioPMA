@@ -11,34 +11,33 @@ import br.com.paxtecnologia.pma.relatorio.vo.TimeframeVO;
 @ViewScoped
 @ManagedBean(name = "workloadBean")
 public class WorkloadBean {
-	
-	private List<TimeframeVO> listaPrincipalXtimeframe_mesTF1;
-	
-	
-	public List <TimeframeVO> getListaPrincipalXtimeframe_mes() {
-		
-		listaPrincipalXtimeframe_mesTF1 = new ArrayList<TimeframeVO>();
-				
-		TimeframeVO a = new TimeframeVO();
-		a.setTf("[{ label: \"TF1: 8 - 18 Horas\",  data: 25}");
-		listaPrincipalXtimeframe_mesTF1.add(a);
-		
-		TimeframeVO b = new TimeframeVO();
-		b.setTf(",{ label: \"TF1: 8 - 18 Horas\",  data: 20}");
-		listaPrincipalXtimeframe_mesTF1.add(b);
-		
-		TimeframeVO c = new TimeframeVO();
-		b.setTf(",{ label: \"TF1: 8 - 18 Horas\",  data: 25}]");
-		listaPrincipalXtimeframe_mesTF1.add(c);
-		
-	return listaPrincipalXtimeframe_mesTF1;
-	} 
-	
-	public String getPrincipal_tf1(){
-		String saida = new String();
-		saida = "[{ label: \"TF1: 8 - 18 Horas\",  data: 25},{ label: \"TF1: 8 - 18 Horas\",  data: 20},{ label: \"TF1: 8 - 18 Horas\",  data: 25}]";
-		return saida;
+
+//	private String valor1;
+//	private String valor2;
+//	private String valor3;
+
+	public String getValor1() {
+		return "[[1,19],[2,7],[3,28],[4,10],"
+				+ "[5,4],[6,10],[7,18],[8,16],[9,28],[10,9],"
+				+ "[11,14],[12,15],[13,15],[14,27],[15,8],[16,11],"
+				+ "[17,7],[18,5],[19,15],[20,12],[21,10],[22,2],[23,25]"
+				+ ",[24,19], [25,7],[26,22],[27,8],[28,1],[29,27],[30,15],[31,15]]";
 	}
-	
-	
+
+	public String getValor2() {
+		return "[[1,19],[2,7],[3,28],[4,10],"
+				+ "[5,4],[6,10],[7,18],[8,16],[9,28],[10,9],"
+				+ "[11,14],[12,15],[13,15],[14,27],[15,8],[16,11],"
+				+ "[17,7],[18,5],[19,15],[20,12],[21,10],[22,2],[23,25]"
+				+ ",[24,19], [25,7],[26,22],[27,8],[28,1],[29,27],[30,15],[31,15]]";
+	}
+
+	public String getValor3() {
+		return "[[1,19],[2,7],[3,28],[4,10],"
+				+ "[5,4],[6,10],[7,18],[8,16],[9,28],[10,9],"
+				+ "[11,14],[12,15],[13,15],[14,27],[15,8],[16,11],"
+				+ "[17,7],[18,5],[19,15],[20,12],[21,10],[22,2],[23,25]"
+				+ ",[24,19], [25,7],[26,22],[27,8],[28,1],[29,27],[30,15],[31,15]]";
+	}
+
 }

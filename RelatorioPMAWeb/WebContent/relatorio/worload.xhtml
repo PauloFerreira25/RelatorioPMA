@@ -15,26 +15,11 @@
 $(function () {
     var previousPoint;
 
-//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-   	
-    var d1 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d1.push([i, parseInt(Math.random() * 30)]);
- 
-    var d2 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d2.push([i, parseInt(Math.random() * 30)]);
- 
-    var d3 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d3.push([i, parseInt(Math.random() * 30)]);
-    
- 
+  	d1 = #{workloadBean.valor1};
+   	d2 = #{workloadBean.valor2};
+   	d3 = #{workloadBean.valor3};
     var ds = new Array();
     
-
     var options = {
             legend:{         
                 container:$("#principalXtimeframe_mes-legenda"),
