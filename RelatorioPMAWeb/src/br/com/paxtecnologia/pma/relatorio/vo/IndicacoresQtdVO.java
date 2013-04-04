@@ -1,14 +1,14 @@
 package br.com.paxtecnologia.pma.relatorio.vo;
 
-public class IncidacoresGeralVO {
+public class IndicacoresQtdVO {
 	private String texto;
-	private String valor;
+	private Integer valor;
 
 	public String getTexto() {
 		return texto;
 	}
 
-	public String getValor() {
+	public Integer getValor() {
 		return valor;
 	}
 
@@ -16,7 +16,7 @@ public class IncidacoresGeralVO {
 		this.texto = texto;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(Integer valor) {
 		this.valor = valor;
 	}
 

@@ -3,19 +3,31 @@ package br.com.paxtecnologia.pma.relatorio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import br.com.paxtecnologia.pma.relatorio.ejb.AtendimentoEjb;
 import br.com.paxtecnologia.pma.relatorio.vo.ChamadoVO;
-import br.com.paxtecnologia.pma.relatorio.vo.IncidacoresGeralVO;
+import br.com.paxtecnologia.pma.relatorio.vo.IndicacoresQtdVO;
 import br.com.paxtecnologia.pma.relatorio.vo.SolicitantesVO;
 import br.com.paxtecnologia.pma.relatorio.vo.TipoChamadosVO;
 
 @ViewScoped
 @ManagedBean(name = "atendimentoBean")
 public class AtendimentoBean {
+	
+	@EJB
+	private AtendimentoEjb atendimentoEjb;
+	
+	@ManagedProperty(value = "#{clientesBean.idCliente}")
+	private Integer idCliente;
+	
+	@ManagedProperty(value = "#{clientesBean.mesRelatorio}")
+	private String mesRelatorio;
 
-	private List<IncidacoresGeralVO> listaGeral;
+	private List<IndicacoresQtdVO> listaGeral;
 	private List<SolicitantesVO> listaSolicitante;
 	private List<TipoChamadosVO> listaTipoChamado;
 	private List<ChamadoVO> listaChamadoAberto;
@@ -41,43 +53,38 @@ public class AtendimentoBean {
 		return totalChamadosFechados;
 	}
 
-	public List<IncidacoresGeralVO> getListaGeral() {
-		listaGeral = new ArrayList<IncidacoresGeralVO>();
+	public List<IndicacoresQtdVO> getListaGeral() {
+		listaGeral = new ArrayList<IndicacoresQtdVO>();
 
-		IncidacoresGeralVO a = new IncidacoresGeralVO();
-		a.setTexto("Número de Chamados Abertos");
-		a.setValor("10");
+		IndicacoresQtdVO a = new IndicacoresQtdVO();
+		a.setTexto("N�mero de Chamados Abertos");
+		a.setValor(atendimentoEjb.getChamadosAbertos(idCliente,mesRelatorio));
 		listaGeral.add(a);
 
-		IncidacoresGeralVO b = new IncidacoresGeralVO();
+		IndicacoresQtdVO b = new IndicacoresQtdVO();
 		b.setTexto("Número de Chamados Solucionados");
-		b.setValor("10");
+		b.setValor(atendimentoEjb.getChamadosFechados(idCliente,mesRelatorio));
 		listaGeral.add(b);
 
-		IncidacoresGeralVO c = new IncidacoresGeralVO();
+		IndicacoresQtdVO c = new IndicacoresQtdVO();
 		c.setTexto("% de Chamados Solucionados");
-		c.setValor("100.00%");
+		c.setValor(atendimentoEjb.getPorcentagemChamadosAbertos(idCliente,mesRelatorio));
 		listaGeral.add(c);
 
-		IncidacoresGeralVO d = new IncidacoresGeralVO();
+		IndicacoresQtdVO d = new IndicacoresQtdVO();
 		d.setTexto("Tempo Médio para solucionar (em Horas)");
-		d.setValor("2.00");
+		d.setValor(atendimentoEjb.getTempoMedio(idCliente,mesRelatorio));
 		listaGeral.add(d);
 
-		IncidacoresGeralVO e = new IncidacoresGeralVO();
+		IndicacoresQtdVO e = new IndicacoresQtdVO();
 		e.setTexto("Número de Chamados em Aberto");
-		e.setValor("1");
+		e.setValor(atendimentoEjb.getChamadosEmAberto(idCliente,mesRelatorio));
 		listaGeral.add(e);
 
-		IncidacoresGeralVO f = new IncidacoresGeralVO();
+		IndicacoresQtdVO f = new IndicacoresQtdVO();
 		f.setTexto("% de Chamados em Aberto");
-		f.setValor("10.00%");
+		f.setValor(atendimentoEjb.getPorcentagemChamadosEmAberto(idCliente,mesRelatorio));
 		listaGeral.add(f);
-
-		IncidacoresGeralVO g = new IncidacoresGeralVO();
-		g.setTexto("Número de Chamados Abertos");
-		g.setValor("10");
-		listaGeral.add(g);
 
 		return listaGeral;
 	}
