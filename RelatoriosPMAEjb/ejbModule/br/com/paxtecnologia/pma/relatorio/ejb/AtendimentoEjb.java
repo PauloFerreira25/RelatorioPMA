@@ -64,7 +64,7 @@ public class AtendimentoEjb {
 	public List<ChamadoVO> getChamadosAbertos(Integer idCliente,
 			String mesRelatorio) {
 		if (listaChamadoAberto == null) {
-			atendimentoDAO.getChamadosAbertos(idCliente, mesRelatorio);
+			listaChamadoAberto = atendimentoDAO.getChamadosAbertos(idCliente, mesRelatorio);
 		}
 		return listaChamadoAberto;
 	}
@@ -85,7 +85,7 @@ public class AtendimentoEjb {
 	public List<ChamadoVO> getChamadosFechados(Integer idCliente,
 			String mesRelatorio) {
 		if (listaChamadoFechado == null) {
-			atendimentoDAO.getChamadosFechados(idCliente, mesRelatorio);
+			listaChamadoFechado = atendimentoDAO.getChamadosFechados(idCliente, mesRelatorio);
 		}
 		return listaChamadoFechado;
 	}
@@ -95,7 +95,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (qtdeChamadoEmAberto == null) {
 			if (listaChamadoEmAberto == null) {
-				getChamadosEmAberto(idCliente, mesRelatorio);
+				listaChamadoEmAberto = getChamadosEmAberto(idCliente, mesRelatorio);
 			}
 			qtdeChamadoEmAberto = listaChamadoEmAberto.size();
 		}
