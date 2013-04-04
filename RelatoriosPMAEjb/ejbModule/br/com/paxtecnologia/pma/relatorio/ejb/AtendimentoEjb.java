@@ -1,6 +1,7 @@
 package br.com.paxtecnologia.pma.relatorio.ejb;
 
 import javax.ejb.Stateless;
+import javax.faces.bean.ManagedProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,33 +16,103 @@ import br.com.paxtecnologia.pma.relatorio.vo.TipoChamadosVO;
 public class AtendimentoEjb {
 
 	private AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
-	private Integer qtdeChamadosAberto;
-	private List<IndicacoresQtdVO> listaChamadosAbertos;
+
+	private Integer qtdeChamadoAberto;
+	private Double porcentagemChamadosAbertos;
+	private Integer qtdeChamadoFechado;
+	private Integer qtdeChamadoEmAberto;
+	private List<ChamadoVO> listaChamadoAberto;
+	private List<ChamadoVO> listaChamadoFechado;
+	private List<ChamadoVO> listaChamadoEmAberto;
 	private List<SolicitantesVO> listaSolicitante;
 	private List<TipoChamadosVO> listaTipoChamado;
-	private List<ChamadoVO> listaChamadoEmAberto;
-	private List<ChamadoVO> listaChamadoFechado;
 
-	public Integer getQtdeChamadoAberto(Integer clienteID, String mesRelatorio) {
-		if (qtdeChamadosAberto == null) {
-			if (listaChamadosAbertos == null) {
-				getChamadosAbertos(clienteID, mesRelatorio);
-			}
-			qtdeChamadosAberto = listaChamadosAbertos.size();
-		}
-		return qtdeChamadosAberto;
+	// Conta Porcentagem
+	public Double getPorcentagem(Integer valor1, Integer valor2){
+		Double porcentagem = valor2.doubleValue() / valor1.doubleValue();
+		return porcentagem;
 	}
-
-	public List getChamadosAbertos(Integer clienteID, String mesRelatorio) {
-		
-		return listaChamadosAbertos;
-	}
-
+	
+	// Porcentagem em Aberto
 	public Double getPorcentagemChamadosAbertos(Integer idCliente,
 			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
+		if (porcentagemChamadosAbertos == null) {
+			if (qtdeChamadoAberto == null) {
+				getQtdeChamadosAbertos(idCliente, mesRelatorio);
+			}
+			if (qtdeChamadoFechado == null) {
+				getQtdeChamadosFechados(idCliente, mesRelatorio);
+			}
+			porcentagemChamadosAbertos = getPorcentagem(qtdeChamadoFechado,qtdeChamadoAberto);
+		}
+		return porcentagemChamadosAbertos;
 	}
+
+	// Quantidade de Chamados Abertos
+	public Integer getQtdeChamadosAbertos(Integer idCliente,
+			String mesRelatorio) {
+		if (qtdeChamadoAberto == null) {
+			if (listaChamadoAberto == null) {
+				getChamadosAbertos(idCliente, mesRelatorio);
+			}
+			qtdeChamadoAberto = listaChamadoAberto.size();
+		}
+		return qtdeChamadoAberto;
+	}
+
+	// Lista de Chamados Abertos
+	public List<ChamadoVO> getChamadosAbertos(Integer idCliente,
+			String mesRelatorio) {
+		if (listaChamadoAberto == null) {
+			atendimentoDAO.getChamadosAbertos(idCliente, mesRelatorio);
+		}
+		return listaChamadoAberto;
+	}
+
+	// Quantidade de Chamdos Fechados
+	public Integer getQtdeChamadosFechados(Integer idCliente,
+			String mesRelatorio) {
+		if (qtdeChamadoFechado == null) {
+			if (listaChamadoFechado == null) {
+				getChamadosFechados(idCliente, mesRelatorio);
+			}
+			qtdeChamadoFechado = listaChamadoFechado.size();
+		}
+		return qtdeChamadoFechado;
+	}
+
+	// Lista de Chamados Fechados
+	public List<ChamadoVO> getChamadosFechados(Integer idCliente,
+			String mesRelatorio) {
+		if (listaChamadoFechado == null) {
+			atendimentoDAO.getChamadosFechados(idCliente, mesRelatorio);
+		}
+		return listaChamadoFechado;
+	}
+
+	// Quantidade de Chamados em Aberto
+	public Integer getQtdeChamadosEmAberto(Integer idCliente,
+			String mesRelatorio) {
+		if (qtdeChamadoEmAberto == null) {
+			if (listaChamadoEmAberto == null) {
+				getChamadosEmAberto(idCliente, mesRelatorio);
+			}
+			qtdeChamadoEmAberto = listaChamadoEmAberto.size();
+		}
+		return qtdeChamadoEmAberto;
+	}
+
+	// Lista de Chamados em Aberto
+	public List<ChamadoVO> getChamadosEmAberto(Integer idCliente,
+			String mesRelatorio) {
+		if (listaChamadoEmAberto == null) {
+			listaChamadoEmAberto = atendimentoDAO.getChamadosEmAberto(
+					idCliente, mesRelatorio);
+		}
+		return listaChamadoEmAberto;
+	}
+
+	// ////////////////////////////////
 
 	public Double getTempoMedio(Integer idCliente, String mesRelatorio) {
 		// TODO Auto-generated method stub
@@ -49,23 +120,6 @@ public class AtendimentoEjb {
 	}
 
 	public Double getPorcentagemChamadosEmAberto(Integer idCliente,
-			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Integer getQtdeChamadosAbertos(Integer idCliente, String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Integer getQtdeChamadosFechados(Integer idCliente,
-			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Integer getQtdeChamadosEmAberto(Integer idCliente,
 			String mesRelatorio) {
 		// TODO Auto-generated method stub
 		return null;
