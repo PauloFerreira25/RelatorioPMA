@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasPorTipoVO;
 import br.com.paxtecnologia.pma.relatorio.vo.UltimoAnoVO;
@@ -29,6 +32,32 @@ public class ParadasDAO {
 				data.getDate());
 		// devolve resultado da query
 		return cal;
+	}
+
+	public Integer getQtdeParadaEvitadasTotal(Integer idCliente,
+			String mesRelatorio) {
+		Integer retorno = null;
+		connection = new DataSourcePMA();
+		PreparedStatement pstmt;
+		String sql = "SELECT qtd_pe FROM pmp_sem_parada WHERE cliente_id = ?";
+		pstmt = connection.getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1, idCliente);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = connection.executaQuery(pstmt);
+		try {
+			while (rs.next()) {
+				retorno = rs.getInt("qtd_pe");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		connection.closeConnection(pstmt);
+		return retorno;
 	}
 
 	public List<ParadasPorTipoVO> getListaParadasEvitadas(Integer idCliente,

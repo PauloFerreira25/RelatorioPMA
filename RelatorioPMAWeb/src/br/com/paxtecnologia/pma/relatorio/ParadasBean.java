@@ -49,7 +49,7 @@ public class ParadasBean {
 			SemParadasVO a = new SemParadasVO();
 			a.setDiasTrabalhados(paradasEjb.getDiasTrabalhados(idCliente,
 					mesRelatorio));
-			a.setParadasEvitadas(paradasEjb.getQtdeParadaEvitadas(idCliente,
+			a.setParadasEvitadas(paradasEjb.getQtdeParadaEvitadasTotal(idCliente,
 					mesRelatorio));
 			a.setDiasSemParadas(paradasEjb.getDiasTrabalhados(idCliente,
 					mesRelatorio));
