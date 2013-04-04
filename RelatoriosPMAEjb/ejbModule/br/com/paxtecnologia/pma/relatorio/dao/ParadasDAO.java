@@ -7,12 +7,18 @@ import java.util.List;
 import java.sql.Date;
 
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasPorTipoVO;
+import br.com.paxtecnologia.pma.relatorio.vo.UltimoAnoVO;
 
 public class ParadasDAO {
 	private DataSourcePMA connection;
 	private List<ParadasPorTipoVO> listaParadasEvitadas;
+	private List<ParadasPorTipoVO> listaParadasNaoProgramadas;
+	private List<ParadasPorTipoVO> listaParadasProgramadasEstrategicas;
+	private List<ParadasPorTipoVO> listaParadasProgramadas;
+	private List<UltimoAnoVO> listaUltimosAnosHoras;
 
 	public Calendar getDataUltimoPNP(Integer clienteID, String mesRelatorio) {
+		// TODO Auto-generated method stub
 		connection = new DataSourcePMA();
 		// query com o banco
 		Date data = new Date(0);
@@ -27,6 +33,7 @@ public class ParadasDAO {
 
 	public List<ParadasPorTipoVO> getListaParadasEvitadas(Integer idCliente,
 			String mesRelatorio) {
+		// TODO Auto-generated method stub
 		listaParadasEvitadas = new ArrayList<ParadasPorTipoVO>();
 		ParadasPorTipoVO a = new ParadasPorTipoVO();
 		a.setIdchamado("VERZANI-250");
@@ -35,7 +42,7 @@ public class ParadasDAO {
 		a.setHost("oracle2");
 		a.setDescricao("Parti��o /u01 deu problema");
 		listaParadasEvitadas.add(a);
-		
+
 		ParadasPorTipoVO b = new ParadasPorTipoVO();
 		b.setIdchamado("VERZANI-251");
 		b.setData("19/02/2013");
@@ -45,6 +52,68 @@ public class ParadasDAO {
 		listaParadasEvitadas.add(b);
 
 		return listaParadasEvitadas;
+	}
+
+	public List<ParadasPorTipoVO> getListaParadasNaoProgramadas(
+			Integer idCliente, String mesRelatorio) {
+		// TODO Auto-generated method stub
+
+		listaParadasNaoProgramadas = new ArrayList<ParadasPorTipoVO>();
+
+		ParadasPorTipoVO a = new ParadasPorTipoVO();
+		a.setIdchamado("VERZANI-245");
+		a.setData("13/02/2013");
+		a.setHoras(0.50);
+		a.setHost("oracle2");
+		a.setDescricao("Lentid�o");
+		listaParadasNaoProgramadas.add(a);
+		return listaParadasNaoProgramadas;
+	}
+
+	public List<ParadasPorTipoVO> getListaParadasProgramadasEstrategicas(
+			Integer idCliente, String mesRelatorio) {
+		listaParadasProgramadasEstrategicas = new ArrayList<ParadasPorTipoVO>();
+
+		ParadasPorTipoVO a = new ParadasPorTipoVO();
+		a.setIdchamado("VERZANI-246");
+		a.setData("13/02/2013");
+		a.setHoras(0.80);
+		a.setHost("oracle3");
+		a.setDescricao("Backup");
+		listaParadasProgramadasEstrategicas.add(a);
+		return listaParadasProgramadasEstrategicas;
+	}
+
+	public List<ParadasPorTipoVO> getListaParadasProgramadas(Integer idCliente,
+			String mesRelatorio) {
+		listaParadasProgramadas = new ArrayList<ParadasPorTipoVO>();
+
+		ParadasPorTipoVO a = new ParadasPorTipoVO();
+		a.setIdchamado("VERZANI-247");
+		a.setData("13/02/2013");
+		a.setHoras(0.89);
+		a.setHost("oracle3");
+		a.setDescricao("Backup urgente");
+		listaParadasProgramadas.add(a);
+		return listaParadasProgramadas;
+	}
+
+	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente,
+			String mesRelatorio) {
+		// TODO Auto-generated method stub
+		listaUltimosAnosHoras = new ArrayList<UltimoAnoVO>();
+
+		UltimoAnoVO a = new UltimoAnoVO();
+		a.setAno("2012");
+		a.setHoras(9.0);
+		listaUltimosAnosHoras.add(a);
+
+		UltimoAnoVO b = new UltimoAnoVO();
+		b.setAno("2011");
+		b.setHoras(19.0);
+		listaUltimosAnosHoras.add(b);
+		// TODO Auto-generated method stub
+		return listaUltimosAnosHoras;
 	}
 
 }
