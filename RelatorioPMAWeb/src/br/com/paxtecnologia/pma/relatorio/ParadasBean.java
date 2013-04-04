@@ -24,7 +24,7 @@ public class ParadasBean {
 
 	@ManagedProperty(value = "#{clientesBean.idCliente}")
 	private Integer idCliente;
-	
+
 	@ManagedProperty(value = "#{clientesBean.mesRelatorio}")
 	private String mesRelatorio;
 
@@ -107,22 +107,9 @@ public class ParadasBean {
 	}
 
 	public List<ParadasPorTipoVO> getListaParadasEvitadas() {
-		if (this.listaParadasEvitadas == null) {
-			listaParadasEvitadas = new ArrayList<ParadasPorTipoVO>();
-			@SuppressWarnings("rawtypes")
-			Map<Integer, Map> paradasEvitadas = paradasEjb
-					.getListaParadasEvitadas();
-			for (Integer key : paradasEvitadas.keySet()) {
-				@SuppressWarnings("unchecked")
-				Map<String, Object> chamado = paradasEvitadas.get(key);
-				ParadasPorTipoVO a = new ParadasPorTipoVO();
-				a.setIdchamado((String) chamado.get("Idchamado"));
-				a.setData((String) chamado.get("Data"));
-				a.setHoras((Double) chamado.get("Horas"));
-				a.setHost((String) chamado.get("Host"));
-				a.setDescricao((String) chamado.get("Descricao"));
-				listaParadasEvitadas.add(a);
-			}
+		if (listaParadasEvitadas == null) {
+			listaParadasEvitadas = paradasEjb.getListaParadasEvitadas(
+					idCliente, mesRelatorio);
 		}
 		return listaParadasEvitadas;
 

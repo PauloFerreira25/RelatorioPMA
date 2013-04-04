@@ -32,12 +32,15 @@ public class AtendimentoBean {
 	private List<TipoChamadosVO> listaTipoChamado;
 	private List<ChamadoVO> listaChamadoAberto;
 	private List<ChamadoVO> listaChamadoFechado;
-	private Integer totalChamadosAbertos = 50;
-	private Double totalPorcentoAbertos = 50.00;
-	private Double totalPorcentoFechados = 33.33;
-	private Integer totalChamadosFechados = 45;
+	private Integer totalChamadosAbertos;
+//	private Double totalPorcentoAbertos = 50.00;
+//	private Double totalPorcentoFechados = 33.33;
+//	private Integer totalChamadosFechados = 45;
 
 	public Integer getTotalChamadosAbertos() {
+		if (totalChamadosAbertos == null){
+			totalChamadosAbertos = atendimentoEjb.getQtdeChamadosAbertos(idCliente,mesRelatorio);
+		}
 		return totalChamadosAbertos;
 	}
 
@@ -57,13 +60,13 @@ public class AtendimentoBean {
 		listaGeral = new ArrayList<IndicacoresQtdVO>();
 
 		IndicacoresQtdVO a = new IndicacoresQtdVO();
-		a.setTexto("N�mero de Chamados Abertos");
-		a.setValor(atendimentoEjb.getChamadosAbertos(idCliente,mesRelatorio));
+		a.setTexto("Número de Chamados Abertos");
+		a.setValor(getTotalChamadosAbertos());
 		listaGeral.add(a);
 
 		IndicacoresQtdVO b = new IndicacoresQtdVO();
 		b.setTexto("Número de Chamados Solucionados");
-		b.setValor(atendimentoEjb.getChamadosFechados(idCliente,mesRelatorio));
+		b.setValor(atendimentoEjb.getQtdeChamadosFechados(idCliente,mesRelatorio));
 		listaGeral.add(b);
 
 		IndicacoresQtdVO c = new IndicacoresQtdVO();
@@ -78,7 +81,7 @@ public class AtendimentoBean {
 
 		IndicacoresQtdVO e = new IndicacoresQtdVO();
 		e.setTexto("Número de Chamados em Aberto");
-		e.setValor(atendimentoEjb.getChamadosEmAberto(idCliente,mesRelatorio));
+		e.setValor(atendimentoEjb.getQtdeChamadosEmAberto(idCliente,mesRelatorio));
 		listaGeral.add(e);
 
 		IndicacoresQtdVO f = new IndicacoresQtdVO();
