@@ -2,8 +2,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	<div id='worload'>
-		<p class="sub-titulo1">WorkLoad</p>
+	<div id='workload'>
+		<p class="sub-titulo1">3 WorkLoad</p>
 		<h:outputScript library="js" name="jquery.js" target="head" />
 		<h:outputScript library="js" name="jquery.flot.js" target="head" />
 		<h:outputScript library="js" name="jquery.flot.orderBars.js"
@@ -14,166 +14,889 @@
 
 $(function () {
     var previousPoint;
- 
+
+//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+   	
     var d1 = [];
-    for (var i = 0; i <= 30; i += 1)
+    for (var i = 1; i <= 30; i += 1)
         d1.push([i, parseInt(Math.random() * 30)]);
  
     var d2 = [];
-    for (var i = 0; i <= 30; i += 1)
+    for (var i = 1; i <= 30; i += 1)
         d2.push([i, parseInt(Math.random() * 30)]);
  
     var d3 = [];
-    for (var i = 0; i <= 30; i += 1)
+    for (var i = 1; i <= 30; i += 1)
         d3.push([i, parseInt(Math.random() * 30)]);
+    
  
     var ds = new Array();
- 
+    
+
+    var options = {
+            legend:{         
+                container:$("#principalXtimeframe_mes-legenda"),
+                noColumns:3,
+            },
+            grid:{
+                hoverable:true,
+            },
+            xaxis: {
+            	min: 0,
+            	max: 32,
+            	ticks: 31,
+            	tickDecimals: 0,
+            	autoscaleMargin: 100
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center" // or "center"
+            	}
+    }
+    
     ds.push({
+        label: "TF1: 8 - 18 Horas", color: "#191970",
         data:d1,
         bars: {
             show: true, 
-            barWidth: 0.2, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
             order: 1,
-            lineWidth : 2
         }
     });
     ds.push({
+    	label: "TF2: 18 - 23 Horas", color: "#CD3333",
         data:d2,
         bars: {
             show: true, 
-            barWidth: 0.2, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
             order: 2
         }
     });
     ds.push({
+    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
         data:d3,
         bars: {
             show: true, 
-            barWidth: 0.2, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
             order: 3
         }
-    });
-                
+    });     
   
                 
     //Display graph
-    $.plot($("#placeholder1"), ds, {
-        grid:{
-            hoverable:true
-        }
-    });
+    $.plot($("#principalXtimeframe_mes-grafico"), ds, options);
 
-    //Display graph
-    $.plot($("#placeholder2"), ds, {
-        grid:{
-            hoverable:true
-        }
-    });
-
-    //Display graph
-    $.plot($("#placeholder3"), ds, {
-        grid:{
-            hoverable:true
-        }
-    });
-
-    //Display graph
-    $.plot($("#placeholder4"), ds, {
-        grid:{
-            hoverable:true
-        }
-    });
-
-    //Display graph
-    $.plot($("#placeholder5"), ds, {
-        grid:{
-            hoverable:true
-        }
-    });
-
-    //Display graph
-    $.plot($("#placeholder6"), ds, {
-        grid:{
-            hoverable:true
-        }
-    });
-
-    //Display graph
-    $.plot($("#placeholder7"), ds, {
-        grid:{
-            hoverable:true
-        }
-    });
-
-    //Display graph
-    $.plot($("#placeholder8"), ds, {
-        grid:{
-            hoverable:true
-        }
-    });
-
-   
- 
- 
-    
 });
-
-
 
 //]]> 
 </script>
 
 
+<script type="text/javascript">
+					//<![CDATA[
+
+$(function () {
+    var previousPoint;
+
+//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+   	
+    var d1 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d1.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d2 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d2.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d3 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d3.push([i, parseInt(Math.random() * 30)]);
+    
+ 
+    var ds = new Array();
+
+    var options = {
+            legend:{         
+                container:$("#principalXtimeframe_ano-legenda"),
+                noColumns:3,
+            },
+            grid:{
+                hoverable:true,
+            },
+            xaxis: {
+            	min: 0,
+            	max: 32,
+            	ticks: 31,
+            	tickDecimals: 0,
+            	autoscaleMargin: 100
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center" // or "center"
+            	}
+    }
+    
+    ds.push({
+        label: "TF1: 8 - 18 Horas", color: "#191970",
+        data:d1,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 1,
+        }
+    });
+    ds.push({
+    	label: "TF2: 18 - 23 Horas", color: "#CD3333",
+        data:d2,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 2
+        }
+    });
+    ds.push({
+    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
+        data:d3,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 3
+        }
+    });     
+      
+
+    //Display graph
+    $.plot($("#principalXtimeframe_ano-grafico"), ds, options);
+
+});
+
+//]]> 
+</script>
+
+
+
+<script type="text/javascript">
+					//<![CDATA[
+
+$(function () {
+    var previousPoint;
+
+//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+   	
+    var d1 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d1.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d2 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d2.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d3 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d3.push([i, parseInt(Math.random() * 30)]);
+    
+ 
+    var ds = new Array();
+
+    var options = {
+            legend:{         
+                container:$("#outrostimeframe_mes-legenda"),
+                noColumns:3,
+            },
+            grid:{
+                hoverable:true,
+            },
+            xaxis: {
+            	min: 0,
+            	max: 32,
+            	ticks: 31,
+            	tickDecimals: 0,
+            	autoscaleMargin: 100
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center" // or "center"
+            	}
+    }
+    
+    ds.push({
+        label: "TF1: 8 - 18 Horas", color: "#191970",
+        data:d1,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 1,
+        }
+    });
+    ds.push({
+    	label: "TF2: 18 - 23 Horas", color: "#CD3333",
+        data:d2,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 2
+        }
+    });
+    ds.push({
+    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
+        data:d3,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 3
+        }
+    });     
+  
+                
+  //Display graph
+    $.plot($("#outrostimeframe_mes-grafico"), ds, options);
+
+  
+});
+
+//]]> 
+</script>
+
+<script type="text/javascript">
+					//<![CDATA[
+
+$(function () {
+    var previousPoint;
+ 
+    var d1 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d1.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d2 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d2.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d3 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d3.push([i, parseInt(Math.random() * 30)]);
+    
+ 
+    var ds = new Array();
+
+    var options = {
+            legend:{         
+                container:$("#outrostimeframe_mes-legenda"),
+                noColumns:3,
+            },
+            grid:{
+                hoverable:true,
+            },
+            xaxis: {
+            	min: 0,
+            	max: 32,
+            	ticks: 31,
+            	tickDecimals: 0,
+            	autoscaleMargin: 100
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center" // or "center"
+            	}
+    }
+    
+    ds.push({
+        label: "TF1: 8 - 18 Horas", color: "#191970",
+        data:d1,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 1,
+        }
+    });
+    ds.push({
+    	label: "TF2: 18 - 23 Horas", color: "#CD3333",
+        data:d2,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 2
+        }
+    });
+    ds.push({
+    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
+        data:d3,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 3
+        }
+    });     
+  
+                
+  //Display graph
+    $.plot($("#outrostimeframe_mes-grafico"), ds, options);
+ 
+});
+
+//]]> 
+</script>
+
+<script type="text/javascript">
+					//<![CDATA[
+
+$(function () {
+    var previousPoint;
+
+//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+   	
+    var d1 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d1.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d2 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d2.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d3 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d3.push([i, parseInt(Math.random() * 30)]);
+    
+ 
+    var ds = new Array();
+
+    var options = {
+            legend:{         
+                container:$("#outrostimeframe_ano-legenda"),
+                noColumns:3,
+            },
+            grid:{
+                hoverable:true,
+            },
+            xaxis: {
+            	min: 0,
+            	max: 32,
+            	ticks: 31,
+            	tickDecimals: 0,
+            	autoscaleMargin: 100
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center" // or "center"
+            	}
+    }
+    
+    ds.push({
+        label: "TF1: 8 - 18 Horas", color: "#191970",
+        data:d1,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 1,
+        }
+    });
+    ds.push({
+    	label: "TF2: 18 - 23 Horas", color: "#CD3333",
+        data:d2,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 2
+        }
+    });
+    ds.push({
+    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
+        data:d3,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 3
+        }
+    });     
+  
+                
+  //Display graph
+    $.plot($("#outrostimeframe_ano-grafico"), ds, options);
+
+});
+
+//]]> 
+</script>
+
+<script type="text/javascript">
+					//<![CDATA[
+
+$(function () {
+    var previousPoint;
+
+//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+   	
+    var d1 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d1.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d2 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d2.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d3 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d3.push([i, parseInt(Math.random() * 30)]);
+    
+ 
+    var ds = new Array();
+
+    var options = {
+            legend:{         
+                container:$("#princapaloutros_tudo_mes-legenda"),
+                noColumns:3,
+            },
+            grid:{
+                hoverable:true,
+            },
+            xaxis: {
+            	min: 0,
+            	max: 32,
+            	ticks: 31,
+            	tickDecimals: 0,
+            	autoscaleMargin: 100
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center" // or "center"
+            	}
+    }
+    
+    ds.push({
+        label: "TF1: 8 - 18 Horas", color: "#191970",
+        data:d1,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 1,
+        }
+    });
+    ds.push({
+    	label: "TF2: 18 - 23 Horas", color: "#CD3333",
+        data:d2,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 2
+        }
+    });
+    ds.push({
+    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
+        data:d3,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 3
+        }
+    });     
+ 
+  //Display graph
+    $.plot($("#princapaloutros_tudo_mes-grafico"), ds, options);
+
+ 
+});
+
+//]]> 
+</script>
+
+
+<script type="text/javascript">
+					//<![CDATA[
+
+$(function () {
+    var previousPoint;
+
+//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+   	
+    var d1 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d1.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d2 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d2.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d3 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d3.push([i, parseInt(Math.random() * 30)]);
+    
+ 
+    var ds = new Array();
+
+    var options = {
+            legend:{         
+                container:$("#princapaloutros_tudo_ano-legenda"),
+                noColumns:3,
+            },
+            grid:{
+                hoverable:true,
+            },
+            xaxis: {
+            	min: 0,
+            	max: 32,
+            	ticks: 31,
+            	tickDecimals: 0,
+            	autoscaleMargin: 100
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center" // or "center"
+            	}
+    }
+    
+    ds.push({
+        label: "TF1: 8 - 18 Horas", color: "#191970",
+        data:d1,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 1,
+        }
+    });
+    ds.push({
+    	label: "TF2: 18 - 23 Horas", color: "#CD3333",
+        data:d2,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 2
+        }
+    });
+    ds.push({
+    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
+        data:d3,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 3
+        }
+    });     
+               
+  //Display graph
+    $.plot($("#princapaloutros_tudo_ano-grafico"), ds, options);
+
+});
+
+//]]> 
+</script>
+
+<script type="text/javascript">
+					//<![CDATA[
+
+$(function () {
+    var previousPoint;
+
+//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+   	
+    var d1 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d1.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d2 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d2.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d3 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d3.push([i, parseInt(Math.random() * 30)]);
+    
+ 
+    var ds = new Array();
+
+    var options = {
+            legend:{         
+                container:$("#princapaloutros_comercial_mes-legenda"),
+                noColumns:3,
+            },
+            grid:{
+                hoverable:true,
+            },
+            xaxis: {
+            	min: 0,
+            	max: 32,
+            	ticks: 31,
+            	tickDecimals: 0,
+            	autoscaleMargin: 100
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center" // or "center"
+            	}
+    }
+    
+    ds.push({
+        label: "TF1: 8 - 18 Horas", color: "#191970",
+        data:d1,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 1,
+        }
+    });
+    ds.push({
+    	label: "TF2: 18 - 23 Horas", color: "#CD3333",
+        data:d2,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 2
+        }
+    });
+    ds.push({
+    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
+        data:d3,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 3
+        }
+    });     
+
+  //Display graph
+    $.plot($("#princapaloutros_comercial_mes-grafico"), ds, options);
+
+});
+
+//]]> 
+</script>
+
+<script type="text/javascript">
+					//<![CDATA[
+
+$(function () {
+    var previousPoint;
+
+//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
+   	
+    var d1 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d1.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d2 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d2.push([i, parseInt(Math.random() * 30)]);
+ 
+    var d3 = [];
+    for (var i = 1; i <= 30; i += 1)
+        d3.push([i, parseInt(Math.random() * 30)]);
+    
+ 
+    var ds = new Array();
+
+    var options = {
+            legend:{         
+                container:$("#princapaloutros_comercial_ano-legenda"),
+                noColumns:3,
+            },
+            grid:{
+                hoverable:true,
+            },
+            xaxis: {
+            	min: 0,
+            	max: 32,
+            	ticks: 31,
+            	tickDecimals: 0,
+            	autoscaleMargin: 100
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center" // or "center"
+            	}
+    }
+    
+    ds.push({
+        label: "TF1: 8 - 18 Horas", color: "#191970",
+        data:d1,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 1,
+        }
+    });
+    ds.push({
+    	label: "TF2: 18 - 23 Horas", color: "#CD3333",
+        data:d2,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 2
+        }
+    });
+    ds.push({
+    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
+        data:d3,
+        bars: {
+            show: true, 
+            lineWidth: 2, 
+            barWidth: 0.05,  
+            order: 3
+        }
+    });     
+
+  //Display graph
+    $.plot($("#princapaloutros_comercial_ano-grafico"), ds, options);
+
+});
+
+//]]> 
+</script>
+
 		<div id='principaltimeframe'>
-			<p class="sub-titulo2">Senior X Time Frame</p>
+			<p class="sub-titulo2">3.1 Senior X Time Frame</p>
 			<h:outputText
 				value="O gráfico abaixo representa o workload através das sessões no database Oracle para o owner “senior” através de 3 distintos time frames." />
 			<h:outputText value="Mês corrente:" />
 			<br />
-			<div id="placeholder1" class="graph-gnd"></div>
+			<div id="principalXtimeframe_mes">
+				<div id="principalXtimeframe_mes-grafico" class="graph-gnd"></div>
+				<div align="center">
+					<div id="principalXtimeframe_mes-legenda"></div>
+				</div>
+			</div>
 			<br />
 			<h:outputText value="Anual:" />
 			<br />
-			<div id="placeholder2" class="graph-gnd"></div>
+			<div id="principalXtimeframe_ano">
+				<div id="principalXtimeframe_ano-grafico" class="graph-gnd "></div>
+				<div align="center">
+					<div id="principalXtimeframe_ano-legenda"></div>
+				</div>
+			</div>
 		</div>
 		<div id='outrostimeframe'>
-			<p class="sub-titulo2">Não Senior X Time Frame</p>
+			<p class="sub-titulo2">3.2 Não Senior X Time Frame</p>
 			<h:outputText
 				value="O gráfico abaixo representa o workload através das sessões no database Oracle para os owners “não senior”, ou seja, todos os demais, através de 3 distintos time frames." />
 			<h:outputText value="Mês corrente:" />
 			<br />
-			<div id="placeholder3" class="graph-gnd"></div>
+			<div id="outrostimeframe_mes">
+				<div id="outrostimeframe_mes-grafico" class="graph-gnd"></div>
+				<div align="center">
+					<div id="outrostimeframe_mes-legenda"></div>
+				</div>
+			</div>
 			<br />
 			<h:outputText value="Anual:" />
 			<br />
-			<div id="placeholder4" class="graph-gnd"></div>
-		</div>
-		<div id='principaloutrostimeframe'>
-			<div id='principaloutrostimeframe1'>
-				<p class="sub-titulo2">Senior X Não Senior</p>
-				<h:outputText
-					value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “senior” contra os owners “não senior” para o time frame 24 horas." />
-				<h:outputText value="Mês corrente:" />
-				<br />
-				<div id="placeholder5" class="graph-gnd"></div>
-				<br />
-				<h:outputText value="Anual:" />
-				<br />
-				<div id="placeholder6" class="graph-gnd"></div>
+			<div id="outrostimeframe_ano">
+				<div id="outrostimeframe_ano-grafico" class="graph-gnd"></div>
+				<div align="center">
+					<div id="outrostimeframe_ano-legenda"></div>
+				</div>
 			</div>
-			<div id='principaloutrostimeframe2'>
-				<p class="sub-titulo2"></p>
-				<h:outputText
-					value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “senior” contra os owners “não senior” para o time frame horário comercial (8-18)." />
-				<h:outputText value="Mês corrente:" />
-				<br />
-				<div id="placeholder7" class="graph-gnd"></div>
-				<br />
-				<h:outputText value="Anual:" />
-				<br />
-				<div id="placeholder8" class="graph-gnd"></div>
+		</div>
+		<div id='princapaloutros_tudo'>
+			<p class="sub-titulo2">3.3 Senior X Não Senior</p>
+			<h:outputText
+				value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “senior” contra os owners “não senior” para o time frame 24 horas." />
+			<h:outputText value="Mês corrente:" />
+			<br />
+			<div id="princapaloutros_tudo_mes">
+				<div id="princapaloutros_tudo_mes-grafico" class="graph-gnd"></div>
+				<div align="center">
+					<div id="princapaloutros_tudo_mes-legenda"></div>
+				</div>
+			</div>
+			<br />
+			<h:outputText value="Anual:" />
+			<br />
+			<div id="princapaloutros_tudo_ano">
+				<div id="princapaloutros_tudo_ano-grafico" class="graph-gnd"></div>
+				<div align="center">
+					<div id="princapaloutros_tudo_ano-legenda"></div>
+				</div>
+			</div>
+		</div>
+		<div id='princapaloutros_comercial'>
+			<p class="sub-titulo2"></p>
+			<h:outputText
+				value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “senior” contra os owners “não senior” para o time frame horário comercial (8-18)." />
+			<h:outputText value="Mês corrente:" />
+			<br />
+			<div id="princapaloutros_comercial_mes">
+				<div id="princapaloutros_comercial_mes-grafico" class="graph-gnd"></div>
+				<div align="center">
+					<div id="princapaloutros_comercial_mes-legenda"></div>
+				</div>
+			</div>
+			<br />
+			<h:outputText value="Anual:" />
+			<br />
+			<div id="princapaloutros_comercial_mes">
+				<div id="princapaloutros_comercial_ano-grafico" class="graph-gnd"></div>
+				<div align="center">
+					<div id="princapaloutros_comercial_ano-legenda"></div>
+				</div>
 			</div>
 		</div>
 	</div>
+
 </ui:composition>
