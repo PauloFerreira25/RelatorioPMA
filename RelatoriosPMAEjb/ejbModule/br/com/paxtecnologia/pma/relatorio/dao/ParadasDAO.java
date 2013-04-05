@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasPorTipoVO;
@@ -40,10 +41,8 @@ public class ParadasDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// Calendar cal = new GregorianCalendar(data.getYear(), data.getMonth(),
-		// data.getDate());
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(data);
+		cal.setTimeInMillis(data.getTime());
 		connection.closeConnection(pstmt);
 		return cal;
 	}

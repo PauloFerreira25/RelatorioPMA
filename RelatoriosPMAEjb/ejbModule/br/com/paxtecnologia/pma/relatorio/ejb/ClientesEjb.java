@@ -13,7 +13,8 @@ public class ClientesEjb {
 	private ClienteDAO clienteDAO = new ClienteDAO();
 	private List<ClienteVO> listaClientes;
 	private List<MesRelatorioVO> listaMesRelatorio;
-
+	private String logoCliente;
+	
 	public List<ClienteVO> getListaClientes() {
 		if (listaClientes == null) {
 			listaClientes = clienteDAO.getListaClientes();
@@ -28,6 +29,13 @@ public class ClientesEjb {
 		}
 		return listaMesRelatorio;
 
+	}
+
+	public String getLogoCliente(Integer idCliente) {
+		if (logoCliente == null) {
+			logoCliente = clienteDAO.getLogoCliente(idCliente);
+		}
+		return logoCliente;
 	}
 
 }

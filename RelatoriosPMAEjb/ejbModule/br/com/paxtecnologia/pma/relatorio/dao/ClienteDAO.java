@@ -1,8 +1,10 @@
 package br.com.paxtecnologia.pma.relatorio.dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +41,9 @@ public class ClienteDAO {
 	public List<MesRelatorioVO> getListaMes(Integer idCliente) {
 		List<MesRelatorioVO> retorno = new ArrayList<MesRelatorioVO>();
 		connection = new DataSourcePMA();
+		Date data = null;
 		PreparedStatement pstmt;
-		String sql = "SELECT data_insercao FROM pmp_task WHERE cliente_id = ? GROUP BY data_insercao";
+		String sql = "SELECT DISTINCT data_insercao FROM pmp_task WHERE cliente_id = ? ";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
@@ -53,9 +56,38 @@ public class ClienteDAO {
 		try {
 			while (rs.next()) {
 				temp = new MesRelatorioVO();
-				temp.setLabelMes(rs.getString("data_insercao"));
-				temp.setMesString(rs.getString("data_insercao"));
+				data = rs.getDate("data_insercao");
+				String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(data);
+				String formattedDateTexto = new SimpleDateFormat("MMM/yyyy").format(data);
+				temp.setLabelMes(formattedDateTexto);
+				temp.setMesString(formattedDate);
 				retorno.add(temp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		connection.closeConnection(pstmt);
+		return retorno;
+	}
+
+	public String getLogoCliente(Integer idCliente) {
+		String retorno = null;
+		connection = new DataSourcePMA();
+		PreparedStatement pstmt;
+		String sql = "SELECT nomelogoimg FROM cliente WHERE cliente_id = ?";
+		pstmt = connection.getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1, idCliente);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = connection.executaQuery(pstmt);
+		try {
+			while (rs.next()) {
+
+				retorno = rs.getString("data_insercao");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
