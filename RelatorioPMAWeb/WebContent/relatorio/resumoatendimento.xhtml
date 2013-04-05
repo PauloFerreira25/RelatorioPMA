@@ -89,7 +89,7 @@
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.qtdeAberto}" />
-						<f:facet name="footer">#{atendimentoBean.totalChamadosAbertos}</f:facet>
+						<f:facet name="footer">#{atendimentoBean.qtdeChamadosAbertos}</f:facet>
 					</h:column>
 
 					<h:column>
@@ -97,19 +97,19 @@
 						<h:outputText value="#{i.porcentoAberto}">
 							<f:convertNumber type="percent" />
 						</h:outputText>
-						<f:facet name="footer">#{atendimentoBean.totalPorcentoAbertos}</f:facet>
+						<f:facet name="footer">#{atendimentoBean.porcentoAbertos}</f:facet>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.qtdeFechado}" />
-						<f:facet name="footer">#{atendimentoBean.totalChamadosFechados}</f:facet>
+						<f:facet name="footer">#{atendimentoBean.qtdeChamadosFechados}</f:facet>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">% de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.porcentoFechado}" />
-						<f:facet name="footer">#{atendimentoBean.totalPorcentoFechados}</f:facet>
+						<f:facet name="footer">#{atendimentoBean.porcentoFechados}</f:facet>
 					</h:column>
 
 				</h:dataTable>
@@ -131,25 +131,25 @@
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.qtdeAberto}" />
-						<f:facet name="footer">#{atendimentoBean.totalChamadosAbertos}</f:facet>
+						<f:facet name="footer">#{atendimentoBean.qtdeChamadosAbertos}</f:facet>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">% de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.porcentoAberto}" />
-						<f:facet name="footer">#{atendimentoBean.totalPorcentoAbertos}</f:facet>
+						<f:facet name="footer">#{atendimentoBean.porcentoAbertos}</f:facet>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.qtdeFechado}" />
-						<f:facet name="footer">#{atendimentoBean.totalChamadosFechados}</f:facet>
+						<f:facet name="footer">#{atendimentoBean.qtdeChamadosFechados}</f:facet>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">% de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.porcentoFechado}" />
-						<f:facet name="footer">#{atendimentoBean.totalPorcentoFechados}</f:facet>
+						<f:facet name="footer">#{atendimentoBean.porcentoFechados}</f:facet>
 					</h:column>
 				</h:dataTable>
 			</div>
@@ -243,25 +243,25 @@
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.qtdeAberto}" />
-						<f:facet name="footer">#{atendimentoHostBean.totalChamadosAbertos}</f:facet>
+						<f:facet name="footer">#{atendimentoHostBean.qtdeChamadosAbertosComHost}</f:facet>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">% de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.porcentoAberto}" />
-						<f:facet name="footer">#{atendimentoHostBean.totalPorcentoAbertos}</f:facet>
+						<f:facet name="footer">#{atendimentoHostBean.porcentoAbertosComHost}</f:facet>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.qtdeFechado}" />
-						<f:facet name="footer">#{atendimentoHostBean.totalChamadosFechados}</f:facet>
+						<f:facet name="footer">#{atendimentoHostBean.qtdeChamadosFechadosComHost}</f:facet>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">% de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.porcentoFechado}" />
-						<f:facet name="footer">#{atendimentoHostBean.totalPorcentoFechados}</f:facet>
+						<f:facet name="footer">#{atendimentoHostBean.porcentoFechadosComHost}</f:facet>
 					</h:column>
 
 				</h:dataTable>

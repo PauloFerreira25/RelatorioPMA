@@ -1,77 +1,58 @@
 package br.com.paxtecnologia.pma.relatorio;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ValueChangeEvent;
+
+import br.com.paxtecnologia.pma.relatorio.ejb.ClientesEjb;
+import br.com.paxtecnologia.pma.relatorio.vo.ClienteVO;
+import br.com.paxtecnologia.pma.relatorio.vo.MesRelatorioVO;
 
 @ManagedBean(name = "clientesBean")
 @SessionScoped
 public class ClientesBean {
 
-	private String idCliente;
+	@EJB
+	private ClientesEjb clientesEjb;
+
+	private Integer idCliente;
 	private String mesRelatorio;
-	private List<ItemVO> listaIdClientes;
-	private List<MesVO> listaIdMes;
+	private List<ClienteVO> listaClientes;
+	private List<MesRelatorioVO> listaMes;
 
-	public static class ItemVO {
-		public String label;
-		public Integer value;
-
-		public ItemVO(String label, Integer value) {
-			this.label = label;
-			this.value = value;
+	public List<ClienteVO> getListaClientes() {
+		if (listaClientes == null) {
+			listaClientes = clientesEjb.getListaClientes();
 		}
-
-		public String getLabel() {
-			return label;
-		}
-
-		public Integer getValue() {
-			return value;
-		}
-
+		return listaClientes;
 	}
 
-	public static class MesVO {
-		public String label;
-		public String value;
+	public void updateListaMes(ValueChangeEvent e) {
+		// This will return you the newly selected
+		// value as an object. You'll have to cast it.
+		Object newValue = e.getNewValue();
 
-		public MesVO(String label, String value) {
-			this.label = label;
-			this.value = value;
-		}
-
-		public String getLabel() {
-			return label;
-		}
-
-		public String getValue() {
-			return value;
-		}
-
+		// The rest of your processing logic goes here...
+		setListaMes(generateListaMes((Integer) newValue));
 	}
 
-	public List<ItemVO> getListaIdClientes() {
-		listaIdClientes = new ArrayList<ItemVO>();
-		listaIdClientes.add(new ItemVO("Alatur", 1));
-		listaIdClientes.add(new ItemVO("Verzani", 2));
-		return listaIdClientes;
+	private List<MesRelatorioVO> generateListaMes(Integer idCliente) {
+		listaMes = clientesEjb.getListaMes(idCliente);
+		return listaMes;
 	}
 
-	public List<MesVO> getListaIdMes() {
-		listaIdMes = new ArrayList<MesVO>();
-		listaIdMes.add(new MesVO("Jan", "2013-01-01"));
-		listaIdMes.add(new MesVO("Fev", "2013-02-01"));
-		return listaIdMes;
+	public List<MesRelatorioVO> getListaMes() {
+		return listaMes;
 	}
 
-	public String getIdCliente() {
+	public Integer getIdCliente() {
 		return idCliente;
 	}
 
-	public void setIdCliente(String idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
@@ -80,8 +61,15 @@ public class ClientesBean {
 	}
 
 	public void setMesRelatorio(String mesRelatorio) {
-
 		this.mesRelatorio = mesRelatorio;
+	}
+
+	public void setListaClientes(List<ClienteVO> listaClientes) {
+		this.listaClientes = listaClientes;
+	}
+
+	public void setListaMes(List<MesRelatorioVO> listaMes) {
+		this.listaMes = listaMes;
 	}
 
 }

@@ -1,13 +1,12 @@
 package br.com.paxtecnologia.pma.relatorio.dao;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasPorTipoVO;
 import br.com.paxtecnologia.pma.relatorio.vo.UltimoAnoVO;
@@ -20,17 +19,32 @@ public class ParadasDAO {
 	private List<ParadasPorTipoVO> listaParadasProgramadas;
 	private List<UltimoAnoVO> listaUltimosAnosHoras;
 
-	public Calendar getDataUltimoPNP(Integer clienteID, String mesRelatorio) {
-		// TODO Auto-generated method stub
+	public Calendar getDataUltimoPNP(Integer idCliente, String mesRelatorio) {
+		Date data = null;
 		connection = new DataSourcePMA();
-		// query com o banco
-		Date data = new Date(0);
-		data.setDate(25);
-		data.setMonth(1);
-		data.setYear(1985);
-		Calendar cal = new GregorianCalendar(data.getYear(), data.getMonth(),
-				data.getDate());
-		// devolve resultado da query
+		PreparedStatement pstmt;
+		String sql = "SELECT data_ult_parada FROM pmp_sem_parada WHERE cliente_id = ?";
+		pstmt = connection.getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1, idCliente);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = connection.executaQuery(pstmt);
+		try {
+			while (rs.next()) {
+				data = rs.getDate("data_ult_parada");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// Calendar cal = new GregorianCalendar(data.getYear(), data.getMonth(),
+		// data.getDate());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(data);
+		connection.closeConnection(pstmt);
 		return cal;
 	}
 

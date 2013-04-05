@@ -1,79 +1,92 @@
 package br.com.paxtecnologia.pma.relatorio;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import br.com.paxtecnologia.pma.relatorio.ejb.AtendimentoEjb;
 import br.com.paxtecnologia.pma.relatorio.vo.HostVO;
 
 @ViewScoped
 @ManagedBean(name = "atendimentoHostBean")
 public class AtendimentoHostBean {
+
+	@EJB
+	private AtendimentoEjb atendimentoEjb;
+
+	@ManagedProperty(value = "#{clientesBean.idCliente}")
+	private Integer idCliente;
+
+	@ManagedProperty(value = "#{clientesBean.mesRelatorio}")
+	private String mesRelatorio;
+
 	private List<HostVO> listaHost;
-	private Integer totalChamadosAbertos = 50;
-	private Double totalPorcentoAbertos = 50.00;
-	private Double totalPorcentoFechados = 33.33;
-	private Integer totalChamadosFechados = 45;
+	private Integer qtdeChamadosAbertosComHost;
+	private Double porcentoAbertosComHost;
+	private Double porcentoFechadosComHost;
+	private Integer qtdeChamadosFechadosComHost;
+	private String graficoAbertos;
+	private String graficoFechados;
 
-	public Integer getTotalChamadosAbertos() {
-		return totalChamadosAbertos;
+	public Integer getQtdeChamadosAbertosComHost() {
+		if (qtdeChamadosAbertosComHost == null) {
+			qtdeChamadosAbertosComHost = atendimentoEjb
+					.getQtdeChamadosAbertosComHost(idCliente, mesRelatorio);
+		}
+		return qtdeChamadosAbertosComHost;
 	}
 
-	public Double getTotalPorcentoAbertos() {
-		return totalPorcentoAbertos;
+	public Double getPorcentoAbertosComHost() {
+		if (porcentoAbertosComHost == null) {
+			porcentoAbertosComHost = atendimentoEjb.getPorcentoAbertosComHost(
+					idCliente, mesRelatorio);
+		}
+		return porcentoAbertosComHost;
 	}
 
-	public Double getTotalPorcentoFechados() {
-		return totalPorcentoFechados;
+	public Double getPorcentoFechadosComHost() {
+		if (porcentoFechadosComHost == null) {
+			porcentoFechadosComHost = atendimentoEjb
+					.getPorcentoFechadosComHost(idCliente, mesRelatorio);
+		}
+		return porcentoFechadosComHost;
 	}
 
-	public Integer getTotalChamadosFechados() {
-		return totalChamadosFechados;
+	public Integer getQtdeChamadosFechadosComHost() {
+		if (qtdeChamadosFechadosComHost == null) {
+			qtdeChamadosFechadosComHost = atendimentoEjb
+					.getQtdeChamadosFechadosComHost(idCliente, mesRelatorio);
+		}
+		return qtdeChamadosFechadosComHost;
 	}
 
 	public List<HostVO> getListaHost() {
-		listaHost = new ArrayList<HostVO>();
-
-		HostVO a = new HostVO();
-		a.setHostname("oracle1");
-		a.setQtdeAberto(16);
-		a.setPorcentoAberto(50.00);
-		a.setQtdeFechado(14);
-		a.setPorcentoFechado(54.56);
-		listaHost.add(a);
-
-		HostVO b = new HostVO();
-		b.setHostname("oracle2");
-		b.setQtdeAberto(10);
-		b.setPorcentoAberto(55.00);
-		b.setQtdeFechado(11);
-		b.setPorcentoFechado(44.56);
-		listaHost.add(b);
-
-		HostVO c = new HostVO();
-		c.setHostname("oracle3");
-		c.setQtdeAberto(5);
-		c.setPorcentoAberto(25.00);
-		c.setQtdeFechado(7);
-		c.setPorcentoFechado(56.00);
-		listaHost.add(c);
+		if (listaHost == null) {
+			listaHost = atendimentoEjb.getListaHost(idCliente, mesRelatorio);
+		}
 
 		return listaHost;
 	}
-	
-	public String getGraficoAbertos(){
-		String saida = new String();
-		saida = "[{ label: \"Series1\",  data: 10},{ label: \"Series2\",  data: 30},{ label: \"Series6\",  data: 110}]";
-		return saida;
-	}
-	
 
-	public String getGraficoFechados(){
-		String saida = new String();
-		saida = "[{ label: \"Series1\",  data: 10},{ label: \"Series2\",  data: 30},{ label: \"Series6\",  data: 110}]";
-		return saida;
+	public String getGraficoAbertos() {
+		if (graficoAbertos == null) {
+			graficoAbertos = atendimentoEjb.getGraficoAbertos(idCliente,
+					mesRelatorio);
+		}
+		return graficoAbertos;
+
+	}
+
+	public String getGraficoFechados() {
+		if (graficoFechados == null) {
+			graficoFechados = atendimentoEjb.getGraficoFechados(idCliente,
+					mesRelatorio);
+		}
+		return graficoFechados;
+
 	}
 
 }

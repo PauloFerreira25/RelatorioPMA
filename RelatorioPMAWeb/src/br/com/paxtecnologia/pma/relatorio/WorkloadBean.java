@@ -1,12 +1,7 @@
 package br.com.paxtecnologia.pma.relatorio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
-import br.com.paxtecnologia.pma.relatorio.vo.TimeframeVO;
 
 @ViewScoped
 @ManagedBean(name = "workloadBean")
