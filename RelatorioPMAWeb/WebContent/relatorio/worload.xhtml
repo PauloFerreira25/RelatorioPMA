@@ -15,9 +15,9 @@
 $(function () {
     var previousPoint;
 
-  	d1 = #{workloadBean.valor1};
-   	d2 = #{workloadBean.valor2};
-   	d3 = #{workloadBean.valor3};
+  	d1 = #{workloadBean.getTf1(idCliente,mesRelatorio,"principalXtimeframe_mes")};
+   	d2 = #{workloadBean.getTf2(idCliente,mesRelatorio,"principalXtimeframe_mes")};
+   	d3 = #{workloadBean.getTf3(idCliente,mesRelatorio,"principalXtimeframe_mes")};
     var ds = new Array();
     
     var options = {
@@ -91,23 +91,10 @@ $(function () {
 $(function () {
     var previousPoint;
 
-//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-   	
-    var d1 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d1.push([i, parseInt(Math.random() * 30)]);
- 
-    var d2 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d2.push([i, parseInt(Math.random() * 30)]);
- 
-    var d3 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d3.push([i, parseInt(Math.random() * 30)]);
+    d1 = #{workloadBean.getTf1(idCliente,mesRelatorio,"principalXtimeframe_ano")};
+   	d2 = #{workloadBean.getTf2(idCliente,mesRelatorio,"principalXtimeframe_ano")};
+   	d3 = #{workloadBean.getTf3(idCliente,mesRelatorio,"principalXtimeframe_ano")};
     
- 
     var ds = new Array();
 
     var options = {
@@ -182,22 +169,9 @@ $(function () {
 $(function () {
     var previousPoint;
 
-//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-   	
-    var d1 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d1.push([i, parseInt(Math.random() * 30)]);
- 
-    var d2 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d2.push([i, parseInt(Math.random() * 30)]);
- 
-    var d3 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d3.push([i, parseInt(Math.random() * 30)]);
-    
+    d1 = #{workloadBean.getTf1(idCliente,mesRelatorio,"outrostimeframe_mes")};
+   	d2 = #{workloadBean.getTf2(idCliente,mesRelatorio,"outrostimeframe_mes")};
+   	d3 = #{workloadBean.getTf3(idCliente,mesRelatorio,"outrostimeframe_mes")};
  
     var ds = new Array();
 
@@ -271,108 +245,10 @@ $(function () {
 
 $(function () {
     var previousPoint;
- 
-    var d1 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d1.push([i, parseInt(Math.random() * 30)]);
- 
-    var d2 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d2.push([i, parseInt(Math.random() * 30)]);
- 
-    var d3 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d3.push([i, parseInt(Math.random() * 30)]);
-    
- 
-    var ds = new Array();
 
-    var options = {
-            legend:{         
-                container:$("#outrostimeframe_mes-legenda"),
-                noColumns:3,
-            },
-            grid:{
-                hoverable:true,
-            },
-            xaxis: {
-            	min: 0,
-            	max: 32,
-            	ticks: 31,
-            	tickDecimals: 0,
-            	autoscaleMargin: 100
-            },
-            yaxis: {           
-            	tickDecimals: 0
-
-            },
-            bars:{
-            	align: "center" // or "center"
-            	}
-    }
-    
-    ds.push({
-        label: "TF1: 8 - 18 Horas", color: "#191970",
-        data:d1,
-        bars: {
-            show: true, 
-            lineWidth: 2, 
-            barWidth: 0.05,  
-            order: 1,
-        }
-    });
-    ds.push({
-    	label: "TF2: 18 - 23 Horas", color: "#CD3333",
-        data:d2,
-        bars: {
-            show: true, 
-            lineWidth: 2, 
-            barWidth: 0.05,  
-            order: 2
-        }
-    });
-    ds.push({
-    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
-        data:d3,
-        bars: {
-            show: true, 
-            lineWidth: 2, 
-            barWidth: 0.05,  
-            order: 3
-        }
-    });     
-  
-                
-  //Display graph
-    $.plot($("#outrostimeframe_mes-grafico"), ds, options);
- 
-});
-
-//]]> 
-</script>
-
-<script type="text/javascript">
-					//<![CDATA[
-
-$(function () {
-    var previousPoint;
-
-//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-   	
-    var d1 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d1.push([i, parseInt(Math.random() * 30)]);
- 
-    var d2 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d2.push([i, parseInt(Math.random() * 30)]);
- 
-    var d3 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d3.push([i, parseInt(Math.random() * 30)]);
-    
+    d1 = #{workloadBean.getTf1(idCliente,mesRelatorio,"outrostimeframe_ano")};
+   	d2 = #{workloadBean.getTf2(idCliente,mesRelatorio,"outrostimeframe_ano")};
+   	d3 = #{workloadBean.getTf3(idCliente,mesRelatorio,"outrostimeframe_ano")};
  
     var ds = new Array();
 
@@ -446,22 +322,9 @@ $(function () {
 $(function () {
     var previousPoint;
 
-//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-   	
-    var d1 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d1.push([i, parseInt(Math.random() * 30)]);
- 
-    var d2 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d2.push([i, parseInt(Math.random() * 30)]);
- 
-    var d3 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d3.push([i, parseInt(Math.random() * 30)]);
-    
+    d1 = #{workloadBean.getTf1(idCliente,mesRelatorio,"princapaloutros_tudo_mes")};
+   	d2 = #{workloadBean.getTf2(idCliente,mesRelatorio,"princapaloutros_tudo_mes")};
+   	d3 = #{workloadBean.getTf3(idCliente,mesRelatorio,"princapaloutros_tudo_mes")};
  
     var ds = new Array();
 
@@ -536,22 +399,9 @@ $(function () {
 $(function () {
     var previousPoint;
 
-//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-   	
-    var d1 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d1.push([i, parseInt(Math.random() * 30)]);
- 
-    var d2 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d2.push([i, parseInt(Math.random() * 30)]);
- 
-    var d3 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d3.push([i, parseInt(Math.random() * 30)]);
-    
+    d1 = #{workloadBean.getTf1(idCliente,mesRelatorio,"princapaloutros_tudo_ano")};
+   	d2 = #{workloadBean.getTf2(idCliente,mesRelatorio,"princapaloutros_tudo_ano")};
+   	d3 = #{workloadBean.getTf3(idCliente,mesRelatorio,"princapaloutros_tudo_ano")};
  
     var ds = new Array();
 
@@ -624,22 +474,9 @@ $(function () {
 $(function () {
     var previousPoint;
 
-//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-   	
-    var d1 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d1.push([i, parseInt(Math.random() * 30)]);
- 
-    var d2 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d2.push([i, parseInt(Math.random() * 30)]);
- 
-    var d3 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d3.push([i, parseInt(Math.random() * 30)]);
-    
+    d1 = #{workloadBean.getTf1(idCliente,mesRelatorio,"princapaloutros_comercial_mes")};
+   	d2 = #{workloadBean.getTf2(idCliente,mesRelatorio,"princapaloutros_comercial_mes")};
+   	d3 = #{workloadBean.getTf3(idCliente,mesRelatorio,"princapaloutros_comercial_mes")};
  
     var ds = new Array();
 
@@ -712,22 +549,9 @@ $(function () {
 $(function () {
     var previousPoint;
 
-//  	d1 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d2 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-//    	d3 = #{WorkloadBean.listaPrincipalXtimeframe_mesTF1}
-   	
-    var d1 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d1.push([i, parseInt(Math.random() * 30)]);
- 
-    var d2 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d2.push([i, parseInt(Math.random() * 30)]);
- 
-    var d3 = [];
-    for (var i = 1; i <= 30; i += 1)
-        d3.push([i, parseInt(Math.random() * 30)]);
-    
+    d1 = #{workloadBean.getTf1(idCliente,mesRelatorio,"princapaloutros_comercial_ano")};
+   	d2 = #{workloadBean.getTf2(idCliente,mesRelatorio,"princapaloutros_comercial_ano")};
+   	d3 = #{workloadBean.getTf3(idCliente,mesRelatorio,"princapaloutros_comercial_ano")};
  
     var ds = new Array();
 
