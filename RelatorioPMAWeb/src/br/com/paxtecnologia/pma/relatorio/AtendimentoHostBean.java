@@ -31,6 +31,16 @@ public class AtendimentoHostBean {
 	private String graficoAbertos;
 	private String graficoFechados;
 
+	
+	
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public void setMesRelatorio(String mesRelatorio) {
+		this.mesRelatorio = mesRelatorio;
+	}
+
 	public Integer getQtdeChamadosAbertosComHost() {
 		if (qtdeChamadosAbertosComHost == null) {
 			qtdeChamadosAbertosComHost = atendimentoEjb

@@ -22,14 +22,8 @@ public class ClientesBean {
 	private String mesRelatorio;
 	private List<ClienteVO> listaClientes;
 	private List<MesRelatorioVO> listaMes;
-	private String logoCliente;
+
 	
-	public String getLogoCliente() {
-		if (logoCliente == null) {
-			logoCliente = clientesEjb.getLogoCliente(idCliente);
-		}
-		return logoCliente;
-	}
 
 	public List<ClienteVO> getListaClientes() {
 		if (listaClientes == null) {

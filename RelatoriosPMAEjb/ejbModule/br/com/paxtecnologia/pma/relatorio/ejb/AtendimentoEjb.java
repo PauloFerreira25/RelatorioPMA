@@ -318,8 +318,9 @@ public class AtendimentoEjb {
 	}
 
 	public String getGraficoAbertos(Integer idCliente, String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
+		String saida = new String();
+		saida = "[{ label: \"Series1\",  data: 10},{ label: \"Series2\",  data: 30},{ label: \"Series6\",  data: 110}]";
+		return saida;
 	}
 
 }

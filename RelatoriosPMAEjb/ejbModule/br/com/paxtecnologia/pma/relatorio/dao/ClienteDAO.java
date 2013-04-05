@@ -75,7 +75,7 @@ public class ClienteDAO {
 		String retorno = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT nomelogoimg FROM cliente WHERE cliente_id = ?";
+		String sql = "SELECT logo FROM pmp_cliente WHERE cliente_id = ?";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
@@ -87,7 +87,7 @@ public class ClienteDAO {
 		try {
 			while (rs.next()) {
 
-				retorno = rs.getString("data_insercao");
+				retorno = rs.getString("logo");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

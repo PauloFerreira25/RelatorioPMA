@@ -23,6 +23,14 @@ public class WorkloadBean {
 	private String label;
 	private String tf;
 	
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public void setMesRelatorio(String mesRelatorio) {
+		this.mesRelatorio = mesRelatorio;
+	}
+
 	public String getTf(Integer idCliente, String mesRelatorio, Integer idGrafico, Integer idTf) {
 		tf = workloadEjb.getTf(idCliente, mesRelatorio, idGrafico, idTf);
 		tf = "[[1,19],[2,7],[3,28],[4,10],"

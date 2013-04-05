@@ -1,12 +1,18 @@
 package br.com.paxtecnologia.pma.relatorio;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import br.com.paxtecnologia.pma.relatorio.ejb.ClientesEjb;
+
 @ViewScoped
 @ManagedBean(name = "capaBean")
 public class CapaBean {
+
+	@EJB
+	private ClientesEjb clientesEjb;
 
 	@ManagedProperty(value = "#{clientesBean.idCliente}")
 	private Integer idCliente;
@@ -18,6 +24,10 @@ public class CapaBean {
 	private String subtituloRelatorio;
 	private String dataCriacao;
 	private String textoVersao = "Versao 1.0";
+
+	public String getLogoCliente() {
+		return clientesEjb.getLogoCliente(idCliente);
+	}
 
 	public String getTituloRelatorio() {
 		return tituloRelatorio;
@@ -49,6 +59,4 @@ public class CapaBean {
 		this.mesRelatorio = mesRelatorio;
 	}
 
-	
-	
 }
