@@ -26,16 +26,20 @@ public class ParadasEjb {
 	private Integer qtdeProgramadasEstrategicas;
 	private Integer qtdeParadaNaoProgramadas;
 	private Integer qtdeParadaEvitadas;
+	private Integer diasTrabalhados;
 
 	public Integer getDiasTrabalhados(Integer idCliente, String mesRelatorio) {
-		Calendar gc = paradasDao.getDataUltimoPNP(idCliente, mesRelatorio);
-		Calendar gregorianCalendar = new GregorianCalendar();
-		DateTime start = new DateTime(gc.getTime());
-		DateTime end = new DateTime(gregorianCalendar);
-		int days = Days.daysBetween(start, end).getDays();
-		System.out.println("Days Between " + gc.getTime() + " : "
-				+ gregorianCalendar.getTime() + " - " + days);
-		return days;
+		if (diasTrabalhados == null) {
+			Calendar gc = paradasDao.getDataUltimoPNP(idCliente, mesRelatorio);
+			Calendar gregorianCalendar = new GregorianCalendar();
+			DateTime start = new DateTime(gc.getTime());
+			DateTime end = new DateTime(gregorianCalendar);
+			int days = Days.daysBetween(start, end).getDays();
+			System.out.println("Days Between " + gc.getTime() + " : "
+					+ gregorianCalendar.getTime() + " - " + days);
+			diasTrabalhados = days;
+		}
+		return diasTrabalhados;
 	}
 
 	public Integer getQtdeParadaEvitadasTotal(Integer idCliente,

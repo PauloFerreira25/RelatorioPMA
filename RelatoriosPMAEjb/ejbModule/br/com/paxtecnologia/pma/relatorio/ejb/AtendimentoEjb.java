@@ -36,7 +36,7 @@ public class AtendimentoEjb {
 	public Integer getQtdeChamadosAbertos(Integer idCliente, String mesRelatorio) {
 		if (qtdeChamadoAberto == null) {
 			if (listaChamadoAberto == null) {
-				getChamadosAbertos(idCliente, mesRelatorio);
+				getListaChamadosAbertos(idCliente, mesRelatorio);
 			}
 			qtdeChamadoAberto = listaChamadoAberto.size();
 		}
@@ -48,7 +48,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (qtdeChamadoFechado == null) {
 			if (listaChamadoFechado == null) {
-				getChamadosFechados(idCliente, mesRelatorio);
+				getListaChamadosFechados(idCliente, mesRelatorio);
 			}
 			qtdeChamadoFechado = listaChamadoFechado.size();
 		}
@@ -60,7 +60,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (qtdeChamadoEmAberto == null) {
 			if (listaChamadoEmAberto == null) {
-				listaChamadoEmAberto = getChamadosEmAberto(idCliente,
+				getListaChamadosEmAbertos(idCliente,
 						mesRelatorio);
 			}
 			qtdeChamadoEmAberto = listaChamadoEmAberto.size();
@@ -132,7 +132,7 @@ public class AtendimentoEjb {
 	// ////////////////////////////////
 
 	// Lista de Chamados Abertos
-	public List<ChamadoVO> getChamadosAbertos(Integer idCliente,
+	public List<ChamadoVO> getListaChamadosAbertos(Integer idCliente,
 			String mesRelatorio) {
 		if (listaChamadoAberto == null) {
 			listaChamadoAberto = atendimentoDAO.getChamadosAbertos(idCliente,
@@ -142,7 +142,7 @@ public class AtendimentoEjb {
 	}
 
 	// Lista de Chamados Fechados
-	public List<ChamadoVO> getChamadosFechados(Integer idCliente,
+	public List<ChamadoVO> getListaChamadosFechados(Integer idCliente,
 			String mesRelatorio) {
 		if (listaChamadoFechado == null) {
 			listaChamadoFechado = atendimentoDAO.getChamadosFechados(idCliente,
@@ -152,7 +152,7 @@ public class AtendimentoEjb {
 	}
 
 	// Lista de Chamados em Aberto
-	public List<ChamadoVO> getChamadosEmAberto(Integer idCliente,
+	public List<ChamadoVO> getListaChamadosEmAbertos(Integer idCliente,
 			String mesRelatorio) {
 		if (listaChamadoEmAberto == null) {
 			listaChamadoEmAberto = atendimentoDAO.getChamadosEmAberto(
@@ -161,7 +161,8 @@ public class AtendimentoEjb {
 		return listaChamadoEmAberto;
 	}
 
-	public List<SolicitantesVO> getListaSolicitantes() {
+	public List<SolicitantesVO> getListaSolicitantes(Integer idCliente,
+			String mesRelatorio) {
 		listaSolicitante = new ArrayList<SolicitantesVO>();
 
 		SolicitantesVO a = new SolicitantesVO();
@@ -190,7 +191,8 @@ public class AtendimentoEjb {
 		return listaSolicitante;
 	}
 
-	public List<TipoChamadosVO> getListaTipoChamado() {
+	public List<TipoChamadosVO> getListaTipoChamado(Integer idCliente,
+			String mesRelatorio) {
 		listaTipoChamado = new ArrayList<TipoChamadosVO>();
 
 		TipoChamadosVO a = new TipoChamadosVO();
@@ -218,66 +220,6 @@ public class AtendimentoEjb {
 		listaTipoChamado.add(c);
 
 		return listaTipoChamado;
-	}
-
-	public List<ChamadoVO> getListaChamadoEmAberto() {
-		listaChamadoEmAberto = new ArrayList<ChamadoVO>();
-
-		ChamadoVO a = new ChamadoVO();
-		a.setIdChamado("VERZANI-219");
-		a.setTitulo("[oracle3] Criação relatório");
-		a.setDataAbertura("09 Jan 2013");
-		a.setStatus("Open");
-		a.setTipoChamado("Task");
-		listaChamadoEmAberto.add(a);
-
-		ChamadoVO b = new ChamadoVO();
-		b.setIdChamado("VERZANI-220");
-		b.setTitulo("[oracle3] Criação relatório");
-		b.setDataAbertura("12 Jan 2013");
-		b.setStatus("Open");
-		b.setTipoChamado("Task");
-		listaChamadoEmAberto.add(b);
-
-		ChamadoVO c = new ChamadoVO();
-		c.setIdChamado("VERZANI-221");
-		c.setTitulo("[oracle3] Criação relatório");
-		c.setDataAbertura("15 Jan 2013");
-		c.setStatus("Reopened");
-		c.setTipoChamado("Task");
-		listaChamadoEmAberto.add(c);
-
-		return listaChamadoEmAberto;
-	}
-
-	public List<ChamadoVO> getListaChamadoFechado() {
-		listaChamadoFechado = new ArrayList<ChamadoVO>();
-
-		ChamadoVO a = new ChamadoVO();
-		a.setIdChamado("VERZANI-219");
-		a.setTitulo("[oracle3] Criação relatório");
-		a.setDataAbertura("09 Jan 2013");
-		a.setStatus("Open");
-		a.setTipoChamado("Task");
-		listaChamadoFechado.add(a);
-
-		ChamadoVO b = new ChamadoVO();
-		b.setIdChamado("VERZANI-220");
-		b.setTitulo("[oracle3] Criação relatório");
-		b.setDataAbertura("12 Jan 2013");
-		b.setStatus("Open");
-		b.setTipoChamado("Task");
-		listaChamadoFechado.add(b);
-
-		ChamadoVO c = new ChamadoVO();
-		c.setIdChamado("VERZANI-221");
-		c.setTitulo("[oracle3] Criação relatório");
-		c.setDataAbertura("15 Jan 2013");
-		c.setStatus("Reopened");
-		c.setTipoChamado("Task");
-		listaChamadoFechado.add(c);
-
-		return listaChamadoFechado;
 	}
 
 	public List<HostVO> getListaHost(Integer idCliente, String mesRelatorio) {

@@ -97,28 +97,32 @@ public class AtendimentoBean {
 
 	public List<SolicitantesVO> getListaSolicitante() {
 		if (listaSolicitante == null) {
-			listaSolicitante = atendimentoEjb.getListaSolicitantes();
+			listaSolicitante = atendimentoEjb.getListaSolicitantes(idCliente,
+					mesRelatorio);
 		}
 		return listaSolicitante;
 	}
 
 	public List<TipoChamadosVO> getListaTipoChamado() {
 		if (listaTipoChamado == null) {
-			listaTipoChamado = atendimentoEjb.getListaTipoChamado();
+			listaTipoChamado = atendimentoEjb.getListaTipoChamado(idCliente,
+					mesRelatorio);
 		}
 		return listaTipoChamado;
 	}
 
-	public List<ChamadoVO> getListaChamadoEmAberto() {
+	public List<ChamadoVO> getListaChamadosEmAbertos() {
 		if (listaChamadoAberto == null) {
-			listaChamadoAberto = atendimentoEjb.getListaChamadoEmAberto();
+			listaChamadoAberto = atendimentoEjb.getListaChamadosEmAbertos(
+					idCliente, mesRelatorio);
 		}
 		return listaChamadoAberto;
 	}
 
-	public List<ChamadoVO> getListaChamadoFechado() {
+	public List<ChamadoVO> getListaChamadosFechados() {
 		if (listaChamadoFechado == null) {
-			listaChamadoFechado = atendimentoEjb.getListaChamadoFechado();
+			listaChamadoFechado = atendimentoEjb.getListaChamadosFechados(
+					idCliente, mesRelatorio);
 		}
 		return listaChamadoFechado;
 	}
