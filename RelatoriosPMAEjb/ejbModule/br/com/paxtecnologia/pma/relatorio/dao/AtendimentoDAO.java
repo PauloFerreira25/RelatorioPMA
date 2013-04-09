@@ -25,7 +25,7 @@ public class AtendimentoDAO {
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			data = new Date(
-					(new SimpleDateFormat("yyyy-mm-dd").parse(mesRelatorio)
+					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
 							.getTime()));
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, data);
@@ -45,10 +45,15 @@ public class AtendimentoDAO {
 				temp = new ChamadoVO();
 				temp.setDataAbertura(new SimpleDateFormat("yyyy-MM-dd")
 						.format(rs.getDate("data_criacao")));
+				if (rs.getDate("data_fechamento") != null) {
+					temp.setDataFechamento(new SimpleDateFormat("yyyy-MM-dd")
+							.format(rs.getDate("data_fechamento")));
+				}
 				temp.setIdChamado(rs.getString("chamado"));
 				temp.setTitulo(rs.getString("titulo"));
 				temp.setStatus(rs.getString("status"));
 				temp.setTipoChamado(rs.getString("tipo_chamado"));
+				temp.setSolicitante(rs.getString("solicitante"));
 				retorno.add(temp);
 			}
 		} catch (SQLException e) {
@@ -65,14 +70,19 @@ public class AtendimentoDAO {
 		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND data_criacao = ? AND data_fechamento is NOT NULL";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? and data_insercao = ? and data_criacao >= ? AND data_fechamento IS NOT NULL";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
+			java.util.Date dataJava = new SimpleDateFormat("yyyy-MM-dd")
+					.parse(mesRelatorio);
+			System.out.println(dataJava.toString());
+			System.out.println(mesRelatorio);
 			data = new Date(
-					(new SimpleDateFormat("yyyy-mm-dd").parse(mesRelatorio)
+					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
 							.getTime()));
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, data);
+			pstmt.setDate(3, data);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,10 +97,13 @@ public class AtendimentoDAO {
 				temp = new ChamadoVO();
 				temp.setDataAbertura(new SimpleDateFormat("yyyy-MM-dd")
 						.format(rs.getDate("data_criacao")));
+				temp.setDataFechamento(new SimpleDateFormat("yyyy-MM-dd")
+						.format(rs.getDate("data_fechamento")));
 				temp.setIdChamado(rs.getString("chamado"));
 				temp.setTitulo(rs.getString("titulo"));
 				temp.setStatus(rs.getString("status"));
 				temp.setTipoChamado(rs.getString("tipo_chamado"));
+				temp.setSolicitante(rs.getString("solicitante"));
 				retorno.add(temp);
 			}
 		} catch (SQLException e) {
@@ -107,11 +120,11 @@ public class AtendimentoDAO {
 		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? and data_insercao = ? and data_criacao >= ? AND data_fechamento is NULL";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? and data_insercao = ? and data_criacao >= ? AND data_fechamento IS NULL";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			data = new Date(
-					(new SimpleDateFormat("yyyy-mm-dd").parse(mesRelatorio)
+					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
 							.getTime()));
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, data);
@@ -132,10 +145,15 @@ public class AtendimentoDAO {
 				temp = new ChamadoVO();
 				temp.setDataAbertura(new SimpleDateFormat("yyyy-MM-dd")
 						.format(rs.getDate("data_criacao")));
+				if (rs.getDate("data_fechamento") != null) {
+					temp.setDataFechamento(new SimpleDateFormat("yyyy-MM-dd")
+							.format(rs.getDate("data_fechamento")));
+				}
 				temp.setIdChamado(rs.getString("chamado"));
 				temp.setTitulo(rs.getString("titulo"));
 				temp.setStatus(rs.getString("status"));
 				temp.setTipoChamado(rs.getString("tipo_chamado"));
+				temp.setSolicitante(rs.getString("solicitante"));
 				retorno.add(temp);
 			}
 		} catch (SQLException e) {

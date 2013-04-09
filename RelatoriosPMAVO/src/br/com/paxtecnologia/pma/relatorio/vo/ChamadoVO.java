@@ -5,8 +5,10 @@ public class ChamadoVO {
 	private String idChamado;
 	private String titulo;
 	private String dataAbertura;
+	private String dataFechamento;
 	private String status;
 	private String tipoChamado;
+	private String solicitante;
 
 	public String getIdChamado() {
 		return idChamado;
@@ -46,6 +48,22 @@ public class ChamadoVO {
 
 	public void setTipoChamado(String tipoChamado) {
 		this.tipoChamado = tipoChamado;
+	}
+
+	public String getDataFechamento() {
+		return dataFechamento;
+	}
+
+	public void setDataFechamento(String dataFechamento) {
+		this.dataFechamento = dataFechamento;
+	}
+
+	public String getSolicitante() {
+		return solicitante;
+	}
+
+	public void setSolicitante(String solicitante) {
+		this.solicitante = solicitante;
 	}
 
 }
