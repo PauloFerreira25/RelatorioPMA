@@ -27,9 +27,11 @@ public class ParadasEjb {
 	private Integer qtdeParadaNaoProgramadas;
 	private Integer qtdeParadaEvitadas;
 	private Integer diasTrabalhados;
+	private Integer idCliente;
 
 	public Integer getDiasTrabalhados(Integer idCliente, String mesRelatorio) {
-		if (diasTrabalhados == null) {
+		if (diasTrabalhados == null || this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
 			Calendar gc = paradasDao.getDataUltimoPNP(idCliente, mesRelatorio);
 			Calendar gregorianCalendar = new GregorianCalendar();
 			DateTime start = new DateTime(gc.getTime());
@@ -49,7 +51,8 @@ public class ParadasEjb {
 
 	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente,
 			String mesRelatorio) {
-		if (listaUltimosAnosHoras == null) {
+		if (listaUltimosAnosHoras == null || this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
 			listaUltimosAnosHoras = paradasDao.getListaUltimosAnosHoras(
 					idCliente, mesRelatorio);
 		}
@@ -59,8 +62,10 @@ public class ParadasEjb {
 
 	public Integer getQtdeParadaProgramadas(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeParadaProgramadas == null) {
-			if (listaParadasProgramadas == null) {
+		if (qtdeParadaProgramadas == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
+			if (listaParadasProgramadas == null|| this.idCliente != idCliente)  {
+				 this.idCliente = idCliente;
 				getListaParadasProgramadas(idCliente, mesRelatorio);
 			}
 			qtdeParadaProgramadas = listaParadasProgramadas.size();
@@ -70,8 +75,10 @@ public class ParadasEjb {
 
 	public Integer getQtdeProgramadasEstrategicas(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeProgramadasEstrategicas == null) {
-			if (listaParadasProgramadas == null) {
+		if (qtdeProgramadasEstrategicas == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
+			if (listaParadasProgramadas == null|| this.idCliente != idCliente)  {
+				 this.idCliente = idCliente;
 				getListaParadasProgramadasEstrategicas(idCliente, mesRelatorio);
 			}
 			qtdeProgramadasEstrategicas = listaParadasProgramadasEstrategicas
@@ -82,8 +89,10 @@ public class ParadasEjb {
 
 	public Integer getQtdeParadaNaoProgramadas(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeParadaNaoProgramadas == null) {
-			if (listaParadasProgramadas == null) {
+		if (qtdeParadaNaoProgramadas == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
+			if (listaParadasProgramadas == null|| this.idCliente != idCliente)  {
+				 this.idCliente = idCliente;
 				getListaParadasNaoProgramadas(idCliente, mesRelatorio);
 			}
 			qtdeParadaNaoProgramadas = listaParadasNaoProgramadas.size();
@@ -92,8 +101,10 @@ public class ParadasEjb {
 	}
 
 	public Integer getQtdeParadaEvitadas(Integer idCliente, String mesRelatorio) {
-		if (qtdeParadaEvitadas == null) {
-			if (listaParadasEvitadas == null) {
+		if (qtdeParadaEvitadas == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
+			if (listaParadasEvitadas == null|| this.idCliente != idCliente)  {
+				 this.idCliente = idCliente;
 				getListaParadasEvitadas(idCliente, mesRelatorio);
 			}
 			qtdeParadaEvitadas = listaParadasEvitadas.size();
@@ -103,7 +114,8 @@ public class ParadasEjb {
 
 	public List<ParadasPorTipoVO> getListaParadasEvitadas(Integer idCliente,
 			String mesRelatorio) {
-		if (listaParadasEvitadas == null) {
+		if (listaParadasEvitadas == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
 			listaParadasEvitadas = paradasDao.getListaParadasEvitadas(
 					idCliente, mesRelatorio);
 		}
@@ -113,7 +125,8 @@ public class ParadasEjb {
 
 	public List<ParadasPorTipoVO> getListaParadasNaoProgramadas(
 			Integer idCliente, String mesRelatorio) {
-		if (listaParadasNaoProgramadas == null) {
+		if (listaParadasNaoProgramadas == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
 			listaParadasNaoProgramadas = paradasDao
 					.getListaParadasNaoProgramadas(idCliente, mesRelatorio);
 		}
@@ -123,7 +136,8 @@ public class ParadasEjb {
 
 	public List<ParadasPorTipoVO> getListaParadasProgramadasEstrategicas(
 			Integer idCliente, String mesRelatorio) {
-		if (listaParadasProgramadasEstrategicas == null) {
+		if (listaParadasProgramadasEstrategicas == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
 			listaParadasProgramadasEstrategicas = paradasDao
 					.getListaParadasProgramadasEstrategicas(idCliente,
 							mesRelatorio);
@@ -134,7 +148,8 @@ public class ParadasEjb {
 
 	public List<ParadasPorTipoVO> getListaParadasProgramadas(Integer idCliente,
 			String mesRelatorio) {
-		if (listaParadasProgramadas == null) {
+		if (listaParadasProgramadas == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
 			listaParadasProgramadas = paradasDao.getListaParadasProgramadas(
 					idCliente, mesRelatorio);
 		}

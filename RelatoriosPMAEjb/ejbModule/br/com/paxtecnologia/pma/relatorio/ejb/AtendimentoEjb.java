@@ -25,6 +25,7 @@ public class AtendimentoEjb {
 	private List<ChamadoVO> listaChamadoEmAberto;
 	private List<SolicitantesVO> listaSolicitante;
 	private List<TipoChamadosVO> listaTipoChamado;
+	private Integer idCliente;
 
 	// Conta Porcentagem
 	private Double getPorcentagem(Integer valor1, Integer valor2) {
@@ -34,8 +35,10 @@ public class AtendimentoEjb {
 
 	// Quantidade de Chamados Abertos
 	public Integer getQtdeChamadosAbertos(Integer idCliente, String mesRelatorio) {
-		if (qtdeChamadoAberto == null) {
-			if (listaChamadoAberto == null) {
+		if (qtdeChamadoAberto == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
+			if (listaChamadoAberto == null|| this.idCliente != idCliente)  {
+				 this.idCliente = idCliente;
 				getListaChamadosAbertos(idCliente, mesRelatorio);
 			}
 			qtdeChamadoAberto = listaChamadoAberto.size();
@@ -46,8 +49,10 @@ public class AtendimentoEjb {
 	// Quantidade de Chamdos Fechados
 	public Integer getQtdeChamadosFechados(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeChamadoFechado == null) {
-			if (listaChamadoFechado == null) {
+		if (qtdeChamadoFechado == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
+			if (listaChamadoFechado == null|| this.idCliente != idCliente)  {
+				 this.idCliente = idCliente;
 				getListaChamadosFechados(idCliente, mesRelatorio);
 			}
 			qtdeChamadoFechado = listaChamadoFechado.size();
@@ -58,8 +63,10 @@ public class AtendimentoEjb {
 	// Quantidade de Chamados em Aberto
 	public Integer getQtdeChamadosEmAberto(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeChamadoEmAberto == null) {
-			if (listaChamadoEmAberto == null) {
+		if (qtdeChamadoEmAberto == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
+			if (listaChamadoEmAberto == null|| this.idCliente != idCliente)  {
+				 this.idCliente = idCliente;
 				getListaChamadosEmAbertos(idCliente,
 						mesRelatorio);
 			}
@@ -97,11 +104,14 @@ public class AtendimentoEjb {
 	// Porcentagem em Aberto
 	public Double getPorcentagemChamadosAbertos(Integer idCliente,
 			String mesRelatorio) {
-		if (porcentagemChamadosAbertos == null) {
-			if (qtdeChamadoAberto == null) {
+		if (porcentagemChamadosAbertos == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
+			if (qtdeChamadoAberto == null|| this.idCliente != idCliente)  {
+				 this.idCliente = idCliente;
 				getQtdeChamadosAbertos(idCliente, mesRelatorio);
 			}
-			if (qtdeChamadoFechado == null) {
+			if (qtdeChamadoFechado == null|| this.idCliente != idCliente)  {
+				 this.idCliente = idCliente;
 				getQtdeChamadosFechados(idCliente, mesRelatorio);
 			}
 			porcentagemChamadosAbertos = getPorcentagem(qtdeChamadoFechado,
@@ -134,7 +144,8 @@ public class AtendimentoEjb {
 	// Lista de Chamados Abertos
 	public List<ChamadoVO> getListaChamadosAbertos(Integer idCliente,
 			String mesRelatorio) {
-		if (listaChamadoAberto == null) {
+		if (listaChamadoAberto == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
 			listaChamadoAberto = atendimentoDAO.getChamadosAbertos(idCliente,
 					mesRelatorio);
 		}
@@ -144,7 +155,8 @@ public class AtendimentoEjb {
 	// Lista de Chamados Fechados
 	public List<ChamadoVO> getListaChamadosFechados(Integer idCliente,
 			String mesRelatorio) {
-		if (listaChamadoFechado == null) {
+		if (listaChamadoFechado == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
 			listaChamadoFechado = atendimentoDAO.getChamadosFechados(idCliente,
 					mesRelatorio);
 		}
@@ -154,7 +166,8 @@ public class AtendimentoEjb {
 	// Lista de Chamados em Aberto
 	public List<ChamadoVO> getListaChamadosEmAbertos(Integer idCliente,
 			String mesRelatorio) {
-		if (listaChamadoEmAberto == null) {
+		if (listaChamadoEmAberto == null|| this.idCliente != idCliente)  {
+			 this.idCliente = idCliente;
 			listaChamadoEmAberto = atendimentoDAO.getChamadosEmAberto(
 					idCliente, mesRelatorio);
 		}

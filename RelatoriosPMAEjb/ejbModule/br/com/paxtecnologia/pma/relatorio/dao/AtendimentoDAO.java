@@ -107,7 +107,7 @@ public class AtendimentoDAO {
 		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND data_criacao = ? AND data_fechamento is NULL";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? and data_insercao = ? and data_criacao >= ? AND data_fechamento is NULL";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			data = new Date(
@@ -115,6 +115,8 @@ public class AtendimentoDAO {
 							.getTime()));
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, data);
+			pstmt.setDate(3, data);
+			System.out.println(data.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
