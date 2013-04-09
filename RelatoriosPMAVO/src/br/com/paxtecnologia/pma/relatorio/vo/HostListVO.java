@@ -1,6 +1,6 @@
 package br.com.paxtecnologia.pma.relatorio.vo;
 
-public class HostVO {
+public class HostListVO {
 
 	private String hostname;
 	private Integer qtdeAberto;

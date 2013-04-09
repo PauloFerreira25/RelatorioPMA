@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 
 import br.com.paxtecnologia.pma.relatorio.dao.AtendimentoDAO;
 import br.com.paxtecnologia.pma.relatorio.vo.ChamadoVO;
-import br.com.paxtecnologia.pma.relatorio.vo.HostVO;
+import br.com.paxtecnologia.pma.relatorio.vo.HostListVO;
 import br.com.paxtecnologia.pma.relatorio.vo.SolicitantesVO;
 import br.com.paxtecnologia.pma.relatorio.vo.TipoChamadosVO;
 
@@ -19,16 +19,23 @@ public class AtendimentoEjb {
 
 	private AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
 
-	private Integer qtdeChamadoAberto;
 	private Double porcentagemChamadosAbertos;
-	private Integer qtdeChamadoFechado;
-	private Integer qtdeChamadoEmAberto;
+	private Double porcentagemChamadosFechados;
+	private Double porcentagemChamadosAbertosTipo;
+	private Integer qtdeChamadosAbertos;
+	private Integer qtdeChamadosFechados;
+	private Integer qtdeChamadosEmAberto;
+	private Integer qtdeHostFechados;
+	private Integer qtdeHostAbertos;
 	private List<ChamadoVO> listaChamadoAberto;
 	private List<ChamadoVO> listaChamadoFechado;
 	private List<ChamadoVO> listaChamadoEmAberto;
 	private List<SolicitantesVO> listaSolicitante;
 	private List<TipoChamadosVO> listaTipoChamado;
-	Map<String, Integer> controleIdCliente = new HashMap<String, Integer>();
+	private List<String> listaHostAbertos;
+	private List<String> listaHostFechados;
+	private List<HostListVO> listaChamadosHost;
+	private Map<String, Integer> controleIdCliente = new HashMap<String, Integer>();
 
 	// Conta Porcentagem
 	private Double getPorcentagem(Integer valor, Integer total) {
@@ -38,62 +45,79 @@ public class AtendimentoEjb {
 
 	// Quantidade de Chamados Abertos
 	public Integer getQtdeChamadosAbertos(Integer idCliente, String mesRelatorio) {
-		if (qtdeChamadoAberto == null
+		if (qtdeChamadosAbertos == null
 				|| controleIdCliente.get("getQtdeChamadosAbertos") != idCliente) {
 			if (listaChamadoAberto == null
-					|| controleIdCliente.get("getQtdeChamadosAbertos") != idCliente) {
-				controleIdCliente.put("getQtdeChamadosAbertos", idCliente);
+					|| controleIdCliente.get("getListaChamadosAbertos") != idCliente) {
 				getListaChamadosAbertos(idCliente, mesRelatorio);
 			}
-			qtdeChamadoAberto = listaChamadoAberto.size();
+			qtdeChamadosAbertos = listaChamadoAberto.size();
 		}
-		return qtdeChamadoAberto;
+		return qtdeChamadosAbertos;
 	}
 
 	// Quantidade de Chamdos Fechados
 	public Integer getQtdeChamadosFechados(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeChamadoFechado == null
+		if (qtdeChamadosFechados == null
 				|| controleIdCliente.get("getQtdeChamadosFechados") != idCliente) {
 			if (listaChamadoFechado == null
-					|| controleIdCliente.get("getQtdeChamadosFechados") != idCliente) {
-				controleIdCliente.put("getQtdeChamadosFechados", idCliente);
+					|| controleIdCliente.get("getListaChamadosFechados") != idCliente) {
 				getListaChamadosFechados(idCliente, mesRelatorio);
 			}
-			qtdeChamadoFechado = listaChamadoFechado.size();
+			qtdeChamadosFechados = listaChamadoFechado.size();
 		}
-		return qtdeChamadoFechado;
+		return qtdeChamadosFechados;
 	}
 
 	// Quantidade de Chamados em Aberto
 	public Integer getQtdeChamadosEmAberto(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeChamadoEmAberto == null
+		if (qtdeChamadosEmAberto == null
 				|| controleIdCliente.get("getQtdeChamadosEmAberto") != idCliente) {
 			if (listaChamadoEmAberto == null
-					|| controleIdCliente.get("getQtdeChamadosEmAberto") != idCliente) {
-				controleIdCliente.put("getQtdeChamadosEmAberto", idCliente);
+					|| controleIdCliente.get("getListaChamadosEmAbertos") != idCliente) {
 				getListaChamadosEmAbertos(idCliente, mesRelatorio);
 			}
-			qtdeChamadoEmAberto = listaChamadoEmAberto.size();
+			qtdeChamadosEmAberto = listaChamadoEmAberto.size();
 		}
-		return qtdeChamadoEmAberto;
+		return qtdeChamadosEmAberto;
 	}
 
-	public Integer getQtdeChamadosFechadosComHost(Integer idCliente,
-			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer getQtdeHostFechados(Integer idCliente, String mesRelatorio) {
+		if (qtdeHostFechados == null
+				|| controleIdCliente.get("getQtdeHostFechados") != idCliente) {
+			if (listaHostFechados == null
+					|| controleIdCliente.get("getListaHostFechados") != idCliente) {
+				getListaHostFechados(idCliente, mesRelatorio);
+			}
+			qtdeHostFechados = listaHostFechados.size();
+		}
+		return qtdeChamadosEmAberto;
 	}
 
-	public Integer getQtdeChamadosAbertosComHost(Integer idCliente,
-			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer getQtdeHostAbertos(Integer idCliente, String mesRelatorio) {
+		if (qtdeHostAbertos == null
+				|| controleIdCliente.get("getQtdeHostAbertos") != idCliente) {
+			if (listaHostAbertos == null
+					|| controleIdCliente.get("getListaHostAbertos") != idCliente) {
+				getListaHostAbertos(idCliente, mesRelatorio);
+			}
+			qtdeHostAbertos = listaHostAbertos.size();
+		}
+		return qtdeHostAbertos;
 	}
 
 	// ////////////////////////////////
 
+	// public Integer getQtdeChamadoAberto() {
+	// return qtdeChamadosAbertos;
+	// }
+
+	// public Integer getQtdeChamadoEmAberto() {
+	// return qtdeChamadoEmAberto;
+	// }
+	//
 	public Double getPorcentoFechadosComHost(Integer idCliente,
 			String mesRelatorio) {
 		// TODO Auto-generated method stub
@@ -109,34 +133,44 @@ public class AtendimentoEjb {
 	// Porcentagem em Aberto
 	public Double getPorcentagemChamadosAbertos(Integer idCliente,
 			String mesRelatorio) {
-		if (porcentagemChamadosAbertos == null
-				|| controleIdCliente.get("getPorcentagemChamadosAbertos") != idCliente) {
-			if (qtdeChamadoAberto == null
-					|| controleIdCliente.get("getPorcentagemChamadosAbertos") != idCliente) {
-				controleIdCliente.put("getQtdeChamadosEmAberto", idCliente);
-				getQtdeChamadosAbertos(idCliente, mesRelatorio);
-			}
-			if (qtdeChamadoFechado == null
-					|| controleIdCliente.get("getPorcentagemChamadosAbertos") != idCliente) {
-				controleIdCliente.put("getQtdeChamadosEmAberto", idCliente);
-				getQtdeChamadosFechados(idCliente, mesRelatorio);
-			}
-			porcentagemChamadosAbertos = getPorcentagem(qtdeChamadoFechado,
-					qtdeChamadoAberto);
-		}
-		return porcentagemChamadosAbertos;
+		return null;
+
 	}
 
 	public Double getPorcentagemChamadosEmAbertos(Integer idCliente,
 			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
+		if (porcentagemChamadosAbertos == null
+				|| controleIdCliente.get("getPorcentagemChamadosAbertos") != idCliente) {
+			if (qtdeChamadosAbertos == null
+					|| controleIdCliente.get("getQtdeChamadosAbertos") != idCliente) {
+				getQtdeChamadosAbertos(idCliente, mesRelatorio);
+			}
+			if (qtdeChamadosEmAberto == null
+					|| controleIdCliente.get("getQtdeChamadosEmAberto") != idCliente) {
+				getQtdeChamadosEmAberto(idCliente, mesRelatorio);
+			}
+			porcentagemChamadosAbertos = getPorcentagem(qtdeChamadosEmAberto,
+					qtdeChamadosAbertos);
+		}
+		return porcentagemChamadosAbertos;
 	}
 
 	public Double getPorcentagemChamadosFechados(Integer idCliente,
 			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
+		if (porcentagemChamadosAbertos == null
+				|| controleIdCliente.get("getPorcentagemChamadosAbertos") != idCliente) {
+			if (qtdeChamadosAbertos == null
+					|| controleIdCliente.get("getQtdeChamadosAbertos") != idCliente) {
+				getQtdeChamadosAbertos(idCliente, mesRelatorio);
+			}
+			if (qtdeChamadosFechados == null
+					|| controleIdCliente.get("getQtdeChamadosFechados") != idCliente) {
+				getQtdeChamadosFechados(idCliente, mesRelatorio);
+			}
+			porcentagemChamadosAbertos = getPorcentagem(qtdeChamadosFechados,
+					qtdeChamadosAbertos);
+		}
+		return porcentagemChamadosAbertos;
 	}
 
 	// ////////////////////////////////
@@ -281,7 +315,6 @@ public class AtendimentoEjb {
 			Iterator<TipoChamadosVO> itTipoChamado;
 			ChamadoVO chamado;
 			Integer achou;
-			Double porcentagem;
 
 			itChamado = listaChamadoAberto.iterator();
 
@@ -328,51 +361,129 @@ public class AtendimentoEjb {
 				}
 
 			}
-			if (qtdeChamadoAberto == null
-					|| controleIdCliente.get("getListaTipoChamado") != idCliente) {
-				controleIdCliente.put("getListaTipoChamado", idCliente);
-				getQtdeChamadosEmAberto(idCliente, mesRelatorio);
+			if (qtdeChamadosAbertos == null
+					|| controleIdCliente.get("getQtdeChamadosAbertos") != idCliente) {
+				getQtdeChamadosAbertos(idCliente, mesRelatorio);
+			}
+			if (qtdeChamadosFechados == null
+					|| controleIdCliente.get("getQtdeChamadosFechados") != idCliente) {
+				;
+				getQtdeChamadosFechados(idCliente, mesRelatorio);
 			}
 			itTipoChamado = listaTipoChamado.iterator();
 			while (itTipoChamado.hasNext()) {
 				TipoChamadosVO tipoChamados = itTipoChamado.next();
-				porcentagem = getPorcentagem(tipoChamados.getQtdeAberto(),
-						qtdeChamadoAberto);
-				tipoChamados.setPorcentoAberto(porcentagem);
+				tipoChamados.setPorcentoAberto(getPorcentagem(
+						tipoChamados.getQtdeAberto(), qtdeChamadosAbertos));
+				tipoChamados.setPorcentoFechado(getPorcentagem(
+						tipoChamados.getQtdeAberto(), qtdeChamadosFechados));
 			}
 		}
 
 		return listaTipoChamado;
 	}
 
-	public List<HostVO> getListaHost(Integer idCliente, String mesRelatorio) {
-		// TODO Auto-generated method stub
-		ArrayList<HostVO> listaHost = new ArrayList<HostVO>();
+	public List<String> getListaHostAbertos(Integer idCliente,
+			String mesRelatorio) {
+		if (listaHostAbertos == null
+				|| controleIdCliente.get("getListaChamadosHostAbertos") != idCliente) {
+			controleIdCliente.put("getListaChamadosHostAbertos", idCliente);
+			listaHostAbertos = atendimentoDAO.getListaAbertosComHosts(
+					idCliente, mesRelatorio);
+		}
+		return listaHostAbertos;
+	}
 
-		// HostVO a = new HostVO();
-		// a.setHostname("oracle1");
-		// a.setQtdeAberto(16);
-		// a.setPorcentoAberto(50.00);
-		// a.setQtdeFechado(14);
-		// a.setPorcentoFechado(54.56);
-		// listaHost.add(a);
-		//
-		// HostVO b = new HostVO();
-		// b.setHostname("oracle2");
-		// b.setQtdeAberto(10);
-		// b.setPorcentoAberto(55.00);
-		// b.setQtdeFechado(11);
-		// b.setPorcentoFechado(44.56);
-		// listaHost.add(b);
-		//
-		// HostVO c = new HostVO();
-		// c.setHostname("oracle3");
-		// c.setQtdeAberto(5);
-		// c.setPorcentoAberto(25.00);
-		// c.setQtdeFechado(7);
-		// c.setPorcentoFechado(56.00);
-		// listaHost.add(c);
-		return listaHost;
+	public List<String> getListaHostFechados(Integer idCliente,
+			String mesRelatorio) {
+		if (listaHostFechados == null
+				|| controleIdCliente.get("getListaHostFechados") != idCliente) {
+			controleIdCliente.put("getListaHostFechados", idCliente);
+			listaHostFechados = atendimentoDAO.getListaFechadosComHosts(
+					idCliente, mesRelatorio);
+		}
+		return listaHostAbertos;
+	}
+
+	public List<HostListVO> getListaHost(Integer idCliente, String mesRelatorio) {
+		if (listaChamadosHost == null
+				|| controleIdCliente.get("getListaHost") != idCliente) {
+			controleIdCliente.put("getListaHost", idCliente);
+			if (listaHostAbertos == null
+					|| controleIdCliente.get("getListaChamadosHostAbertos") != idCliente) {
+				getListaHostAbertos(idCliente, mesRelatorio);
+			}
+			if (listaHostFechados == null
+					|| controleIdCliente.get("getListaHostFechados") != idCliente) {
+				getListaHostFechados(idCliente, mesRelatorio);
+			}
+			listaChamadosHost = new ArrayList<HostListVO>();
+			Iterator<String> itHost;
+			Iterator<HostListVO> itHostList;
+			String host;
+			Integer achou;
+
+			itHost = listaHostAbertos.iterator();
+
+			while (itHost.hasNext()) {
+				host = itHost.next();
+				itHostList = listaChamadosHost.iterator();
+				achou = 0;
+				while (itHostList.hasNext()) {
+					HostListVO hostVO = itHostList.next();
+					if (hostVO.getHostname().equals(host)) {
+						hostVO.setQtdeAberto(hostVO.getQtdeAberto() + 1);
+						achou = 1;
+					}
+				}
+				if (achou == 0) {
+					HostListVO hostVO = new HostListVO();
+					hostVO.setHostname(host);
+					hostVO.setQtdeAberto(1);
+					hostVO.setQtdeFechado(0);
+					listaChamadosHost.add(hostVO);
+				}
+			}
+
+			itHost = listaHostFechados.iterator();
+			while (itHost.hasNext()) {
+				host = itHost.next();
+				itHostList = listaChamadosHost.iterator();
+				achou = 0;
+				while (itHostList.hasNext()) {
+					HostListVO hostVO = itHostList.next();
+					if (hostVO.getHostname().equals(host)) {
+						hostVO.setQtdeFechado(hostVO.getQtdeFechado() + 1);
+						achou = 1;
+					}
+				}
+				if (achou == 0) {
+					HostListVO hostVO = new HostListVO();
+					hostVO.setHostname(host);
+					hostVO.setQtdeAberto(0);
+					hostVO.setQtdeFechado(1);
+					listaChamadosHost.add(hostVO);
+				}
+
+			}
+			if (qtdeHostAbertos == null
+					|| controleIdCliente.get("getQtdeHostAbertos") != idCliente) {
+				getQtdeHostAbertos(idCliente, mesRelatorio);
+			}
+			if (qtdeHostFechados == null
+					|| controleIdCliente.get("getQtdeHostFechados") != idCliente) {
+				getQtdeHostFechados(idCliente, mesRelatorio);
+			}
+			itHostList = listaChamadosHost.iterator();
+			while (itHostList.hasNext()) {
+				HostListVO hostVO = itHostList.next();
+				hostVO.setPorcentoAberto(getPorcentagem(hostVO.getQtdeAberto(),
+						qtdeHostAbertos));
+				hostVO.setPorcentoFechado(getPorcentagem(
+						hostVO.getQtdeFechado(), qtdeHostAbertos));
+			}
+		}
+		return listaChamadosHost;
 	}
 
 	public String getGraficoFechados(Integer idCliente, String mesRelatorio) {
@@ -386,6 +497,31 @@ public class AtendimentoEjb {
 		String saida = new String();
 		saida = "[{ label: \"Series1\",  data: 10},{ label: \"Series2\",  data: 30},{ label: \"Series6\",  data: 110}]";
 		return saida;
+	}
+
+	public Double getPorcentagemChamadosAbertosTipo(Integer idCliente,
+			String mesRelatorio) {
+		Double porcentagem = 0.0;
+		Iterator<TipoChamadosVO> itTipoChamado;
+
+		if (porcentagemChamadosAbertosTipo == null
+				|| controleIdCliente.get("getPorcentagemChamadosAbertosTipo") != idCliente) {
+			controleIdCliente.put("getPorcentagemChamadosAbertosTipo",
+					idCliente);
+			if (listaTipoChamado == null
+					|| controleIdCliente.get("getListaTipoChamado") != idCliente) {
+				getListaTipoChamado(idCliente, mesRelatorio);
+			}
+			itTipoChamado = listaTipoChamado.iterator();
+
+			while (itTipoChamado.hasNext()) {
+				TipoChamadosVO tipoChamados = itTipoChamado.next();
+				porcentagem = porcentagem + tipoChamados.getPorcentoAberto();
+			}
+
+		}
+
+		return porcentagem;
 	}
 
 }

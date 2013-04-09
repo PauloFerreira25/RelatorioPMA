@@ -28,18 +28,24 @@ public class AtendimentoBean {
 	@ManagedProperty(value = "#{clientesBean.mesRelatorio}")
 	private String mesRelatorio;
 
-	private List<IndicacoresQtdVO> listaGeral;
 	private List<SolicitantesVO> listaSolicitante;
 	private List<TipoChamadosVO> listaTipoChamado;
-	private List<ChamadoVO> listaChamadoAberto;
 	private List<ChamadoVO> listaChamadoFechado;
 	private List<ChamadoVO> listaChamadoEmAberto;
 	private Integer qtdeChamadosAbertos;
 	private Integer qtdeChamadosEmAbertos;
 	private Integer qtdeChamadosFechados;
+	private Integer qtdeChamadosAbertosSolicitante;
+	private Integer qtdeChamadosFechadosSolicitante;
+	private Integer qtdeChamadosAbertosTipo;
+	private Integer qtdeChamadosFechadosTipo;
+	private Double porcentoAbertosSolicitante;
+	private Double porcentoFechadosSolicitante;
 	private Double porcentoAbertos;
 	private Double porcentoEmAbertos;
 	private Double porcentoFechados;
+	private Double porcentagemAbertoTipo;
+	private Double porcentoFechadosTipo;
 
 	public void setMesRelatorio(String mesRelatorio) {
 		this.mesRelatorio = mesRelatorio;
@@ -47,7 +53,6 @@ public class AtendimentoBean {
 
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
-		System.out.println("Seta Cliente:" + idCliente.toString());
 	}
 
 	public Integer getQtdeChamadosAbertos() {
@@ -168,18 +173,56 @@ public class AtendimentoBean {
 	}
 
 	public Double getPorcentagemAbertoTipo() {
-		List<TipoChamadosVO> listaTipoChamado = getListaTipoChamado();
-
-		Iterator<TipoChamadosVO> itTipoChamado;
-		Double porcentagem;
-
-		itTipoChamado = listaTipoChamado.iterator();
-		porcentagem = 0.0;
-		while (itTipoChamado.hasNext()) {
-			TipoChamadosVO tipoChamados = itTipoChamado.next();
-			porcentagem = porcentagem + tipoChamados.getPorcentoAberto();
+		if (porcentagemAbertoTipo == null) {
+			porcentagemAbertoTipo = atendimentoEjb
+					.getPorcentagemChamadosAbertosTipo(idCliente, mesRelatorio);
 		}
-		return porcentagem;
+		return porcentagemAbertoTipo;
 
 	}
+
+
+	public List<ChamadoVO> getListaChamadoFechado() {
+		return listaChamadoFechado;
+	}
+
+	public List<ChamadoVO> getListaChamadoEmAberto() {
+		return listaChamadoEmAberto;
+	}
+
+	public Integer getQtdeChamadosEmAbertos() {
+		return qtdeChamadosEmAbertos;
+	}
+
+	public Integer getQtdeChamadosAbertosSolicitante() {
+		return qtdeChamadosAbertosSolicitante;
+	}
+
+	public Integer getQtdeChamadosFechadosSolicitante() {
+		return qtdeChamadosFechadosSolicitante;
+	}
+
+	public Integer getQtdeChamadosAbertosTipo() {
+		return qtdeChamadosAbertosTipo;
+	}
+
+	public Integer getQtdeChamadosFechadosTipo() {
+		return qtdeChamadosFechadosTipo;
+	}
+
+	public Double getPorcentoAbertosSolicitante() {
+		return porcentoAbertosSolicitante;
+	}
+
+	public Double getPorcentoFechadosSolicitante() {
+		return porcentoFechadosSolicitante;
+	}
+
+	public Double getPorcentoFechadosTipo() {
+		return porcentoFechadosTipo;
+	}
+	
+	
+	
+	
 }
