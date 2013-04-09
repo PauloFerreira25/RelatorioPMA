@@ -17,7 +17,7 @@
 				itemLabel="#{i.nome}" itemValue="#{i.id}" />
 		</h:selectOneMenu>
 		<h:selectOneMenu id="MesRelatorio"
-			value="#{clientesBean.mesRelatorio}" onchange="submit()" hideNoSelectionOption="true">
+			value="#{clientesBean.mesRelatorio}" hideNoSelectionOption="true">
 			<f:selectItem itemLabel="Escolha um mês" itemValue="0"
 				noSelectionOption="true" />
 			<f:selectItems value="#{clientesBean.listaMes}" var="i"

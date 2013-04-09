@@ -28,108 +28,109 @@ public class AtendimentoBean {
 	@ManagedProperty(value = "#{clientesBean.mesRelatorio}")
 	private String mesRelatorio;
 
-	private List<IndicacoresQtdVO> listaGeral;
-	private List<SolicitantesVO> listaSolicitante;
-	private List<TipoChamadosVO> listaTipoChamado;
-	private List<ChamadoVO> listaChamadoAberto;
-	private List<ChamadoVO> listaChamadoFechado;
-	private Integer qtdeChamadosAbertos;
-	private Integer qtdeChamadosEmAbertos;
-	private Integer qtdeChamadosFechados;
-	private Double porcentoAbertos;
-	private Double porcentoEmAbertos;
-	private Double porcentoFechados;
+	// private List<IndicacoresQtdVO> listaGeral;
+	// private List<SolicitantesVO> listaSolicitante;
+	// private List<TipoChamadosVO> listaTipoChamado;
+	// private List<ChamadoVO> listaChamadoAberto;
+	// private List<ChamadoVO> listaChamadoFechado;
+	// private Integer qtdeChamadosAbertos;
+	// private Integer qtdeChamadosEmAbertos;
+	// private Integer qtdeChamadosFechados;
+	// private Double porcentoAbertos;
+	// private Double porcentoEmAbertos;
+	// private Double porcentoFechados;
 
 	public void setMesRelatorio(String mesRelatorio) {
 		this.mesRelatorio = mesRelatorio;
+		System.out.println("Seta Mes:" + mesRelatorio.toString());
 	}
 
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
+		System.out.println("Seta Cliente:" + idCliente.toString());
 	}
 
 	public Integer getQtdeChamadosAbertos() {
-		if (qtdeChamadosAbertos == null) {
-			qtdeChamadosAbertos = atendimentoEjb.getQtdeChamadosAbertos(
-					idCliente, mesRelatorio);
-		}
-		return qtdeChamadosAbertos;
+		// if (qtdeChamadosAbertos == null) {
+		// qtdeChamadosAbertos =
+		// }
+		return atendimentoEjb.getQtdeChamadosAbertos(idCliente, mesRelatorio);
 	}
 
 	public Integer getQtdeChamadosFechados() {
-		if (qtdeChamadosFechados == null) {
-			qtdeChamadosFechados = atendimentoEjb.getQtdeChamadosFechados(
-					idCliente, mesRelatorio);
-		}
-		return qtdeChamadosFechados;
+		// if (qtdeChamadosFechados == null) {
+		// qtdeChamadosFechados = atendimentoEjb.getQtdeChamadosFechados(
+		// idCliente, mesRelatorio);
+		// }
+		return atendimentoEjb.getQtdeChamadosFechados(idCliente, mesRelatorio);
 	}
 
 	private Object getQtdeChamadosEmAberto() {
-		if (qtdeChamadosEmAbertos == null) {
-			qtdeChamadosEmAbertos = atendimentoEjb.getQtdeChamadosEmAberto(
-					idCliente, mesRelatorio);
-		}
-		return qtdeChamadosEmAbertos;
+		// if (qtdeChamadosEmAbertos == null) {
+		// qtdeChamadosEmAbertos = atendimentoEjb.getQtdeChamadosEmAberto(
+		// idCliente, mesRelatorio);
+		// }
+		return atendimentoEjb.getQtdeChamadosEmAberto(idCliente, mesRelatorio);
 	}
 
 	public Double getPorcentoAbertos() {
-		if (porcentoAbertos == null) {
-			porcentoAbertos = atendimentoEjb.getPorcentagemChamadosAbertos(
-					idCliente, mesRelatorio);
-		}
-		return porcentoAbertos;
+		// if (porcentoAbertos == null) {
+		// porcentoAbertos = atendimentoEjb.getPorcentagemChamadosAbertos(
+		// idCliente, mesRelatorio);
+		// }
+		return atendimentoEjb.getPorcentagemChamadosAbertos(idCliente,
+				mesRelatorio);
 	}
 
 	public Double getPorcentoFechados() {
-		if (porcentoFechados == null) {
-			porcentoFechados = atendimentoEjb.getPorcentagemChamadosFechados(
-					idCliente, mesRelatorio);
-		}
-		return porcentoFechados;
+		// if (porcentoFechados == null) {
+		// porcentoFechados = atendimentoEjb.getPorcentagemChamadosFechados(
+		// idCliente, mesRelatorio);
+		// }
+		return atendimentoEjb.getPorcentagemChamadosFechados(idCliente,
+				mesRelatorio);
 	}
 
 	public Double getPorcentoEmAbertos() {
-		if (porcentoEmAbertos == null) {
-			porcentoEmAbertos = atendimentoEjb.getPorcentagemChamadosEmAbertos(
-					idCliente, mesRelatorio);
-		}
-		return porcentoEmAbertos;
+		// if (porcentoEmAbertos == null) {
+		// porcentoEmAbertos = atendimentoEjb.getPorcentagemChamadosEmAbertos(
+		// idCliente, mesRelatorio);
+		// }
+		return atendimentoEjb.getPorcentagemChamadosEmAbertos(idCliente,
+				mesRelatorio);
 	}
 
 	public List<SolicitantesVO> getListaSolicitante() {
-		if (listaSolicitante == null) {
-			listaSolicitante = atendimentoEjb.getListaSolicitantes(idCliente,
-					mesRelatorio);
-		}
-		return listaSolicitante;
+		// if (listaSolicitante == null) {
+		// listaSolicitante = atendimentoEjb.getListaSolicitantes(idCliente,
+		// mesRelatorio);
+		// }
+		return atendimentoEjb.getListaSolicitantes(idCliente, mesRelatorio);
 	}
 
 	public List<TipoChamadosVO> getListaTipoChamado() {
-		if (listaTipoChamado == null) {
-			listaTipoChamado = atendimentoEjb.getListaTipoChamado(idCliente,
-					mesRelatorio);
-		}
-		return listaTipoChamado;
+		// if (listaTipoChamado == null) {
+		// listaTipoChamado = atendimentoEjb.getListaTipoChamado(idCliente,
+		// mesRelatorio);
+		// }
+		return atendimentoEjb.getListaTipoChamado(idCliente, mesRelatorio);
 	}
 
 	public List<ChamadoVO> getListaChamadosEmAbertos() {
-		if (listaChamadoAberto == null) {
-			listaChamadoAberto = atendimentoEjb.getListaChamadosEmAbertos(
-					idCliente, mesRelatorio);
-		}
-		return listaChamadoAberto;
+		return atendimentoEjb
+				.getListaChamadosEmAbertos(idCliente, mesRelatorio);
 	}
 
 	public List<ChamadoVO> getListaChamadosFechados() {
-		if (listaChamadoFechado == null) {
-			listaChamadoFechado = atendimentoEjb.getListaChamadosFechados(
-					idCliente, mesRelatorio);
-		}
-		return listaChamadoFechado;
+		// if (listaChamadoFechado == null) {
+		// listaChamadoFechado = atendimentoEjb.getListaChamadosFechados(
+		// idCliente, mesRelatorio);
+		// // }
+		return atendimentoEjb.getListaChamadosFechados(idCliente, mesRelatorio);
 	}
 
 	public List<IndicacoresQtdVO> getListaGeral() {
-		listaGeral = new ArrayList<IndicacoresQtdVO>();
+		List<IndicacoresQtdVO> listaGeral = new ArrayList<IndicacoresQtdVO>();
 
 		IndicacoresQtdVO a = new IndicacoresQtdVO();
 		a.setTexto("Número de Chamados Abertos");
@@ -164,16 +165,13 @@ public class AtendimentoBean {
 
 		return listaGeral;
 	}
-	
-	public Double getPorcentagemAbertoTipo(){
-		
-		if(listaTipoChamado == null){
-			getListaTipoChamado();
-		}
-		
+
+	public Double getPorcentagemAbertoTipo() {
+		List<TipoChamadosVO> listaTipoChamado = getListaTipoChamado();
+
 		Iterator<TipoChamadosVO> itTipoChamado;
 		Double porcentagem;
-		
+
 		itTipoChamado = listaTipoChamado.iterator();
 		porcentagem = 0.0;
 		while (itTipoChamado.hasNext()) {
@@ -181,7 +179,6 @@ public class AtendimentoBean {
 			porcentagem = porcentagem + tipoChamados.getPorcentoAberto();
 		}
 		return porcentagem;
-		
-	}
 
+	}
 }

@@ -23,8 +23,6 @@ public class ClientesBean {
 	private List<ClienteVO> listaClientes;
 	private List<MesRelatorioVO> listaMes;
 
-	
-
 	public List<ClienteVO> getListaClientes() {
 		if (listaClientes == null) {
 			listaClientes = clientesEjb.getListaClientes();
@@ -42,7 +40,9 @@ public class ClientesBean {
 	}
 
 	private List<MesRelatorioVO> generateListaMes(Integer idCliente) {
+		listaMes = null;
 		listaMes = clientesEjb.getListaMes(idCliente);
+		System.out.println("Lista Mes Cliente:" + idCliente.toString());
 		return listaMes;
 	}
 
