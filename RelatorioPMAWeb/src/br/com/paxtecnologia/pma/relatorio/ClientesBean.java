@@ -1,5 +1,6 @@
 package br.com.paxtecnologia.pma.relatorio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -22,6 +23,15 @@ public class ClientesBean {
 	private String mesRelatorio;
 	private List<ClienteVO> listaClientes;
 	private List<MesRelatorioVO> listaMes;
+	private Boolean update = false;
+
+	public Boolean getUpdate() {
+		return update;
+	}
+
+	public void setUpdate(Boolean update) {
+		this.update = update;
+	}
 
 	public List<ClienteVO> getListaClientes() {
 		if (listaClientes == null) {
@@ -40,9 +50,11 @@ public class ClientesBean {
 	}
 
 	private List<MesRelatorioVO> generateListaMes(Integer idCliente) {
-		listaMes = null;
+		setUpdate(false);
 		listaMes = clientesEjb.getListaMes(idCliente);
+		setUpdate(true);
 		System.out.println("Lista Mes Cliente:" + idCliente.toString());
+		System.out.println(listaMes.toString());
 		return listaMes;
 	}
 

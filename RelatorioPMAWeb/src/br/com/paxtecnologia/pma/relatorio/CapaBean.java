@@ -1,5 +1,9 @@
 package br.com.paxtecnologia.pma.relatorio;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -24,6 +28,7 @@ public class CapaBean {
 	private String subtituloRelatorio;
 	private String dataCriacao;
 	private String textoVersao = "Versao 1.0";
+	SimpleDateFormat dateFormat;
 
 	public String getLogoCliente() {
 		return clientesEjb.getLogoCliente(idCliente);
@@ -35,14 +40,27 @@ public class CapaBean {
 
 	public String getSubtituloRelatorio() {
 		if (subtituloRelatorio == null) {
-			subtituloRelatorio = "- Fevereiro / 2013-";
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date dataRelatorio;
+			try {
+				dataRelatorio = dateFormat.parse(mesRelatorio);
+				dateFormat = new SimpleDateFormat("MMMM / yyyy");
+				subtituloRelatorio = "- " + dateFormat.format(dataRelatorio)
+						+ " -";
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 		return subtituloRelatorio;
 	}
 
 	public String getDataCriacao() {
 		if (dataCriacao == null) {
-			dataCriacao = "Data de criaçao: 01 de março de 2013";
+			Date dataAtual = new Date();
+			dateFormat = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
+			dataCriacao = "Data de criaçao: " + dateFormat.format(dataAtual);
 		}
 		return dataCriacao;
 	}
