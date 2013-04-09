@@ -243,30 +243,6 @@ public class AtendimentoEjb {
 
 			}
 		}
-
-		// SolicitantesVO a = new SolicitantesVO();
-		// a.setSolictante("Marcelo");
-		// a.setQtdeAberto(2);
-		// a.setPorcentoAberto(20.00);
-		// a.setQtdeFechado(5);
-		// a.setPorcentoFechado(23.56);
-		// listaSolicitante.add(a);
-		//
-		// SolicitantesVO b = new SolicitantesVO();
-		// b.setSolictante("PAX");
-		// b.setQtdeAberto(7);
-		// b.setPorcentoAberto(70.00);
-		// b.setQtdeFechado(4);
-		// b.setPorcentoFechado(58.56);
-		// listaSolicitante.add(b);
-		//
-		// SolicitantesVO c = new SolicitantesVO();
-		// c.setSolictante("Sérgio");
-		// c.setQtdeAberto(7);
-		// c.setPorcentoAberto(70.00);
-		// c.setQtdeFechado(4);
-		// c.setPorcentoFechado(58.56);
-		// listaSolicitante.add(c);
 		return listaSolicitante;
 	}
 
@@ -322,7 +298,7 @@ public class AtendimentoEjb {
 					TipoChamadosVO tipoChamados = itTipoChamado.next();
 					if (tipoChamados.getTipo().equals(chamado.getTipoChamado())) {
 						tipoChamados.setQtdeFechado(tipoChamados
-								.getQtdeAberto() + 1);
+								.getQtdeFechado() + 1);
 						achou = 1;
 					}
 				}
@@ -335,31 +311,17 @@ public class AtendimentoEjb {
 				}
 
 			}
+			itTipoChamado = listaTipoChamado.iterator();
+			while (itTipoChamado.hasNext()) {
+				TipoChamadosVO tipoChamados = itTipoChamado.next();
+				// Calcula a porcentagem;
+//				if (tipoChamados.getTipo().equals(chamado.getTipoChamado())) {
+//					tipoChamados
+//							.setQtdeFechado(tipoChamados.getQtdeFechado() + 1);
+//					achou = 1;
+//				}
+			}
 		}
-
-		// TipoChamadosVO a = new TipoChamadosVO();
-		// a.setTipo("Incidente");
-		// a.setQtdeAberto(16);
-		// a.setPorcentoAberto(50.00);
-		// a.setQtdeFechado(14);
-		// a.setPorcentoFechado(54.56);
-		// listaTipoChamado.add(a);
-		//
-		// TipoChamadosVO b = new TipoChamadosVO();
-		// b.setTipo("Mudança");
-		// b.setQtdeAberto(1);
-		// b.setPorcentoAberto(7.14);
-		// b.setQtdeFechado(2);
-		// b.setPorcentoFechado(4.56);
-		// listaTipoChamado.add(b);
-		//
-		// TipoChamadosVO c = new TipoChamadosVO();
-		// c.setTipo("Task");
-		// c.setQtdeAberto(11);
-		// c.setPorcentoAberto(35.71);
-		// c.setQtdeFechado(10);
-		// c.setPorcentoFechado(44.56);
-		// listaTipoChamado.add(c);
 
 		return listaTipoChamado;
 	}
