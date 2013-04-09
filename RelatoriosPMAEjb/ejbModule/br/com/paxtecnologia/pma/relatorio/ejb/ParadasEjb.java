@@ -2,7 +2,9 @@ package br.com.paxtecnologia.pma.relatorio.ejb;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Stateless;
 
@@ -27,18 +29,15 @@ public class ParadasEjb {
 	private Integer qtdeParadaNaoProgramadas;
 	private Integer qtdeParadaEvitadas;
 	private Integer diasTrabalhados;
-	private Integer idCliente;
+	Map<String, Integer> controleIdCliente = new HashMap<String, Integer>();
 
 	public Integer getDiasTrabalhados(Integer idCliente, String mesRelatorio) {
-		if (diasTrabalhados == null || this.idCliente != idCliente)  {
-			 this.idCliente = idCliente;
+		if (diasTrabalhados == null || controleIdCliente.get("getDiasTrabalhados") != idCliente) {
 			Calendar gc = paradasDao.getDataUltimoPNP(idCliente, mesRelatorio);
 			Calendar gregorianCalendar = new GregorianCalendar();
 			DateTime start = new DateTime(gc.getTime());
 			DateTime end = new DateTime(gregorianCalendar);
 			int days = Days.daysBetween(start, end).getDays();
-			System.out.println("Days Between " + gc.getTime() + " : "
-					+ gregorianCalendar.getTime() + " - " + days);
 			diasTrabalhados = days;
 		}
 		return diasTrabalhados;
@@ -51,10 +50,10 @@ public class ParadasEjb {
 
 	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente,
 			String mesRelatorio) {
-		if (listaUltimosAnosHoras == null || this.idCliente != idCliente)  {
-			 this.idCliente = idCliente;
+		if (listaUltimosAnosHoras == null || controleIdCliente.get("getListaUltimosAnosHoras") != idCliente) {
 			listaUltimosAnosHoras = paradasDao.getListaUltimosAnosHoras(
 					idCliente, mesRelatorio);
+			controleIdCliente.put("getListaUltimosAnosHoras", idCliente);
 		}
 		return listaUltimosAnosHoras;
 
@@ -62,11 +61,10 @@ public class ParadasEjb {
 
 	public Integer getQtdeParadaProgramadas(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeParadaProgramadas == null|| this.idCliente != idCliente)  {
-			 this.idCliente = idCliente;
-			if (listaParadasProgramadas == null|| this.idCliente != idCliente)  {
-				 this.idCliente = idCliente;
+		if (qtdeParadaProgramadas == null || controleIdCliente.get("getQtdeParadaProgramadas") != idCliente) {
+			if (listaParadasProgramadas == null || controleIdCliente.get("getQtdeParadaProgramadas") != idCliente) {
 				getListaParadasProgramadas(idCliente, mesRelatorio);
+				controleIdCliente.put("getQtdeParadaProgramadas", idCliente);
 			}
 			qtdeParadaProgramadas = listaParadasProgramadas.size();
 		}
@@ -75,11 +73,10 @@ public class ParadasEjb {
 
 	public Integer getQtdeProgramadasEstrategicas(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeProgramadasEstrategicas == null|| this.idCliente != idCliente)  {
-			 this.idCliente = idCliente;
-			if (listaParadasProgramadas == null|| this.idCliente != idCliente)  {
-				 this.idCliente = idCliente;
+		if (qtdeProgramadasEstrategicas == null || controleIdCliente.get("getQtdeProgramadasEstrategicas") != idCliente) {
+			if (listaParadasProgramadas == null || controleIdCliente.get("getQtdeProgramadasEstrategicas") != idCliente) {
 				getListaParadasProgramadasEstrategicas(idCliente, mesRelatorio);
+				controleIdCliente.put("getQtdeProgramadasEstrategicas", idCliente);
 			}
 			qtdeProgramadasEstrategicas = listaParadasProgramadasEstrategicas
 					.size();
@@ -89,11 +86,10 @@ public class ParadasEjb {
 
 	public Integer getQtdeParadaNaoProgramadas(Integer idCliente,
 			String mesRelatorio) {
-		if (qtdeParadaNaoProgramadas == null|| this.idCliente != idCliente)  {
-			 this.idCliente = idCliente;
-			if (listaParadasProgramadas == null|| this.idCliente != idCliente)  {
-				 this.idCliente = idCliente;
+		if (qtdeParadaNaoProgramadas == null || controleIdCliente.get("getQtdeParadaNaoProgramadas") != idCliente) {
+			if (listaParadasProgramadas == null || controleIdCliente.get("getQtdeParadaNaoProgramadas") != idCliente) {
 				getListaParadasNaoProgramadas(idCliente, mesRelatorio);
+				controleIdCliente.put("getQtdeParadaNaoProgramadas", idCliente);
 			}
 			qtdeParadaNaoProgramadas = listaParadasNaoProgramadas.size();
 		}
@@ -101,11 +97,10 @@ public class ParadasEjb {
 	}
 
 	public Integer getQtdeParadaEvitadas(Integer idCliente, String mesRelatorio) {
-		if (qtdeParadaEvitadas == null|| this.idCliente != idCliente)  {
-			 this.idCliente = idCliente;
-			if (listaParadasEvitadas == null|| this.idCliente != idCliente)  {
-				 this.idCliente = idCliente;
+		if (qtdeParadaEvitadas == null || controleIdCliente.get("getQtdeParadaEvitadas") != idCliente) {
+			if (listaParadasEvitadas == null || controleIdCliente.get("getQtdeParadaEvitadas") != idCliente) {
 				getListaParadasEvitadas(idCliente, mesRelatorio);
+				controleIdCliente.put("getQtdeParadaEvitadas", idCliente);
 			}
 			qtdeParadaEvitadas = listaParadasEvitadas.size();
 		}
@@ -114,10 +109,9 @@ public class ParadasEjb {
 
 	public List<ParadasPorTipoVO> getListaParadasEvitadas(Integer idCliente,
 			String mesRelatorio) {
-		if (listaParadasEvitadas == null|| this.idCliente != idCliente)  {
-			 this.idCliente = idCliente;
-			listaParadasEvitadas = paradasDao.getListaParadasEvitadas(
-					idCliente, mesRelatorio);
+		if (listaParadasEvitadas == null || controleIdCliente.get("getListaParadasEvitadas") != idCliente) {
+			listaParadasEvitadas = paradasDao.getListaParadasEvitadas(idCliente, mesRelatorio);
+			controleIdCliente.put("getListaParadasEvitadas", idCliente);
 		}
 		return listaParadasEvitadas;
 
@@ -125,10 +119,10 @@ public class ParadasEjb {
 
 	public List<ParadasPorTipoVO> getListaParadasNaoProgramadas(
 			Integer idCliente, String mesRelatorio) {
-		if (listaParadasNaoProgramadas == null|| this.idCliente != idCliente)  {
-			 this.idCliente = idCliente;
+		if (listaParadasNaoProgramadas == null || controleIdCliente.get("getListaParadasNaoProgramadas") != idCliente) {
 			listaParadasNaoProgramadas = paradasDao
 					.getListaParadasNaoProgramadas(idCliente, mesRelatorio);
+			controleIdCliente.put("getListaParadasNaoProgramadas", idCliente);
 		}
 		return listaParadasNaoProgramadas;
 
@@ -136,11 +130,11 @@ public class ParadasEjb {
 
 	public List<ParadasPorTipoVO> getListaParadasProgramadasEstrategicas(
 			Integer idCliente, String mesRelatorio) {
-		if (listaParadasProgramadasEstrategicas == null|| this.idCliente != idCliente)  {
-			 this.idCliente = idCliente;
+		if (listaParadasProgramadasEstrategicas == null || controleIdCliente.get("getListaParadasProgramadasEstrategicas") != idCliente) {
 			listaParadasProgramadasEstrategicas = paradasDao
 					.getListaParadasProgramadasEstrategicas(idCliente,
 							mesRelatorio);
+			controleIdCliente.put("getListaParadasProgramadasEstrategicas", idCliente);
 		}
 		return listaParadasProgramadasEstrategicas;
 
@@ -148,10 +142,10 @@ public class ParadasEjb {
 
 	public List<ParadasPorTipoVO> getListaParadasProgramadas(Integer idCliente,
 			String mesRelatorio) {
-		if (listaParadasProgramadas == null|| this.idCliente != idCliente)  {
-			 this.idCliente = idCliente;
+		if (listaParadasProgramadas == null || controleIdCliente.get("getListaParadasProgramadas") != idCliente) {
 			listaParadasProgramadas = paradasDao.getListaParadasProgramadas(
 					idCliente, mesRelatorio);
+			controleIdCliente.put("getListaParadasProgramadas", idCliente);
 		}
 		return listaParadasProgramadas;
 
