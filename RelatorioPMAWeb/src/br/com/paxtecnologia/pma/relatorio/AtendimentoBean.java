@@ -1,6 +1,7 @@
 package br.com.paxtecnologia.pma.relatorio;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -162,6 +163,25 @@ public class AtendimentoBean {
 		listaGeral.add(f);
 
 		return listaGeral;
+	}
+	
+	public Double getPorcentagemAbertoTipo(){
+		
+		if(listaTipoChamado == null){
+			getListaTipoChamado();
+		}
+		
+		Iterator<TipoChamadosVO> itTipoChamado;
+		Double porcentagem;
+		
+		itTipoChamado = listaTipoChamado.iterator();
+		porcentagem = 0.0;
+		while (itTipoChamado.hasNext()) {
+			TipoChamadosVO tipoChamados = itTipoChamado.next();
+			porcentagem = porcentagem + tipoChamados.getPorcentoAberto();
+		}
+		return porcentagem;
+		
 	}
 
 }

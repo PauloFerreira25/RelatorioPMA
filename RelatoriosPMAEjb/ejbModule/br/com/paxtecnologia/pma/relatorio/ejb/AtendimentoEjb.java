@@ -29,8 +29,8 @@ public class AtendimentoEjb {
 	private Integer idCliente;
 
 	// Conta Porcentagem
-	private Double getPorcentagem(Integer valor1, Integer valor2) {
-		Double porcentagem = valor2.doubleValue() / valor1.doubleValue();
+	private Double getPorcentagem(Integer valor, Integer total) {
+		Double porcentagem = valor.doubleValue() / total.doubleValue();
 		return porcentagem;
 	}
 
@@ -265,6 +265,7 @@ public class AtendimentoEjb {
 			Iterator<TipoChamadosVO> itTipoChamado;
 			ChamadoVO chamado;
 			Integer achou;
+			Double porcentagem;
 
 			itChamado = listaChamadoAberto.iterator();
 
@@ -311,20 +312,21 @@ public class AtendimentoEjb {
 				}
 
 			}
+			if (qtdeChamadoAberto == null || this.idCliente != idCliente){
+				this.idCliente = idCliente;
+				getQtdeChamadosEmAberto(idCliente,mesRelatorio);
+			}
 			itTipoChamado = listaTipoChamado.iterator();
 			while (itTipoChamado.hasNext()) {
 				TipoChamadosVO tipoChamados = itTipoChamado.next();
-				// Calcula a porcentagem;
-//				if (tipoChamados.getTipo().equals(chamado.getTipoChamado())) {
-//					tipoChamados
-//							.setQtdeFechado(tipoChamados.getQtdeFechado() + 1);
-//					achou = 1;
-//				}
+				porcentagem = getPorcentagem(tipoChamados.getQtdeAberto(),qtdeChamadoAberto);
+				tipoChamados.setPorcentoAberto(porcentagem);
 			}
 		}
 
 		return listaTipoChamado;
 	}
+
 
 	public List<HostVO> getListaHost(Integer idCliente, String mesRelatorio) {
 		// TODO Auto-generated method stub

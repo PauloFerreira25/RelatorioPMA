@@ -7,7 +7,8 @@
 		<div id='indicadores'>
 			<div id='sem_parada' class="centro">
 				<h:outputText value="Estamos trabalhando há " class="formato1" />
-				<h:outputText value="#{paradasBean.diasTrabalhados}" class="formato2" />
+				<h:outputText value="#{paradasBean.diasTrabalhados}"
+					class="formato2" />
 				<h:outputText value=" dia(s)" class="formato1" />
 				<br />
 				<h:outputText value="sem paradas operacionais" class="formato1" />
@@ -17,11 +18,13 @@
 					class="formato1" />
 				<br />
 				<h:outputText value="Evitamos " class="formato1" />
-				<h:outputText value="#{paradasBean.qtdeParadasEvitadasTotal}" class="formato2" />
+				<h:outputText value="#{paradasBean.qtdeParadasEvitadasTotal}"
+					class="formato2" />
 				<h:outputText value=" paradas operacionais " class="formato1" />
 				<br />
 				<h:outputText value=" nos últimos " class="formato1" />
-				<h:outputText value="#{paradasBean.diasTrabalhados}" class="formato2" />
+				<h:outputText value="#{paradasBean.diasTrabalhados}"
+					class="formato2" />
 				<h:outputText value=" dias." class="formato1" />
 			</div>
 			<p>
@@ -136,8 +139,14 @@
 
 					<h:column>
 						<f:facet name="header">% de Chamados Abertos</f:facet>
-						<h:outputText value="#{i.porcentoAberto}" />
-						<f:facet name="footer">#{atendimentoBean.porcentoAbertos}</f:facet>
+						<h:outputText value="#{i.porcentoAberto}">
+							<f:convertNumber type="percent" />
+						</h:outputText>
+						<f:facet name="footer">
+							<h:outputText value="#{atendimentoBean.porcentagemAbertoTipo}">
+								<f:convertNumber type="percent" />
+							</h:outputText>
+						</f:facet>
 					</h:column>
 
 					<h:column>
@@ -148,15 +157,18 @@
 
 					<h:column>
 						<f:facet name="header">% de Chamados Fechados</f:facet>
-						<h:outputText value="#{i.porcentoFechado}" />
+						<h:outputText value="#{i.porcentoFechado}">
+							<f:convertNumber type="percent" />
+						</h:outputText>
 						<f:facet name="footer">#{atendimentoBean.porcentoFechados}</f:facet>
 					</h:column>
 				</h:dataTable>
 			</div>
 			<div id='chamadoemaberto'>
 				<p class="sub-titulo2">2.4 Chamados em Aberto</p>
-				<h:dataTable value="#{atendimentoBean.listaChamadosEmAbertos}" var="i"
-					styleClass="default-table" headerClass="default-table-header"
+				<h:dataTable value="#{atendimentoBean.listaChamadosEmAbertos}"
+					var="i" styleClass="default-table"
+					headerClass="default-table-header"
 					rowClasses="default-table-odd-row,default-table-even-row"
 					footerClass="default-table-footer"
 					columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft">
@@ -189,8 +201,9 @@
 			</div>
 			<div id='chamadofechado'>
 				<p class="sub-titulo2">2.5 Chamados em Fechado</p>
-				<h:dataTable value="#{atendimentoBean.listaChamadosFechados}" var="i"
-					styleClass="default-table" headerClass="default-table-header"
+				<h:dataTable value="#{atendimentoBean.listaChamadosFechados}"
+					var="i" styleClass="default-table"
+					headerClass="default-table-header"
 					rowClasses="default-table-odd-row,default-table-even-row"
 					footerClass="default-table-footer"
 					columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft">
@@ -209,7 +222,7 @@
 						<f:facet name="header">Data de Abertura</f:facet>
 						<h:outputText value="#{i.dataAbertura}" />
 					</h:column>
-					
+
 					<h:column>
 						<f:facet name="header">Data de Resolução</f:facet>
 						<h:outputText value="#{i.dataFechamento}" />
