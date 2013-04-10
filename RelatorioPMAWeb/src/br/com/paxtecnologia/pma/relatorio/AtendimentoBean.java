@@ -13,7 +13,6 @@ import br.com.paxtecnologia.pma.relatorio.vo.ChamadoVO;
 import br.com.paxtecnologia.pma.relatorio.vo.IndicacoresQtdVO;
 import br.com.paxtecnologia.pma.relatorio.vo.ChamadoQuantidadeVO;
 
-
 @ViewScoped
 @ManagedBean(name = "atendimentoBean")
 public class AtendimentoBean {
@@ -54,6 +53,8 @@ public class AtendimentoBean {
 		this.idCliente = idCliente;
 	}
 
+	// 2.1
+
 	public Integer getQtdeChamadosAbertos() {
 		if (qtdeChamadosAbertos == null) {
 			qtdeChamadosAbertos = atendimentoEjb.getQtdeChamadosAbertos(
@@ -70,22 +71,6 @@ public class AtendimentoBean {
 		return qtdeChamadosFechados;
 	}
 
-	private Object getQtdeChamadosEmAberto() {
-		if (qtdeChamadosEmAbertos == null) {
-			qtdeChamadosEmAbertos = atendimentoEjb.getQtdeChamadosEmAberto(
-					idCliente, mesRelatorio);
-		}
-		return qtdeChamadosEmAbertos;
-	}
-
-	public Double getPorcentoAbertos() {
-		if (porcentoAbertos == null) {
-			porcentoAbertos = atendimentoEjb.getPorcentagemChamadosAbertos(
-					idCliente, mesRelatorio);
-		}
-		return porcentoAbertos;
-	}
-
 	public Double getPorcentoFechados() {
 		if (porcentoFechados == null) {
 			porcentoFechados = atendimentoEjb.getPorcentagemChamadosFechados(
@@ -94,44 +79,20 @@ public class AtendimentoBean {
 		return porcentoFechados;
 	}
 
+	private Object getQtdeChamadosEmAberto() {
+		if (qtdeChamadosEmAbertos == null) {
+			qtdeChamadosEmAbertos = atendimentoEjb.getQtdeChamadosEmAberto(
+					idCliente, mesRelatorio);
+		}
+		return qtdeChamadosEmAbertos;
+	}
+
 	public Double getPorcentoEmAbertos() {
 		if (porcentoEmAbertos == null) {
 			porcentoEmAbertos = atendimentoEjb.getPorcentagemChamadosEmAbertos(
 					idCliente, mesRelatorio);
 		}
 		return porcentoEmAbertos;
-	}
-
-	public List<ChamadoQuantidadeVO> getListaSolicitante() {
-		if (listaSolicitante == null) {
-			listaSolicitante = atendimentoEjb.getListaSolicitantes(idCliente,
-					mesRelatorio);
-		}
-		return listaSolicitante;
-	}
-
-	public List<ChamadoQuantidadeVO> getListaTipoChamado() {
-		if (listaTipoChamado == null) {
-			listaTipoChamado = atendimentoEjb.getListaTipoChamado(idCliente,
-					mesRelatorio);
-		}
-		return listaTipoChamado;
-	}
-
-	public List<ChamadoVO> getListaChamadosEmAbertos() {
-		if (listaChamadoEmAberto == null) {
-			listaChamadoEmAberto = atendimentoEjb.getListaChamadosEmAbertos(
-					idCliente, mesRelatorio);
-		}
-		return listaChamadoEmAberto;
-	}
-
-	public List<ChamadoVO> getListaChamadosFechados() {
-		if (listaChamadoFechado == null) {
-			listaChamadoFechado = atendimentoEjb.getListaChamadosFechados(
-					idCliente, mesRelatorio);
-		}
-		return listaChamadoFechado;
 	}
 
 	public List<IndicacoresQtdVO> getListaGeral() {
@@ -171,62 +132,121 @@ public class AtendimentoBean {
 		return listaGeral;
 	}
 
+	// 2.2
+
+	public List<ChamadoQuantidadeVO> getListaSolicitante() {
+		if (listaSolicitante == null) {
+			listaSolicitante = atendimentoEjb.getListaSolicitantes(idCliente,
+					mesRelatorio);
+		}
+		return listaSolicitante;
+	}
+
+	public Integer getQtdeChamadosAbertosSolicitante() {
+		if (qtdeChamadosAbertosSolicitante == null) {
+			qtdeChamadosAbertosSolicitante = atendimentoEjb
+					.getQtdeChamadosAbertosSolicitante(idCliente, mesRelatorio);
+		}
+		return qtdeChamadosAbertosSolicitante;
+	}
+
+	public Integer getQtdeChamadosFechadosSolicitante() {
+		if (qtdeChamadosFechadosSolicitante == null) {
+			qtdeChamadosFechadosSolicitante = atendimentoEjb
+					.getQtdeChamadosFechadosSolicitante(idCliente, mesRelatorio);
+		}
+		return qtdeChamadosFechadosSolicitante;
+	}
+
+	public Double getPorcentoAbertosSolicitante() {
+		if (porcentoAbertosSolicitante == null) {
+			porcentoAbertosSolicitante = atendimentoEjb
+					.getPorcentoAbertosSolicitante(idCliente, mesRelatorio);
+		}
+		return porcentoAbertosSolicitante;
+	}
+
+	public Double getPorcentoFechadosSolicitante() {
+		if (porcentoFechadosSolicitante == null) {
+			porcentoFechadosSolicitante = atendimentoEjb
+					.getPorcentoFechadosSolicitante(idCliente, mesRelatorio);
+		}
+		return porcentoFechadosSolicitante;
+	}
+
+	// 2.3
+
+	public List<ChamadoQuantidadeVO> getListaTipoChamado() {
+		if (listaTipoChamado == null) {
+			listaTipoChamado = atendimentoEjb.getListaTipoChamado(idCliente,
+					mesRelatorio);
+		}
+		return listaTipoChamado;
+	}
+
+	public List<ChamadoVO> getListaChamadosEmAbertos() {
+		if (listaChamadoEmAberto == null) {
+			listaChamadoEmAberto = atendimentoEjb.getListaChamadosEmAbertos(
+					idCliente, mesRelatorio);
+		}
+		return listaChamadoEmAberto;
+	}
+
+	public List<ChamadoVO> getListaChamadosFechados() {
+		if (listaChamadoFechado == null) {
+			listaChamadoFechado = atendimentoEjb.getListaChamadosFechados(
+					idCliente, mesRelatorio);
+		}
+		return listaChamadoFechado;
+	}
+
+	public Integer getQtdeChamadosAbertosTipo() {
+		if (qtdeChamadosAbertosTipo == null) {
+			qtdeChamadosAbertosTipo = atendimentoEjb
+					.getQtdeChamadosAbertosTipo(idCliente, mesRelatorio);
+		}
+		return qtdeChamadosAbertosTipo;
+	}
+
+	public Integer getQtdeChamadosFechadosTipo() {
+		if (qtdeChamadosFechadosTipo == null) {
+			qtdeChamadosFechadosTipo = atendimentoEjb
+					.getQtdeChamadosFechadosTipo(idCliente, mesRelatorio);
+		}
+		return qtdeChamadosFechadosTipo;
+	}
+
 	public Double getPorcentagemAbertoTipo() {
 		if (porcentagemAbertoTipo == null) {
 			porcentagemAbertoTipo = atendimentoEjb
 					.getPorcentagemChamadosAbertosTipo(idCliente, mesRelatorio);
 		}
 		return porcentagemAbertoTipo;
-
 	}
-	
+
 	public Double getPorcentagemFechadoTipo() {
 		if (porcentagemFechadoTipo == null) {
 			porcentagemFechadoTipo = atendimentoEjb
 					.getPorcentagemChamadosFechadosTipo(idCliente, mesRelatorio);
 		}
 		return porcentagemFechadoTipo;
-
 	}
 
-
-	public List<ChamadoVO> getListaChamadoFechado() {
-		return listaChamadoFechado;
-	}
-
-	public List<ChamadoVO> getListaChamadoEmAberto() {
-		return listaChamadoEmAberto;
-	}
+	//
 
 	public Integer getQtdeChamadosEmAbertos() {
+		if(qtdeChamadosEmAbertos == null){
+			qtdeChamadosEmAbertos = atendimentoEjb.getQtdeChamadosEmAberto(idCliente, mesRelatorio);
+		}
 		return qtdeChamadosEmAbertos;
 	}
 
-	public Integer getQtdeChamadosAbertosSolicitante() {
-		return qtdeChamadosAbertosSolicitante;
+	public Double getPorcentoAbertos() {
+		if (porcentoAbertos == null) {
+			porcentoAbertos = atendimentoEjb.getPorcentagemChamadosAbertos(
+					idCliente, mesRelatorio);
+		}
+		return porcentoAbertos;
 	}
 
-	public Integer getQtdeChamadosFechadosSolicitante() {
-		return qtdeChamadosFechadosSolicitante;
-	}
-
-	public Integer getQtdeChamadosAbertosTipo() {
-		return qtdeChamadosAbertosTipo;
-	}
-
-	public Integer getQtdeChamadosFechadosTipo() {
-		return qtdeChamadosFechadosTipo;
-	}
-
-	public Double getPorcentoAbertosSolicitante() {
-		return porcentoAbertosSolicitante;
-	}
-
-	public Double getPorcentoFechadosSolicitante() {
-		return porcentoFechadosSolicitante;
-	}
-
-	
-	
-	
 }
