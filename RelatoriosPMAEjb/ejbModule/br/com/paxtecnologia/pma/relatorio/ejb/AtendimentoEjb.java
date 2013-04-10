@@ -22,6 +22,7 @@ public class AtendimentoEjb {
 	private Double porcentagemChamadosAbertos;
 	private Double porcentagemChamadosFechados;
 	private Double porcentagemChamadosAbertosTipo;
+	private Double porcentagemChamadosFechadosTipo;
 	private Integer qtdeChamadosAbertos;
 	private Integer qtdeChamadosFechados;
 	private Integer qtdeChamadosEmAberto;
@@ -376,9 +377,10 @@ public class AtendimentoEjb {
 				tipoChamados.setPorcentoAberto(getPorcentagem(
 						tipoChamados.getQtdeAberto(), qtdeChamadosAbertos));
 				tipoChamados.setPorcentoFechado(getPorcentagem(
-						tipoChamados.getQtdeAberto(), qtdeChamadosFechados));
+						tipoChamados.getQtdeFechado(), qtdeChamadosFechados));
 			}
 		}
+		
 
 		return listaTipoChamado;
 	}
@@ -519,6 +521,30 @@ public class AtendimentoEjb {
 				porcentagem = porcentagem + tipoChamados.getPorcentoAberto();
 			}
 
+		}
+
+		return porcentagem;
+	}
+
+	public Double getPorcentagemChamadosFechadosTipo(Integer idCliente,
+			String mesRelatorio) {
+		Double porcentagem = 0.0;
+		Iterator<TipoChamadosVO> itTipoChamado;
+
+		if (porcentagemChamadosFechadosTipo == null
+				|| controleIdCliente.get("getPorcentagemChamadosFechadosTipo") != idCliente) {
+			controleIdCliente.put("getPorcentagemChamadosFechadosTipo",
+					idCliente);
+			if (listaTipoChamado == null
+					|| controleIdCliente.get("getListaTipoChamado") != idCliente) {
+				getListaTipoChamado(idCliente, mesRelatorio);
+			}
+			itTipoChamado = listaTipoChamado.iterator();
+
+			while (itTipoChamado.hasNext()) {
+				TipoChamadosVO tipoChamados = itTipoChamado.next();
+				porcentagem = porcentagem + tipoChamados.getPorcentoFechado();
+			}
 		}
 
 		return porcentagem;
