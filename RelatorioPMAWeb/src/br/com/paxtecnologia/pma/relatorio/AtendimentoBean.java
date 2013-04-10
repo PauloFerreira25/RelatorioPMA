@@ -1,7 +1,6 @@
 package br.com.paxtecnologia.pma.relatorio;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -45,7 +44,7 @@ public class AtendimentoBean {
 	private Double porcentoEmAbertos;
 	private Double porcentoFechados;
 	private Double porcentagemAbertoTipo;
-	private Double porcentoFechadosTipo;
+	private Double porcentagemFechadoTipo;
 
 	public void setMesRelatorio(String mesRelatorio) {
 		this.mesRelatorio = mesRelatorio;
@@ -180,6 +179,15 @@ public class AtendimentoBean {
 		return porcentagemAbertoTipo;
 
 	}
+	
+	public Double getPorcentagemFechadoTipo() {
+		if (porcentagemFechadoTipo == null) {
+			porcentagemFechadoTipo = atendimentoEjb
+					.getPorcentagemChamadosFechadosTipo(idCliente, mesRelatorio);
+		}
+		return porcentagemFechadoTipo;
+
+	}
 
 
 	public List<ChamadoVO> getListaChamadoFechado() {
@@ -218,10 +226,6 @@ public class AtendimentoBean {
 		return porcentoFechadosSolicitante;
 	}
 
-	public Double getPorcentoFechadosTipo() {
-		return porcentoFechadosTipo;
-	}
-	
 	
 	
 	

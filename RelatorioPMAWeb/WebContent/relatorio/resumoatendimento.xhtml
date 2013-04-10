@@ -100,7 +100,12 @@
 						<h:outputText value="#{i.porcentoAberto}">
 							<f:convertNumber type="percent" />
 						</h:outputText>
-						<f:facet name="footer">#{atendimentoBean.porcentoAbertosSolicitante}</f:facet>
+						<f:facet name="footer">
+							<h:outputText
+								value="#{atendimentoBean.porcentoAbertosSolicitante}">
+								<f:convertNumber type="percent" />
+							</h:outputText>
+						</f:facet>
 					</h:column>
 
 					<h:column>
@@ -111,8 +116,15 @@
 
 					<h:column>
 						<f:facet name="header">% de Chamados Fechados</f:facet>
-						<h:outputText value="#{i.porcentoFechado}" />
-						<f:facet name="footer">#{atendimentoBean.porcentoFechadosSolicitante}</f:facet>
+						<h:outputText value="#{i.porcentoFechado}">
+							<f:convertNumber type="percent" />
+						</h:outputText>
+						<f:facet name="footer">
+							<h:outputText
+								value="#{atendimentoBean.porcentoFechadosSolicitante}">
+								<f:convertNumber type="percent" />
+							</h:outputText>
+						</f:facet>
 					</h:column>
 
 				</h:dataTable>
@@ -147,7 +159,7 @@
 								<f:convertNumber type="percent" />
 							</h:outputText>
 						</f:facet>
-						
+
 					</h:column>
 
 					<h:column>
@@ -161,7 +173,11 @@
 						<h:outputText value="#{i.porcentoFechado}">
 							<f:convertNumber type="percent" />
 						</h:outputText>
-						<f:facet name="footer">#{atendimentoBean.porcentoFechadosTipo}</f:facet>
+						<f:facet name="footer">
+							<h:outputText value="#{atendimentoBean.porcentagemFechadoTipo}">
+								<f:convertNumber type="percent" />
+							</h:outputText>
+						</f:facet>
 					</h:column>
 				</h:dataTable>
 			</div>
