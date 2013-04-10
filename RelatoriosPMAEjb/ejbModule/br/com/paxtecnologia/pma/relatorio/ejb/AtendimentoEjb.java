@@ -85,6 +85,36 @@ public class AtendimentoEjb {
 		return qtdeChamadosEmAberto;
 	}
 
+	public Integer getQtdeChamadosAbertosSolicitante(Integer idCliente,
+			String mesRelatorio) {
+		return 1;
+	}
+
+	public Integer getQtdeChamadosFechadosSolicitante(Integer idCliente,
+			String mesRelatorio) {
+		return 1;
+	}
+
+	public Integer getQtdeChamadosEmAbertosSolicitante(Integer idCliente,
+			String mesRelatorio) {
+		return 1;
+	}
+
+	public Integer getQtdeChamadosAbertosTipo(Integer idCliente,
+			String mesRelatorio) {
+		return 1;
+	}
+
+	public Integer getQtdeChamadosFechadosTipo(Integer idCliente,
+			String mesRelatorio) {
+		return 1;
+	}
+
+	public Integer getQtdeChamadosEmAbertosTipo(Integer idCliente,
+			String mesRelatorio) {
+		return 1;
+	}
+
 	public Integer getQtdeHostFechados(Integer idCliente, String mesRelatorio) {
 		if (qtdeHostFechados == null
 				|| controleIdCliente.get("getQtdeHostFechados") != idCliente) {
@@ -119,17 +149,6 @@ public class AtendimentoEjb {
 	// return qtdeChamadoEmAberto;
 	// }
 	//
-	public Double getPorcentoFechadosComHost(Integer idCliente,
-			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Double getPorcentoAbertosComHost(Integer idCliente,
-			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	// Porcentagem em Aberto
 	public Double getPorcentagemChamadosAbertos(Integer idCliente,
@@ -172,6 +191,42 @@ public class AtendimentoEjb {
 					qtdeChamadosAbertos);
 		}
 		return porcentagemChamadosAbertos;
+	}
+
+	public Double getPorcentoFechadosComHost(Integer idCliente,
+			String mesRelatorio) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double getPorcentoAbertosComHost(Integer idCliente,
+			String mesRelatorio) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double getPorcentoEmAbertosComHost(Integer idCliente,
+			String mesRelatorio) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double getPorcentoAbertosSolicitante(Integer idCliente,
+			String mesRelatorio) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double getPorcentoFechadosSolicitante(Integer idCliente,
+			String mesRelatorio) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double getPorcentoEmAbertosSolicitante(Integer idCliente,
+			String mesRelatorio) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// ////////////////////////////////
@@ -380,7 +435,6 @@ public class AtendimentoEjb {
 						tipoChamados.getQtdeFechado(), qtdeChamadosFechados));
 			}
 		}
-		
 
 		return listaTipoChamado;
 	}
