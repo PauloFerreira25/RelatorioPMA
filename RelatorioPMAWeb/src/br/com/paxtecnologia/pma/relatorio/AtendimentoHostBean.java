@@ -81,7 +81,7 @@ public class AtendimentoHostBean {
 
 	public String getGraficoAbertos() {
 		if (graficoAbertos == null) {
-			graficoAbertos = atendimentoEjb.getGraficoAbertos(idCliente,
+			graficoAbertos = atendimentoEjb.getGraficoAbertosHost(idCliente,
 					mesRelatorio);
 		}
 		return graficoAbertos;
@@ -90,7 +90,7 @@ public class AtendimentoHostBean {
 
 	public String getGraficoFechados() {
 		if (graficoFechados == null) {
-			graficoFechados = atendimentoEjb.getGraficoFechados(idCliente,
+			graficoFechados = atendimentoEjb.getGraficoFechadosHost(idCliente,
 					mesRelatorio);
 		}
 		return graficoFechados;
