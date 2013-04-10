@@ -1,8 +1,8 @@
 package br.com.paxtecnologia.pma.relatorio.vo;
 
-public class SolicitantesVO {
+public class ChamadoQuantidadeVO {
 
-	private String solictante;
+	private String nome;
 	private Integer qtdeAberto;
 	private Integer qtdeFechado;
 	private Integer qtdeEmAberto;
@@ -10,12 +10,12 @@ public class SolicitantesVO {
 	private Double porcentoAberto;
 	private Double porcentoEmAberto;
 
-	public String getSolictante() {
-		return solictante;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setSolictante(String solictante) {
-		this.solictante = solictante;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Integer getQtdeAberto() {

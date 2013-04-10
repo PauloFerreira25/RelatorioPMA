@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
 import br.com.paxtecnologia.pma.relatorio.ejb.AtendimentoEjb;
 import br.com.paxtecnologia.pma.relatorio.vo.ChamadoVO;
 import br.com.paxtecnologia.pma.relatorio.vo.IndicacoresQtdVO;
-import br.com.paxtecnologia.pma.relatorio.vo.SolicitantesVO;
+import br.com.paxtecnologia.pma.relatorio.vo.ChamadoQuantidadeVO;
 import br.com.paxtecnologia.pma.relatorio.vo.TipoChamadosVO;
 
 @ViewScoped
@@ -27,7 +27,7 @@ public class AtendimentoBean {
 	@ManagedProperty(value = "#{clientesBean.mesRelatorio}")
 	private String mesRelatorio;
 
-	private List<SolicitantesVO> listaSolicitante;
+	private List<ChamadoQuantidadeVO> listaSolicitante;
 	private List<TipoChamadosVO> listaTipoChamado;
 	private List<ChamadoVO> listaChamadoFechado;
 	private List<ChamadoVO> listaChamadoEmAberto;
@@ -102,7 +102,7 @@ public class AtendimentoBean {
 		return porcentoEmAbertos;
 	}
 
-	public List<SolicitantesVO> getListaSolicitante() {
+	public List<ChamadoQuantidadeVO> getListaSolicitante() {
 		if (listaSolicitante == null) {
 			listaSolicitante = atendimentoEjb.getListaSolicitantes(idCliente,
 					mesRelatorio);
