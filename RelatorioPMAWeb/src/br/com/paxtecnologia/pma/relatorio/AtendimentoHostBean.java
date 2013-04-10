@@ -41,7 +41,7 @@ public class AtendimentoHostBean {
 
 	public Integer getQtdeChamadosAbertosComHost() {
 		if (qtdeChamadosAbertosComHost == null) {
-			qtdeChamadosAbertosComHost = atendimentoEjb.getQtdeHostAbertos(
+			qtdeChamadosAbertosComHost = atendimentoEjb.getQtdeChamadosAbertosHost(
 					idCliente, mesRelatorio);
 		}
 		return qtdeChamadosAbertosComHost;
@@ -65,7 +65,7 @@ public class AtendimentoHostBean {
 
 	public Integer getQtdeChamadosFechadosComHost() {
 		if (qtdeChamadosFechadosComHost == null) {
-			qtdeChamadosFechadosComHost = atendimentoEjb.getQtdeHostFechados(
+			qtdeChamadosFechadosComHost = atendimentoEjb.getQtdeChamadosFechadosHost(
 					idCliente, mesRelatorio);
 		}
 		return qtdeChamadosFechadosComHost;
@@ -73,7 +73,7 @@ public class AtendimentoHostBean {
 
 	public List<ChamadoQuantidadeVO> getListaHost() {
 		if (listaHost == null) {
-			listaHost = atendimentoEjb.getListaHost(idCliente, mesRelatorio);
+			listaHost = atendimentoEjb.getListaChamadoHost(idCliente, mesRelatorio);
 		}
 
 		return listaHost;
