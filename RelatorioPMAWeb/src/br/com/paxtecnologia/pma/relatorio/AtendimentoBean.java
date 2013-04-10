@@ -178,7 +178,7 @@ public class AtendimentoBean {
 
 	public List<ChamadoQuantidadeVO> getListaTipoChamado() {
 		if (listaTipoChamado == null) {
-			listaTipoChamado = atendimentoEjb.getListaTipoChamado(idCliente,
+			listaTipoChamado = atendimentoEjb.getListaChamadoTipo(idCliente,
 					mesRelatorio);
 		}
 		return listaTipoChamado;
