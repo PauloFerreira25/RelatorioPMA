@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import br.com.paxtecnologia.pma.relatorio.ejb.AtendimentoEjb;
-import br.com.paxtecnologia.pma.relatorio.vo.HostListVO;
+import br.com.paxtecnologia.pma.relatorio.vo.ChamadoQuantidadeVO;
 
 @ViewScoped
 @ManagedBean(name = "atendimentoHostBean")
@@ -23,7 +23,7 @@ public class AtendimentoHostBean {
 	@ManagedProperty(value = "#{clientesBean.mesRelatorio}")
 	private String mesRelatorio;
 
-	private List<HostListVO> listaHost;
+	private List<ChamadoQuantidadeVO> listaHost;
 	private Integer qtdeChamadosAbertosComHost;
 	private Double porcentoAbertosComHost;
 	private Double porcentoFechadosComHost;
@@ -31,8 +31,6 @@ public class AtendimentoHostBean {
 	private String graficoAbertos;
 	private String graficoFechados;
 
-	
-	
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
@@ -43,8 +41,8 @@ public class AtendimentoHostBean {
 
 	public Integer getQtdeChamadosAbertosComHost() {
 		if (qtdeChamadosAbertosComHost == null) {
-			qtdeChamadosAbertosComHost = atendimentoEjb
-					.getQtdeHostAbertos(idCliente, mesRelatorio);
+			qtdeChamadosAbertosComHost = atendimentoEjb.getQtdeHostAbertos(
+					idCliente, mesRelatorio);
 		}
 		return qtdeChamadosAbertosComHost;
 	}
@@ -67,13 +65,13 @@ public class AtendimentoHostBean {
 
 	public Integer getQtdeChamadosFechadosComHost() {
 		if (qtdeChamadosFechadosComHost == null) {
-			qtdeChamadosFechadosComHost = atendimentoEjb
-					.getQtdeHostFechados(idCliente, mesRelatorio);
+			qtdeChamadosFechadosComHost = atendimentoEjb.getQtdeHostFechados(
+					idCliente, mesRelatorio);
 		}
 		return qtdeChamadosFechadosComHost;
 	}
 
-	public List<HostListVO> getListaHost() {
+	public List<ChamadoQuantidadeVO> getListaHost() {
 		if (listaHost == null) {
 			listaHost = atendimentoEjb.getListaHost(idCliente, mesRelatorio);
 		}

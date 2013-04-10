@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 
 import br.com.paxtecnologia.pma.relatorio.dao.AtendimentoDAO;
 import br.com.paxtecnologia.pma.relatorio.vo.ChamadoVO;
-import br.com.paxtecnologia.pma.relatorio.vo.HostListVO;
+import br.com.paxtecnologia.pma.relatorio.vo.ChamadoQuantidadeVO;
 import br.com.paxtecnologia.pma.relatorio.vo.ChamadoQuantidadeVO;
 
 @Stateless
@@ -47,7 +47,7 @@ public class AtendimentoEjb {
 	private List<String> listaHostAbertos;
 	private List<String> listaHostFechados;
 	private List<String> listaHostEmAbertos;
-	private List<HostListVO> listaChamadosHost;
+	private List<ChamadoQuantidadeVO> listaChamadosHost;
 	private Map<String, Integer> controleIdCliente = new HashMap<String, Integer>();
 
 	// Conta Porcentagem
@@ -711,7 +711,7 @@ public class AtendimentoEjb {
 		return listaHostEmAbertos;
 	}
 
-	public List<HostListVO> getListaHost(Integer idCliente, String mesRelatorio) {
+	public List<ChamadoQuantidadeVO> getListaHost(Integer idCliente, String mesRelatorio) {
 		if (listaChamadosHost == null
 				|| controleIdCliente.get("getListaHost") != idCliente) {
 			controleIdCliente.put("getListaHost", idCliente);
@@ -723,9 +723,9 @@ public class AtendimentoEjb {
 					|| controleIdCliente.get("getListaHostFechados") != idCliente) {
 				getListaHostFechados(idCliente, mesRelatorio);
 			}
-			listaChamadosHost = new ArrayList<HostListVO>();
+			listaChamadosHost = new ArrayList<ChamadoQuantidadeVO>();
 			Iterator<String> itHost;
-			Iterator<HostListVO> itHostList;
+			Iterator<ChamadoQuantidadeVO> itHostList;
 			String host;
 			Integer achou;
 
@@ -736,15 +736,15 @@ public class AtendimentoEjb {
 				itHostList = listaChamadosHost.iterator();
 				achou = 0;
 				while (itHostList.hasNext()) {
-					HostListVO hostVO = itHostList.next();
-					if (hostVO.getHostname().equals(host)) {
+					ChamadoQuantidadeVO hostVO = itHostList.next();
+					if (hostVO.getNome().equals(host)) {
 						hostVO.setQtdeAberto(hostVO.getQtdeAberto() + 1);
 						achou = 1;
 					}
 				}
 				if (achou == 0) {
-					HostListVO hostVO = new HostListVO();
-					hostVO.setHostname(host);
+					ChamadoQuantidadeVO hostVO = new ChamadoQuantidadeVO();
+					hostVO.setNome(host);
 					hostVO.setQtdeAberto(1);
 					hostVO.setQtdeFechado(0);
 					listaChamadosHost.add(hostVO);
@@ -757,15 +757,15 @@ public class AtendimentoEjb {
 				itHostList = listaChamadosHost.iterator();
 				achou = 0;
 				while (itHostList.hasNext()) {
-					HostListVO hostVO = itHostList.next();
-					if (hostVO.getHostname().equals(host)) {
+					ChamadoQuantidadeVO hostVO = itHostList.next();
+					if (hostVO.getNome().equals(host)) {
 						hostVO.setQtdeFechado(hostVO.getQtdeFechado() + 1);
 						achou = 1;
 					}
 				}
 				if (achou == 0) {
-					HostListVO hostVO = new HostListVO();
-					hostVO.setHostname(host);
+					ChamadoQuantidadeVO hostVO = new ChamadoQuantidadeVO();
+					hostVO.setNome(host);
 					hostVO.setQtdeAberto(0);
 					hostVO.setQtdeFechado(1);
 					listaChamadosHost.add(hostVO);
@@ -782,7 +782,7 @@ public class AtendimentoEjb {
 			}
 			itHostList = listaChamadosHost.iterator();
 			while (itHostList.hasNext()) {
-				HostListVO hostVO = itHostList.next();
+				ChamadoQuantidadeVO hostVO = itHostList.next();
 				hostVO.setPorcentoAberto(getPorcentagem(hostVO.getQtdeAberto(),
 						qtdeHostAbertos));
 				hostVO.setPorcentoFechado(getPorcentagem(
