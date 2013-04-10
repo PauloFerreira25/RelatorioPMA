@@ -4,9 +4,11 @@ public class SolicitantesVO {
 
 	private String solictante;
 	private Integer qtdeAberto;
-	private Double porcentoAberto;
 	private Integer qtdeFechado;
+	private Integer qtdeEmAberto;
 	private Double porcentoFechado;
+	private Double porcentoAberto;
+	private Double porcentoEmAberto;
 
 	public String getSolictante() {
 		return solictante;
@@ -46,6 +48,22 @@ public class SolicitantesVO {
 
 	public void setPorcentoFechado(Double porcentoFechado) {
 		this.porcentoFechado = porcentoFechado;
+	}
+
+	public Integer getQtdeEmAberto() {
+		return qtdeEmAberto;
+	}
+
+	public void setQtdeEmAberto(Integer qtdeEmAberto) {
+		this.qtdeEmAberto = qtdeEmAberto;
+	}
+
+	public Double getPorcentoEmAberto() {
+		return porcentoEmAberto;
+	}
+
+	public void setPorcentoEmAberto(Double porcentoEmAberto) {
+		this.porcentoEmAberto = porcentoEmAberto;
 	}
 
 }
