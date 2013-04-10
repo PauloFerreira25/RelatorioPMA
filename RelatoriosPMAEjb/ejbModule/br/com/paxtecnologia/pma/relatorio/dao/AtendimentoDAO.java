@@ -113,7 +113,7 @@ public class AtendimentoDAO {
 		return retorno;
 	}
 
-	public List<ChamadoVO> getChamadosEmAberto(Integer idCliente,
+	public List<ChamadoVO> getChamadosEmAbertos(Integer idCliente,
 			String mesRelatorio) {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
 		Date data = null;
@@ -207,6 +207,45 @@ public class AtendimentoDAO {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT c.nome_fantasia FROM pmp_task a, pmp_task_host b, pmp_host c WHERE a.task_id = b.task_id AND c.host_id = b.host_id AND a.cliente_id = ? AND a.data_insercao = ? AND a.data_criacao >= ?";
+		pstmt = connection.getPreparedStatement(sql);
+		try {
+			data = new Date(
+					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
+							.getTime()));
+			pstmt.setInt(1, idCliente);
+			pstmt.setDate(2, data);
+			pstmt.setDate(3, data);
+			System.out.println(data.toString());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = connection.executaQuery(pstmt);
+		String temp;
+		try {
+			while (rs.next()) {
+				temp = new String();
+				temp = rs.getString("nome_fantasia");
+				retorno.add(temp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		connection.closeConnection(pstmt);
+		return retorno;
+	}
+
+	public List<String> getListaEmAbertosComHosts(Integer idCliente,
+			String mesRelatorio) {
+		List<String> retorno = new ArrayList<String>();
+		Date data = null;
+		connection = new DataSourcePMA();
+		PreparedStatement pstmt;
+		String sql = "SELECT c.nome_fantasia FROM pmp_task a, pmp_task_host b, pmp_host c WHERE a.task_id = b.task_id AND c.host_id = b.host_id AND a.cliente_id = ? AND a.data_insercao = ? AND a.data_criacao >= ? AND a.data_fechamento IS NULL";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			data = new Date(
