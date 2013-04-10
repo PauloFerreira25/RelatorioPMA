@@ -12,7 +12,7 @@ import br.com.paxtecnologia.pma.relatorio.ejb.AtendimentoEjb;
 import br.com.paxtecnologia.pma.relatorio.vo.ChamadoVO;
 import br.com.paxtecnologia.pma.relatorio.vo.IndicacoresQtdVO;
 import br.com.paxtecnologia.pma.relatorio.vo.ChamadoQuantidadeVO;
-import br.com.paxtecnologia.pma.relatorio.vo.TipoChamadosVO;
+
 
 @ViewScoped
 @ManagedBean(name = "atendimentoBean")
@@ -28,7 +28,7 @@ public class AtendimentoBean {
 	private String mesRelatorio;
 
 	private List<ChamadoQuantidadeVO> listaSolicitante;
-	private List<TipoChamadosVO> listaTipoChamado;
+	private List<ChamadoQuantidadeVO> listaTipoChamado;
 	private List<ChamadoVO> listaChamadoFechado;
 	private List<ChamadoVO> listaChamadoEmAberto;
 	private Integer qtdeChamadosAbertos;
@@ -110,7 +110,7 @@ public class AtendimentoBean {
 		return listaSolicitante;
 	}
 
-	public List<TipoChamadosVO> getListaTipoChamado() {
+	public List<ChamadoQuantidadeVO> getListaTipoChamado() {
 		if (listaTipoChamado == null) {
 			listaTipoChamado = atendimentoEjb.getListaTipoChamado(idCliente,
 					mesRelatorio);
