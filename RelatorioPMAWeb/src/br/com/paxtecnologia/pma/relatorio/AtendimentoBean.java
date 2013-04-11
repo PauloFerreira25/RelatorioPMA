@@ -40,8 +40,8 @@ public class AtendimentoBean {
 	private Double porcentoAbertosSolicitante;
 	private Double porcentoFechadosSolicitante;
 	private Double porcentoAbertos;
-	private Double porcentoEmAbertos;
-	private Double porcentoFechados;
+	private String porcentoEmAbertos;
+	private String porcentoFechados;
 	private Double porcentagemAbertoTipo;
 	private Double porcentagemFechadoTipo;
 
@@ -71,10 +71,12 @@ public class AtendimentoBean {
 		return qtdeChamadosFechados;
 	}
 
-	public Double getPorcentoFechados() {
+	public String getPorcentoFechados() {
 		if (porcentoFechados == null) {
-			porcentoFechados = atendimentoEjb.getPorcentagemChamadosFechados(
-					idCliente, mesRelatorio);
+			Double porcento = null;
+			porcento = atendimentoEjb.getPorcentagemChamadosFechados(
+					idCliente, mesRelatorio) * 100;
+			porcentoFechados = porcento.toString().substring(0, 2) + '%';
 		}
 		return porcentoFechados;
 	}
@@ -87,10 +89,12 @@ public class AtendimentoBean {
 		return qtdeChamadosEmAbertos;
 	}
 
-	public Double getPorcentoEmAbertos() {
+	public String getPorcentoEmAbertos() {
 		if (porcentoEmAbertos == null) {
-			porcentoEmAbertos = atendimentoEjb.getPorcentagemChamadosEmAbertos(
-					idCliente, mesRelatorio);
+			Double porcento = null;
+			porcento = atendimentoEjb.getPorcentagemChamadosEmAbertos(
+					idCliente, mesRelatorio) * 100;
+			porcentoEmAbertos = porcento.toString().substring(0, 2) + '%';
 		}
 		return porcentoEmAbertos;
 	}
@@ -121,7 +125,6 @@ public class AtendimentoBean {
 		IndicacoresQtdVO e = new IndicacoresQtdVO();
 		e.setTexto("Número de Chamados em Aberto");
 		e.setValor(getQtdeChamadosEmAberto());
-
 		listaGeral.add(e);
 
 		IndicacoresQtdVO f = new IndicacoresQtdVO();
