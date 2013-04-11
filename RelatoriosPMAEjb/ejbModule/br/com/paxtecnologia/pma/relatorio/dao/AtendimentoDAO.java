@@ -21,7 +21,7 @@ public class AtendimentoDAO {
 		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND data_insercao = ?";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND data_insercao = ?";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			data = new Date(
@@ -54,6 +54,7 @@ public class AtendimentoDAO {
 				temp.setStatus(rs.getString("status"));
 				temp.setTipoChamado(rs.getString("tipo_chamado"));
 				temp.setSolicitante(rs.getString("solicitante"));
+				temp.setSegundosTrabalhos(rs.getInt("segundos_trabalhados"));
 				retorno.add(temp);
 			}
 		} catch (SQLException e) {
@@ -70,7 +71,7 @@ public class AtendimentoDAO {
 		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND data_insercao = ? AND data_fechamento IS NOT NULL";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND data_insercao = ? AND data_fechamento IS NOT NULL";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			java.util.Date dataJava = new SimpleDateFormat("yyyy-MM-dd")
@@ -103,6 +104,7 @@ public class AtendimentoDAO {
 				temp.setStatus(rs.getString("status"));
 				temp.setTipoChamado(rs.getString("tipo_chamado"));
 				temp.setSolicitante(rs.getString("solicitante"));
+				temp.setSegundosTrabalhos(rs.getInt("segundos_trabalhados"));
 				retorno.add(temp);
 			}
 		} catch (SQLException e) {
@@ -119,7 +121,7 @@ public class AtendimentoDAO {
 		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? and data_insercao = ? and data_criacao >= ? AND data_fechamento IS NULL";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? and data_insercao = ? and data_criacao >= ? AND data_fechamento IS NULL";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			data = new Date(
@@ -152,6 +154,7 @@ public class AtendimentoDAO {
 				temp.setStatus(rs.getString("status"));
 				temp.setTipoChamado(rs.getString("tipo_chamado"));
 				temp.setSolicitante(rs.getString("solicitante"));
+				temp.setSegundosTrabalhos(rs.getInt("segundos_trabalhados"));
 				retorno.add(temp);
 			}
 		} catch (SQLException e) {

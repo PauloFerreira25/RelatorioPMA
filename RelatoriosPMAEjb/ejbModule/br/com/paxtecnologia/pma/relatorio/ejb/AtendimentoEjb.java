@@ -41,10 +41,11 @@ public class AtendimentoEjb {
 	private Integer qtdeChamadosAbertosTipo;
 	private Integer qtdeChamadosFechadosTipo;
 	private Integer qtdeChamadosEmAbertosTipo;
+	private Double tempoMedioChamadoFechado;
 	private List<ChamadoVO> listaChamadoAberto;
 	private List<ChamadoVO> listaChamadoFechado;
 	private List<ChamadoVO> listaChamadoEmAberto;
-	private List<ChamadoQuantidadeVO> listaSolicitante;
+	private List<ChamadoQuantidadeVO> listaChamadoSolicitante;
 	private List<ChamadoQuantidadeVO> listaChamadoTipo;
 	private List<String> listaAbertosHost;
 	private List<String> listaFechadosHost;
@@ -110,7 +111,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (qtdeChamadosAbertosSolicitante == null
 				|| controleIdCliente.get("getQtdeChamadosAbertosSolicitante") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaSolicitantes") != idCliente) {
 				getListaSolicitantes(idCliente, mesRelatorio);
 			}
@@ -125,7 +126,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (qtdeChamadosFechadosSolicitante == null
 				|| controleIdCliente.get("getQtdeChamadosFechadosSolicitante") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaSolicitantes") != idCliente) {
 				getListaSolicitantes(idCliente, mesRelatorio);
 			}
@@ -140,7 +141,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (qtdeChamadosEmAbertosSolicitante == null
 				|| controleIdCliente.get("getQtdeChamadosEmAbertosSolicitante") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaSolicitantes") != idCliente) {
 				getListaSolicitantes(idCliente, mesRelatorio);
 			}
@@ -154,7 +155,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (qtdeChamadosAbertosTipo == null
 				|| controleIdCliente.get("getQtdeChamadosAbertosTipo") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoTipo == null
 					|| controleIdCliente.get("getListaChamadoTipo") != idCliente) {
 				getListaChamadoTipo(idCliente, mesRelatorio);
 			}
@@ -167,7 +168,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (qtdeChamadosFechadosTipo == null
 				|| controleIdCliente.get("getQtdeChamadosFechadosTipo") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoTipo == null
 					|| controleIdCliente.get("getListaChamadoTipo") != idCliente) {
 				getListaChamadoTipo(idCliente, mesRelatorio);
 			}
@@ -180,7 +181,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (qtdeChamadosEmAbertosTipo == null
 				|| controleIdCliente.get("getQtdeChamadosEmAbertosTipo") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoTipo == null
 					|| controleIdCliente.get("getListaChamadoTipo") != idCliente) {
 				getListaChamadoTipo(idCliente, mesRelatorio);
 			}
@@ -275,7 +276,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (porcentagemChamadosAbertosSolicitante == null
 				|| controleIdCliente.get("getPorcentoAbertosSolicitante") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaSolicitantes") != idCliente) {
 				getListaSolicitantes(idCliente, mesRelatorio);
 			}
@@ -288,7 +289,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (porcentagemChamadosFechadosSolicitante == null
 				|| controleIdCliente.get("getPorcentoFechadosSolicitante") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaSolicitantes") != idCliente) {
 				getListaSolicitantes(idCliente, mesRelatorio);
 			}
@@ -301,7 +302,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (porcentagemChamadosEmAbertosSolicitante == null
 				|| controleIdCliente.get("getPorcentoEmAbertosSolicitante") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaSolicitantes") != idCliente) {
 				getListaSolicitantes(idCliente, mesRelatorio);
 			}
@@ -314,7 +315,7 @@ public class AtendimentoEjb {
 	public Double getPorcentoAbertosTipo(Integer idCliente, String mesRelatorio) {
 		if (porcentagemChamadosAbertosTipo == null
 				|| controleIdCliente.get("getPorcentoAbertosTipo") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaChamadoTipo") != idCliente) {
 				getListaChamadoTipo(idCliente, mesRelatorio);
 			}
@@ -326,7 +327,7 @@ public class AtendimentoEjb {
 	public Double getPorcentoFechadosTipo(Integer idCliente, String mesRelatorio) {
 		if (porcentagemChamadosFechadosTipo == null
 				|| controleIdCliente.get("getPorcentoFechadosTipo") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaChamadoTipo") != idCliente) {
 				getListaChamadoTipo(idCliente, mesRelatorio);
 			}
@@ -339,7 +340,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (porcentagemChamadosEmAbertosTipo == null
 				|| controleIdCliente.get("getPorcentoEmAbertosTipo") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaChamadoTipo") != idCliente) {
 				getListaChamadoTipo(idCliente, mesRelatorio);
 			}
@@ -352,7 +353,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (porcentagemChamadosFechadosHost == null
 				|| controleIdCliente.get("getPorcentoFechadosComHost") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaChamadoHost") != idCliente) {
 				getListaChamadoHost(idCliente, mesRelatorio);
 			}
@@ -365,7 +366,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (porcentagemChamadosAbertosHost == null
 				|| controleIdCliente.get("getPorcentoAbertosComHost") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaChamadoHost") != idCliente) {
 				getListaChamadoHost(idCliente, mesRelatorio);
 			}
@@ -378,7 +379,7 @@ public class AtendimentoEjb {
 			String mesRelatorio) {
 		if (porcentagemChamadosEmAbertosHost == null
 				|| controleIdCliente.get("getPorcentoEmAbertosComHost") != idCliente) {
-			if (listaSolicitante == null
+			if (listaChamadoSolicitante == null
 					|| controleIdCliente.get("getListaChamadoHost") != idCliente) {
 				getListaChamadoHost(idCliente, mesRelatorio);
 			}
@@ -390,8 +391,35 @@ public class AtendimentoEjb {
 	// ////////////////////////////////
 
 	public Double getTempoMedio(Integer idCliente, String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
+		if (tempoMedioChamadoFechado == null
+				|| controleIdCliente.get("getTempoMedio") != idCliente) {
+			if (listaChamadoFechado == null
+					|| controleIdCliente.get("getListaChamadosFechados") != idCliente) {
+				getListaChamadosFechados(idCliente, mesRelatorio);
+			}
+			if (qtdeChamadosFechados == null
+					|| controleIdCliente.get("getListaChamadosFechados") != idCliente) {
+				getQtdeChamadosFechados(idCliente, mesRelatorio);
+			}
+			controleIdCliente.put("getTempoMedio", idCliente);
+			tempoMedioChamadoFechado=0.0;
+			Iterator<ChamadoVO> itChamado;
+			ChamadoVO chamado;
+
+			itChamado = listaChamadoFechado.iterator();
+
+			while (itChamado.hasNext()) {
+				chamado = itChamado.next();
+				tempoMedioChamadoFechado = tempoMedioChamadoFechado
+						+ chamado.getSegundosTrabalhos();
+			}
+			// Converte para horas
+			tempoMedioChamadoFechado = tempoMedioChamadoFechado
+					/ qtdeChamadosFechados / 60 / 60;
+		}
+
+		return tempoMedioChamadoFechado;
+
 	}
 
 	// ////////////////////////////////
@@ -436,7 +464,7 @@ public class AtendimentoEjb {
 
 	public List<ChamadoQuantidadeVO> getListaSolicitantes(Integer idCliente,
 			String mesRelatorio) {
-		if (listaSolicitante == null
+		if (listaChamadoSolicitante == null
 				|| controleIdCliente.get("getListaSolicitantes") != idCliente) {
 			if (listaChamadoAberto == null
 					|| controleIdCliente.get("getListaChamadosAbertos") != idCliente) {
@@ -452,7 +480,7 @@ public class AtendimentoEjb {
 			}
 			controleIdCliente.put("getListaSolicitantes", idCliente);
 
-			listaSolicitante = new ArrayList<ChamadoQuantidadeVO>();
+			listaChamadoSolicitante = new ArrayList<ChamadoQuantidadeVO>();
 			Iterator<ChamadoVO> itChamado;
 			Iterator<ChamadoQuantidadeVO> itSolicitante;
 			ChamadoVO chamado;
@@ -462,7 +490,7 @@ public class AtendimentoEjb {
 
 			while (itChamado.hasNext()) {
 				chamado = itChamado.next();
-				itSolicitante = listaSolicitante.iterator();
+				itSolicitante = listaChamadoSolicitante.iterator();
 				achou = 0;
 				while (itSolicitante.hasNext()) {
 					ChamadoQuantidadeVO solicitante = itSolicitante.next();
@@ -478,14 +506,14 @@ public class AtendimentoEjb {
 					solicitante.setQtdeAberto(1);
 					solicitante.setQtdeFechado(0);
 					solicitante.setQtdeEmAberto(0);
-					listaSolicitante.add(solicitante);
+					listaChamadoSolicitante.add(solicitante);
 				}
 			}
 
 			itChamado = listaChamadoFechado.iterator();
 			while (itChamado.hasNext()) {
 				chamado = itChamado.next();
-				itSolicitante = listaSolicitante.iterator();
+				itSolicitante = listaChamadoSolicitante.iterator();
 				achou = 0;
 				while (itSolicitante.hasNext()) {
 					ChamadoQuantidadeVO solicitante = itSolicitante.next();
@@ -501,14 +529,14 @@ public class AtendimentoEjb {
 					solicitante.setQtdeAberto(0);
 					solicitante.setQtdeFechado(1);
 					solicitante.setQtdeEmAberto(0);
-					listaSolicitante.add(solicitante);
+					listaChamadoSolicitante.add(solicitante);
 				}
 			}
 
 			itChamado = listaChamadoEmAberto.iterator();
 			while (itChamado.hasNext()) {
 				chamado = itChamado.next();
-				itSolicitante = listaSolicitante.iterator();
+				itSolicitante = listaChamadoSolicitante.iterator();
 				achou = 0;
 				while (itSolicitante.hasNext()) {
 					ChamadoQuantidadeVO solicitante = itSolicitante.next();
@@ -524,13 +552,13 @@ public class AtendimentoEjb {
 					solicitante.setQtdeAberto(0);
 					solicitante.setQtdeFechado(0);
 					solicitante.setQtdeEmAberto(1);
-					listaSolicitante.add(solicitante);
+					listaChamadoSolicitante.add(solicitante);
 				}
 			}
 			Integer aberto = 0;
 			Integer fechado = 0;
 			Integer emAberto = 0;
-			itSolicitante = listaSolicitante.iterator();
+			itSolicitante = listaChamadoSolicitante.iterator();
 			while (itSolicitante.hasNext()) {
 				ChamadoQuantidadeVO solicitante = itSolicitante.next();
 				aberto = aberto + solicitante.getQtdeAberto();
@@ -545,7 +573,7 @@ public class AtendimentoEjb {
 			Double porcentagemAberto = 0.0;
 			Double porcentagemEmAberto = 0.0;
 			Double porcentagemFechado = 0.0;
-			itSolicitante = listaSolicitante.iterator();
+			itSolicitante = listaChamadoSolicitante.iterator();
 			while (itSolicitante.hasNext()) {
 				ChamadoQuantidadeVO solicitante = itSolicitante.next();
 				solicitante.setPorcentoAberto(getPorcentagem(
@@ -566,7 +594,7 @@ public class AtendimentoEjb {
 			setPorcentagemChamadosEmAbertosSolicitante(porcentagemEmAberto);
 			setPorcentagemChamadosFechadosSolicitante(porcentagemFechado);
 		}
-		return listaSolicitante;
+		return listaChamadoSolicitante;
 	}
 
 	public List<ChamadoQuantidadeVO> getListaChamadoTipo(Integer idCliente,
@@ -902,9 +930,6 @@ public class AtendimentoEjb {
 			saida = saida + "]";
 
 		}
-
-		// saida =
-		// "[{ label: \"Series1\",  data: 10},{ label: \"Series2\",  data: 30},{ label: \"Series6\",  data: 110}]";
 		return saida;
 	}
 
@@ -923,12 +948,9 @@ public class AtendimentoEjb {
 			saida = saida + "]";
 
 		}
-
-		// saida =
-		// "[{ label: \"Series1\",  data: 10},{ label: \"Series2\",  data: 30},{ label: \"Series6\",  data: 110}]";
 		return saida;
 	}
-	
+
 	public String getGraficoEmAbertosHost(Integer idCliente, String mesRelatorio) {
 		String saida = new String();
 		if (listaGraficoEmAbertosHost == null
@@ -1087,7 +1109,8 @@ public class AtendimentoEjb {
 		this.listaGraficoAbertosHost = listaGraficoAbertosHost;
 	}
 
-	private void setListaGraficoFechadosHost(List<String> listaGraficoFechadosHost) {
+	private void setListaGraficoFechadosHost(
+			List<String> listaGraficoFechadosHost) {
 		this.listaGraficoFechadosHost = listaGraficoFechadosHost;
 	}
 

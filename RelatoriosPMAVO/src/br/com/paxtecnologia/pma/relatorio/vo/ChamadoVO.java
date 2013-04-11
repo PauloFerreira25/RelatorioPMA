@@ -9,6 +9,7 @@ public class ChamadoVO {
 	private String status;
 	private String tipoChamado;
 	private String solicitante;
+	private Integer segundosTrabalhos;
 
 	public String getIdChamado() {
 		return idChamado;
@@ -64,6 +65,14 @@ public class ChamadoVO {
 
 	public void setSolicitante(String solicitante) {
 		this.solicitante = solicitante;
+	}
+
+	public Integer getSegundosTrabalhos() {
+		return segundosTrabalhos;
+	}
+
+	public void setSegundosTrabalhos(Integer segundosTrabalhos) {
+		this.segundosTrabalhos = segundosTrabalhos;
 	}
 
 }

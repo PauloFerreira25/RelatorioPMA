@@ -97,4 +97,30 @@ public class ClienteDAO {
 		return retorno;
 	}
 
+	public String getNomeCliente(Integer idCliente) {
+		String retorno = null;
+		connection = new DataSourcePMA();
+		PreparedStatement pstmt;
+		String sql = "SELECT cliente FROM pmp_cliente WHERE cliente_id = ?";
+		pstmt = connection.getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1, idCliente);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = connection.executaQuery(pstmt);
+		try {
+			while (rs.next()) {
+
+				retorno = rs.getString("cliente");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		connection.closeConnection(pstmt);
+		return retorno;
+	}
+
 }
