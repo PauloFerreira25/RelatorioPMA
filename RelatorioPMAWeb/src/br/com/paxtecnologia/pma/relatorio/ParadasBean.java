@@ -36,6 +36,7 @@ public class ParadasBean {
 	private Integer qtdeParadasEvitadasTotal;
 
 	public Integer getDiasTrabalhados() {
+		//TODO Tem que fazer a tablela com data de inserção e editar o ejb
 		if (diasTrabalhados == null) {
 			diasTrabalhados = paradasEjb.getDiasTrabalhados(idCliente,
 					mesRelatorio);
@@ -70,6 +71,7 @@ public class ParadasBean {
 	}
 
 	public List<ParadasVO> getListaResumo() {
+		//TODO Tem que fazer todo o calculo
 		if (listaItem == null) {
 
 			listaItem = new ArrayList<ParadasVO>();
