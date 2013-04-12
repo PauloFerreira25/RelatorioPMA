@@ -44,6 +44,7 @@ public class AtendimentoBean {
 	private String porcentoFechados;
 	private Double porcentagemAbertoTipo;
 	private Double porcentagemFechadoTipo;
+	private String tempoMedio;
 
 	public void setMesRelatorio(String mesRelatorio) {
 		this.mesRelatorio = mesRelatorio;
@@ -98,6 +99,15 @@ public class AtendimentoBean {
 		}
 		return porcentoEmAbertos;
 	}
+	
+	public String getTempoMedio(){
+		if (tempoMedio == null){
+			Double tempo = null;
+			tempo = atendimentoEjb.getTempoMedio(idCliente, mesRelatorio);
+			tempoMedio = tempo.toString().substring(0, 4) + " h";
+		}
+		return tempoMedio;
+	}
 
 	public List<IndicacoresQtdVO> getListaGeral() {
 		List<IndicacoresQtdVO> listaGeral = new ArrayList<IndicacoresQtdVO>();
@@ -119,7 +129,7 @@ public class AtendimentoBean {
 
 		IndicacoresQtdVO d = new IndicacoresQtdVO();
 		d.setTexto("Tempo Médio para solucionar (em Horas)");
-		d.setValor(atendimentoEjb.getTempoMedio(idCliente, mesRelatorio));
+		d.setValor(getTempoMedio());
 		listaGeral.add(d);
 
 		IndicacoresQtdVO e = new IndicacoresQtdVO();
