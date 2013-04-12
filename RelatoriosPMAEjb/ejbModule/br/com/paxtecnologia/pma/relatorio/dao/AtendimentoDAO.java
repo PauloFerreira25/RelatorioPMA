@@ -36,7 +36,6 @@ public class AtendimentoDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(pstmt.toString().toString());
 
 		ResultSet rs = connection.executaQuery(pstmt);
 		ChamadoVO temp;
@@ -179,7 +178,6 @@ public class AtendimentoDAO {
 							.getTime()));
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, data);
-			System.out.println(data.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -257,7 +255,6 @@ public class AtendimentoDAO {
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, data);
 			pstmt.setDate(3, data);
-			System.out.println(data.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
