@@ -22,6 +22,7 @@ public class ParadasDAO {
 
 	public Calendar getDataUltimoPNP(Integer idCliente, String mesRelatorio) {
 		Date data = null;
+		Calendar cal = Calendar.getInstance();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT data_ult_parada FROM pmp_sem_parada WHERE cliente_id = ?";
@@ -36,13 +37,14 @@ public class ParadasDAO {
 		try {
 			while (rs.next()) {
 				data = rs.getDate("data_ult_parada");
+
+				cal.setTimeInMillis(data.getTime());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(data.getTime());
+
 		connection.closeConnection(pstmt);
 		return cal;
 	}

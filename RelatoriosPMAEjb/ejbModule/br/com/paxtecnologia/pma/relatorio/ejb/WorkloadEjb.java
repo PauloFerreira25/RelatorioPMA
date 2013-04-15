@@ -1,5 +1,8 @@
 package br.com.paxtecnologia.pma.relatorio.ejb;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,16 +52,16 @@ public class WorkloadEjb {
 		case 1:
 			tf = getTfCalculo8as18(graficoMetrica.getMetrica(), mesRelatorio);
 			break;
-		case 2:
-			tf = getTfCalculo24horas(graficoMetrica.getMetrica(), mesRelatorio);
-			break;
-		case 3:
-			tf = getTfCalculo0a8e23a24(graficoMetrica.getMetrica(),
-					mesRelatorio);
-			break;
-		case 4:
-			tf = getTfCalculo18a23(graficoMetrica.getMetrica(), mesRelatorio);
-			break;
+		 case 2:
+		 tf = getTfCalculo24horas(graficoMetrica.getMetrica(), mesRelatorio);
+		 break;
+		 case 3:
+		 tf = getTfCalculo0a8e23a24(graficoMetrica.getMetrica(),
+		 mesRelatorio);
+		 break;
+		 case 4:
+		 tf = getTfCalculo18a23(graficoMetrica.getMetrica(), mesRelatorio);
+		 break;
 		default:
 			break;
 		}
@@ -67,22 +70,22 @@ public class WorkloadEjb {
 	}
 
 	private String getTfCalculo18a23(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrameList = workloadDao.getTimeFrame18a23(metrica,
-				mesRelatorio);
+		List<TimeFrameVO> timeFrameList = workloadDao.getTimeFrame18a23(
+				metrica, mesRelatorio);
 
 		return formataTimeFram(timeFrameList);
 	}
 
 	private String getTfCalculo0a8e23a24(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrameList = workloadDao.getTimeFrame0a8e23a24(metrica,
-				mesRelatorio);
+		List<TimeFrameVO> timeFrameList = workloadDao.getTimeFrame0a8e23a24(
+				metrica, mesRelatorio);
 
 		return formataTimeFram(timeFrameList);
 	}
 
 	private String getTfCalculo24horas(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrameList = workloadDao.getTimeFrame24horas(metrica,
-				mesRelatorio);
+		List<TimeFrameVO> timeFrameList = workloadDao.getTimeFrame24horas(
+				metrica, mesRelatorio);
 
 		return formataTimeFram(timeFrameList);
 	}
@@ -93,17 +96,26 @@ public class WorkloadEjb {
 
 		return formataTimeFram(timeFrameList);
 
-		
 	}
 
 	private String formataTimeFram(List<TimeFrameVO> timeFrameList) {
 		String saida;
 		Iterator<TimeFrameVO> itTime = timeFrameList.iterator();
 		saida = "[";
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd");
+		DecimalFormat df = new DecimalFormat("###");
 		while (itTime.hasNext()) {
 			TimeFrameVO timeFrame = itTime.next();
-			saida = saida + "[" + timeFrame.getData() + ","
-					+ timeFrame.getValor() + "],";
+			try {
+				saida = saida
+						+ "["
+						+ sdf2.format(sdf1.parse(timeFrame.getData()).getTime())
+						+ "," + df.format(timeFrame.getValor()) + "],";
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		saida = saida + "]";
 

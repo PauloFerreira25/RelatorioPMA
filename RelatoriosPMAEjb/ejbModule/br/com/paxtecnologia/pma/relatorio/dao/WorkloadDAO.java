@@ -17,39 +17,6 @@ import br.com.paxtecnologia.pma.relatorio.vo.WorkloadGraficoVO;
 public class WorkloadDAO {
 	private DataSourcePMA connection;
 
-	// public List<TimeFrameVO> getTimeFrame(Integer idCliente,
-	// String mesRelatorio, Date dataInicio, Date dataFim, String metrica) {
-	// List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
-	// connection = new DataSourcePMA();
-	// PreparedStatement pstmt;
-	// String sql =
-	// "SELECT data, valor FROM fato_coleta a, pmp_metrica b, pmp_cliente c WHERE a.metrica_id = b.metrica_id AND a.cliente_id = c.cliente_id AND a.cliente_id = ? AND data between ? and ? AND b.arquivo_metrica = ?";
-	// pstmt = connection.getPreparedStatement(sql);
-	// try {
-	// pstmt.setInt(1, idCliente);
-	// pstmt.setDate(2, dataInicio);
-	// pstmt.setDate(3, dataFim);
-	// pstmt.setString(4, metrica);
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// ResultSet rs = connection.executaQuery(pstmt);
-	// TimeFrameVO temp;
-	// try {
-	// while (rs.next()) {
-	// temp = new TimeFrameVO();
-	// temp.setData(rs.getDate("data"));
-	// temp.setValor(rs.getDouble("valor"));
-	// timeFrame.add(temp);
-	// }
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return timeFrame;
-	// }
-
 	public WorkloadGraficoVO getGrafico(Integer idCliente, Integer idGrafico) {
 		WorkloadGraficoVO retorno = new WorkloadGraficoVO();
 		connection = new DataSourcePMA();
@@ -108,20 +75,158 @@ public class WorkloadDAO {
 
 	public List<TimeFrameVO> getTimeFrame18a23(Integer metrica,
 			String mesRelatorio) {
-		return null;
+		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
+		connection = new DataSourcePMA();
+		Date dataMes = null;
+		Date dataMesMaisUm = null;
+		PreparedStatement pstmt;
+		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
+				+ "FROM fato_coleta "
+				+ "WHERE data between ? and ? "
+				+ "AND to_char(data,'hh24') in ('18','19','20','21','22') "
+				+ "AND metrica_id = ? "
+				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
+		pstmt = connection.getPreparedStatement(sql);
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			dataMes = new Date((sdf.parse(mesRelatorio).getTime()));
+			Calendar c = Calendar.getInstance();
+			c.setTime(sdf.parse(mesRelatorio));
+			c.add(Calendar.MONTH, 1);
+			dataMesMaisUm = new Date(
+					(sdf.parse(sdf.format(c.getTime())).getTime()));
+			pstmt.setDate(1, dataMes);
+			pstmt.setDate(2, dataMesMaisUm);
+			pstmt.setInt(3, metrica);
+			// pstmt.setInt(1, metrica);
+			System.out.println("**" + dataMes + " : " + dataMesMaisUm
+					+ " - metrica: " + metrica);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			// }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = connection.executaQuery(pstmt);
+		TimeFrameVO temp;
+		try {
+			while (rs.next()) {
+				temp = new TimeFrameVO();
+				temp.setData(rs.getString("data"));
+				temp.setValor(rs.getDouble("valor"));
+				timeFrame.add(temp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return timeFrame;
 
 	}
 
 	public List<TimeFrameVO> getTimeFrame0a8e23a24(Integer metrica,
 			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
+		connection = new DataSourcePMA();
+		Date dataMes = null;
+		Date dataMesMaisUm = null;
+		PreparedStatement pstmt;
+		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
+				+ "FROM fato_coleta "
+				+ "WHERE data between ? and ? "
+				+ "AND to_char(data,'hh24') in ('00','01','02','03','04','05','06','07','23') "
+				+ "AND metrica_id = ? "
+				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
+		pstmt = connection.getPreparedStatement(sql);
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			dataMes = new Date((sdf.parse(mesRelatorio).getTime()));
+			Calendar c = Calendar.getInstance();
+			c.setTime(sdf.parse(mesRelatorio));
+			c.add(Calendar.MONTH, 1);
+			dataMesMaisUm = new Date(
+					(sdf.parse(sdf.format(c.getTime())).getTime()));
+			pstmt.setDate(1, dataMes);
+			pstmt.setDate(2, dataMesMaisUm);
+			pstmt.setInt(3, metrica);
+			// pstmt.setInt(1, metrica);
+			System.out.println("**" + dataMes + " : " + dataMesMaisUm
+					+ " - metrica: " + metrica);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			// }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = connection.executaQuery(pstmt);
+		TimeFrameVO temp;
+		try {
+			while (rs.next()) {
+				temp = new TimeFrameVO();
+				temp.setData(rs.getString("data"));
+				temp.setValor(rs.getDouble("valor"));
+				timeFrame.add(temp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return timeFrame;
 	}
 
 	public List<TimeFrameVO> getTimeFrame24horas(Integer metrica,
 			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
+		connection = new DataSourcePMA();
+		Date dataMes = null;
+		Date dataMesMaisUm = null;
+		PreparedStatement pstmt;
+		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
+				+ "FROM fato_coleta "
+				+ "WHERE data between ? and ? "
+				+ "AND metrica_id = ? "
+				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
+		pstmt = connection.getPreparedStatement(sql);
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			dataMes = new Date((sdf.parse(mesRelatorio).getTime()));
+			Calendar c = Calendar.getInstance();
+			c.setTime(sdf.parse(mesRelatorio));
+			c.add(Calendar.MONTH, 1);
+			dataMesMaisUm = new Date(
+					(sdf.parse(sdf.format(c.getTime())).getTime()));
+			pstmt.setDate(1, dataMes);
+			pstmt.setDate(2, dataMesMaisUm);
+			pstmt.setInt(3, metrica);
+			// pstmt.setInt(1, metrica);
+			System.out.println("**" + dataMes + " : " + dataMesMaisUm
+					+ " - metrica: " + metrica);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			// }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = connection.executaQuery(pstmt);
+		TimeFrameVO temp;
+		try {
+			while (rs.next()) {
+				temp = new TimeFrameVO();
+				temp.setData(rs.getString("data"));
+				temp.setValor(rs.getDouble("valor"));
+				timeFrame.add(temp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return timeFrame;
 	}
 
 	public List<TimeFrameVO> getTimeFrame8a18(Integer metrica,
@@ -133,11 +238,10 @@ public class WorkloadDAO {
 		PreparedStatement pstmt;
 		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
 				+ "FROM fato_coleta "
-				+ "WHERE data between '01/03/2013' and '01/04/2013' "
+				+ "WHERE data between ? and ? "
 				+ "AND to_char(data,'hh24') in ('08','09','10','11','12','13','14','15','16','17') "
-				+ "AND metrica_id = 6658 "
-				+ "GROUP BY to_char(data, 'dd/mm/yyyy') "
-				+ "ORDER BY to_char(data, 'dd/mm/yyyy')";
+				+ "AND metrica_id = ? "
+				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -147,12 +251,17 @@ public class WorkloadDAO {
 			c.add(Calendar.MONTH, 1);
 			dataMesMaisUm = new Date(
 					(sdf.parse(sdf.format(c.getTime())).getTime()));
-//			pstmt.setDate(1, dataMes);
-//			pstmt.setDate(2, dataMesMaisUm);
-//			pstmt.setInt(3, metrica);
-//			pstmt.setInt(1, metrica);
-			System.out.println("**" + dataMes + " : " + dataMesMaisUm + " - metrica: "+ metrica);
+			pstmt.setDate(1, dataMes);
+			pstmt.setDate(2, dataMesMaisUm);
+			pstmt.setInt(3, metrica);
+			// pstmt.setInt(1, metrica);
+			System.out.println("**" + dataMes + " : " + dataMesMaisUm
+					+ " - metrica: " + metrica);
 		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			// }
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
