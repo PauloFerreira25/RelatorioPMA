@@ -331,7 +331,6 @@ $(function () {
 
     d1 = #{workloadBean.getTf(5,1)};
    	d2 = #{workloadBean.getTf(5,2)};
-   	d3 = #{workloadBean.getTf(5,3)};
  
     var ds = new Array();
 
@@ -379,16 +378,6 @@ $(function () {
             order: 2
         }
     });
-    ds.push({
-    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
-        data:d3,
-        bars: {
-            show: true, 
-            lineWidth: 2, 
-            barWidth: 0.05,  
-            order: 3
-        }
-    });     
  
   //Display graph
     $.plot($("#princapaloutros_tudo_mes-grafico"), ds, options);
@@ -408,7 +397,6 @@ $(function () {
 
     d1 = #{workloadBean.getTf(6,1)};
    	d2 = #{workloadBean.getTf(6,2)};
-   	d3 = #{workloadBean.getTf(6,3)};
  
     var ds = new Array();
 
@@ -456,16 +444,7 @@ $(function () {
             order: 2
         }
     });
-    ds.push({
-    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
-        data:d3,
-        bars: {
-            show: true, 
-            lineWidth: 2, 
-            barWidth: 0.05,  
-            order: 3
-        }
-    });     
+      
                
   //Display graph
     $.plot($("#princapaloutros_tudo_ano-grafico"), ds, options);
@@ -483,7 +462,7 @@ $(function () {
 
     d1 = #{workloadBean.getTf(7,1)};
    	d2 = #{workloadBean.getTf(7,2)};
-   	d3 = #{workloadBean.getTf(7,3)};
+   	
  
     var ds = new Array();
 
@@ -531,16 +510,7 @@ $(function () {
             order: 2
         }
     });
-    ds.push({
-    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
-        data:d3,
-        bars: {
-            show: true, 
-            lineWidth: 2, 
-            barWidth: 0.05,  
-            order: 3
-        }
-    });     
+  
 
   //Display graph
     $.plot($("#princapaloutros_comercial_mes-grafico"), ds, options);
@@ -558,7 +528,7 @@ $(function () {
 
     d1 = #{workloadBean.getTf(8,1)};
    	d2 = #{workloadBean.getTf(8,2)};
-   	d3 = #{workloadBean.getTf(8,3)};
+   	
  
     var ds = new Array();
 
@@ -606,16 +576,7 @@ $(function () {
             order: 2
         }
     });
-    ds.push({
-    	label: "TF3: 0 - 8 e 23 - 24 Horas", color: "#4F94CD",
-        data:d3,
-        bars: {
-            show: true, 
-            lineWidth: 2, 
-            barWidth: 0.05,  
-            order: 3
-        }
-    });     
+ 
 
   //Display graph
     $.plot($("#princapaloutros_comercial_ano-grafico"), ds, options);

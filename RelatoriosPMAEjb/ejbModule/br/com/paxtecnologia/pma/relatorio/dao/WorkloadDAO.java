@@ -43,6 +43,7 @@ public class WorkloadDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		connection.closeConnection(pstmt);
 		return retorno;
 	}
 
@@ -70,6 +71,7 @@ public class WorkloadDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		connection.closeConnection(pstmt);
 		return retorno;
 	}
 
@@ -122,6 +124,7 @@ public class WorkloadDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		connection.closeConnection(pstmt);
 		return timeFrame;
 
 	}
@@ -175,6 +178,7 @@ public class WorkloadDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		connection.closeConnection(pstmt);
 		return timeFrame;
 	}
 
@@ -226,6 +230,7 @@ public class WorkloadDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		connection.closeConnection(pstmt);
 		return timeFrame;
 	}
 
@@ -278,6 +283,7 @@ public class WorkloadDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		connection.closeConnection(pstmt);
 		return timeFrame;
 	}
 }
