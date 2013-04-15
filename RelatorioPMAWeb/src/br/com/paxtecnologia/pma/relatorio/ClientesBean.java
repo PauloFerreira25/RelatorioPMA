@@ -1,6 +1,5 @@
 package br.com.paxtecnologia.pma.relatorio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
