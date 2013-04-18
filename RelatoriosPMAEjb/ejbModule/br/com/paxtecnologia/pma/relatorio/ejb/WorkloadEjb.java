@@ -18,30 +18,18 @@ public class WorkloadEjb {
 
 	private WorkloadDAO workloadDao = new WorkloadDAO();
 
-	private String label;
+	public String getLabel(Integer idGrafico, Integer idTf) {
+		return workloadDao.getLabel(idGrafico, idTf);
+	}
 
-	public String getLabel(Integer idCliente, String mesRelatorio,
-			Integer idGrafico, Integer idLabel) {
-		// TODO Auto-generated method stub
-		return label;
+	public String getLabelTitulo(Integer idGrafico) {
+		return workloadDao.getLabelTitulo(idGrafico);
 	}
 
 	public String getTf(Integer idCliente, String mesRelatorio,
 			Integer idGrafico, Integer idTf) {
-		String tf = null;
-		WorkloadGraficoVO grafico = workloadDao
-				.getGrafico(idCliente, idGrafico);
-		switch (grafico.getTipo_calculo()) {
-		case 1:
-			tf = geraTfCalculoSoMetrica(mesRelatorio, idTf, grafico);
-			break;
-		case 2:
-			tf = geraTfCalculoSoMetrica(mesRelatorio, idTf, grafico);
-			break;
-		default:
-			break;
-		}
-		return tf;
+		WorkloadGraficoVO grafico = workloadDao.getGrafico(idCliente, idGrafico);
+		return geraTfCalculoSoMetrica(mesRelatorio, idTf, grafico);
 	}
 
 	private String geraTfCalculoSoMetrica(String mesRelatorio, Integer idTf,
@@ -50,18 +38,17 @@ public class WorkloadEjb {
 		GraficoMetricaVO graficoMetrica = workloadDao.getMetrica(grafico, idTf);
 		switch (graficoMetrica.getTipo_horario()) {
 		case 1:
-			tf = getTfCalculo8as18(graficoMetrica.getMetrica(), mesRelatorio);
+			tf = getTfCalculo8as18(graficoMetrica.getMetrica(), mesRelatorio, grafico.getGraficoId());
 			break;
 		 case 2:
-		 tf = getTfCalculo24horas(graficoMetrica.getMetrica(), mesRelatorio);
-		 break;
+		 tf = getTfCalculo24horas(graficoMetrica.getMetrica(), mesRelatorio, grafico.getGraficoId());
+		 	break;
 		 case 3:
-		 tf = getTfCalculo0a8e23a24(graficoMetrica.getMetrica(),
-		 mesRelatorio);
-		 break;
+		 tf = getTfCalculo0a8e23a24(graficoMetrica.getMetrica(), mesRelatorio, grafico.getGraficoId());
+		 	break;
 		 case 4:
-		 tf = getTfCalculo18a23(graficoMetrica.getMetrica(), mesRelatorio);
-		 break;
+		 tf = getTfCalculo18a23(graficoMetrica.getMetrica(), mesRelatorio, grafico.getGraficoId());
+		 	break;
 		default:
 			break;
 		}
@@ -69,33 +56,54 @@ public class WorkloadEjb {
 		return tf;
 	}
 
-	private String getTfCalculo18a23(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrameList = workloadDao.getTimeFrame18a23(
-				metrica, mesRelatorio);
-
-		return formataTimeFram(timeFrameList);
+	private String getTfCalculo18a23(Integer metrica, String mesRelatorio, Integer idGrafico) {
+		List<TimeFrameVO> timeFrameList = null;
+		if (idGrafico%2!=0) { //impar = mensal
+			 timeFrameList = workloadDao.getTimeFrame18a23(metrica, mesRelatorio);
+			return formataTimeFram(timeFrameList);
+		} else{ //par = mensal
+			timeFrameList = workloadDao.getTimeFrameAno18a23(metrica, mesRelatorio);
+			return formataTimeFramAno(timeFrameList);
+		}	
 	}
 
-	private String getTfCalculo0a8e23a24(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrameList = workloadDao.getTimeFrame0a8e23a24(
-				metrica, mesRelatorio);
-
-		return formataTimeFram(timeFrameList);
+	private String getTfCalculo0a8e23a24(Integer metrica, String mesRelatorio, Integer idGrafico) {
+		List<TimeFrameVO> timeFrameList = null;
+		if (idGrafico%2!=0) { //impar
+			timeFrameList = workloadDao.getTimeFrame0a8e23a24(
+					metrica, mesRelatorio);
+			return formataTimeFram(timeFrameList);
+		} else { //impar
+			timeFrameList = workloadDao.getTimeFrameAno0a8e23a24(
+					metrica, mesRelatorio);
+			return formataTimeFramAno(timeFrameList);
+		}
 	}
 
-	private String getTfCalculo24horas(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrameList = workloadDao.getTimeFrame24horas(
-				metrica, mesRelatorio);
-
-		return formataTimeFram(timeFrameList);
+	private String getTfCalculo24horas(Integer metrica, String mesRelatorio, Integer idGrafico) {
+		List<TimeFrameVO> timeFrameList = null;
+		if (idGrafico%2!=0) { //impar
+			timeFrameList = workloadDao.getTimeFrame24horas(
+					metrica, mesRelatorio);
+			return formataTimeFram(timeFrameList);
+		} else { //par
+			timeFrameList = workloadDao.getTimeFrameAno24horas(
+					metrica, mesRelatorio);
+			return formataTimeFramAno(timeFrameList);
+		}
 	}
 
-	private String getTfCalculo8as18(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrameList = workloadDao.getTimeFrame8a18(metrica,
-				mesRelatorio);
-
-		return formataTimeFram(timeFrameList);
-
+	private String getTfCalculo8as18(Integer metrica, String mesRelatorio, Integer idGrafico) {
+		List<TimeFrameVO> timeFrameList = null;
+		if (idGrafico%2!=0) { //impar
+			timeFrameList = workloadDao.getTimeFrame8a18(metrica,
+					mesRelatorio);
+			return formataTimeFram(timeFrameList);
+		} else { //par
+			timeFrameList = workloadDao.getTimeFrameAno8a18(metrica,
+					mesRelatorio);
+			return formataTimeFramAno(timeFrameList);
+		}
 	}
 
 	private String formataTimeFram(List<TimeFrameVO> timeFrameList) {
@@ -117,9 +125,25 @@ public class WorkloadEjb {
 				e.printStackTrace();
 			}
 		}
+		saida = saida.substring(0,saida.length()-1);
 		saida = saida + "]";
-
 		return saida;
 	}
 
+	private String formataTimeFramAno(List<TimeFrameVO> timeFrameList) {
+		String saida;
+		Iterator<TimeFrameVO> itTime = timeFrameList.iterator();
+		saida = "[";
+		DecimalFormat df = new DecimalFormat("###");
+		while (itTime.hasNext()) {
+			TimeFrameVO timeFrame = itTime.next();
+				saida = saida
+						+ "["
+						+ "(new Date("+timeFrame.getData().substring(3, 7) +","+(Integer.parseInt(timeFrame.getData().substring(0, 2))-1)+")).getTime()"
+						+ "," + df.format(timeFrame.getValor()) + "],";
+		}
+		saida = saida.substring(0,saida.length()-1);
+		saida = saida + "]";
+		return saida;
+	}	
 }

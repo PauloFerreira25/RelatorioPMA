@@ -451,7 +451,6 @@ public class AtendimentoEjb {
 	// Lista de Chamados em Aberto
 	public List<ChamadoVO> getListaChamadosEmAbertos(Integer idCliente,
 			String mesRelatorio) {
-		System.out.println("getListaChamadosEmAbertos " + listaChamadoEmAberto);
 		if (listaChamadoEmAberto == null
 				|| controleIdCliente.get("getListaChamadosEmAbertos") != idCliente) {
 			controleIdCliente.put("getListaChamadosEmAbertos", idCliente);

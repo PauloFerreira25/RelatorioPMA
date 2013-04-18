@@ -1,7 +1,6 @@
 package br.com.paxtecnologia.pma.relatorio.ejb;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +33,15 @@ public class ParadasEjb {
 	public Integer getDiasTrabalhados(Integer idCliente, String mesRelatorio) {
 		if (diasTrabalhados == null || controleIdCliente.get("getDiasTrabalhados") != idCliente) {
 			Calendar gc = paradasDao.getDataUltimoPNP(idCliente, mesRelatorio);
-			Calendar gregorianCalendar = new GregorianCalendar();
+			
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Integer.parseInt(mesRelatorio.substring(0,4)), (Integer.parseInt(mesRelatorio.substring(6,7))-1), Integer.parseInt(mesRelatorio.substring(9,10)),0,0,0);
+			int lastDate = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		    calendar.set(Calendar.DAY_OF_MONTH, lastDate);
+		    
 			DateTime start = new DateTime(gc.getTime());
-			DateTime end = new DateTime(gregorianCalendar);
+			DateTime end = new DateTime(calendar);
+			
 			int days = Days.daysBetween(start, end).getDays();
 			diasTrabalhados = days;
 		}
