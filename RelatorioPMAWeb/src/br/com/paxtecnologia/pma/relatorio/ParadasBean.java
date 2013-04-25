@@ -81,13 +81,13 @@ public class ParadasBean {
 			listaItem.add(a);
 
 			ParadasVO b = new ParadasVO();
-			b.setTipo("Paradas NÃ£o Programadas");
+			b.setTipo("Paradas Não Programadas");
 			b.setSigla(PARADAS_NAO_PROGRAMADAS);
 			b.setQtde(paradasEjb.getQtdeParadaNaoProgramadas(idCliente,	mesRelatorio, PARADAS_NAO_PROGRAMADAS));
 			listaItem.add(b);
 
 			ParadasVO c = new ParadasVO();
-			c.setTipo("Paradas Programadas EstratÃ©gicas");
+			c.setTipo("Paradas Programadas Estratégicas");
 			c.setSigla(PARADAS_PROGRAMADAS_ESTRATEGICAS);
 			c.setQtde(paradasEjb.getQtdeProgramadasEstrategicas(idCliente, mesRelatorio, PARADAS_PROGRAMADAS_ESTRATEGICAS));
 			listaItem.add(c);
