@@ -8,16 +8,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.com.paxtecnologia.pma.relatorio.util.FormataData;
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasPorTipoVO;
 import br.com.paxtecnologia.pma.relatorio.vo.UltimoAnoVO;
 
 public class ParadasDAO {
 	private DataSourcePMA connection;
-	private List<ParadasPorTipoVO> listaParadasEvitadas;
-	private List<ParadasPorTipoVO> listaParadasNaoProgramadas;
-	private List<ParadasPorTipoVO> listaParadasProgramadasEstrategicas;
-	private List<ParadasPorTipoVO> listaParadasProgramadas;
-	private List<UltimoAnoVO> listaUltimosAnosHoras;
 
 	public Calendar getDataUltimoPNP(Integer idCliente, String mesRelatorio) {
 		Date data = null;
@@ -74,89 +70,86 @@ public class ParadasDAO {
 		return retorno;
 	}
 
-	public List<ParadasPorTipoVO> getListaParadasEvitadas(Integer idCliente,
-			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		listaParadasEvitadas = new ArrayList<ParadasPorTipoVO>();
-		ParadasPorTipoVO a = new ParadasPorTipoVO();
-		a.setIdchamado("VERZANI-250");
-		a.setData("19/02/2013");
-		a.setHoras(0.34);
-		a.setHost("oracle2");
-		a.setDescricao("Parti��o /u01 deu problema");
-		listaParadasEvitadas.add(a);
-
-		ParadasPorTipoVO b = new ParadasPorTipoVO();
-		b.setIdchamado("VERZANI-251");
-		b.setData("19/02/2013");
-		b.setHoras(0.34);
-		b.setHost("oracle2");
-		b.setDescricao("Parti��o /u01 deu problema");
-		listaParadasEvitadas.add(b);
-
-		return listaParadasEvitadas;
+	public List<ParadasPorTipoVO> getListaParadasPorTipo(
+			Integer idCliente, String mesRelatorio, String tipo) {
+		connection = new DataSourcePMA();
+		PreparedStatement pstmt;
+		String sql = "SELECT c.chamado, " +
+					 "to_char(c.data_criacao, 'dd/mm/yyyy') data, " +
+					 "c.segundos_trabalhados/60/60 segundos_trabalhados, " +
+					 "e.nome_fantasia, " +
+					 "c.titulo " +
+					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c, pmp_task_host d, pmp_host e " +
+					 "WHERE a.parada_id = b.parada_id " +
+					 "AND a.task_id = c.task_id " +
+					 "AND a.task_id = d.task_id " +
+					 "AND d.host_id = e.host_id " +
+					 "AND c.cliente_id = ? " +
+					 "AND trunc(c.data_insercao,'YYYY') = trunc(?,'YYYY') " +
+					 "AND regexp_like(b.tipo_parada,?)";
+		pstmt = connection.getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1, idCliente);
+			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setString(3, tipo);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = connection.executaQuery(pstmt);
+		List<ParadasPorTipoVO> listaParadasPorTipoVO  = new ArrayList<ParadasPorTipoVO>();
+		try {
+			while (rs.next()) {
+				ParadasPorTipoVO paradasPorTipoVO = new ParadasPorTipoVO();
+				paradasPorTipoVO.setIdchamado(rs.getString("chamado"));
+				paradasPorTipoVO.setData(rs.getString("data"));
+				paradasPorTipoVO.setHoras(rs.getDouble("segundos_trabalhados"));
+				paradasPorTipoVO.setHost(rs.getString("nome_fantasia"));
+				paradasPorTipoVO.setDescricao(rs.getString("titulo"));
+				listaParadasPorTipoVO.add(paradasPorTipoVO);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		connection.closeConnection(pstmt);
+		return listaParadasPorTipoVO;
 	}
 
-	public List<ParadasPorTipoVO> getListaParadasNaoProgramadas(
-			Integer idCliente, String mesRelatorio) {
-		// TODO Auto-generated method stub
-
-		listaParadasNaoProgramadas = new ArrayList<ParadasPorTipoVO>();
-
-		ParadasPorTipoVO a = new ParadasPorTipoVO();
-		a.setIdchamado("VERZANI-245");
-		a.setData("13/02/2013");
-		a.setHoras(0.50);
-		a.setHost("oracle2");
-		a.setDescricao("Lentid�o");
-		listaParadasNaoProgramadas.add(a);
-		return listaParadasNaoProgramadas;
-	}
-
-	public List<ParadasPorTipoVO> getListaParadasProgramadasEstrategicas(
-			Integer idCliente, String mesRelatorio) {
-		listaParadasProgramadasEstrategicas = new ArrayList<ParadasPorTipoVO>();
-
-		ParadasPorTipoVO a = new ParadasPorTipoVO();
-		a.setIdchamado("VERZANI-246");
-		a.setData("13/02/2013");
-		a.setHoras(0.80);
-		a.setHost("oracle3");
-		a.setDescricao("Backup");
-		listaParadasProgramadasEstrategicas.add(a);
-		return listaParadasProgramadasEstrategicas;
-	}
-
-	public List<ParadasPorTipoVO> getListaParadasProgramadas(Integer idCliente,
-			String mesRelatorio) {
-		listaParadasProgramadas = new ArrayList<ParadasPorTipoVO>();
-
-		ParadasPorTipoVO a = new ParadasPorTipoVO();
-		a.setIdchamado("VERZANI-247");
-		a.setData("13/02/2013");
-		a.setHoras(0.89);
-		a.setHost("oracle3");
-		a.setDescricao("Backup urgente");
-		listaParadasProgramadas.add(a);
-		return listaParadasProgramadas;
-	}
-
-	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente,
-			String mesRelatorio) {
-		// TODO Auto-generated method stub
-		listaUltimosAnosHoras = new ArrayList<UltimoAnoVO>();
-
-		UltimoAnoVO a = new UltimoAnoVO();
-		a.setAno("2012");
-		a.setHoras(9.0);
-		listaUltimosAnosHoras.add(a);
-
-		UltimoAnoVO b = new UltimoAnoVO();
-		b.setAno("2011");
-		b.setHoras(19.0);
-		listaUltimosAnosHoras.add(b);
-		// TODO Auto-generated method stub
-		return listaUltimosAnosHoras;
+	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente, String tipo) {
+		connection = new DataSourcePMA();
+		PreparedStatement pstmt;
+		String sql = "SELECT to_char(c.data_insercao, 'yyyy') data, " +
+					 "sum (c.segundos_trabalhados/60/60) horas_trabalhadas " +
+					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c " +
+					 "WHERE a.parada_id = b.parada_id " +
+					 "AND a.task_id = c.task_id " +
+					 "AND c.cliente_id = ? " +
+					 "AND regexp_like(b.tipo_parada,?) " +
+					 "group by to_char(c.data_insercao, 'yyyy')";
+		pstmt = connection.getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1, idCliente);
+			pstmt.setString(2, tipo);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = connection.executaQuery(pstmt);
+		List<UltimoAnoVO> listaUltimoAnoVO  = new ArrayList<UltimoAnoVO>();
+		try {
+			while (rs.next()) {
+				UltimoAnoVO ultimoAnoVO = new UltimoAnoVO();
+				ultimoAnoVO.setAno(rs.getString("data"));
+				ultimoAnoVO.setHoras(rs.getDouble("horas_trabalhadas"));
+				listaUltimoAnoVO.add(ultimoAnoVO);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		connection.closeConnection(pstmt);
+		return listaUltimoAnoVO;
 	}
 
 }

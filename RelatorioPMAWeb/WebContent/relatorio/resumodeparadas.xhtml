@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jstl/core">
 	<h:outputScript library="js" name="jquery.js" target="head" />
 	<h:outputScript library="js" name="jquery.flot.js" target="head" />
 	<h:outputStylesheet library="css" name="grafico.css" target="head" />
@@ -13,7 +14,7 @@
 			<h:outputText
 				value="Consideramos paradas evitadas, atuações executadas no ambiente depois de detectadas pelo monitoramento acionando a equipe técnica que tomou alguma ação para evitar a parada." />
 			<h:outputText value="Último ano:" />
-			<h:dataTable value="#{paradasBean.listaUltimosAnosHoras}" var="i"
+			<h:dataTable value="#{paradasBean.getListaUltimosAnosHoras('PE')}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
@@ -33,7 +34,7 @@
 			<h:outputText value="Acumulado do ano:" />
 			<div id="graficoAcumuladoAno" class="graph-med"></div>
 			<h:outputText value="Dados do mês:" />
-			<h:dataTable value="#{paradasBean.listaParadasEvitadas}" var="i"
+			<h:dataTable value="#{paradasBean.listaParadasEvitadasMes}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
@@ -71,7 +72,7 @@
 			<p class="sub-titulo2">4.2 Paradas Não Programadas (PNP)</p>
 			<h:outputText
 				value="Paradas que ocorreram no ambiente de forma bruta, sem conhecimento da equipe técnica." />
-			<h:dataTable value="#{paradasBean.listaParadasNaoProgramadas}"
+			<h:dataTable value="#{paradasBean.listaParadasNaoProgramadasMes}"
 				var="i" styleClass="default-table"
 				headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
@@ -95,7 +96,7 @@
 
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
-					<h:outputText value="#{i.host}" />
+					<h:outputText value="#{i.descricao}" />
 				</h:column>
 
 			</h:dataTable>
@@ -105,7 +106,7 @@
 			<h:outputText
 				value="Consideramos paradas programadas estratégicas as situações de necessidade de manutenção no ambiente, onde é possível sua execução sem causar indisponibilidade no mesmo." />
 			<h:dataTable
-				value="#{paradasBean.listaParadasProgramadasEstrategicas}" var="i"
+				value="#{paradasBean.listaParadasProgramadasEstrategicasMes}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
@@ -127,7 +128,7 @@
 
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
-					<h:outputText value="#{i.host}" />
+					<h:outputText value="#{i.descricao}" />
 				</h:column>
 
 			</h:dataTable>
@@ -136,7 +137,7 @@
 			<p class="sub-titulo2">4.4 Paradas Programadas (PP)</p>
 			<h:outputText
 				value="Consideramos paradas programas as situações de necessidade de manutenção no ambiente, porém gerando indisponibilidade no mesmo." />
-			<h:dataTable value="#{paradasBean.listaParadasProgramadas}" var="i"
+			<h:dataTable value="#{paradasBean.listaParadasProgramadasMes}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
@@ -159,7 +160,7 @@
 
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
-					<h:outputText value="#{i.host}" />
+					<h:outputText value="#{i.descricao}" />
 				</h:column>
 
 			</h:dataTable>
@@ -168,8 +169,8 @@
 			<p class="sub-titulo2">4.5 Totais</p>
 			<h:outputText
 				value="A PNP esta diretamente relacionada ao PE, onde PNP gera Downtime e PE gera downtime evitado, sendo assim:" />
-			<h:outputText value="PNP: 129 min" />
-			<h:outputText value="PE: 0 min" />
+			<h:outputText value="PNP: #{paradasBean.getTempoParadasMes('PNP')} hrs e " />
+			<h:outputText value="PE: #{paradasBean.getTempoParadasMes('PE')} hrs" />
 			<div id="princapaloutros_comercial_mes">
 				<div id="graficoPNPPE" class="graph-med"></div>
 				<div align="center">
@@ -180,8 +181,8 @@
 
 			<h:outputText
 				value="A PP esta diretamente relacionada ao PPE, onde PP gera Downtime e PPE gera downtime evitado, sendo assim:" />
-			<h:outputText value="PP: 0 min" />
-			<h:outputText value="PPE: 6 min" />
+			<h:outputText value="PP: #{paradasBean.getTempoParadasMes('PP')} hrs e " />
+			<h:outputText value="PPE: #{paradasBean.getTempoParadasMes('PPE')} hrs" />
 			<div id="princapaloutros_comercial_mes">
 				<div id="graficoPPEPP" class="graph-med"></div>
 				<div align="center">
@@ -194,8 +195,8 @@
 	<script type="text/javascript">
 	//<![CDATA[
 $(function () {
-    var d1 = [[1,-1],[2,-5],[3,-6],[4,0],[5,0],[6,-5],[7,-6],[8,-7],[9,-9],[10,-1],[11,-2],[12,-5]];
-    var d2 = [[1,5],[2,1],[3,4],[4,8],[5,2],[6,0],[7,0],[8,1],[9,4],[10,2],[11,5],[12,8]];
+    var d1 = #{paradasBean.getParadas("PNP")};
+    var d2 = #{paradasBean.getParadas("PE")};
     var d3 = [];
 
     for (var i = 0; i <12; i += 1)
@@ -231,8 +232,8 @@ $(function () {
 	<script type="text/javascript">
 	//<![CDATA[
 $(function () {
-    var d1 = [[1,-1],[2,-5],[3,-6],[4,0],[5,0],[6,-5],[7,-6],[8,-7],[9,-9],[10,-1],[11,-2],[12,-5]];
-    var d2 = [[1,5],[2,1],[3,4],[4,8],[5,2],[6,0],[7,0],[8,1],[9,4],[10,2],[11,5],[12,8]];
+    var d1 = #{paradasBean.getParadas("PPE")};
+    var d2 = #{paradasBean.getParadas("PP")};
     var d3 = [];
 
     for (var i = 0; i <12; i += 1)
@@ -267,11 +268,9 @@ $(function () {
 </script>
 	<script type="text/javascript">
 	//<![CDATA[
+
 $(function () {
-    var d1 = [];
-    for (var i = 0; i <= 12; i += 1)
-        d1.push([i, Math.sin(i)]);
-                       
+    var d1 = #{paradasBean.getParadas("PE")};
     $.plot($("#graficoAcumuladoAno"), [
         {
            label: "Parada Evitadas", color:"blue", data: d1,
@@ -279,6 +278,7 @@ $(function () {
         }
     ]);
 });
+
 //]]> 
 </script>
 </ui:composition>

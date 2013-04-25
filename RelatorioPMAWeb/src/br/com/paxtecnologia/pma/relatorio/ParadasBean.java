@@ -28,26 +28,28 @@ public class ParadasBean {
 
 	private List<ParadasVO> listaItem;
 	private List<UltimoAnoVO> listaUltimosAnosHoras;
-	private List<ParadasPorTipoVO> listaParadasEvitadas;
-	private List<ParadasPorTipoVO> listaParadasNaoProgramadas;
-	private List<ParadasPorTipoVO> listaParadasProgramadasEstrategicas;
-	private List<ParadasPorTipoVO> listaParadasProgramadas;
+	private List<ParadasPorTipoVO> listaParadasEvitadasMes;
+	private List<ParadasPorTipoVO> listaParadasNaoProgramadasMes;
+	private List<ParadasPorTipoVO> listaParadasProgramadasEstrategicasMes;
+	private List<ParadasPorTipoVO> listaParadasProgramadasMes;
 	private Integer diasTrabalhados;
 	private Integer qtdeParadasEvitadasTotal;
 
+	private static String PARADAS_EVITADAS = "PE";
+	private static String PARADAS_NAO_PROGRAMADAS = "PNP";
+	private static String PARADAS_PROGRAMADAS_ESTRATEGICAS = "PPE";
+	private static String PARADAS_PROGRAMADAS = "PP";
+	
 	public Integer getDiasTrabalhados() {
-		//TODO Tem que fazer a tablela com data de inserção e editar o ejb
 		if (diasTrabalhados == null) {
-			diasTrabalhados = paradasEjb.getDiasTrabalhados(idCliente,
-					mesRelatorio);
+			diasTrabalhados = paradasEjb.getDiasTrabalhados(idCliente, mesRelatorio);
 		}
 		return diasTrabalhados;
 	}
 
 	public Integer getQtdeParadasEvitadasTotal() {
 		if (qtdeParadasEvitadasTotal == null) {
-			qtdeParadasEvitadasTotal = paradasEjb.getQtdeParadaEvitadasTotal(
-					idCliente, mesRelatorio);
+			qtdeParadasEvitadasTotal = paradasEjb.getQtdeParadaEvitadasTotal(idCliente, mesRelatorio);
 		}
 		return qtdeParadasEvitadasTotal;
 	}
@@ -60,82 +62,78 @@ public class ParadasBean {
 		this.idCliente = idCliente;
 	}
 
-	public List<UltimoAnoVO> getListaUltimosAnosHoras() {
-
+	public List<UltimoAnoVO> getListaUltimosAnosHoras(String tipo) {
 		if (listaUltimosAnosHoras == null) {
-			listaUltimosAnosHoras = paradasEjb.getListaUltimosAnosHoras(
-					idCliente, mesRelatorio);
+			listaUltimosAnosHoras = paradasEjb.getListaUltimosAnosHoras(idCliente, tipo);
 		}
-
 		return listaUltimosAnosHoras;
 	}
 
 	public List<ParadasVO> getListaResumo() {
-		//TODO Tem que fazer todo o calculo
 		if (listaItem == null) {
 
 			listaItem = new ArrayList<ParadasVO>();
 
 			ParadasVO a = new ParadasVO();
 			a.setTipo("Paradas Evitadas");
-			a.setSigla("PE");
-			a.setQtde(paradasEjb.getQtdeParadaEvitadas(idCliente, mesRelatorio));
+			a.setSigla(PARADAS_EVITADAS);
+			a.setQtde(paradasEjb.getQtdeParadaEvitadas(idCliente, mesRelatorio, PARADAS_EVITADAS));
 			listaItem.add(a);
 
 			ParadasVO b = new ParadasVO();
 			b.setTipo("Paradas Não Programadas");
-			b.setSigla("PNP");
-			b.setQtde(paradasEjb.getQtdeParadaNaoProgramadas(idCliente,
-					mesRelatorio));
+			b.setSigla(PARADAS_NAO_PROGRAMADAS);
+			b.setQtde(paradasEjb.getQtdeParadaNaoProgramadas(idCliente,	mesRelatorio, PARADAS_NAO_PROGRAMADAS));
 			listaItem.add(b);
 
 			ParadasVO c = new ParadasVO();
 			c.setTipo("Paradas Programadas Estratégicas");
-			c.setSigla("PPE");
-			c.setQtde(paradasEjb.getQtdeProgramadasEstrategicas(idCliente,
-					mesRelatorio));
+			c.setSigla(PARADAS_PROGRAMADAS_ESTRATEGICAS);
+			c.setQtde(paradasEjb.getQtdeProgramadasEstrategicas(idCliente, mesRelatorio, PARADAS_PROGRAMADAS_ESTRATEGICAS));
 			listaItem.add(c);
 
 			ParadasVO d = new ParadasVO();
 			d.setTipo("Paradas Programadas");
-			d.setSigla("PP");
-			d.setQtde(paradasEjb.getQtdeParadaProgramadas(idCliente,
-					mesRelatorio));
+			d.setSigla(PARADAS_PROGRAMADAS);
+			d.setQtde(paradasEjb.getQtdeParadaProgramadas(idCliente, mesRelatorio, PARADAS_PROGRAMADAS));
 			listaItem.add(d);
 		}
 		return listaItem;
 	}
 
-	public List<ParadasPorTipoVO> getListaParadasEvitadas() {
-		if (listaParadasEvitadas == null) {
-			listaParadasEvitadas = paradasEjb.getListaParadasEvitadas(
-					idCliente, mesRelatorio);
+	public List<ParadasPorTipoVO> getListaParadasEvitadasMes() {
+		if (listaParadasEvitadasMes == null) {
+			listaParadasEvitadasMes = paradasEjb.getListaParadasEvitadasMes(idCliente, mesRelatorio, PARADAS_EVITADAS);
 		}
-		return listaParadasEvitadas;
+		return listaParadasEvitadasMes;
 	}
 
-	public List<ParadasPorTipoVO> getListaParadasNaoProgramadas() {
-		if (listaParadasNaoProgramadas == null) {
-			listaParadasNaoProgramadas = paradasEjb
-					.getListaParadasNaoProgramadas(idCliente, mesRelatorio);
+	public List<ParadasPorTipoVO> getListaParadasNaoProgramadasMes() {
+		if (listaParadasNaoProgramadasMes == null) {
+			listaParadasNaoProgramadasMes = paradasEjb.getListaParadasNaoProgramadasMes(idCliente, mesRelatorio, PARADAS_NAO_PROGRAMADAS);
 		}
-		return listaParadasNaoProgramadas;
+		return listaParadasNaoProgramadasMes;
 	}
 
-	public List<ParadasPorTipoVO> getListaParadasProgramadasEstrategicas() {
-		if (listaParadasProgramadasEstrategicas == null) {
-			listaParadasProgramadasEstrategicas = paradasEjb
-					.getListaParadasProgramadasEstrategicas(idCliente,
-							mesRelatorio);
+	public List<ParadasPorTipoVO> getListaParadasProgramadasEstrategicasMes() {
+		if (listaParadasProgramadasEstrategicasMes == null) {
+			listaParadasProgramadasEstrategicasMes = paradasEjb.getListaParadasProgramadasEstrategicasMes(idCliente, mesRelatorio, PARADAS_PROGRAMADAS_ESTRATEGICAS);
 		}
-		return listaParadasProgramadasEstrategicas;
+		return listaParadasProgramadasEstrategicasMes;
 	}
 
-	public List<ParadasPorTipoVO> getListaParadasProgramadas() {
-		if (listaParadasProgramadas == null) {
-			listaParadasProgramadas = paradasEjb.getListaParadasProgramadas(
-					idCliente, mesRelatorio);
+	public List<ParadasPorTipoVO> getListaParadasProgramadasMes() {
+		if (listaParadasProgramadasMes == null) {
+			listaParadasProgramadasMes = paradasEjb.getListaParadasProgramadasMes(idCliente, mesRelatorio, PARADAS_PROGRAMADAS);
 		}
-		return listaParadasProgramadas;
+		return listaParadasProgramadasMes;
+	}
+	
+	public String getParadas(String tipo) {
+		return paradasEjb.getParadas(tipo,mesRelatorio);
+	}
+	
+	public Double getTempoParadasMes(String tipo) {
+		return paradasEjb.getTempoParadasMes(tipo,mesRelatorio);
 	}
 }

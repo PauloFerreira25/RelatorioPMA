@@ -107,9 +107,8 @@ public class WorkloadEjb {
 	}
 
 	private String formataTimeFram(List<TimeFrameVO> timeFrameList) {
-		String saida;
+		String saida = "[";
 		Iterator<TimeFrameVO> itTime = timeFrameList.iterator();
-		saida = "[";
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("dd");
 		DecimalFormat df = new DecimalFormat("###");
@@ -131,9 +130,8 @@ public class WorkloadEjb {
 	}
 
 	private String formataTimeFramAno(List<TimeFrameVO> timeFrameList) {
-		String saida;
+		String saida = "[";
 		Iterator<TimeFrameVO> itTime = timeFrameList.iterator();
-		saida = "[";
 		DecimalFormat df = new DecimalFormat("###");
 		while (itTime.hasNext()) {
 			TimeFrameVO timeFrame = itTime.next();

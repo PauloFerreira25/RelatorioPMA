@@ -1,18 +1,15 @@
 package br.com.paxtecnologia.pma.relatorio.dao;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.paxtecnologia.pma.relatorio.vo.GraficoMetricaVO;
 import br.com.paxtecnologia.pma.relatorio.vo.TimeFrameVO;
 import br.com.paxtecnologia.pma.relatorio.vo.WorkloadGraficoVO;
+import br.com.paxtecnologia.pma.relatorio.util.FormataData;
 
 public class WorkloadDAO {
 	private DataSourcePMA connection;
@@ -85,8 +82,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, formataDataInicio(mesRelatorio));
-			pstmt.setDate(2, formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -121,8 +118,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, formataAnoInicio(mesRelatorio));
-			pstmt.setDate(2, formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataData.formataAnoInicio(mesRelatorio));
+			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -157,8 +154,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, formataDataInicio(mesRelatorio));
-			pstmt.setDate(2, formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -193,8 +190,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, formataAnoInicio(mesRelatorio));
-			pstmt.setDate(2, formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataData.formataAnoInicio(mesRelatorio));
+			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -228,8 +225,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, formataDataInicio(mesRelatorio));
-			pstmt.setDate(2, formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -263,8 +260,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, formataAnoInicio(mesRelatorio));
-			pstmt.setDate(2, formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataData.formataAnoInicio(mesRelatorio));
+			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -299,8 +296,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, formataDataInicio(mesRelatorio));
-			pstmt.setDate(2, formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -335,8 +332,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, formataAnoInicio(mesRelatorio));
-			pstmt.setDate(2, formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataData.formataAnoInicio(mesRelatorio));
+			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -413,48 +410,5 @@ public class WorkloadDAO {
 		}
 		connection.closeConnection(pstmt);
 		return labelTitulo;
-	}	
-	
-	private Date formataAnoInicio(String mesRelatorio) {
-		Date anoInicio = null;
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar c = Calendar.getInstance();
-			c.setTime(sdf.parse(mesRelatorio));
-			c.add(Calendar.YEAR, -1);
-			anoInicio = new Date(sdf.parse(sdf.format(c.getTime())).getTime());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			// }
-		}
-		return anoInicio;
-	}
-	
-	private Date formataDataInicio(String mesRelatorio) {
-		Date dataInicio = null;
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			dataInicio = new Date((sdf.parse(mesRelatorio).getTime()));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return dataInicio;
-	}
-	
-	private Date formataDataFim(String mesRelatorio) {
-		Date dataFim = null;
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar c = Calendar.getInstance();
-			c.setTime(sdf.parse(mesRelatorio));
-			c.add(Calendar.MONTH, 1);
-			dataFim = new Date((sdf.parse(sdf.format(c.getTime())).getTime()));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return dataFim;
 	}	
 }
