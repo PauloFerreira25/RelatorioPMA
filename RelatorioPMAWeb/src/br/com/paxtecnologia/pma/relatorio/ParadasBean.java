@@ -64,7 +64,7 @@ public class ParadasBean {
 
 	public List<UltimoAnoVO> getListaUltimosAnosHoras(String tipo) {
 		if (listaUltimosAnosHoras == null) {
-			listaUltimosAnosHoras = paradasEjb.getListaUltimosAnosHoras(idCliente, tipo);
+			listaUltimosAnosHoras = paradasEjb.getListaUltimosAnosHoras(idCliente, tipo,mesRelatorio);
 		}
 		return listaUltimosAnosHoras;
 	}

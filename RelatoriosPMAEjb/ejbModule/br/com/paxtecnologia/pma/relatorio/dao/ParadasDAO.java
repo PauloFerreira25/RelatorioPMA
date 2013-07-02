@@ -20,10 +20,13 @@ public class ParadasDAO {
 		Calendar cal = Calendar.getInstance();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT data_ult_parada FROM pmp_sem_parada WHERE cliente_id = ?";
+		String sql = "SELECT data_ult_parada FROM pmp_sem_parada "+
+			         "WHERE cliente_id = ? "+
+			         "  and trunc(data_insercao,'MM') = trunc(?,'MM')";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
+			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,7 +79,7 @@ public class ParadasDAO {
 		PreparedStatement pstmt;
 		String sql = "SELECT c.chamado, " +
 					 "to_char(c.data_criacao, 'dd/mm/yyyy') data, " +
-					 "c.segundos_trabalhados/60/60 segundos_trabalhados, " +
+					 "round(c.segundos_trabalhados/60/60,2) segundos_trabalhados, " +
 					 "e.nome_fantasia, " +
 					 "c.titulo " +
 					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c, pmp_task_host d, pmp_host e " +
@@ -116,7 +119,7 @@ public class ParadasDAO {
 		return listaParadasPorTipoVO;
 	}
 
-	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente, String tipo) {
+	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente, String tipo, String mesRelatorio) {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT to_char(c.data_insercao, 'yyyy') data, " +
@@ -126,11 +129,13 @@ public class ParadasDAO {
 					 "AND a.task_id = c.task_id " +
 					 "AND c.cliente_id = ? " +
 					 "AND regexp_like(b.tipo_parada,?) " +
+					 "AND c.data_insercao <= ?" +
 					 "group by to_char(c.data_insercao, 'yyyy')";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
 			pstmt.setString(2, tipo);
+			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

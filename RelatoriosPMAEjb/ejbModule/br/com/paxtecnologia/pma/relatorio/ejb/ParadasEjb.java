@@ -68,9 +68,9 @@ public class ParadasEjb {
 		return paradasDao.getQtdeParadaEvitadasTotal(idCliente, mesRelatorio);
 	}
 
-	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente, String tipo) {
+	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente, String tipo, String mesRelatorio) {
 		if (listaUltimosAnosHoras == null || controleIdCliente.get("getListaUltimosAnosHoras") != idCliente) {
-			listaUltimosAnosHoras = paradasDao.getListaUltimosAnosHoras(idCliente, tipo);
+			listaUltimosAnosHoras = paradasDao.getListaUltimosAnosHoras(idCliente, tipo, mesRelatorio);
 			controleIdCliente.put("getListaUltimosAnosHoras", idCliente);
 		}
 		return listaUltimosAnosHoras;

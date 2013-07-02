@@ -47,7 +47,7 @@ public class WorkloadDAO {
 		GraficoMetricaVO retorno = new GraficoMetricaVO();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT metrica_id, tipo_horario_id FROM pmp_time_frame a WHERE grafico_id = ? AND time_frame_controle_id = ?";
+		String sql = "SELECT metrica_link_id, tipo_horario_id FROM pmp_time_frame a WHERE grafico_id = ? AND time_frame_controle_id = ?";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, grafico.getGraficoId());
@@ -59,7 +59,7 @@ public class WorkloadDAO {
 		ResultSet rs = connection.executaQuery(pstmt);
 		try {
 			while (rs.next()) {
-				retorno.setMetrica(rs.getInt("metrica_id"));
+				retorno.setMetrica(rs.getInt("metrica_link_id"));
 				retorno.setTipo_horario(rs.getInt("tipo_horario_id"));
 			}
 		} catch (SQLException e) {
@@ -78,7 +78,7 @@ public class WorkloadDAO {
 				+ "FROM fato_coleta "
 				+ "WHERE data between ? and ? "
 				+ "AND to_char(data,'hh24') in ('18','19','20','21','22') "
-				+ "AND metrica_id = ? "
+				+ "AND metrica_link_id = ? "
 				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
@@ -114,7 +114,7 @@ public class WorkloadDAO {
 				+ "FROM fato_coleta "
 				+ "WHERE data between ? and ? "
 				+ "AND to_char(data,'hh24') in ('18','19','20','21','22') "
-				+ "AND metrica_id = ? "
+				+ "AND metrica_link_id = ? "
 				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
@@ -150,7 +150,7 @@ public class WorkloadDAO {
 				+ "FROM fato_coleta "
 				+ "WHERE data between ? and ? "
 				+ "AND to_char(data,'hh24') in ('00','01','02','03','04','05','06','07','23') "
-				+ "AND metrica_id = ? "
+				+ "AND metrica_link_id = ? "
 				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
@@ -186,7 +186,7 @@ public class WorkloadDAO {
 				+ "FROM fato_coleta "
 				+ "WHERE data between ? and ? "
 				+ "AND to_char(data,'hh24') in ('00','01','02','03','04','05','06','07','23') "
-				+ "AND metrica_id = ? "
+				+ "AND metrica_link_id = ? "
 				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
@@ -221,7 +221,7 @@ public class WorkloadDAO {
 		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
 				+ "FROM fato_coleta "
 				+ "WHERE data between ? and ? "
-				+ "AND metrica_id = ? "
+				+ "AND metrica_link_id = ? "
 				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
@@ -256,7 +256,7 @@ public class WorkloadDAO {
 		String sql = "SELECT to_char(data, 'mm/yyyy') data, avg(valor) valor "
 				+ "FROM fato_coleta "
 				+ "WHERE data between ? and ? "
-				+ "AND metrica_id = ? "
+				+ "AND metrica_link_id = ? "
 				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
@@ -292,7 +292,7 @@ public class WorkloadDAO {
 				+ "FROM fato_coleta "
 				+ "WHERE data between ? and ? "
 				+ "AND to_char(data,'hh24') in ('08','09','10','11','12','13','14','15','16','17') "
-				+ "AND metrica_id = ? "
+				+ "AND metrica_link_id = ? "
 				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
@@ -328,7 +328,7 @@ public class WorkloadDAO {
 				+ "FROM fato_coleta "
 				+ "WHERE data between ? and ? "
 				+ "AND to_char(data,'hh24') in ('08','09','10','11','12','13','14','15','16','17') "
-				+ "AND metrica_id = ? "
+				+ "AND metrica_link_id = ? "
 				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
