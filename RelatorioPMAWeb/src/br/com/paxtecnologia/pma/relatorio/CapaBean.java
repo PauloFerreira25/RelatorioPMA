@@ -89,7 +89,7 @@ public class CapaBean {
 		if (dataCriacao == null) {
 			Date dataAtual = new Date();
 			dateFormat = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
-			dataCriacao = "Data de criaÃ§ao: " + dateFormat.format(dataAtual);
+			dataCriacao = "Data de criação: " + dateFormat.format(dataAtual);
 		}
 		return dataCriacao;
 	}

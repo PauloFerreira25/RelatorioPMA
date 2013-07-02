@@ -137,3 +137,4 @@ public class ParadasBean {
 		return paradasEjb.getTempoParadasMes(tipo,mesRelatorio);
 	}
 }
+

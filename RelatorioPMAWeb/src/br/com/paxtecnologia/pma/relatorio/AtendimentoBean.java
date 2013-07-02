@@ -113,12 +113,12 @@ public class AtendimentoBean {
 		List<IndicacoresQtdVO> listaGeral = new ArrayList<IndicacoresQtdVO>();
 
 		IndicacoresQtdVO a = new IndicacoresQtdVO();
-		a.setTexto("NÃºmero de Chamados Abertos");
+		a.setTexto("Número de Chamados Abertos");
 		a.setValor(getQtdeChamadosAbertos());
 		listaGeral.add(a);
 
 		IndicacoresQtdVO b = new IndicacoresQtdVO();
-		b.setTexto("NÃºmero de Chamados Solucionados");
+		b.setTexto("Número de Chamados Solucionados");
 		b.setValor(getQtdeChamadosFechados());
 		listaGeral.add(b);
 
@@ -128,12 +128,12 @@ public class AtendimentoBean {
 		listaGeral.add(c);
 
 		IndicacoresQtdVO d = new IndicacoresQtdVO();
-		d.setTexto("Tempo MÃ©dio para solucionar (em Horas)");
+		d.setTexto("Tempo Médio para solucionar (em Horas)");
 		d.setValor(getTempoMedio());
 		listaGeral.add(d);
 
 		IndicacoresQtdVO e = new IndicacoresQtdVO();
-		e.setTexto("NÃºmero de Chamados em Aberto");
+		e.setTexto("Número de Chamados em Aberto");
 		e.setValor(getQtdeChamadosEmAberto());
 		listaGeral.add(e);
 
