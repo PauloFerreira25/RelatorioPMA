@@ -454,9 +454,6 @@ public class AtendimentoEjb {
 		if (listaChamadoEmAberto == null
 				|| controleIdCliente.get("getListaChamadosEmAbertos") != idCliente) {
 			controleIdCliente.put("getListaChamadosEmAbertos", idCliente);
-			System.out.println("Entrei");
-			listaChamadoEmAberto = atendimentoDAO.getChamadosEmAbertos(
-					idCliente, mesRelatorio);
 		}
 		return listaChamadoEmAberto;
 	}

@@ -73,10 +73,6 @@ public class AtendimentoDAO {
 		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND data_insercao = ? AND data_fechamento IS NOT NULL";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			java.util.Date dataJava = new SimpleDateFormat("yyyy-MM-dd")
-					.parse(mesRelatorio);
-			System.out.println(dataJava.toString());
-			System.out.println(mesRelatorio);
 			data = new Date(
 					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
 							.getTime()));
@@ -129,7 +125,6 @@ public class AtendimentoDAO {
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, data);
 			pstmt.setDate(3, data);
-			System.out.println(data.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -216,7 +211,6 @@ public class AtendimentoDAO {
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, data);
 			pstmt.setDate(3, data);
-			System.out.println(data.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
