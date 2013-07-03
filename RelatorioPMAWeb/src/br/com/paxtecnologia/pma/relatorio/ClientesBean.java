@@ -52,8 +52,6 @@ public class ClientesBean {
 		setUpdate(false);
 		listaMes = clientesEjb.getListaMes(idCliente);
 		setUpdate(true);
-		System.out.println("Lista Mes Cliente:" + idCliente.toString());
-		System.out.println(listaMes.toString());
 		return listaMes;
 	}
 
