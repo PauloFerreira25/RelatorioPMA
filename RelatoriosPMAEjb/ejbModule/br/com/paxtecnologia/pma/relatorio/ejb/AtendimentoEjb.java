@@ -430,8 +430,7 @@ public class AtendimentoEjb {
 		if (listaChamadoAberto == null
 				|| controleIdCliente.get("getListaChamadosAbertos") != idCliente) {
 			controleIdCliente.put("getListaChamadosAbertos", idCliente);
-			listaChamadoAberto = atendimentoDAO.getChamadosAbertos(idCliente,
-					mesRelatorio);
+			listaChamadoAberto = atendimentoDAO.getChamadosAbertos(idCliente, mesRelatorio);
 		}
 		return listaChamadoAberto;
 	}
@@ -442,8 +441,7 @@ public class AtendimentoEjb {
 		if (listaChamadoFechado == null
 				|| controleIdCliente.get("getListaChamadosFechados") != idCliente) {
 			controleIdCliente.put("getListaChamadosFechados", idCliente);
-			listaChamadoFechado = atendimentoDAO.getChamadosFechados(idCliente,
-					mesRelatorio);
+			listaChamadoFechado = atendimentoDAO.getChamadosFechados(idCliente,	mesRelatorio);
 		}
 		return listaChamadoFechado;
 	}
@@ -454,6 +452,7 @@ public class AtendimentoEjb {
 		if (listaChamadoEmAberto == null
 				|| controleIdCliente.get("getListaChamadosEmAbertos") != idCliente) {
 			controleIdCliente.put("getListaChamadosEmAbertos", idCliente);
+			listaChamadoEmAberto = atendimentoDAO.getChamadosEmAbertos(idCliente, mesRelatorio);
 		}
 		return listaChamadoEmAberto;
 	}
