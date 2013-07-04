@@ -916,15 +916,14 @@ public class AtendimentoEjb {
 				|| controleIdCliente.get("getGraficoFechadosHost") != idCliente) {
 			getListaChamadoHost(idCliente, mesRelatorio);
 			controleIdCliente.put("getGraficoFechadosHost", idCliente);
-			Iterator<String> itHost = listaGraficoFechadosHost.iterator();
-			saida = "[";
-			while (itHost.hasNext()) {
-				String host = itHost.next();
-				saida = saida + host + ",";
-			}
-			saida = saida + "]";
-
+		}	
+		Iterator<String> itHost = listaGraficoFechadosHost.iterator();
+		saida = "[";
+		while (itHost.hasNext()) {
+			String host = itHost.next();
+			saida = saida + host + ",";
 		}
+		saida = saida + "]";
 		return saida;
 	}
 
@@ -934,15 +933,14 @@ public class AtendimentoEjb {
 				|| controleIdCliente.get("getGraficoAbertosHost") != idCliente) {
 			getListaChamadoHost(idCliente, mesRelatorio);
 			controleIdCliente.put("getGraficoAbertosHost", idCliente);
-			Iterator<String> itHost = listaGraficoAbertosHost.iterator();
-			saida = "[";
-			while (itHost.hasNext()) {
-				String host = itHost.next();
-				saida = saida + host + ",";
-			}
-			saida = saida + "]";
-
+		}	
+		Iterator<String> itHost = listaGraficoAbertosHost.iterator();
+		saida = "[";
+		while (itHost.hasNext()) {
+			String host = itHost.next();
+			saida = saida + host + ",";
 		}
+		saida = saida + "]";
 		return saida;
 	}
 
@@ -952,18 +950,14 @@ public class AtendimentoEjb {
 				|| controleIdCliente.get("getGraficoEmAbertosHost") != idCliente) {
 			getListaChamadoHost(idCliente, mesRelatorio);
 			controleIdCliente.put("getGraficoEmAbertosHost", idCliente);
-			Iterator<String> itHost = listaGraficoEmAbertosHost.iterator();
-			saida = "[";
-			while (itHost.hasNext()) {
-				String host = itHost.next();
-				saida = saida + host + ",";
-			}
-			saida = saida + "]";
-
+		}	
+		Iterator<String> itHost = listaGraficoEmAbertosHost.iterator();
+		saida = "[";
+		while (itHost.hasNext()) {
+			String host = itHost.next();
+			saida = saida + host + ",";
 		}
-
-		// saida =
-		// "[{ label: \"Series1\",  data: 10},{ label: \"Series2\",  data: 30},{ label: \"Series6\",  data: 110}]";
+		saida = saida + "]";
 		return saida;
 	}
 

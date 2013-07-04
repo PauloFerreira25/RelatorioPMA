@@ -305,7 +305,11 @@ public class ParadasEjb {
 		for(Integer i = 0; i<meses.length; i++) {
 			somaHorasAcumulado = somaHorasAcumulado + meses[i];
 			if (i <= Integer.parseInt(mesRelatorio.substring(6,7))) {
-				saida = saida + "[" + i + "," + somaHorasAcumulado + "],";
+				if (tipo.equals(PARADAS_NAO_PROGRAMADAS)||tipo.equals(PARADAS_PROGRAMADAS)) {
+					saida = saida + "[" + i + "," + (-somaHorasAcumulado) + "],";
+				} else {
+					saida = saida + "[" + i + "," + somaHorasAcumulado + "],";
+				}
 			} else {
 				saida = saida + "[" + i + "," + 0.0 + "],";
 			}

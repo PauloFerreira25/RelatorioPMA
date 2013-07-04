@@ -41,32 +41,28 @@ public class AtendimentoHostBean {
 
 	public Integer getQtdeChamadosAbertosComHost() {
 		if (qtdeChamadosAbertosComHost == null) {
-			qtdeChamadosAbertosComHost = atendimentoEjb.getQtdeChamadosAbertosHost(
-					idCliente, mesRelatorio);
+			qtdeChamadosAbertosComHost = atendimentoEjb.getQtdeChamadosAbertosHost(idCliente, mesRelatorio);
 		}
 		return qtdeChamadosAbertosComHost;
 	}
 
 	public Double getPorcentoAbertosComHost() {
 		if (porcentoAbertosComHost == null) {
-			porcentoAbertosComHost = atendimentoEjb.getPorcentoAbertosComHost(
-					idCliente, mesRelatorio);
+			porcentoAbertosComHost = atendimentoEjb.getPorcentoAbertosComHost(idCliente, mesRelatorio);
 		}
 		return porcentoAbertosComHost;
 	}
 
 	public Double getPorcentoFechadosComHost() {
 		if (porcentoFechadosComHost == null) {
-			porcentoFechadosComHost = atendimentoEjb
-					.getPorcentoFechadosComHost(idCliente, mesRelatorio);
+			porcentoFechadosComHost = atendimentoEjb.getPorcentoFechadosComHost(idCliente, mesRelatorio);
 		}
 		return porcentoFechadosComHost;
 	}
 
 	public Integer getQtdeChamadosFechadosComHost() {
 		if (qtdeChamadosFechadosComHost == null) {
-			qtdeChamadosFechadosComHost = atendimentoEjb.getQtdeChamadosFechadosHost(
-					idCliente, mesRelatorio);
+			qtdeChamadosFechadosComHost = atendimentoEjb.getQtdeChamadosFechadosHost(idCliente, mesRelatorio);
 		}
 		return qtdeChamadosFechadosComHost;
 	}
@@ -75,26 +71,21 @@ public class AtendimentoHostBean {
 		if (listaHost == null) {
 			listaHost = atendimentoEjb.getListaChamadoHost(idCliente, mesRelatorio);
 		}
-
 		return listaHost;
 	}
 
 	public String getGraficoAbertos() {
 		if (graficoAbertos == null) {
-			graficoAbertos = atendimentoEjb.getGraficoAbertosHost(idCliente,
-					mesRelatorio);
+			graficoAbertos = atendimentoEjb.getGraficoAbertosHost(idCliente, mesRelatorio);
 		}
 		return graficoAbertos;
-
 	}
 
 	public String getGraficoFechados() {
 		if (graficoFechados == null) {
-			graficoFechados = atendimentoEjb.getGraficoFechadosHost(idCliente,
-					mesRelatorio);
+			graficoFechados = atendimentoEjb.getGraficoFechadosHost(idCliente, mesRelatorio);
 		}
 		return graficoFechados;
-
 	}
 
 }
