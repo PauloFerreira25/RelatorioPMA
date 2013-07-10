@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.paxtecnologia.pma.relatorio.util.FormataData;
 import br.com.paxtecnologia.pma.relatorio.vo.ChamadoVO;
 
 public class AtendimentoDAO {
@@ -67,21 +68,15 @@ public class AtendimentoDAO {
 	public List<ChamadoVO> getChamadosFechados(Integer idCliente,
 			String mesRelatorio) {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
-		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND data_insercao = ? AND data_fechamento IS NOT NULL";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND trunc(data_insercao,'MM') <= trunc(?,'MM') AND trunc(data_fechamento,'MM') = trunc(?,'MM')";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			data = new Date(
-					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
-							.getTime()));
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, data);
+			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -113,22 +108,42 @@ public class AtendimentoDAO {
 	public List<ChamadoVO> getChamadosEmAbertos(Integer idCliente,
 			String mesRelatorio) {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
-		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? and data_insercao = ? and data_criacao >= ? AND data_fechamento IS NULL";
+		String sql = "SELECT distinct chamado, " +
+                	 "		 		  titulo, "+
+                	 "		 		  solicitante, "+
+                	 "		 		  tipo_chamado, "+
+                	 "		 		  decode(status,'Closed','In Progress',status) status, "+
+                	 "		 		  segundos_trabalhados, "+
+                	 "		 		  data_criacao "+
+                	 "  FROM pmp_task p "+
+                	 " WHERE cliente_id = ? "+
+                	 "   and trunc(data_insercao, 'MM') <= trunc(?, 'MM') "+
+                	 "   and trunc(data_criacao, 'MM') <= trunc(?, 'MM') "+
+                	 "	 and chamado in "+
+                	 "		 (select chamado "+
+                	 "			from pmp_task "+
+                	 "		   WHERE cliente_id = p.cliente_id "+
+                	 "			 and data_fechamento IS NULL "+
+                	 "		  union "+
+                	 "		  select chamado "+
+                	 "			from pmp_task "+
+                	 "		   WHERE cliente_id = p.cliente_id "+
+                	 "			 and trunc(data_fechamento,'MM') >= trunc(?, 'MM')) "+
+                	 "	 and chamado not in "+
+                	 "		 (select chamado "+
+                	 "			from pmp_task "+
+                	 "		   where cliente_id = p.cliente_id "+
+                	 "			 and trunc(data_fechamento, 'MM') <= trunc(?, 'MM'))";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			data = new Date(
-					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
-							.getTime()));
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, data);
-			pstmt.setDate(3, data);
+			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(4, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(5, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -137,12 +152,7 @@ public class AtendimentoDAO {
 		try {
 			while (rs.next()) {
 				temp = new ChamadoVO();
-				temp.setDataAbertura(new SimpleDateFormat("yyyy-MM-dd")
-						.format(rs.getDate("data_criacao")));
-				if (rs.getDate("data_fechamento") != null) {
-					temp.setDataFechamento(new SimpleDateFormat("yyyy-MM-dd")
-							.format(rs.getDate("data_fechamento")));
-				}
+				temp.setDataAbertura(new SimpleDateFormat("yyyy-MM-dd").format(rs.getDate("data_criacao")));
 				temp.setIdChamado(rs.getString("chamado"));
 				temp.setTitulo(rs.getString("titulo"));
 				temp.setStatus(rs.getString("status"));

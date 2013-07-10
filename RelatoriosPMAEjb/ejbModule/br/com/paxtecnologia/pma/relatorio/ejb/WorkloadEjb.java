@@ -52,7 +52,6 @@ public class WorkloadEjb {
 		default:
 			break;
 		}
-
 		return tf;
 	}
 
@@ -61,7 +60,7 @@ public class WorkloadEjb {
 		if (idGrafico%2!=0) { //impar = mensal
 			 timeFrameList = workloadDao.getTimeFrame18a23(metrica, mesRelatorio);
 			return formataTimeFram(timeFrameList);
-		} else{ //par = mensal
+		} else{ //par = anual
 			timeFrameList = workloadDao.getTimeFrameAno18a23(metrica, mesRelatorio);
 			return formataTimeFramAno(timeFrameList);
 		}	
@@ -69,11 +68,11 @@ public class WorkloadEjb {
 
 	private String getTfCalculo0a8e23a24(Integer metrica, String mesRelatorio, Integer idGrafico) {
 		List<TimeFrameVO> timeFrameList = null;
-		if (idGrafico%2!=0) { //impar
+		if (idGrafico%2!=0) { //impar = mensal
 			timeFrameList = workloadDao.getTimeFrame0a8e23a24(
 					metrica, mesRelatorio);
 			return formataTimeFram(timeFrameList);
-		} else { //impar
+		} else { //par = anual
 			timeFrameList = workloadDao.getTimeFrameAno0a8e23a24(
 					metrica, mesRelatorio);
 			return formataTimeFramAno(timeFrameList);

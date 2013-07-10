@@ -1,5 +1,6 @@
 package br.com.paxtecnologia.pma.relatorio;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,8 +104,9 @@ public class AtendimentoBean {
 	public String getTempoMedio(){
 		if (tempoMedio == null){
 			Double tempo = null;
+			DecimalFormat df = new DecimalFormat("#.00");
 			tempo = atendimentoEjb.getTempoMedio(idCliente, mesRelatorio);
-			tempoMedio = tempo.toString().substring(0, 4) + " h";
+			tempoMedio = df.format(tempo) + " h";
 		}
 		return tempoMedio;
 	}

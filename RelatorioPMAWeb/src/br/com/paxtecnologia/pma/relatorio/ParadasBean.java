@@ -77,25 +77,25 @@ public class ParadasBean {
 			ParadasVO a = new ParadasVO();
 			a.setTipo("Paradas Evitadas");
 			a.setSigla(PARADAS_EVITADAS);
-			a.setQtde(paradasEjb.getQtdeParadaEvitadas(idCliente, mesRelatorio, PARADAS_EVITADAS));
+			a.setQtde(paradasEjb.getQtdeParadaEvitadasMes(idCliente, mesRelatorio, PARADAS_EVITADAS));
 			listaItem.add(a);
 
 			ParadasVO b = new ParadasVO();
 			b.setTipo("Paradas Não Programadas");
 			b.setSigla(PARADAS_NAO_PROGRAMADAS);
-			b.setQtde(paradasEjb.getQtdeParadaNaoProgramadas(idCliente,	mesRelatorio, PARADAS_NAO_PROGRAMADAS));
+			b.setQtde(paradasEjb.getQtdeParadaNaoProgramadasMes(idCliente,	mesRelatorio, PARADAS_NAO_PROGRAMADAS));
 			listaItem.add(b);
 
 			ParadasVO c = new ParadasVO();
 			c.setTipo("Paradas Programadas Estratégicas");
 			c.setSigla(PARADAS_PROGRAMADAS_ESTRATEGICAS);
-			c.setQtde(paradasEjb.getQtdeProgramadasEstrategicas(idCliente, mesRelatorio, PARADAS_PROGRAMADAS_ESTRATEGICAS));
+			c.setQtde(paradasEjb.getQtdeProgramadasEstrategicasMes(idCliente, mesRelatorio, PARADAS_PROGRAMADAS_ESTRATEGICAS));
 			listaItem.add(c);
 
 			ParadasVO d = new ParadasVO();
 			d.setTipo("Paradas Programadas");
 			d.setSigla(PARADAS_PROGRAMADAS);
-			d.setQtde(paradasEjb.getQtdeParadaProgramadas(idCliente, mesRelatorio, PARADAS_PROGRAMADAS));
+			d.setQtde(paradasEjb.getQtdeParadaProgramadasMes(idCliente, mesRelatorio, PARADAS_PROGRAMADAS));
 			listaItem.add(d);
 		}
 		return listaItem;
@@ -133,6 +133,10 @@ public class ParadasBean {
 		return paradasEjb.getParadas(tipo,mesRelatorio);
 	}
 	
+	public String getParadasAcumulado(String tipo) {
+		return paradasEjb.getParadasAcumulado(tipo,mesRelatorio);
+	}
+
 	public Double getTempoParadasMes(String tipo) {
 		return paradasEjb.getTempoParadasMes(tipo,mesRelatorio);
 	}

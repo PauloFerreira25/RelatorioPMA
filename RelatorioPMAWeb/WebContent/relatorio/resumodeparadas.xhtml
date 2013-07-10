@@ -216,7 +216,7 @@ $(function () {
     var d3 = [];
 
     for (var i = 0; i <12; i += 1)
-        d3.push([i, d2[i][1] - d1[i][1]]);
+        d3.push([i, d2[i][1] + d1[i][1]]);
 
     var options = {
             legend:{         
@@ -286,7 +286,7 @@ $(function () {
 	//<![CDATA[
 
 $(function () {
-    var d1 = #{paradasBean.getParadas("PE")};
+    var d1 = #{paradasBean.getParadasAcumulado("PE")};
     $.plot($("#graficoAcumuladoAno"), [
         {
            label: "Parada Evitadas", color:"blue", data: d1,
