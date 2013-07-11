@@ -35,16 +35,16 @@ public class WorkloadBean implements Serializable {
 		this.mesRelatorio = mesRelatorio;
 	}
 
-	public String getTf(Integer idGrafico, Integer idTf) {
-		return workloadEjb.getTf(idCliente, mesRelatorio, idGrafico, idTf);
+	public String getTf(Integer idGraficoControle, Integer idTf) {
+		return workloadEjb.getTf(idCliente, mesRelatorio, idGraficoControle, idTf);
 	}
 
-	public String getLabel(Integer idGrafico, Integer idTf) {
-		return workloadEjb.getLabel(idCliente, idGrafico, idTf);
+	public String getLabel(Integer idGraficoControle, Integer idTf) {
+		return workloadEjb.getLabel(idCliente, idGraficoControle, idTf);
 	}
 	
-	public String getLabelTitulo(Integer idGrafico) {
-		return workloadEjb.getLabelTitulo(idGrafico);
+	public String getLabelTitulo(Integer idGraficoControle) {
+		return workloadEjb.getLabelTitulo(idCliente, idGraficoControle);
 	}
 
 }

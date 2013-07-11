@@ -8,50 +8,27 @@ import java.util.List;
 
 import br.com.paxtecnologia.pma.relatorio.vo.GraficoMetricaVO;
 import br.com.paxtecnologia.pma.relatorio.vo.TimeFrameVO;
-import br.com.paxtecnologia.pma.relatorio.vo.WorkloadGraficoVO;
 import br.com.paxtecnologia.pma.relatorio.util.FormataData;
 
 public class WorkloadDAO {
 	private DataSourcePMA connection;
 
-	public WorkloadGraficoVO getGrafico(Integer idCliente, Integer idGrafico) {
-		WorkloadGraficoVO retorno = new WorkloadGraficoVO();
-		connection = new DataSourcePMA();
-		PreparedStatement pstmt;
-		String sql = "SELECT grafico_id, titulo, mes_ano, tipo_calculo_id FROM pmp_grafico WHERE cliente_id = ? AND grafico_controle_id = ?";
-		pstmt = connection.getPreparedStatement(sql);
-		try {
-			pstmt.setInt(1, idCliente);
-			pstmt.setInt(2, idGrafico);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ResultSet rs = connection.executaQuery(pstmt);
-		try {
-			while (rs.next()) {
-				retorno.setGraficoId(rs.getInt("grafico_Id"));
-				retorno.setTitulo(rs.getString("titulo"));
-				retorno.setMes_ano(rs.getInt("mes_ano"));
-				retorno.setTipo_calculo(rs.getInt("tipo_calculo_id"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		connection.closeConnection(pstmt);
-		return retorno;
-	}
-
-	public GraficoMetricaVO getMetrica(WorkloadGraficoVO grafico, Integer idTf) {
+	public GraficoMetricaVO getMetrica(Integer idCliente, Integer idGraficoControle, Integer idTf) {
 		GraficoMetricaVO retorno = new GraficoMetricaVO();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT metrica_link_id, tipo_horario_id FROM pmp_time_frame a WHERE grafico_id = ? AND time_frame_controle_id = ?";
+		String sql = "select t.metrica_link_id, "+
+				 	 "       t.tipo_horario_id "+
+				 	 "  from pmp_grafico g, pmp_time_frame t "+
+				 	 " where g.cliente_id = ? "+
+				 	 "   and g.grafico_controle_id = ? "+
+				 	 "   and t.time_frame_controle_id = ? "+
+				 	 "   and g.grafico_id = t.grafico_id";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setInt(1, grafico.getGraficoId());
-			pstmt.setInt(2, idTf);
+			pstmt.setInt(1, idCliente);
+			pstmt.setInt(2, idGraficoControle);
+			pstmt.setInt(3, idTf);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,7 +37,7 @@ public class WorkloadDAO {
 		try {
 			while (rs.next()) {
 				retorno.setMetrica(rs.getInt("metrica_link_id"));
-				retorno.setTipo_horario(rs.getInt("tipo_horario_id"));
+				retorno.setTipoHorario(rs.getInt("tipo_horario_id"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -150,11 +127,11 @@ public class WorkloadDAO {
 		    builder.append("?,");
 		}
 		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
-				+ "FROM fato_coleta "
-				+ "WHERE data between ? and ? "
-				+ "AND metrica_link_id = ? "
-				+ "AND to_char(data,'hh24') in (" + builder.deleteCharAt( builder.length() -1 ).toString() + ") "
-				+ "GROUP BY to_char(data, 'dd/mm/yyyy') ORDER BY data";
+				     + "FROM fato_coleta "
+				     + "WHERE data between ? and ? "
+				     + "AND metrica_link_id = ? "
+				     + "AND to_char(data,'hh24') in (" + builder.deleteCharAt( builder.length() -1 ).toString() + ") "
+				     + "GROUP BY to_char(data, 'dd/mm/yyyy') ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setDate(1, FormataData.formataDataInicio(mesRelatorio));
@@ -199,7 +176,7 @@ public class WorkloadDAO {
 				+ "WHERE data between ? and ? "
 				+ "AND metrica_link_id = ? "
 				+ "AND to_char(data,'hh24') in (" + builder.deleteCharAt( builder.length() -1 ).toString() + ") "
-				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
+				+ "GROUP BY to_char(data, 'mm/yyyy') ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setDate(1, FormataData.formataAnoInicio(mesRelatorio));
@@ -230,17 +207,20 @@ public class WorkloadDAO {
 		return timeFrame;
 	}		
 	
-	public String getLabel(Integer idGrafico, Integer idTf) {
+	public String getLabel(Integer idCliente, Integer idGraficoControle, Integer idTf) {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT legenda "
-				+ "FROM pmp_time_frame "
-				+ "WHERE grafico_id = ? "
-				+ "AND time_frame_controle_id = ? ";
+		String sql = "select t.legenda "+
+				     "  from pmp_grafico g, pmp_time_frame t "+
+				     " where g.cliente_id = ? "+
+				     "   and g.grafico_controle_id = ? "+
+				     "   and t.time_frame_controle_id = ? "+
+				     "   and g.grafico_id = t.grafico_id";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setInt(1, idGrafico);
-			pstmt.setInt(2, idTf);
+			pstmt.setInt(1, idCliente);
+			pstmt.setInt(2, idGraficoControle);
+			pstmt.setInt(3, idTf);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -259,15 +239,17 @@ public class WorkloadDAO {
 		return label;
 	}	
 
-	public String getLabelTitulo(Integer idGrafico) {
+	public String getLabelTitulo(Integer idCliente, Integer idGraficoControle) {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT titulo "
 				+ "FROM pmp_grafico "
-				+ "WHERE grafico_id = ?";
+				+ "WHERE cliente_id = ? "
+				+ "  and grafico_controle_id = ?";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setInt(1, idGrafico);
+			pstmt.setInt(1, idCliente);
+			pstmt.setInt(2, idGraficoControle);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
