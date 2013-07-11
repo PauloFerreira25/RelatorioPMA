@@ -40,7 +40,7 @@ public class WorkloadBean implements Serializable {
 	}
 
 	public String getLabel(Integer idGrafico, Integer idTf) {
-		return workloadEjb.getLabel(idGrafico, idTf);
+		return workloadEjb.getLabel(idCliente, idGrafico, idTf);
 	}
 	
 	public String getLabelTitulo(Integer idGrafico) {

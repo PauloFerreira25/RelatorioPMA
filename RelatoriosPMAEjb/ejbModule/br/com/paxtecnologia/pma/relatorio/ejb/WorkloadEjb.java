@@ -3,8 +3,11 @@ package br.com.paxtecnologia.pma.relatorio.ejb;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Stateless;
 
@@ -17,19 +20,20 @@ import br.com.paxtecnologia.pma.relatorio.vo.WorkloadGraficoVO;
 public class WorkloadEjb {
 
 	private WorkloadDAO workloadDao = new WorkloadDAO();
+	private Map<String, Integer> controleIdCliente = new HashMap<String, Integer>();
 
-	public String getLabel(Integer idGrafico, Integer idTf) {
-		return workloadDao.getLabel(idGrafico, idTf);
+	public String getLabel(Integer idCliente, Integer idGrafico, Integer idTf) {
+		WorkloadGraficoVO grafico = workloadDao.getGrafico(idCliente, idGrafico);
+		return workloadDao.getLabel(grafico.getGraficoId(), idTf);
 	}
 
 	public String getLabelTitulo(Integer idGrafico) {
 		return workloadDao.getLabelTitulo(idGrafico);
 	}
 
-	public String getTf(Integer idCliente, String mesRelatorio,
-			Integer idGrafico, Integer idTf) {
+	public String getTf(Integer idCliente, String mesRelatorio, Integer idGrafico, Integer idTf) {
 		WorkloadGraficoVO grafico = workloadDao.getGrafico(idCliente, idGrafico);
-		return geraTfCalculoSoMetrica(mesRelatorio, idTf, grafico);
+		return geraTfCalculoSoMetrica(mesRelatorio, idTf, grafico);		
 	}
 
 	private String geraTfCalculoSoMetrica(String mesRelatorio, Integer idTf,
@@ -49,7 +53,10 @@ public class WorkloadEjb {
 		 case 4:
 		 tf = getTfCalculo18a23(graficoMetrica.getMetrica(), mesRelatorio, grafico.getGraficoId());
 		 	break;
-		default:
+		 case 5:
+		 tf = getTfCalculo0a8e18a24(graficoMetrica.getMetrica(), mesRelatorio, grafico.getGraficoId());
+		 	break;
+		 default:
 			break;
 		}
 		return tf;
@@ -57,24 +64,63 @@ public class WorkloadEjb {
 
 	private String getTfCalculo18a23(Integer metrica, String mesRelatorio, Integer idGrafico) {
 		List<TimeFrameVO> timeFrameList = null;
+		List<String> periodo = new ArrayList<String>();
+		periodo.add("18");
+		periodo.add("19");
+		periodo.add("20");
+		periodo.add("21");
+		periodo.add("22");
 		if (idGrafico%2!=0) { //impar = mensal
-			 timeFrameList = workloadDao.getTimeFrame18a23(metrica, mesRelatorio);
+			 timeFrameList = workloadDao.getTimeFrame(metrica, mesRelatorio, periodo);
 			return formataTimeFram(timeFrameList);
 		} else{ //par = anual
-			timeFrameList = workloadDao.getTimeFrameAno18a23(metrica, mesRelatorio);
+			timeFrameList = workloadDao.getTimeFrameAno(metrica, mesRelatorio, periodo);
 			return formataTimeFramAno(timeFrameList);
 		}	
 	}
 
-	private String getTfCalculo0a8e23a24(Integer metrica, String mesRelatorio, Integer idGrafico) {
+	private String getTfCalculo0a8e18a24(Integer metrica, String mesRelatorio, Integer idGrafico) {
 		List<TimeFrameVO> timeFrameList = null;
+		List<String> periodo = new ArrayList<String>();
+		periodo.add("00");
+		periodo.add("01");
+		periodo.add("02");
+		periodo.add("03");
+		periodo.add("04");
+		periodo.add("05");
+		periodo.add("06");
+		periodo.add("07");
+		periodo.add("18");
+		periodo.add("19");
+		periodo.add("20");
+		periodo.add("21");
+		periodo.add("22");
+		periodo.add("23");
 		if (idGrafico%2!=0) { //impar = mensal
-			timeFrameList = workloadDao.getTimeFrame0a8e23a24(
-					metrica, mesRelatorio);
+			timeFrameList = workloadDao.getTimeFrame(metrica, mesRelatorio,periodo);
 			return formataTimeFram(timeFrameList);
 		} else { //par = anual
-			timeFrameList = workloadDao.getTimeFrameAno0a8e23a24(
-					metrica, mesRelatorio);
+			timeFrameList = workloadDao.getTimeFrameAno(metrica, mesRelatorio,periodo);
+			return formataTimeFramAno(timeFrameList);
+		}
+	}
+
+	private String getTfCalculo0a8e23a24(Integer metrica, String mesRelatorio, Integer idGrafico) {
+		List<TimeFrameVO> timeFrameList = null;
+		List<String> periodo = new ArrayList<String>();
+		periodo.add("00");
+		periodo.add("01");
+		periodo.add("02");
+		periodo.add("04");
+		periodo.add("05");
+		periodo.add("06");
+		periodo.add("07");
+		periodo.add("23");
+		if (idGrafico%2!=0) { //impar = mensal
+			timeFrameList = workloadDao.getTimeFrame(metrica, mesRelatorio, periodo);
+			return formataTimeFram(timeFrameList);
+		} else { //par = anual
+			timeFrameList = workloadDao.getTimeFrameAno(metrica, mesRelatorio, periodo);
 			return formataTimeFramAno(timeFrameList);
 		}
 	}
@@ -94,13 +140,23 @@ public class WorkloadEjb {
 
 	private String getTfCalculo8as18(Integer metrica, String mesRelatorio, Integer idGrafico) {
 		List<TimeFrameVO> timeFrameList = null;
+		List<String> periodo = new ArrayList<String>();
+		periodo.add("07");
+		periodo.add("08");
+		periodo.add("09");
+		periodo.add("10");
+		periodo.add("11");
+		periodo.add("12");
+		periodo.add("13");
+		periodo.add("14");
+		periodo.add("15");
+		periodo.add("16");
+		periodo.add("17");
 		if (idGrafico%2!=0) { //impar
-			timeFrameList = workloadDao.getTimeFrame8a18(metrica,
-					mesRelatorio);
+			timeFrameList = workloadDao.getTimeFrame(metrica, mesRelatorio, periodo);
 			return formataTimeFram(timeFrameList);
 		} else { //par
-			timeFrameList = workloadDao.getTimeFrameAno8a18(metrica,
-					mesRelatorio);
+			timeFrameList = workloadDao.getTimeFrameAno(metrica,mesRelatorio, periodo);
 			return formataTimeFramAno(timeFrameList);
 		}
 	}

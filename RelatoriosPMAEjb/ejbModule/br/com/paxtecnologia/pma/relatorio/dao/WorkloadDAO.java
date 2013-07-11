@@ -70,150 +70,6 @@ public class WorkloadDAO {
 		return retorno;
 	}
 
-	public List<TimeFrameVO> getTimeFrame18a23(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
-		connection = new DataSourcePMA();
-		PreparedStatement pstmt;
-		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
-				+ "FROM fato_coleta "
-				+ "WHERE data between ? and ? "
-				+ "AND to_char(data,'hh24') in ('18','19','20','21','22') "
-				+ "AND metrica_link_id = ? "
-				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
-		pstmt = connection.getPreparedStatement(sql);
-		try {
-			pstmt.setDate(1, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
-			pstmt.setInt(3, metrica);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ResultSet rs = connection.executaQuery(pstmt);
-		TimeFrameVO temp;
-		try {
-			while (rs.next()) {
-				temp = new TimeFrameVO();
-				temp.setData(rs.getString("data"));
-				temp.setValor(rs.getDouble("valor"));
-				timeFrame.add(temp);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		connection.closeConnection(pstmt);
-		return timeFrame;
-	}
-	
-	public List<TimeFrameVO> getTimeFrameAno18a23(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
-		connection = new DataSourcePMA();
-		PreparedStatement pstmt;
-		String sql = "SELECT to_char(data, 'mm/yyyy') data, avg(valor) valor "
-				+ "FROM fato_coleta "
-				+ "WHERE data between ? and ? "
-				+ "AND to_char(data,'hh24') in ('18','19','20','21','22') "
-				+ "AND metrica_link_id = ? "
-				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
-		pstmt = connection.getPreparedStatement(sql);
-		try {
-			pstmt.setDate(1, FormataData.formataAnoInicio(mesRelatorio));
-			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
-			pstmt.setInt(3, metrica);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ResultSet rs = connection.executaQuery(pstmt);
-		TimeFrameVO temp;
-		try {
-			while (rs.next()) {
-				temp = new TimeFrameVO();
-				temp.setData(rs.getString("data"));
-				temp.setValor(rs.getDouble("valor"));
-				timeFrame.add(temp);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		connection.closeConnection(pstmt);
-		return timeFrame;
-	}
-
-	public List<TimeFrameVO> getTimeFrame0a8e23a24(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
-		connection = new DataSourcePMA();
-		PreparedStatement pstmt;
-		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
-				+ "FROM fato_coleta "
-				+ "WHERE data between ? and ? "
-				+ "AND to_char(data,'hh24') in ('00','01','02','03','04','05','06','07','23') "
-				+ "AND metrica_link_id = ? "
-				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
-		pstmt = connection.getPreparedStatement(sql);
-		try {
-			pstmt.setDate(1, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
-			pstmt.setInt(3, metrica);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ResultSet rs = connection.executaQuery(pstmt);
-		TimeFrameVO temp;
-		try {
-			while (rs.next()) {
-				temp = new TimeFrameVO();
-				temp.setData(rs.getString("data"));
-				temp.setValor(rs.getDouble("valor"));
-				timeFrame.add(temp);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		connection.closeConnection(pstmt);
-		return timeFrame;
-	}
-
-	public List<TimeFrameVO> getTimeFrameAno0a8e23a24(Integer metrica, String mesRelatorio) {
-		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
-		connection = new DataSourcePMA();
-		PreparedStatement pstmt;
-		String sql = "SELECT to_char(data, 'mm/yyyy') data, avg(valor) valor "
-				+ "FROM fato_coleta "
-				+ "WHERE data between ? and ? "
-				+ "AND to_char(data,'hh24') in ('00','01','02','03','04','05','06','07','23') "
-				+ "AND metrica_link_id = ? "
-				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
-		pstmt = connection.getPreparedStatement(sql);
-		try {
-			pstmt.setDate(1, FormataData.formataAnoInicio(mesRelatorio));
-			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
-			pstmt.setInt(3, metrica);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ResultSet rs = connection.executaQuery(pstmt);
-		TimeFrameVO temp;
-		try {
-			while (rs.next()) {
-				temp = new TimeFrameVO();
-				temp.setData(rs.getString("data"));
-				temp.setValor(rs.getDouble("valor"));
-				timeFrame.add(temp);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		connection.closeConnection(pstmt);
-		return timeFrame;
-	}	
-	
 	public List<TimeFrameVO> getTimeFrame24horas(Integer metrica, String mesRelatorio) {
 		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
 		connection = new DataSourcePMA();
@@ -283,22 +139,31 @@ public class WorkloadDAO {
 		connection.closeConnection(pstmt);
 		return timeFrame;
 	}	
-
-	public List<TimeFrameVO> getTimeFrame8a18(Integer metrica, String mesRelatorio) {
+	
+	public List<TimeFrameVO> getTimeFrame(Integer metrica, String mesRelatorio, List<String> periodo) {
 		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
+		List<String> possibleValues = periodo;
+		StringBuilder builder = new StringBuilder();
+		for( int i = 0 ; i < possibleValues.size(); i++ ) {
+		    builder.append("?,");
+		}
 		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
 				+ "FROM fato_coleta "
 				+ "WHERE data between ? and ? "
-				+ "AND to_char(data,'hh24') in ('08','09','10','11','12','13','14','15','16','17') "
 				+ "AND metrica_link_id = ? "
-				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
+				+ "AND to_char(data,'hh24') in (" + builder.deleteCharAt( builder.length() -1 ).toString() + ") "
+				+ "GROUP BY to_char(data, 'dd/mm/yyyy') ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setDate(1, FormataData.formataDataInicio(mesRelatorio));
 			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
+			int index = 4;
+			for( String o : possibleValues ) {
+			   pstmt.setString(  index++, o ); // or whatever it applies 
+			}			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -320,21 +185,30 @@ public class WorkloadDAO {
 		return timeFrame;
 	}
 
-	public List<TimeFrameVO> getTimeFrameAno8a18(Integer metrica, String mesRelatorio) {
+	public List<TimeFrameVO> getTimeFrameAno(Integer metrica, String mesRelatorio, List<String> periodo) {
 		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
+		List<String> possibleValues = periodo;
+		StringBuilder builder = new StringBuilder();
+		for( int i = 0 ; i < possibleValues.size(); i++ ) {
+		    builder.append("?,");
+		}
 		String sql = "SELECT to_char(data, 'mm/yyyy') data, avg(valor) valor "
 				+ "FROM fato_coleta "
 				+ "WHERE data between ? and ? "
-				+ "AND to_char(data,'hh24') in ('08','09','10','11','12','13','14','15','16','17') "
 				+ "AND metrica_link_id = ? "
+				+ "AND to_char(data,'hh24') in (" + builder.deleteCharAt( builder.length() -1 ).toString() + ") "
 				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setDate(1, FormataData.formataAnoInicio(mesRelatorio));
 			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
+			int index = 4;
+			for( String o : possibleValues ) {
+			   pstmt.setString(  index++, o ); // or whatever it applies 
+			}			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -354,7 +228,7 @@ public class WorkloadDAO {
 		}
 		connection.closeConnection(pstmt);
 		return timeFrame;
-	}	
+	}		
 	
 	public String getLabel(Integer idGrafico, Integer idTf) {
 		connection = new DataSourcePMA();
