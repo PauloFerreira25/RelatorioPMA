@@ -24,12 +24,11 @@ body,td,th,input,textarea,select,a {
 }
 
 #graficoesquerda {
-	float: left;
-	width: 50%;
+	margin-bottom: 20px;
 }
 
 #graficodireita {
-	margin-left: 50%;
+	margin-bottom: 20px;
 }
 
 .grafico-barra-esquerda {

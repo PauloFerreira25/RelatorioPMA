@@ -29,25 +29,28 @@ public class WorkloadEjb {
 	public String getTf(Integer idCliente, String mesRelatorio, Integer idGraficoControle, Integer idTf) {
 		String tf = null;
 		GraficoMetricaVO graficoMetrica = workloadDao.getMetrica(idCliente, idGraficoControle, idTf);
-		switch (graficoMetrica.getTipoHorario()) {
-		case 1:
-			tf = getTfCalculo8as18(graficoMetrica.getMetrica(), mesRelatorio, idGraficoControle);
-			break;
-		 case 2:
-		 tf = getTfCalculo24horas(graficoMetrica.getMetrica(), mesRelatorio, idGraficoControle);
-		 	break;
-		 case 3:
-		 tf = getTfCalculo0a8e23a24(graficoMetrica.getMetrica(), mesRelatorio, idGraficoControle);
-		 	break;
-		 case 4:
-		 tf = getTfCalculo18a23(graficoMetrica.getMetrica(), mesRelatorio, idGraficoControle);
-		 	break;
-		 case 5:
-		 tf = getTfCalculo0a8e18a24(graficoMetrica.getMetrica(), mesRelatorio, idGraficoControle);
-		 	break;
-		 default:
-			break;
-		}
+		Integer tipoHorario = graficoMetrica.getTipoHorario();
+		if (tipoHorario != null) {
+			switch (tipoHorario) {
+			 case 1:
+				tf = getTfCalculo8as18(graficoMetrica.getMetrica(), mesRelatorio, idGraficoControle);
+				break;
+			 case 2:
+				tf = getTfCalculo24horas(graficoMetrica.getMetrica(), mesRelatorio, idGraficoControle);
+			 	break;
+			 case 3:
+				tf = getTfCalculo0a8e23a24(graficoMetrica.getMetrica(), mesRelatorio, idGraficoControle);
+			 	break;
+			 case 4:
+				tf = getTfCalculo18a23(graficoMetrica.getMetrica(), mesRelatorio, idGraficoControle);
+			 	break;
+			 case 5:
+				tf = getTfCalculo0a8e18a24(graficoMetrica.getMetrica(), mesRelatorio, idGraficoControle);
+			 	break;
+			 default:
+				break;
+			}
+		}	
 		return tf;
 	}
 

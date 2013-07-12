@@ -175,7 +175,15 @@ public class AtendimentoDAO {
 		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT c.nome_fantasia FROM pmp_task a, pmp_task_host b, pmp_host c WHERE a.task_id = b.task_id AND c.host_id = b.host_id AND a.cliente_id = ? AND a.data_insercao = ? AND a.data_fechamento IS NOT NULL";
+		String sql = "SELECT c.nome_fantasia "
+					+"  FROM pmp_task a, pmp_task_host b, pmp_host c, pmp_host_ambiente d "
+					+" WHERE a.task_id = b.task_id "
+					+"   AND c.host_id = b.host_id "
+					+"   AND c.host_id = d.host_id "
+					+"   AND d.ambiente_id = 3 " //Producao
+					+"   AND a.cliente_id = ? "
+					+"   AND a.data_insercao = ? "
+					+"   AND a.data_fechamento IS NOT NULL";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			data = new Date(
@@ -212,7 +220,15 @@ public class AtendimentoDAO {
 		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT c.nome_fantasia FROM pmp_task a, pmp_task_host b, pmp_host c WHERE a.task_id = b.task_id AND c.host_id = b.host_id AND a.cliente_id = ? AND a.data_insercao = ? AND a.data_criacao >= ?";
+		String sql = "SELECT c.nome_fantasia "
+					+"  FROM pmp_task a, pmp_task_host b, pmp_host c, pmp_host_ambiente d "
+					+" WHERE a.task_id = b.task_id "
+					+"   AND c.host_id = b.host_id "
+					+"   AND c.host_id = d.host_id"
+					+"   AND d.ambiente_id = 3 "//Producao
+					+"   AND a.cliente_id = ? "
+					+"   AND a.data_insercao = ?"
+					+"   AND a.data_criacao >= ?";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			data = new Date(
@@ -250,7 +266,16 @@ public class AtendimentoDAO {
 		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT c.nome_fantasia FROM pmp_task a, pmp_task_host b, pmp_host c WHERE a.task_id = b.task_id AND c.host_id = b.host_id AND a.cliente_id = ? AND a.data_insercao = ? AND a.data_criacao >= ? AND a.data_fechamento IS NULL";
+		String sql = "SELECT c.nome_fantasia "
+				+"  FROM pmp_task a, pmp_task_host b, pmp_host c, pmp_host_ambiente d "
+				+" WHERE a.task_id = b.task_id "
+				+"   AND c.host_id = b.host_id "
+				+"   AND c.host_id = d.host_id"
+				+"   AND d.ambiente_id = 3 "//Producao
+				+"   AND a.cliente_id = ? "
+				+"   AND a.data_insercao = ?"
+				+"   AND a.data_criacao >= ?"
+				+"   AND a.data_fechamento IS NULL";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			data = new Date(

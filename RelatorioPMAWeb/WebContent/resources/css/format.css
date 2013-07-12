@@ -34,3 +34,18 @@ a:hover {
 	font-size: 40px;
 	color: red;
 }
+
+.lista{
+	font-size:18px;
+	list-style-type:none;
+}
+
+.lista li{
+	margin-bottom:10px;
+}
+
+.lista ul{
+	font-size: 15px;
+	margin-bottom: 2px;
+	list-style-type: none;
+}
