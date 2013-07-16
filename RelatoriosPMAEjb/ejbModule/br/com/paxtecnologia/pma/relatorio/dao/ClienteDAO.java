@@ -43,7 +43,7 @@ public class ClienteDAO {
 		connection = new DataSourcePMA();
 		Date data = null;
 		PreparedStatement pstmt;
-		String sql = "SELECT DISTINCT data_insercao FROM pmp_task WHERE cliente_id = ? ";
+		String sql = "SELECT DISTINCT data_insercao FROM pmp_task WHERE cliente_id = ? order by 1 desc";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
