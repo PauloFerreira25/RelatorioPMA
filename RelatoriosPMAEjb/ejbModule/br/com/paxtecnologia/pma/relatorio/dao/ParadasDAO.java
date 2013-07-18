@@ -88,13 +88,14 @@ public class ParadasDAO {
 					 "AND a.task_id = d.task_id " +
 					 "AND d.host_id = e.host_id " +
 					 "AND c.cliente_id = ? " +
-					 "AND trunc(c.data_insercao,'YYYY') = trunc(?,'YYYY') " +
+					 "AND c.data_insercao between ? and ? " +
 					 "AND regexp_like(b.tipo_parada,?)";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setString(3, tipo);
+			pstmt.setDate(2, FormataData.formataAnoInicio(mesRelatorio));
+			pstmt.setDate(3, FormataData.formataDataFim(mesRelatorio));
+			pstmt.setString(4, tipo);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

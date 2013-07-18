@@ -11,8 +11,8 @@
 		<p class="sub-titulo1">4. Resumo de Paradas</p>
 		<div id='paradasevitadas'>
 			<p class="sub-titulo2">4.1 Paradas Evitadas (PE)</p>
-			<h:outputText
-				value="Consideramos paradas evitadas, atuações executadas no ambiente depois de detectadas pelo monitoramento acionando a equipe técnica que tomou alguma ação para evitar a parada." />
+			<h:outputText value="Consideramos paradas evitadas, atuações executadas no ambiente depois de detectadas pelo monitoramento acionando a equipe técnica que tomou alguma ação para evitar a parada." />
+			<br></br><br></br>
 			<h:outputText value="Último ano:" />
 			<h:dataTable value="#{paradasBean.getListaUltimosAnosHoras('PE')}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
@@ -215,24 +215,36 @@ $(function () {
     var d2 = #{paradasBean.getParadas("PE")};
     var d3 = [];
 
-    for (var i = 0; i <12; i += 1)
-        d3.push([i, d2[i][1] + d1[i][1]]);
-
+    for (var i = 0; i <d1.length; i ++)
+		d3.push([d1[i][0], d2[i][1] + d1[i][1]]);
+    
     var options = {
             legend:{         
                 container:$("#graficoPNPPE-legenda"),
                 noColumns:3,
-            }
+            },
+            xaxis: {
+            	mode: "time",
+            	minTickSize: [1, "month"]
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center"
+            	}
     }
+
     
     $.plot($("#graficoPNPPE"), [
         {
             label: "PNP", color:"red", data: d1,
-            bars: { show: true },
+            bars: { show: true, lineWidth: 8 },
 	},
 	{
             label: "PE", color:"blue", data: d2,
-            bars: { show: true }
+            bars: { show: true, lineWidth: 8 }
 	},
 	{
             label: "Saldo", color:"yellow", data: d3,
@@ -252,24 +264,36 @@ $(function () {
     var d2 = #{paradasBean.getParadas("PP")};
     var d3 = [];
 
-    for (var i = 0; i <12; i += 1)
-        d3.push([i, d2[i][1] - d1[i][1]]);
+    for (var i = 0; i <d1.length; i ++)
+		d3.push([d1[i][0], d2[i][1] - d1[i][1]]);
 
     var options = {
             legend:{         
                 container:$("#graficoPPEPP-legenda"),
                 noColumns:3,
-            }
+            },
+            xaxis: {
+            	mode: "time",
+            	minTickSize: [1, "month"]
+            },
+            yaxis: {           
+            	tickDecimals: 0
+
+            },
+            bars:{
+            	align: "center"
+            	}
     }
+
                        
     $.plot($("#graficoPPEPP"), [
         {
             label: "PPE", color:"red", data: d1,
-            bars: { show: true },
+            bars: { show: true, lineWidth: 8 },
 	},
 	{
             label: "PP", color:"blue", data: d2,
-            bars: { show: true }
+            bars: { show: true, lineWidth: 8 }
 	},
 	{
             label: "Saldo", color:"yellow", data: d3,
@@ -287,12 +311,19 @@ $(function () {
 
 $(function () {
     var d1 = #{paradasBean.getParadasAcumulado("PE")};
+    var options = {
+            xaxis: {
+            	mode: "time",
+            	minTickSize: [1, "month"]
+            }
+    }
+
     $.plot($("#graficoAcumuladoAno"), [
         {
            label: "Parada Evitadas", color:"blue", data: d1,
-            bars: { show: true }
+            bars: { show: true, lineWidth: 16 }
         }
-    ]);
+    ],options);
 });
 
 //]]> 

@@ -46,5 +46,9 @@ public class WorkloadBean implements Serializable {
 	public String getLabelTitulo(Integer idGraficoControle) {
 		return workloadEjb.getLabelTitulo(idCliente, idGraficoControle);
 	}
+	
+	public int getDiasNoMes() {
+		return workloadEjb.getDiasNoMes(mesRelatorio);
+	}
 
 }

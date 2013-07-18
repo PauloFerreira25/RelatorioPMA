@@ -264,6 +264,7 @@ public class ParadasEjb {
 		return listaParadasProgramadasMes;
 	}	
 	
+	/*
 	public String getParadas(String tipo, String mesRelatorio) {
 		List<ParadasPorTipoVO> listaParadas = null;
 
@@ -304,8 +305,108 @@ public class ParadasEjb {
 		saida = saida.substring(0,saida.length()-1);
 		saida = saida + "]";
 		return saida;
+	}*/
+	
+	public String getParadas(String tipo, String mesRelatorio) {
+		List<ParadasPorTipoVO> listaParadas = null;
+
+		if (tipo.equals(PARADAS_EVITADAS)) {
+			listaParadas = listaParadasEvitadas;
+		} else if (tipo.equals(PARADAS_NAO_PROGRAMADAS)) {
+			listaParadas = listaParadasNaoProgramadas;
+		} else if (tipo.equals(PARADAS_PROGRAMADAS_ESTRATEGICAS)) {
+			listaParadas = listaParadasProgramadasEstrategicas;
+		} else if (tipo.equals(PARADAS_PROGRAMADAS)) {
+			listaParadas = listaParadasProgramadas;
+		}
+		
+		String saida = "[";
+		double [][] meses = new double[2][12]; 
+		for (ParadasPorTipoVO paradasPorTipoVO:listaParadas) {
+			for (Integer j = 0; j<=1; j++) {
+				Double somaHoras = 0.0;
+				for (Integer i = 0; i<12; i++) {
+					somaHoras = 0.0;
+					//Verifica se a data pertence ao mesmo mes
+					if (Integer.parseInt(paradasPorTipoVO.getData().substring(3,5)) == (i+1) && (Integer.parseInt(paradasPorTipoVO.getData().substring(6,10))) == (Integer.parseInt(mesRelatorio.substring(0,4))-j)) {
+						somaHoras = somaHoras + paradasPorTipoVO.getHoras();
+					}
+					meses[j][i] = meses[j][i] + somaHoras;
+				}
+			}	
+		}
+		for(Integer j = 1; j>=0; j--) {	
+			Integer mesInicial = 0;
+			Integer mesFinal = 0;
+			if (j == 1) {
+				mesInicial = Integer.parseInt(mesRelatorio.substring(6,7))-1;
+				mesFinal = 11;
+			} else {
+				mesInicial = 0;
+				mesFinal = Integer.parseInt(mesRelatorio.substring(6,7));
+			}
+			for(Integer i = mesInicial; i<mesFinal; i++) {
+				if (i <= Integer.parseInt(mesRelatorio.substring(6,7))) {
+					if (tipo.equals(PARADAS_NAO_PROGRAMADAS)||tipo.equals(PARADAS_PROGRAMADAS)) {
+						saida = saida + "[(new Date(" + (Integer.parseInt(mesRelatorio.substring(0,4))-j) + "," + i + ").getTime())," + (-meses[j][i]) + "],";
+					} else {
+						saida = saida + "[(new Date(" + (Integer.parseInt(mesRelatorio.substring(0,4))-j) + "," + i + ").getTime())," + meses[j][i] + "],";
+					}
+				} else {
+					saida = saida + "[(new Date(" + (Integer.parseInt(mesRelatorio.substring(0,4))-j) + "," + i + ").getTime())," + 0.0 + "],";
+				}
+			}
+		}	
+
+		saida = saida.substring(0,saida.length()-1);
+		saida = saida + "]";
+		return saida;
 	}
 	
+	public String getParadasAcumulado(String tipo, String mesRelatorio) {
+		List<ParadasPorTipoVO> listaParadas = null;
+
+		if (tipo.equals(PARADAS_EVITADAS)) {
+			listaParadas = listaParadasEvitadas;
+		} else if (tipo.equals(PARADAS_NAO_PROGRAMADAS)) {
+			listaParadas = listaParadasNaoProgramadas;
+		} else if (tipo.equals(PARADAS_PROGRAMADAS_ESTRATEGICAS)) {
+			listaParadas = listaParadasProgramadasEstrategicas;
+		} else if (tipo.equals(PARADAS_PROGRAMADAS)) {
+			listaParadas = listaParadasProgramadas;
+		}
+		
+		String saida = "[";
+		double [] meses = new double[12]; 
+		for (ParadasPorTipoVO paradasPorTipoVO:listaParadas) {
+			for (Integer i = 0; i<12; i++) {
+				Double somaHoras = 0.0;
+				//Verifica se a data pertence ao mes do parametro mesRelatorio
+				if (Integer.parseInt(paradasPorTipoVO.getData().substring(3,5)) == (i) && Integer.parseInt(paradasPorTipoVO.getData().substring(6,10)) == (Integer.parseInt(mesRelatorio.substring(0,4)))) {
+					 somaHoras = somaHoras + paradasPorTipoVO.getHoras();
+				}
+				meses[i] = meses[i] + somaHoras;
+			}	
+		}
+		double somaHorasAcumulado = 0.0;
+		for(Integer i = 0; i<meses.length; i++) {
+			somaHorasAcumulado = somaHorasAcumulado + meses[i];
+			if (i <= Integer.parseInt(mesRelatorio.substring(6,7))) {
+				if (tipo.equals(PARADAS_NAO_PROGRAMADAS)||tipo.equals(PARADAS_PROGRAMADAS)) {
+					saida = saida + "[(new Date(" + Integer.parseInt(mesRelatorio.substring(0,4)) + "," + i + ").getTime())," + (-somaHorasAcumulado) + "],";
+				} else {
+					saida = saida + "[(new Date(" + Integer.parseInt(mesRelatorio.substring(0,4)) + "," + i + ").getTime())," + somaHorasAcumulado + "],";
+				}
+			} else {
+				saida = saida + "[(new Date(" + Integer.parseInt(mesRelatorio.substring(0,4)) + "," + i + ").getTime())," + 0.0 + "],";
+			}
+		}
+
+		saida = saida.substring(0,saida.length()-1);
+		saida = saida + "]";
+		return saida;
+	}
+	/*
 	public String getParadasAcumulado(String tipo, String mesRelatorio) {
 		List<ParadasPorTipoVO> listaParadas = null;
 
@@ -348,7 +449,7 @@ public class ParadasEjb {
 		saida = saida.substring(0,saida.length()-1);
 		saida = saida + "]";
 		return saida;
-	}	
+	}	*/
 	
 	public Double getTempoParadasMes(String tipo, String mesRelatorio) {
 		List<ParadasPorTipoVO> listaParadas = null;

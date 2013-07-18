@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import br.com.paxtecnologia.pma.relatorio.dao.WorkloadDAO;
+import br.com.paxtecnologia.pma.relatorio.util.FormataData;
 import br.com.paxtecnologia.pma.relatorio.vo.GraficoMetricaVO;
 import br.com.paxtecnologia.pma.relatorio.vo.TimeFrameVO;
 
@@ -24,6 +25,10 @@ public class WorkloadEjb {
 
 	public String getLabelTitulo(Integer idCliente, Integer idGraficoControle) {
 		return workloadDao.getLabelTitulo(idCliente, idGraficoControle);
+	}
+	
+	public int getDiasNoMes(String mesRelatorio) {
+		return FormataData.diasNoMes(mesRelatorio);
 	}
 
 	public String getTf(Integer idCliente, String mesRelatorio, Integer idGraficoControle, Integer idTf) {

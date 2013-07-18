@@ -78,7 +78,8 @@ public class AtendimentoBean {
 			Double porcento = null;
 			porcento = atendimentoEjb.getPorcentagemChamadosFechados(
 					idCliente, mesRelatorio) * 100;
-			porcentoFechados = porcento.toString().substring(0, 2) + '%';
+			DecimalFormat df = new DecimalFormat("#.00");
+			porcentoFechados = df.format(porcento) + '%';
 		}
 		return porcentoFechados;
 	}
@@ -96,7 +97,8 @@ public class AtendimentoBean {
 			Double porcento = null;
 			porcento = atendimentoEjb.getPorcentagemChamadosEmAbertos(
 					idCliente, mesRelatorio) * 100;
-			porcentoEmAbertos = porcento.toString().substring(0, 2) + '%';
+			DecimalFormat df = new DecimalFormat("#.00");
+			porcentoEmAbertos = df.format(porcento) + '%';
 		}
 		return porcentoEmAbertos;
 	}

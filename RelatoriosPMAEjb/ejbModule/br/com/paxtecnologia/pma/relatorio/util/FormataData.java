@@ -45,4 +45,17 @@ public class FormataData {
 		}
 		return dataFim;
 	}
+	
+	public static int diasNoMes(String mesRelatorio) {
+		int dia = 0;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar c = Calendar.getInstance();
+			c.setTime(sdf.parse(mesRelatorio));
+			dia = c.getActualMaximum( Calendar.DAY_OF_MONTH );
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return dia;
+	}	
 }

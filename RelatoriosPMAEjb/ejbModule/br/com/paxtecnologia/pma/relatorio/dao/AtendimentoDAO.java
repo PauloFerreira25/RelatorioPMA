@@ -19,21 +19,14 @@ public class AtendimentoDAO {
 	public List<ChamadoVO> getChamadosAbertos(Integer idCliente,
 			String mesRelatorio) {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
-		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND data_insercao = ?";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			data = new Date(
-					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
-							.getTime()));
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, data);
+			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -70,7 +63,7 @@ public class AtendimentoDAO {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND trunc(data_insercao,'MM') <= trunc(?,'MM') AND trunc(data_fechamento,'MM') = trunc(?,'MM')";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND trunc(data_insercao,'MM') = trunc(?,'MM') AND trunc(data_fechamento,'MM') = trunc(?,'MM')";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
