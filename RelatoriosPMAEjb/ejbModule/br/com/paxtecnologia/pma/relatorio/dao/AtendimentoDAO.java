@@ -169,11 +169,9 @@ public class AtendimentoDAO {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT c.nome_fantasia "
-					+"  FROM pmp_task a, pmp_task_host b, pmp_host c, pmp_host_ambiente d "
+					+"  FROM pmp_task a, pmp_task_host b, pmp_host c "
 					+" WHERE a.task_id = b.task_id "
 					+"   AND c.host_id = b.host_id "
-					+"   AND c.host_id = d.host_id "
-					+"   AND d.ambiente_id = 3 " //Producao
 					+"   AND a.cliente_id = ? "
 					+"   AND a.data_insercao = ? "
 					+"   AND a.data_fechamento IS NOT NULL";
@@ -214,11 +212,9 @@ public class AtendimentoDAO {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT c.nome_fantasia "
-					+"  FROM pmp_task a, pmp_task_host b, pmp_host c, pmp_host_ambiente d "
+					+"  FROM pmp_task a, pmp_task_host b, pmp_host c "
 					+" WHERE a.task_id = b.task_id "
 					+"   AND c.host_id = b.host_id "
-					+"   AND c.host_id = d.host_id"
-					+"   AND d.ambiente_id = 3 "//Producao
 					+"   AND a.cliente_id = ? "
 					+"   AND a.data_insercao = ?"
 					+"   AND a.data_criacao >= ?";
@@ -260,11 +256,9 @@ public class AtendimentoDAO {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT c.nome_fantasia "
-				+"  FROM pmp_task a, pmp_task_host b, pmp_host c, pmp_host_ambiente d "
+				+"  FROM pmp_task a, pmp_task_host b, pmp_host c "
 				+" WHERE a.task_id = b.task_id "
 				+"   AND c.host_id = b.host_id "
-				+"   AND c.host_id = d.host_id"
-				+"   AND d.ambiente_id = 3 "//Producao
 				+"   AND a.cliente_id = ? "
 				+"   AND a.data_insercao = ?"
 				+"   AND a.data_criacao >= ?"
