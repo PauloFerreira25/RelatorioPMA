@@ -44,9 +44,12 @@ public class ParadasEjb {
 	private static String PARADAS_PROGRAMADAS = "PP";
 	
 	Map<String, Integer> controleIdCliente = new HashMap<String, Integer>();
+	private Map<String, String> controleMesCliente = new HashMap<String, String>();
 
 	public Integer getDiasTrabalhados(Integer idCliente, String mesRelatorio) {
-		if (diasTrabalhados == null || controleIdCliente.get("getDiasTrabalhados") != idCliente) {
+		if (diasTrabalhados == null || controleIdCliente.get("getDiasTrabalhados") != idCliente
+				|| (controleIdCliente.get("getDiasTrabalhados") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 			Calendar gc = paradasDao.getDataUltimoPNP(idCliente, mesRelatorio);
 			
 			Calendar calendar = Calendar.getInstance();
@@ -59,6 +62,9 @@ public class ParadasEjb {
 			
 			int days = Days.daysBetween(start, end).getDays();
 			diasTrabalhados = days;
+
+			controleIdCliente.put("getDiasTrabalhados", idCliente);
+			controleMesCliente.put("controleMesCliente", mesRelatorio);
 		}
 		return diasTrabalhados;
 	}
@@ -69,19 +75,27 @@ public class ParadasEjb {
 	}
 
 	public List<UltimoAnoVO> getListaUltimosAnosHoras(Integer idCliente, String tipo, String mesRelatorio) {
-		if (listaUltimosAnosHoras == null || controleIdCliente.get("getListaUltimosAnosHoras") != idCliente) {
+		if (listaUltimosAnosHoras == null || controleIdCliente.get("getListaUltimosAnosHoras") != idCliente
+				|| (controleIdCliente.get("getListaUltimosAnosHoras") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 			listaUltimosAnosHoras = paradasDao.getListaUltimosAnosHoras(idCliente, tipo, mesRelatorio);
 			controleIdCliente.put("getListaUltimosAnosHoras", idCliente);
+			controleMesCliente.put("controleMesCliente", mesRelatorio);
 		}
 		return listaUltimosAnosHoras;
 	}
 
 	public Integer getQtdeParadaProgramadas(Integer idCliente,
 			String mesRelatorio, String tipo) {
-		if (qtdeParadaProgramadas == null || controleIdCliente.get("getQtdeParadaProgramadas") != idCliente) {
-			if (listaParadasProgramadas == null || controleIdCliente.get("getQtdeParadaProgramadas") != idCliente) {
+		if (qtdeParadaProgramadas == null || controleIdCliente.get("getQtdeParadaProgramadas") != idCliente
+				|| (controleIdCliente.get("getQtdeParadaProgramadas") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
+			if (listaParadasProgramadas == null || controleIdCliente.get("getQtdeParadaProgramadas") != idCliente
+					|| (controleIdCliente.get("getQtdeParadaProgramadas") == idCliente
+					   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 				getListaParadasProgramadas(idCliente, mesRelatorio, tipo);
 				controleIdCliente.put("getQtdeParadaProgramadas", idCliente);
+				controleMesCliente.put("controleMesCliente", mesRelatorio);
 			}
 			qtdeParadaProgramadas = listaParadasProgramadas.size();
 		}
@@ -90,10 +104,15 @@ public class ParadasEjb {
 
 	public Integer getQtdeParadaProgramadasMes(Integer idCliente,
 			String mesRelatorio, String tipo) {
-		if (qtdeParadaProgramadasMes == null || controleIdCliente.get("getQtdeParadaProgramadasMes") != idCliente) {
-			if (listaParadasProgramadasMes == null || controleIdCliente.get("getQtdeParadaProgramadasMes") != idCliente) {
+		if (qtdeParadaProgramadasMes == null || controleIdCliente.get("getQtdeParadaProgramadasMes") != idCliente
+				|| (controleIdCliente.get("getQtdeParadaProgramadasMes") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
+			if (listaParadasProgramadasMes == null || controleIdCliente.get("getQtdeParadaProgramadasMes") != idCliente
+					|| (controleIdCliente.get("getQtdeParadaProgramadasMes") == idCliente
+					   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 				getListaParadasProgramadasMes(idCliente, mesRelatorio, tipo);
 				controleIdCliente.put("getQtdeParadaProgramadasMes", idCliente);
+				controleMesCliente.put("controleMesCliente", mesRelatorio);
 			}
 			qtdeParadaProgramadasMes = listaParadasProgramadasMes.size();
 		}
@@ -101,22 +120,31 @@ public class ParadasEjb {
 	}	
 
 	public Integer getQtdeProgramadasEstrategicas(Integer idCliente, String mesRelatorio, String tipo) {
-		if (qtdeProgramadasEstrategicas == null || controleIdCliente.get("getQtdeProgramadasEstrategicas") != idCliente) {
-			if (listaParadasProgramadas == null || controleIdCliente.get("getQtdeProgramadasEstrategicas") != idCliente) {
+		if (qtdeProgramadasEstrategicas == null || controleIdCliente.get("getQtdeProgramadasEstrategicas") != idCliente
+				|| (controleIdCliente.get("getQtdeProgramadasEstrategicas") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
+			if (listaParadasProgramadas == null || controleIdCliente.get("getQtdeProgramadasEstrategicas") != idCliente
+					|| (controleIdCliente.get("getQtdeProgramadasEstrategicas") == idCliente
+					   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 				getListaParadasProgramadasEstrategicas(idCliente, mesRelatorio, tipo);
 				controleIdCliente.put("getQtdeProgramadasEstrategicas", idCliente);
+				controleMesCliente.put("controleMesCliente", mesRelatorio);
 			}
-			qtdeProgramadasEstrategicas = listaParadasProgramadasEstrategicas
-					.size();
+			qtdeProgramadasEstrategicas = listaParadasProgramadasEstrategicas.size();
 		}
 		return qtdeProgramadasEstrategicas;
 	}
 
 	public Integer getQtdeProgramadasEstrategicasMes(Integer idCliente, String mesRelatorio, String tipo) {
-		if (qtdeProgramadasEstrategicasMes == null || controleIdCliente.get("getQtdeProgramadasEstrategicasMes") != idCliente) {
-			if (listaParadasProgramadasMes == null || controleIdCliente.get("getQtdeProgramadasEstrategicasMes") != idCliente) {
+		if (qtdeProgramadasEstrategicasMes == null || controleIdCliente.get("getQtdeProgramadasEstrategicasMes") != idCliente
+				|| (controleIdCliente.get("getQtdeProgramadasEstrategicasMes") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
+			if (listaParadasProgramadasMes == null || controleIdCliente.get("getQtdeProgramadasEstrategicasMes") != idCliente
+					|| (controleIdCliente.get("getQtdeProgramadasEstrategicasMes") == idCliente
+					   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 				getListaParadasProgramadasEstrategicasMes(idCliente, mesRelatorio, tipo);
 				controleIdCliente.put("getQtdeProgramadasEstrategicasMes", idCliente);
+				controleMesCliente.put("controleMesCliente", mesRelatorio);
 			}
 			qtdeProgramadasEstrategicasMes = listaParadasProgramadasEstrategicasMes.size();
 		}
@@ -124,10 +152,15 @@ public class ParadasEjb {
 	}
 	
 	public Integer getQtdeParadaNaoProgramadas(Integer idCliente, String mesRelatorio, String tipo) {
-		if (qtdeParadaNaoProgramadas == null || controleIdCliente.get("getQtdeParadaNaoProgramadas") != idCliente) {
-			if (listaParadasProgramadas == null || controleIdCliente.get("getQtdeParadaNaoProgramadas") != idCliente) {
+		if (qtdeParadaNaoProgramadas == null || controleIdCliente.get("getQtdeParadaNaoProgramadas") != idCliente
+				|| (controleIdCliente.get("getQtdeParadaNaoProgramadas") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
+			if (listaParadasProgramadas == null || controleIdCliente.get("getQtdeParadaNaoProgramadas") != idCliente
+					|| (controleIdCliente.get("getQtdeParadaNaoProgramadas") == idCliente
+					   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 				getListaParadasNaoProgramadas(idCliente, mesRelatorio, tipo);
 				controleIdCliente.put("getQtdeParadaNaoProgramadas", idCliente);
+				controleMesCliente.put("controleMesCliente", mesRelatorio);
 			}
 			qtdeParadaNaoProgramadas = listaParadasNaoProgramadas.size();
 		}
@@ -135,10 +168,15 @@ public class ParadasEjb {
 	}
 	
 	public Integer getQtdeParadaNaoProgramadasMes(Integer idCliente, String mesRelatorio, String tipo) {
-		if (qtdeParadaNaoProgramadasMes == null || controleIdCliente.get("getQtdeParadaNaoProgramadasMes") != idCliente) {
-			if (listaParadasProgramadasMes == null || controleIdCliente.get("getQtdeParadaNaoProgramadasMes") != idCliente) {
+		if (qtdeParadaNaoProgramadasMes == null || controleIdCliente.get("getQtdeParadaNaoProgramadasMes") != idCliente
+				|| (controleIdCliente.get("getQtdeParadaNaoProgramadasMes") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
+			if (listaParadasProgramadasMes == null || controleIdCliente.get("getQtdeParadaNaoProgramadasMes") != idCliente
+					|| (controleIdCliente.get("getQtdeParadaNaoProgramadasMes") == idCliente
+					   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 				getListaParadasNaoProgramadasMes(idCliente, mesRelatorio, tipo);
 				controleIdCliente.put("getQtdeParadaNaoProgramadasMes", idCliente);
+				controleMesCliente.put("controleMesCliente", mesRelatorio);
 			}
 			qtdeParadaNaoProgramadasMes = listaParadasNaoProgramadasMes.size();
 		}
@@ -146,10 +184,15 @@ public class ParadasEjb {
 	}	
 
 	public Integer getQtdeParadaEvitadas(Integer idCliente, String mesRelatorio, String tipo) {
-		if (qtdeParadaEvitadas == null || controleIdCliente.get("getQtdeParadaEvitadas") != idCliente) {
-			if (listaParadasEvitadas == null || controleIdCliente.get("getQtdeParadaEvitadas") != idCliente) {
+		if (qtdeParadaEvitadas == null || controleIdCliente.get("getQtdeParadaEvitadas") != idCliente
+				|| (controleIdCliente.get("getQtdeParadaEvitadas") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
+			if (listaParadasEvitadas == null || controleIdCliente.get("getQtdeParadaEvitadas") != idCliente
+					|| (controleIdCliente.get("getQtdeParadaEvitadas") == idCliente
+					   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 				getListaParadasEvitadas(idCliente, mesRelatorio, tipo);
 				controleIdCliente.put("getQtdeParadaEvitadas", idCliente);
+				controleMesCliente.put("controleMesCliente", mesRelatorio);
 			}
 			qtdeParadaEvitadas = listaParadasEvitadas.size();
 		}
@@ -157,10 +200,15 @@ public class ParadasEjb {
 	}
 	
 	public Integer getQtdeParadaEvitadasMes(Integer idCliente, String mesRelatorio, String tipo) {
-		if (qtdeParadaEvitadasMes == null || controleIdCliente.get("getQtdeParadaEvitadasMes") != idCliente) {
-			if (listaParadasEvitadasMes == null || controleIdCliente.get("getQtdeParadaEvitadasMes") != idCliente) {
+		if (qtdeParadaEvitadasMes == null || controleIdCliente.get("getQtdeParadaEvitadasMes") != idCliente
+				|| (controleIdCliente.get("getQtdeParadaEvitadasMes") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
+			if (listaParadasEvitadasMes == null || controleIdCliente.get("getQtdeParadaEvitadasMes") != idCliente
+					|| (controleIdCliente.get("getQtdeParadaEvitadasMes") == idCliente
+					   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 				getListaParadasEvitadasMes(idCliente, mesRelatorio, tipo);
 				controleIdCliente.put("getQtdeParadaEvitadasMes", idCliente);
+				controleMesCliente.put("controleMesCliente", mesRelatorio);
 			}
 			qtdeParadaEvitadasMes = listaParadasEvitadasMes.size();
 		}
@@ -168,15 +216,20 @@ public class ParadasEjb {
 	}
 
 	public List<ParadasPorTipoVO> getListaParadasEvitadas(Integer idCliente, String mesRelatorio, String tipo) {
-		if (listaParadasEvitadas == null || controleIdCliente.get("getListaParadasEvitadas") != idCliente) {
+		if (listaParadasEvitadas == null || controleIdCliente.get("getListaParadasEvitadas") != idCliente
+				|| (controleIdCliente.get("getListaParadasEvitadas") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 			listaParadasEvitadas = paradasDao.getListaParadasPorTipo(idCliente, mesRelatorio, tipo);
 			controleIdCliente.put("getListaParadasEvitadas", idCliente);
+			controleMesCliente.put("controleMesCliente", mesRelatorio);
 		}
 		return listaParadasEvitadas;
 	}
 
 	public List<ParadasPorTipoVO> getListaParadasEvitadasMes(Integer idCliente, String mesRelatorio, String tipo) {
-		if (listaParadasEvitadasMes == null || listaParadasEvitadasMes.size() == 0 || controleIdCliente.get("getListaParadasEvitadasMes") != idCliente) {
+		if (listaParadasEvitadasMes == null || listaParadasEvitadasMes.size() == 0 || controleIdCliente.get("getListaParadasEvitadasMes") != idCliente
+				|| (controleIdCliente.get("getListaParadasEvitadasMes") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 			DateTime data = new DateTime(Integer.parseInt(mesRelatorio.substring(0,4)), Integer.parseInt(mesRelatorio.substring(6,7)), Integer.parseInt(mesRelatorio.substring(9,10)),0,0,0);
 			listaParadasEvitadasMes = new ArrayList<ParadasPorTipoVO>();
 			for(ParadasPorTipoVO paradasPorTipoVO:getListaParadasEvitadas(idCliente, mesRelatorio, tipo)){
@@ -186,22 +239,28 @@ public class ParadasEjb {
 				}
 			}		
 			controleIdCliente.put("getListaParadasEvitadasMes", idCliente);
+			controleMesCliente.put("controleMesCliente", mesRelatorio);
 		}
 		return listaParadasEvitadasMes;
 	}
 
 	public List<ParadasPorTipoVO> getListaParadasNaoProgramadas(
 			Integer idCliente, String mesRelatorio, String tipo) {
-		if (listaParadasNaoProgramadas == null || controleIdCliente.get("getListaParadasNaoProgramadas") != idCliente) {
+		if (listaParadasNaoProgramadas == null || controleIdCliente.get("getListaParadasNaoProgramadas") != idCliente
+				|| (controleIdCliente.get("getListaParadasNaoProgramadas") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 			listaParadasNaoProgramadas = paradasDao.getListaParadasPorTipo(idCliente, mesRelatorio, tipo);
 			controleIdCliente.put("getListaParadasNaoProgramadas", idCliente);
+			controleMesCliente.put("controleMesCliente", mesRelatorio);
 		}
 		return listaParadasNaoProgramadas;
 
 	}
 	
 	public List<ParadasPorTipoVO> getListaParadasNaoProgramadasMes(Integer idCliente, String mesRelatorio, String tipo) {
-		if (listaParadasNaoProgramadasMes == null || listaParadasNaoProgramadasMes.size() == 0 || controleIdCliente.get("getListaParadasNaoProgramadasMes") != idCliente) {
+		if (listaParadasNaoProgramadasMes == null || listaParadasNaoProgramadasMes.size() == 0 || controleIdCliente.get("getListaParadasNaoProgramadasMes") != idCliente
+				|| (controleIdCliente.get("getListaParadasNaoProgramadasMes") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 			DateTime data = new DateTime(Integer.parseInt(mesRelatorio.substring(0,4)), Integer.parseInt(mesRelatorio.substring(6,7)), Integer.parseInt(mesRelatorio.substring(9,10)),0,0,0);
 			listaParadasNaoProgramadasMes = new ArrayList<ParadasPorTipoVO>();
 			for(ParadasPorTipoVO paradasPorTipoVO:getListaParadasNaoProgramadas(idCliente, mesRelatorio, tipo)){
@@ -211,22 +270,28 @@ public class ParadasEjb {
 				}
 			}
 			controleIdCliente.put("getListaParadasNaoProgramadasMes", idCliente);
+			controleMesCliente.put("controleMesCliente", mesRelatorio);
 		}
 		return listaParadasNaoProgramadasMes;
 	}
 
 	public List<ParadasPorTipoVO> getListaParadasProgramadasEstrategicas(
 			Integer idCliente, String mesRelatorio, String tipo) {
-		if (listaParadasProgramadasEstrategicas == null || controleIdCliente.get("getListaParadasProgramadasEstrategicas") != idCliente) {
+		if (listaParadasProgramadasEstrategicas == null || controleIdCliente.get("getListaParadasProgramadasEstrategicas") != idCliente
+				|| (controleIdCliente.get("getListaParadasProgramadasEstrategicas") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 			listaParadasProgramadasEstrategicas = paradasDao.getListaParadasPorTipo(idCliente, mesRelatorio, tipo);
 			controleIdCliente.put("getListaParadasProgramadasEstrategicas", idCliente);
+			controleMesCliente.put("controleMesCliente", mesRelatorio);
 		}
 		return listaParadasProgramadasEstrategicas;
 
 	}
 	
 	public List<ParadasPorTipoVO> getListaParadasProgramadasEstrategicasMes(Integer idCliente, String mesRelatorio, String tipo) {
-		if (listaParadasProgramadasEstrategicasMes == null || listaParadasProgramadasEstrategicasMes.size() == 0 || controleIdCliente.get("getListaParadasProgramadasEstrategicasMes") != idCliente) {
+		if (listaParadasProgramadasEstrategicasMes == null || listaParadasProgramadasEstrategicasMes.size() == 0 || controleIdCliente.get("getListaParadasProgramadasEstrategicasMes") != idCliente
+				|| (controleIdCliente.get("getListaParadasProgramadasEstrategicasMes") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 			DateTime data = new DateTime(Integer.parseInt(mesRelatorio.substring(0,4)), Integer.parseInt(mesRelatorio.substring(6,7)), Integer.parseInt(mesRelatorio.substring(9,10)),0,0,0);
 			listaParadasProgramadasEstrategicasMes = new ArrayList<ParadasPorTipoVO>();
 			for(ParadasPorTipoVO paradasPorTipoVO:getListaParadasProgramadasEstrategicas(idCliente, mesRelatorio, tipo)){
@@ -236,21 +301,27 @@ public class ParadasEjb {
 				}
 			}
 			controleIdCliente.put("getListaParadasProgramadasEstrategicasMes", idCliente);
+			controleMesCliente.put("controleMesCliente", mesRelatorio);
 		}
 		return listaParadasProgramadasEstrategicasMes;
 	}	
 
 	public List<ParadasPorTipoVO> getListaParadasProgramadas(Integer idCliente,
 			String mesRelatorio, String tipo) {
-		if (listaParadasProgramadas == null || controleIdCliente.get("getListaParadasProgramadas") != idCliente) {
+		if (listaParadasProgramadas == null || controleIdCliente.get("getListaParadasProgramadas") != idCliente
+				|| (controleIdCliente.get("getListaParadasProgramadas") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 			listaParadasProgramadas = paradasDao.getListaParadasPorTipo(idCliente, mesRelatorio, tipo);
 			controleIdCliente.put("getListaParadasProgramadas", idCliente);
+			controleMesCliente.put("controleMesCliente", mesRelatorio);
 		}
 		return listaParadasProgramadas;
 	}
 	
 	public List<ParadasPorTipoVO> getListaParadasProgramadasMes(Integer idCliente, String mesRelatorio, String tipo) {
-		if (listaParadasProgramadasMes == null || listaParadasProgramadasMes.size() == 0 ||controleIdCliente.get("getListaParadasProgramadasMes") != idCliente) {
+		if (listaParadasProgramadasMes == null || listaParadasProgramadasMes.size() == 0 ||controleIdCliente.get("getListaParadasProgramadasMes") != idCliente
+				|| (controleIdCliente.get("getListaParadasProgramadasMes") == idCliente
+				   && controleMesCliente.get("mesCliente") != mesRelatorio)) {
 			DateTime data = new DateTime(Integer.parseInt(mesRelatorio.substring(0,4)), Integer.parseInt(mesRelatorio.substring(6,7)), Integer.parseInt(mesRelatorio.substring(9,10)),0,0,0);
 			listaParadasProgramadasMes = new ArrayList<ParadasPorTipoVO>();
 			for(ParadasPorTipoVO paradasPorTipoVO:getListaParadasProgramadas(idCliente, mesRelatorio, tipo)){
@@ -260,6 +331,7 @@ public class ParadasEjb {
 				}
 			}
 			controleIdCliente.put("getListaParadasProgramadasMes", idCliente);
+			controleMesCliente.put("controleMesCliente", mesRelatorio);
 		}
 		return listaParadasProgramadasMes;
 	}	

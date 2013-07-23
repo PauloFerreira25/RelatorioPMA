@@ -34,7 +34,8 @@
 			</h:dataTable>
 			<h:outputText value="Acumulado do ano:" />
 			<div id="graficoAcumuladoAno" class="graph-med"></div>
-			<h:outputText value="Dados do mês:" />
+			<h:outputText value="Dados do mês:" rendered="#{!empty paradasBean.listaParadasEvitadasMes}"/>
+			<h:outputText value="Durante o mês vigente no relatório não foram constatadas PEs." rendered="#{empty paradasBean.listaParadasEvitadasMes}"/>
 			<h:dataTable value="#{paradasBean.listaParadasEvitadasMes}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
@@ -276,7 +277,7 @@ $(function () {
     var d3 = [];
 
     for (var i = 0; i <d1.length; i ++)
-		d3.push([d1[i][0], d2[i][1] - d1[i][1]]);
+		d3.push([d1[i][0], d2[i][1] + d1[i][1]]);
 
     var options = {
             legend:{         
