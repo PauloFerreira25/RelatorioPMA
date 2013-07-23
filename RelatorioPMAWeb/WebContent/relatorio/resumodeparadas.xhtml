@@ -18,7 +18,8 @@
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
-				columnClasses="celluleLeft,celluleCenter">
+				columnClasses="celluleLeft,celluleCenter"
+				rendered="#{!empty paradasBean.getListaUltimosAnosHoras('PE')}">
 
 				<h:column>
 					<f:facet name="header">Ano</f:facet>
@@ -38,7 +39,8 @@
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
-				columnClasses="celluleLeft,celluleLeft,celluleCenter,celluleLeft,celluleLeft">
+				columnClasses="celluleLeft,celluleLeft,celluleCenter,celluleLeft,celluleLeft"
+				rendered="#{!empty paradasBean.listaParadasEvitadasMes}">
 
 				<h:column>
 					<f:facet name="header">Nº Chamado</f:facet>
@@ -72,12 +74,15 @@
 			<p class="sub-titulo2">4.2 Paradas Não Programadas (PNP)</p>
 			<h:outputText
 				value="Paradas que ocorreram no ambiente de forma bruta, sem conhecimento da equipe técnica." />
+			<br></br>
+			<h:outputText value="Durante o mês vigente no relatório não foram constatadas PNP." rendered="#{empty paradasBean.listaParadasNaoProgramadasMes}" />	
 			<h:dataTable value="#{paradasBean.listaParadasNaoProgramadasMes}"
 				var="i" styleClass="default-table"
 				headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
-				columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft">
+				columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft"
+				rendered="#{!empty paradasBean.listaParadasNaoProgramadasMes}">
 
 				<h:column>
 					<f:facet name="header">Nº Chamado</f:facet>
@@ -110,12 +115,15 @@
 			<p class="sub-titulo2">4.3 Paradas Programadas Estratégicas (PPE)</p>
 			<h:outputText
 				value="Consideramos paradas programadas estratégicas as situações de necessidade de manutenção no ambiente, onde é possível sua execução sem causar indisponibilidade no mesmo." />
+			<br></br>
+			<h:outputText value="Durante o mês vigente no relatório não foram constatadas PPE." rendered="#{empty paradasBean.listaParadasProgramadasEstrategicasMes}" />	
 			<h:dataTable
 				value="#{paradasBean.listaParadasProgramadasEstrategicasMes}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
-				columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft">
+				columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft"
+				rendered="#{!empty paradasBean.listaParadasProgramadasEstrategicasMes}">
 
 				<h:column>
 					<f:facet name="header">Nº Chamado</f:facet>
@@ -148,11 +156,14 @@
 			<p class="sub-titulo2">4.4 Paradas Programadas (PP)</p>
 			<h:outputText
 				value="Consideramos paradas programas as situações de necessidade de manutenção no ambiente, porém gerando indisponibilidade no mesmo." />
+			<br></br>
+			<h:outputText value="Durante o mês vigente no relatório não foram constatadas PP." rendered="#{empty paradasBean.listaParadasProgramadasMes}" />	
 			<h:dataTable value="#{paradasBean.listaParadasProgramadasMes}" var="i"
 				styleClass="default-table" headerClass="default-table-header"
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
-				columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft">>
+				columnClasses="celluleLeft,celluleCenter,celluleLeft,celluleLeft"
+				rendered="#{!empty paradasBean.listaParadasProgramadasMes}">
 
 				<h:column>
 					<f:facet name="header">Nº Chamado</f:facet>

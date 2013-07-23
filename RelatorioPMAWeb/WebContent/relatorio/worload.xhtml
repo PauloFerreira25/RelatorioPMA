@@ -558,7 +558,7 @@ $(function () {
 		<div id='principaltimeframe'>
 			<p class="sub-titulo2">3.1 #{workloadBean.getLabelTitulo(1)}</p>
 			<h:outputText
-				value="O gráfico abaixo representa o workload através das sessões no database Oracle para o owner “senior” através de 3 distintos time frames." />
+				value="O gráfico abaixo representa o workload através das sessões no database Oracle para o owner “#{workloadBean.getLabelTitulo(1)}” através de 3 distintos time frames." />
 			<h:outputText value="Mês corrente:" />
 			<br />
 			<div id="principalXtimeframe_mes">
@@ -580,7 +580,7 @@ $(function () {
 		<div id='outrostimeframe'>
 			<p class="sub-titulo2">3.3 #{workloadBean.getLabelTitulo(3)}</p>
 			<h:outputText
-				value="O gráfico abaixo representa o workload através das sessões no database Oracle para os owners “não senior”, ou seja, todos os demais, através de 3 distintos time frames." />
+				value="O gráfico abaixo representa o workload através das sessões no database Oracle para os owners “#{workloadBean.getLabelTitulo(3)}”, ou seja, todos os demais, através de 3 distintos time frames." />
 			<h:outputText value="Mês corrente:" />
 			<br />
 			<div id="outrostimeframe_mes">
@@ -602,7 +602,7 @@ $(function () {
 		<div id='princapaloutros_tudo'>
 			<p class="sub-titulo2">3.5 #{workloadBean.getLabelTitulo(5)}</p>
 			<h:outputText
-				value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “senior” contra os owners “não senior” para o time frame 24 horas." />
+				value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “#{workloadBean.getLabel(5,1)}” contra os owners “#{workloadBean.getLabel(5,2)}” para o time frame 24 horas." />
 			<h:outputText value="Mês corrente:" />
 			<br />
 			<div id="princapaloutros_tudo_mes">
@@ -624,7 +624,7 @@ $(function () {
 		<div id='princapaloutros_comercial'>
 			<p class="sub-titulo2">3.7 #{workloadBean.getLabelTitulo(7)}</p>
 			<h:outputText
-				value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “senior” contra os owners “não senior” para o time frame horário comercial (8-18)." />
+				value="O gráfico abaixo compara o workload através das sessões no database Oracle do owner “#{workloadBean.getLabel(7,1)}” contra os owners “#{workloadBean.getLabel(7,2)}” para o time frame horário comercial (8-18)." />
 			<h:outputText value="Mês corrente:" />
 			<br />
 			<div id="princapaloutros_comercial_mes">

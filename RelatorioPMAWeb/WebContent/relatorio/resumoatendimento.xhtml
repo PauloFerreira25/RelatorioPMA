@@ -77,11 +77,14 @@
 			</h:dataTable>
 			<div id='chamadossolicitantes'>
 				<p class="sub-titulo2">2.2 Chamados por Solicitante</p>
+				<br></br>
+				<h:outputText value="Não há chamados no mês corrente." rendered="#{empty atendimentoBean.listaSolicitante}" />
 				<h:dataTable value="#{atendimentoBean.listaSolicitante}" var="i"
 					styleClass="default-table" headerClass="default-table-header"
 					rowClasses="default-table-odd-row,default-table-even-row"
 					footerClass="default-table-footer"
-					columnClasses="celluleLeft,celluleCenter,celluleCenter,celluleCenter,celluleCenter">
+					columnClasses="celluleLeft,celluleCenter,celluleCenter,celluleCenter,celluleCenter"
+					rendered="#{!empty atendimentoBean.listaSolicitante}">
 
 					<h:column footerClass="default-table-footer celluleLeft">
 						<f:facet name="header">Solicitante</f:facet>
@@ -183,12 +186,15 @@
 			</div>
 			<div id='chamadoemaberto'>
 				<p class="sub-titulo2">2.4 Chamados em Aberto</p>
+				<br></br>
+				<h:outputText value="Não há chamados em aberto no fim do mês corrente." rendered="#{empty atendimentoBean.listaChamadosEmAbertos}" />
 				<h:dataTable value="#{atendimentoBean.listaChamadosEmAbertos}"
 					var="i" styleClass="default-table"
 					headerClass="default-table-header"
 					rowClasses="default-table-odd-row,default-table-even-row"
 					footerClass="default-table-footer"
-					columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft">
+					columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft"
+					rendered="#{!empty atendimentoBean.listaChamadosEmAbertos}">
 
 					<h:column>
 						<f:facet name="header">ID Chamado</f:facet>
@@ -218,12 +224,15 @@
 			</div>
 			<div id='chamadofechado'>
 				<p class="sub-titulo2">2.5 Chamados em Fechado</p>
+				<br></br>
+				<h:outputText value="Não há chamados em fechado no fim do mês corrente." rendered="#{empty atendimentoBean.listaChamadosFechados}" />
 				<h:dataTable value="#{atendimentoBean.listaChamadosFechados}"
 					var="i" styleClass="default-table"
 					headerClass="default-table-header"
 					rowClasses="default-table-odd-row,default-table-even-row"
 					footerClass="default-table-footer"
-					columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft">
+					columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft"
+					rendered="#{!empty atendimentoBean.listaChamadosFechados}">
 
 					<h:column>
 						<f:facet name="header">ID Chamado</f:facet>

@@ -77,16 +77,18 @@ public class ParadasDAO {
 			Integer idCliente, String mesRelatorio, String tipo) {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT c.chamado, " +
+		String sql = "SELECT distinct c.chamado, " +
 					 "to_char(c.data_criacao, 'dd/mm/yyyy') data, " +
 					 "round(c.segundos_trabalhados/60/60,2) segundos_trabalhados, " +
-					 "e.nome_fantasia, " +
+					 "pmp_get_hosts_task(c.task_id) nome_fantasia, " +
 					 "c.titulo " +
-					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c, pmp_task_host d, pmp_host e " +
+					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c, pmp_task_host d, pmp_host e, pmp_host_ambiente f " +
 					 "WHERE a.parada_id = b.parada_id " +
 					 "AND a.task_id = c.task_id " +
 					 "AND a.task_id = d.task_id " +
 					 "AND d.host_id = e.host_id " +
+					 "AND e.host_id = f.host_id " +
+					 "AND f.ambiente_id = 3 " + //producao
 					 "AND c.cliente_id = ? " +
 					 "AND c.data_insercao between ? and ? " +
 					 "AND regexp_like(b.tipo_parada,?)";
@@ -94,7 +96,7 @@ public class ParadasDAO {
 		try {
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, FormataData.formataAnoInicio(mesRelatorio));
-			pstmt.setDate(3, FormataData.formataDataFim(mesRelatorio));
+			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
 			pstmt.setString(4, tipo);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -125,9 +127,13 @@ public class ParadasDAO {
 		PreparedStatement pstmt;
 		String sql = "SELECT to_char(c.data_insercao, 'yyyy') data, " +
 					 "sum (c.segundos_trabalhados/60/60) horas_trabalhadas " +
-					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c " +
+					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c, pmp_task_host d, pmp_host e, pmp_host_ambiente f " +
 					 "WHERE a.parada_id = b.parada_id " +
 					 "AND a.task_id = c.task_id " +
+					 "AND a.task_id = d.task_id " +
+					 "AND d.host_id = e.host_id " +
+					 "AND e.host_id = f.host_id " +
+					 "AND f.ambiente_id = 3 " + //producao
 					 "AND c.cliente_id = ? " +
 					 "AND regexp_like(b.tipo_parada,?) " +
 					 "AND c.data_insercao <= ?" +
