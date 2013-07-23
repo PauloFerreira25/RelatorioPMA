@@ -126,7 +126,7 @@ public class ParadasDAO {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT to_char(c.data_insercao, 'yyyy') data, " +
-					 "sum (c.segundos_trabalhados/60/60) horas_trabalhadas " +
+					 "round(sum(c.segundos_trabalhados/60/60),2) horas_trabalhadas " +
 					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c, pmp_task_host d, pmp_host e, pmp_host_ambiente f " +
 					 "WHERE a.parada_id = b.parada_id " +
 					 "AND a.task_id = c.task_id " +
