@@ -610,7 +610,8 @@ public class AtendimentoEjb {
 				achou = 0;
 				while (itSolicitante.hasNext()) {
 					ChamadoQuantidadeVO solicitante = itSolicitante.next();
-					if (solicitante.getNome() != null && solicitante.getNome().equals(chamado.getSolicitante())) {
+					if ((solicitante.getNome() != null && solicitante.getNome().equals(chamado.getSolicitante()))
+					   ||(solicitante.getNome() == null && chamado.getSolicitante() == null)) {
 						solicitante.setQtdeAberto(solicitante.getQtdeAberto() + 1);
 						achou = 1;
 					}
@@ -632,7 +633,8 @@ public class AtendimentoEjb {
 				achou = 0;
 				while (itSolicitante.hasNext()) {
 					ChamadoQuantidadeVO solicitante = itSolicitante.next();
-					if (solicitante.getNome() != null && solicitante.getNome().equals(chamado.getSolicitante())) {
+					if ((solicitante.getNome() != null && solicitante.getNome().equals(chamado.getSolicitante()))
+					   ||(solicitante.getNome() == null && chamado.getSolicitante() == null)) {
 						solicitante.setQtdeFechado(solicitante.getQtdeFechado() + 1);
 						achou = 1;
 					}
@@ -654,7 +656,8 @@ public class AtendimentoEjb {
 				achou = 0;
 				while (itSolicitante.hasNext()) {
 					ChamadoQuantidadeVO solicitante = itSolicitante.next();
-					if (solicitante.getNome() != null && solicitante.getNome().equals(chamado.getSolicitante())) {
+					if ((solicitante.getNome() != null && solicitante.getNome().equals(chamado.getSolicitante()))
+						||(solicitante.getNome() == null && chamado.getSolicitante() == null)) {
 						solicitante.setQtdeEmAberto(solicitante.getQtdeEmAberto() + 1);
 						achou = 1;
 					}
