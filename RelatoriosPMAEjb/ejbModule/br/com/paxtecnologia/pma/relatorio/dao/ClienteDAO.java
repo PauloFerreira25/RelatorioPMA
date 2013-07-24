@@ -18,7 +18,7 @@ public class ClienteDAO {
 		List<ClienteVO> retorno = new ArrayList<ClienteVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT cliente_id, cliente FROM pmp_cliente";
+		String sql = "SELECT cliente_id, cliente FROM pmp_cliente order by cliente";
 		pstmt = connection.getPreparedStatement(sql);
 		ResultSet rs = connection.executaQuery(pstmt);
 		ClienteVO temp;
