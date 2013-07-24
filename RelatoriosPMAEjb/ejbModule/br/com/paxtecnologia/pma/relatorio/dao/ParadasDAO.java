@@ -79,7 +79,7 @@ public class ParadasDAO {
 		PreparedStatement pstmt;
 		String sql = "SELECT distinct c.chamado, " +
 					 "to_char(c.data_criacao, 'dd/mm/yyyy') data, " +
-					 "round(c.segundos_trabalhados/60/60,2) segundos_trabalhados, " +
+					 "round(to_number(a.data_fim_parada - a.data_inicio_parada) * 24,2) segundos_trabalhados, " +
 					 "pmp_get_hosts_task(c.task_id) nome_fantasia, " +
 					 "c.titulo " +
 					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c, pmp_task_host d, pmp_host e, pmp_host_ambiente f " +
@@ -126,7 +126,7 @@ public class ParadasDAO {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT to_char(c.data_insercao, 'yyyy') data, " +
-					 "round(sum(c.segundos_trabalhados/60/60),2) horas_trabalhadas " +
+					 "round(sum(to_number(a.data_fim_parada - a.data_inicio_parada)) * 24,2) horas_trabalhadas " +
 					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c, pmp_task_host d, pmp_host e, pmp_host_ambiente f " +
 					 "WHERE a.parada_id = b.parada_id " +
 					 "AND a.task_id = c.task_id " +

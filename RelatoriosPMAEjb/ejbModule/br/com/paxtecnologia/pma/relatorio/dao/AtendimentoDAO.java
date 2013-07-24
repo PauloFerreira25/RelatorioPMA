@@ -103,32 +103,39 @@ public class AtendimentoDAO {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT distinct chamado, " +
-                	 "		 		  titulo, "+
-                	 "		 		  solicitante, "+
-                	 "		 		  tipo_chamado, "+
-                	 "		 		  decode(status,'Closed','In Progress',status) status, "+
-                	 "		 		  segundos_trabalhados, "+
-                	 "		 		  data_criacao "+
-                	 "  FROM pmp_task p "+
-                	 " WHERE cliente_id = ? "+
-                	 "   and trunc(data_insercao, 'MM') <= trunc(?, 'MM') "+
-                	 "   and trunc(data_criacao, 'MM') <= trunc(?, 'MM') "+
-                	 "	 and chamado in "+
-                	 "		 (select chamado "+
-                	 "			from pmp_task "+
-                	 "		   WHERE cliente_id = p.cliente_id "+
-                	 "			 and data_fechamento IS NULL "+
-                	 "		  union "+
-                	 "		  select chamado "+
-                	 "			from pmp_task "+
-                	 "		   WHERE cliente_id = p.cliente_id "+
-                	 "			 and trunc(data_fechamento,'MM') >= trunc(?, 'MM')) "+
-                	 "	 and chamado not in "+
-                	 "		 (select chamado "+
-                	 "			from pmp_task "+
-                	 "		   where cliente_id = p.cliente_id "+
-                	 "			 and trunc(data_fechamento, 'MM') <= trunc(?, 'MM'))";
+		String sql = "select p.chamado, "+
+				"       p.titulo, "+
+				"       p.solicitante, "+
+				"       p.tipo_chamado, "+
+				"       p.status, "+
+				"       p.segundos_trabalhados, "+
+				"       p.data_criacao "+
+				"  from pmp_task p, "+
+				"       ( "+    
+				"        SELECT  p.chamado, "+
+				"                max(p.data_insercao) data_insercao "+
+				"          FROM pmp_task p "+ 
+				"         WHERE cliente_id = ? "+
+				"           and trunc(data_insercao, 'MM') <= trunc(?, 'MM') "+
+				"           and trunc(data_criacao, 'MM') <= trunc(?, 'MM') "+
+				"        	 and chamado in "+
+				"        		 (select chamado "+ 
+				"        			from pmp_task "+
+				"        		   WHERE cliente_id = p.cliente_id "+
+				"        			 and data_fechamento IS NULL "+
+				"        		  union "+
+				"        		  select chamado "+
+				"        			from pmp_task "+
+				"        		   WHERE cliente_id = p.cliente_id "+
+				"        			 and trunc(data_fechamento,'MM') >= trunc(?, 'MM')) "+
+				"        	 and chamado not in "+
+				"        		 (select chamado "+
+				"        			from pmp_task "+
+				"        		   where cliente_id = p.cliente_id "+
+				"        			 and trunc(data_fechamento, 'MM') <= trunc(?, 'MM')) "+
+				"        group by p.chamado) x "+
+				" where p.chamado = x.chamado "+
+				"   and p.data_insercao = x.data_insercao";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
