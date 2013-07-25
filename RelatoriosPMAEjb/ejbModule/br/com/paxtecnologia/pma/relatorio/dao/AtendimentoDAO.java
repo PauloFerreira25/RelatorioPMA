@@ -21,11 +21,12 @@ public class AtendimentoDAO {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND data_insercao = ?";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND trunc(data_insercao,'MM') = trunc(?,'MM') AND trunc(data_criacao,'MM') = trunc(?,'MM')";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -181,7 +182,7 @@ public class AtendimentoDAO {
 					+"   AND c.host_id = b.host_id "
 					+"   AND a.cliente_id = ? "
 					+"   AND a.data_insercao = ? "
-					+"   AND a.data_fechamento IS NOT NULL";
+					+"   AND trunc(a.data_fechamento,'MM') = trunc(?,'MM')";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			data = new Date(
@@ -189,6 +190,7 @@ public class AtendimentoDAO {
 							.getTime()));
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, data);
+			pstmt.setDate(3, data);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
