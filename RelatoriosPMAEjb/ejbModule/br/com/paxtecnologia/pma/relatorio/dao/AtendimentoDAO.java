@@ -173,7 +173,6 @@ public class AtendimentoDAO {
 	public List<String> getListaFechadosComHosts(Integer idCliente,
 			String mesRelatorio) {
 		List<String> retorno = new ArrayList<String>();
-		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT c.nome_fantasia "
@@ -185,16 +184,10 @@ public class AtendimentoDAO {
 					+"   AND trunc(a.data_fechamento,'MM') = trunc(?,'MM')";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			data = new Date(
-					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
-							.getTime()));
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, data);
-			pstmt.setDate(3, data);
+			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -217,7 +210,6 @@ public class AtendimentoDAO {
 	public List<String> getListaAbertosComHosts(Integer idCliente,
 			String mesRelatorio) {
 		List<String> retorno = new ArrayList<String>();
-		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
 		String sql = "SELECT c.nome_fantasia "
@@ -229,16 +221,10 @@ public class AtendimentoDAO {
 					+"   AND a.data_criacao >= ?";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			data = new Date(
-					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
-							.getTime()));
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, data);
-			pstmt.setDate(3, data);
+			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -261,29 +247,45 @@ public class AtendimentoDAO {
 	public List<String> getListaEmAbertosComHosts(Integer idCliente,
 			String mesRelatorio) {
 		List<String> retorno = new ArrayList<String>();
-		Date data = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT c.nome_fantasia "
-				+"  FROM pmp_task a, pmp_task_host b, pmp_host c "
-				+" WHERE a.task_id = b.task_id "
-				+"   AND c.host_id = b.host_id "
-				+"   AND a.cliente_id = ? "
-				+"   AND a.data_insercao = ?"
-				+"   AND a.data_criacao >= ?"
-				+"   AND a.data_fechamento IS NULL";
+		String sql = "select c.nome_fantasia "+
+					 "  from pmp_task a, pmp_task_host b, pmp_host c, "+
+					 "       ( "+    
+					 "        SELECT  p.chamado, "+
+					 "                max(p.data_insercao) data_insercao "+
+					 "          FROM pmp_task p "+ 
+					 "         WHERE cliente_id = ? "+
+					 "           and trunc(data_insercao, 'MM') <= trunc(?, 'MM') "+
+					 "           and trunc(data_criacao, 'MM') <= trunc(?, 'MM') "+
+					 "        	 and chamado in "+
+					 "        		 (select chamado "+ 
+					 "        			from pmp_task "+
+					 "        		   WHERE cliente_id = p.cliente_id "+
+					 "        			 and data_fechamento IS NULL "+
+					 "        		  union "+
+					 "        		  select chamado "+
+					 "        			from pmp_task "+
+					 "        		   WHERE cliente_id = p.cliente_id "+
+					 "        			 and trunc(data_fechamento,'MM') >= trunc(?, 'MM')) "+
+					 "        	 and chamado not in "+
+					 "        		 (select chamado "+
+					 "        			from pmp_task "+
+					 "        		   where cliente_id = p.cliente_id "+
+					 "        			 and trunc(data_fechamento, 'MM') <= trunc(?, 'MM')) "+
+					 "        group by p.chamado) x "+
+					 " where a.chamado = x.chamado "+
+					 "   and a.data_insercao = x.data_insercao "+
+					 "   and a.task_id = b.task_id "+
+					 "   AND c.host_id = b.host_id";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			data = new Date(
-					(new SimpleDateFormat("yyyy-MM-dd").parse(mesRelatorio)
-							.getTime()));
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, data);
-			pstmt.setDate(3, data);
+			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(4, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(5, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -302,5 +304,4 @@ public class AtendimentoDAO {
 		connection.closeConnection(pstmt);
 		return retorno;
 	}
-
 }
