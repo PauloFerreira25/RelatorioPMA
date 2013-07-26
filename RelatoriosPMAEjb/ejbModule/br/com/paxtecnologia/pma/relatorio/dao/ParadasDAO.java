@@ -52,10 +52,11 @@ public class ParadasDAO {
 		Integer retorno = null;
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT qtd_pe FROM pmp_sem_parada WHERE cliente_id = ?";
+		String sql = "SELECT qtd_pe FROM pmp_sem_parada WHERE cliente_id = ? and trunc(data_insercao,'MM') = trunc(?,'MM')";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
+			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
