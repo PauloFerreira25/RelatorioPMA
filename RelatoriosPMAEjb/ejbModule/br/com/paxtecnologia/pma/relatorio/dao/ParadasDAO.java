@@ -78,8 +78,9 @@ public class ParadasDAO {
 			Integer idCliente, String mesRelatorio, String tipo) {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT distinct c.chamado, " +
+		String sql = "SELECT c.chamado, " +
 					 "to_char(c.data_criacao, 'dd/mm/yyyy') data, " +
+					 "to_char(a.data_inicio_parada, 'dd/mm/yyyy') data_parada, " +
 					 "round(to_number(a.data_fim_parada - a.data_inicio_parada) * 24,2) segundos_trabalhados, " +
 					 "pmp_get_hosts_task(c.task_id) nome_fantasia, " +
 					 "c.titulo " +
@@ -92,6 +93,7 @@ public class ParadasDAO {
 					 "AND f.ambiente_id = 3 " + //producao
 					 "AND c.cliente_id = ? " +
 					 "AND c.data_insercao between ? and ? " +
+					 "AND trunc(c.data_insercao,'MM') = trunc(a.data_inicio_parada,'MM') " +
 					 "AND regexp_like(b.tipo_parada,?)";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
@@ -110,6 +112,7 @@ public class ParadasDAO {
 				ParadasPorTipoVO paradasPorTipoVO = new ParadasPorTipoVO();
 				paradasPorTipoVO.setIdchamado(rs.getString("chamado"));
 				paradasPorTipoVO.setData(rs.getString("data"));
+				paradasPorTipoVO.setDataParada(rs.getString("data_parada"));
 				paradasPorTipoVO.setHoras(rs.getDouble("segundos_trabalhados"));
 				paradasPorTipoVO.setHost(rs.getString("nome_fantasia"));
 				paradasPorTipoVO.setDescricao(rs.getString("titulo"));

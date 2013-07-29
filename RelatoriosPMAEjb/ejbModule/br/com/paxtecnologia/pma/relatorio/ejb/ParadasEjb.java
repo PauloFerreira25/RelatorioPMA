@@ -234,7 +234,7 @@ public class ParadasEjb {
 			listaParadasEvitadasMes = new ArrayList<ParadasPorTipoVO>();
 			for(ParadasPorTipoVO paradasPorTipoVO:getListaParadasEvitadas(idCliente, mesRelatorio, tipo)){
 				//Verifica se a data pertence ao mes do parametro mesRelatorio
-				if (Integer.parseInt(paradasPorTipoVO.getData().substring(3,5)) == (data.monthOfYear().get()) && Integer.parseInt(paradasPorTipoVO.getData().substring(6,10)) == (data.year().get())) {
+				if (Integer.parseInt(paradasPorTipoVO.getDataParada().substring(3,5)) == (data.monthOfYear().get()) && Integer.parseInt(paradasPorTipoVO.getData().substring(6,10)) == (data.year().get())) {
 					listaParadasEvitadasMes.add(paradasPorTipoVO);
 				}
 			}		
@@ -265,7 +265,7 @@ public class ParadasEjb {
 			listaParadasNaoProgramadasMes = new ArrayList<ParadasPorTipoVO>();
 			for(ParadasPorTipoVO paradasPorTipoVO:getListaParadasNaoProgramadas(idCliente, mesRelatorio, tipo)){
 				//Verifica se a data pertence ao mes do parametro mesRelatorio
-				if (Integer.parseInt(paradasPorTipoVO.getData().substring(3,5)) == (data.monthOfYear().get()) && Integer.parseInt(paradasPorTipoVO.getData().substring(6,10)) == (data.year().get())) {
+				if (Integer.parseInt(paradasPorTipoVO.getDataParada().substring(3,5)) == (data.monthOfYear().get()) && Integer.parseInt(paradasPorTipoVO.getData().substring(6,10)) == (data.year().get())) {
 					listaParadasNaoProgramadasMes.add(paradasPorTipoVO);
 				}
 			}
@@ -296,7 +296,7 @@ public class ParadasEjb {
 			listaParadasProgramadasEstrategicasMes = new ArrayList<ParadasPorTipoVO>();
 			for(ParadasPorTipoVO paradasPorTipoVO:getListaParadasProgramadasEstrategicas(idCliente, mesRelatorio, tipo)){
 				//Verifica se a data pertence ao mes do parametro mesRelatorio
-				if (Integer.parseInt(paradasPorTipoVO.getData().substring(3,5)) == (data.monthOfYear().get()) && Integer.parseInt(paradasPorTipoVO.getData().substring(6,10)) == (data.year().get())) {
+				if (Integer.parseInt(paradasPorTipoVO.getDataParada().substring(3,5)) == (data.monthOfYear().get()) && Integer.parseInt(paradasPorTipoVO.getData().substring(6,10)) == (data.year().get())) {
 					listaParadasProgramadasEstrategicasMes.add(paradasPorTipoVO);
 				}
 			}
@@ -326,7 +326,7 @@ public class ParadasEjb {
 			listaParadasProgramadasMes = new ArrayList<ParadasPorTipoVO>();
 			for(ParadasPorTipoVO paradasPorTipoVO:getListaParadasProgramadas(idCliente, mesRelatorio, tipo)){
 				//Verifica se a data pertence ao mes do parametro mesRelatorio
-				if (Integer.parseInt(paradasPorTipoVO.getData().substring(3,5)) == (data.monthOfYear().get()) && Integer.parseInt(paradasPorTipoVO.getData().substring(6,10)) == (data.year().get())) {
+				if (Integer.parseInt(paradasPorTipoVO.getDataParada().substring(3,5)) == (data.monthOfYear().get()) && Integer.parseInt(paradasPorTipoVO.getData().substring(6,10)) == (data.year().get())) {
 					listaParadasProgramadasMes.add(paradasPorTipoVO);
 				}
 			}

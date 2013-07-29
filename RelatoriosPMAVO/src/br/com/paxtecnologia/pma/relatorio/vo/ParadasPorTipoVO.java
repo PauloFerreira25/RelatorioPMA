@@ -4,6 +4,7 @@ public class ParadasPorTipoVO {
 	
 	private String idchamado;
 	private String data;
+	private String dataParada;
 	private Double horas;
 	private String host;
 	private String descricao;
@@ -37,6 +38,12 @@ public class ParadasPorTipoVO {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	public String getDataParada() {
+		return dataParada;
+	}
+	public void setDataParada(String dataParada) {
+		this.dataParada = dataParada;
 	}
 	
 }
