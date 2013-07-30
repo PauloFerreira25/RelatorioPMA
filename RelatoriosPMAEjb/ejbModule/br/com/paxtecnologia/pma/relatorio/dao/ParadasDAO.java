@@ -100,7 +100,7 @@ public class ParadasDAO {
 			pstmt.setInt(1, idCliente);
 			pstmt.setDate(2, FormataData.formataAnoInicio(mesRelatorio));
 			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setString(4, "^"+tipo);
+			pstmt.setString(4, "^"+tipo+" ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -145,7 +145,7 @@ public class ParadasDAO {
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
-			pstmt.setString(2, "^"+tipo);
+			pstmt.setString(2, "^"+tipo+" ");
 			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
