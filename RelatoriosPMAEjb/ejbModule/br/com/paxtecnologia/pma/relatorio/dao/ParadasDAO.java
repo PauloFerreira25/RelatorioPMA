@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.com.paxtecnologia.pma.relatorio.util.FormataData;
+import br.com.paxtecnologia.pma.relatorio.util.FormataDataUtil;
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasPorTipoVO;
 import br.com.paxtecnologia.pma.relatorio.vo.UltimoAnoVO;
 
@@ -26,7 +26,7 @@ public class ParadasDAO {
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +56,7 @@ public class ParadasDAO {
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,8 +98,8 @@ public class ParadasDAO {
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, FormataData.formataAnoInicio(mesRelatorio));
-			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataAnoInicio(mesRelatorio));
+			pstmt.setDate(3, FormataDataUtil.formataDataInicio(mesRelatorio));
 			pstmt.setString(4, "^"+tipo+" ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -146,7 +146,7 @@ public class ParadasDAO {
 		try {
 			pstmt.setInt(1, idCliente);
 			pstmt.setString(2, "^"+tipo+" ");
-			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataDataUtil.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

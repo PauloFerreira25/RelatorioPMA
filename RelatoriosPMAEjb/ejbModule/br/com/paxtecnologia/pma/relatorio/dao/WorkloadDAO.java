@@ -8,7 +8,7 @@ import java.util.List;
 
 import br.com.paxtecnologia.pma.relatorio.vo.GraficoMetricaVO;
 import br.com.paxtecnologia.pma.relatorio.vo.TimeFrameVO;
-import br.com.paxtecnologia.pma.relatorio.util.FormataData;
+import br.com.paxtecnologia.pma.relatorio.util.FormataDataUtil;
 
 public class WorkloadDAO {
 	private DataSourcePMA connection;
@@ -58,8 +58,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataDataUtil.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -93,8 +93,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, FormataData.formataAnoInicio(mesRelatorio));
-			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataDataUtil.formataAnoInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -134,8 +134,8 @@ public class WorkloadDAO {
 				     + "GROUP BY to_char(data, 'dd/mm/yyyy') ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataDataUtil.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 			int index = 4;
 			for( String o : possibleValues ) {
@@ -179,8 +179,8 @@ public class WorkloadDAO {
 				+ "GROUP BY to_char(data, 'mm/yyyy') ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
-			pstmt.setDate(1, FormataData.formataAnoInicio(mesRelatorio));
-			pstmt.setDate(2, FormataData.formataDataFim(mesRelatorio));
+			pstmt.setDate(1, FormataDataUtil.formataAnoInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataFim(mesRelatorio));
 			pstmt.setInt(3, metrica);
 			int index = 4;
 			for( String o : possibleValues ) {

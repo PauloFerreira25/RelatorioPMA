@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class FormataData {
+public class FormataDataUtil {
 	
 	public static Date formataAnoInicio(String mesRelatorio) {
 		Date anoInicio = null;

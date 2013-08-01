@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 
 import br.com.paxtecnologia.pma.relatorio.dao.ParadasDAO;
+import br.com.paxtecnologia.pma.relatorio.util.FormataValorUtil;
 import br.com.paxtecnologia.pma.relatorio.vo.ParadasPorTipoVO;
 import br.com.paxtecnologia.pma.relatorio.vo.UltimoAnoVO;
 
@@ -457,6 +458,7 @@ public class ParadasEjb {
 				somaHorasMes = somaHorasMes + paradasPorTipoVO.getHoras();
 			}
 		}
-		return somaHorasMes;
+		
+		return FormataValorUtil.converterDoubleDoisDecimais(somaHorasMes);
 	}	
 }

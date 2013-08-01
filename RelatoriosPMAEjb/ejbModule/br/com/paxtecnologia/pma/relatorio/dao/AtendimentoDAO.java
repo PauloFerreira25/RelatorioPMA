@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.paxtecnologia.pma.relatorio.util.FormataData;
+import br.com.paxtecnologia.pma.relatorio.util.FormataDataUtil;
 import br.com.paxtecnologia.pma.relatorio.vo.ChamadoVO;
 
 public class AtendimentoDAO {
@@ -23,8 +23,8 @@ public class AtendimentoDAO {
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataDataUtil.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,8 +66,8 @@ public class AtendimentoDAO {
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataDataUtil.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -138,10 +138,10 @@ public class AtendimentoDAO {
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(4, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(5, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataDataUtil.formataDataInicio(mesRelatorio));
+			pstmt.setDate(4, FormataDataUtil.formataDataInicio(mesRelatorio));
+			pstmt.setDate(5, FormataDataUtil.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -183,8 +183,8 @@ public class AtendimentoDAO {
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataDataUtil.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -220,8 +220,8 @@ public class AtendimentoDAO {
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
-			pstmt.setDate(2, FormataData.formataDataInicio(mesRelatorio));
-			pstmt.setDate(3, FormataData.formataDataInicio(mesRelatorio));
+			pstmt.setDate(2, FormataDataUtil.formataDataInicio(mesRelatorio));
+			pstmt.setDate(3, FormataDataUtil.formataDataInicio(mesRelatorio));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
