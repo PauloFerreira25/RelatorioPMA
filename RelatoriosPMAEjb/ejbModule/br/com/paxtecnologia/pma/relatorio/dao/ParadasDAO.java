@@ -78,7 +78,7 @@ public class ParadasDAO {
 			Integer idCliente, String mesRelatorio, String tipo) {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT c.chamado, " +
+		String sql = "SELECT distinct c.chamado, " +
 					 "to_char(c.data_criacao, 'dd/mm/yyyy') data, " +
 					 "to_char(a.data_inicio_parada, 'dd/mm/yyyy') data_parada, " +
 					 "round(to_number(a.data_fim_parada - a.data_inicio_parada) * 24,2) segundos_trabalhados, " +
