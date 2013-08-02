@@ -78,23 +78,26 @@ public class ParadasDAO {
 			Integer idCliente, String mesRelatorio, String tipo) {
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT distinct c.chamado, " +
+		String sql = "SELECT c.chamado, " +
 					 "to_char(c.data_criacao, 'dd/mm/yyyy') data, " +
 					 "to_char(a.data_inicio_parada, 'dd/mm/yyyy') data_parada, " +
 					 "round(to_number(a.data_fim_parada - a.data_inicio_parada) * 24,2) segundos_trabalhados, " +
 					 "pmp_get_hosts_task(c.task_id) nome_fantasia, " +
 					 "c.titulo " +
-					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c, pmp_task_host d, pmp_host e, pmp_host_ambiente f " +
+					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c " +
 					 "WHERE a.parada_id = b.parada_id " +
-					 "AND a.task_id = c.task_id " +
-					 "AND a.task_id = d.task_id " +
-					 "AND d.host_id = e.host_id " +
-					 "AND e.host_id = f.host_id " +
-					 "AND f.ambiente_id = 3 " + //producao
-					 "AND c.cliente_id = ? " +
-					 "AND c.data_insercao between ? and ? " +
-					 "AND trunc(c.data_insercao,'MM') = trunc(a.data_inicio_parada,'MM') " +
-					 "AND regexp_like(b.tipo_parada,?)";
+					 "  AND a.task_id = c.task_id " +
+					 "  AND c.cliente_id = ? " +
+					 "  AND c.data_insercao between ? and ? " +
+					 "  AND trunc(c.data_insercao,'MM') = trunc(a.data_inicio_parada,'MM') " +
+					 "  AND regexp_like(b.tipo_parada,?) " +
+					 "  AND EXISTS (select 1 from pmp_task_host d, " + 
+                     "                            pmp_host e, " +
+                     "                            pmp_host_ambiente f " + 
+                     "                      where a.task_id = d.task_id " + 
+                     "                        AND d.host_id = e.host_id " + 
+					 "                        AND e.host_id = f.host_id " +
+					 "                        AND f.ambiente_id = 3) "; //producao
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
@@ -131,16 +134,19 @@ public class ParadasDAO {
 		PreparedStatement pstmt;
 		String sql = "SELECT to_char(c.data_insercao, 'yyyy') data, " +
 					 "round(sum(to_number(a.data_fim_parada - a.data_inicio_parada)) * 24,2) horas_trabalhadas " +
-					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c, pmp_task_host d, pmp_host e, pmp_host_ambiente f " +
+					 "FROM pmp_task_parada a, pmp_parada b, pmp_task c " +
 					 "WHERE a.parada_id = b.parada_id " +
-					 "AND a.task_id = c.task_id " +
-					 "AND a.task_id = d.task_id " +
-					 "AND d.host_id = e.host_id " +
-					 "AND e.host_id = f.host_id " +
-					 "AND f.ambiente_id = 3 " + //producao
-					 "AND c.cliente_id = ? " +
-					 "AND regexp_like(b.tipo_parada,?) " +
-					 "AND c.data_insercao <= ?" +
+					 "  AND a.task_id = c.task_id " +
+					 "  AND c.cliente_id = ? " +
+					 "  AND regexp_like(b.tipo_parada,?) " +
+					 "  AND c.data_insercao <= ?" +
+					 "  AND EXISTS (select 1 from pmp_task_host d, " + 
+                     "                            pmp_host e, " +
+                     "                            pmp_host_ambiente f " + 
+                     "                      where a.task_id = d.task_id " + 
+                     "                        AND d.host_id = e.host_id " + 
+					 "                        AND e.host_id = f.host_id " +
+					 "                        AND f.ambiente_id = 3) " + //producao
 					 "group by to_char(c.data_insercao, 'yyyy')";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
