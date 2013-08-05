@@ -1,6 +1,8 @@
 package br.com.paxtecnologia.pma.relatorio.ejb;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -555,6 +557,16 @@ public class AtendimentoEjb {
 			setPorcentagemChamadosAbertosSolicitante(porcentagemAberto);
 			setPorcentagemChamadosFechadosSolicitante(porcentagemFechado);
 		}
+		
+		List<ChamadoQuantidadeVO> orderArrayList = listaChamadoSolicitante;
+		
+		Collections.sort(orderArrayList, new Comparator<ChamadoQuantidadeVO>() {
+			@Override
+			public int compare(ChamadoQuantidadeVO o1, ChamadoQuantidadeVO o2) {
+ 				return o2.getQtdeAberto().compareTo(o1.getQtdeAberto());
+ 			}
+		});
+		
 		return listaChamadoSolicitante;
 	}
 
@@ -790,6 +802,16 @@ public class AtendimentoEjb {
 			setPorcentagemChamadosAbertosHost(porcentagemAberto);
 			setPorcentagemChamadosFechadosHost(porcentagemFechado);
 		}
+		
+		List<ChamadoQuantidadeVO> orderArrayList = listaChamadosHost;
+		
+		Collections.sort(orderArrayList, new Comparator<ChamadoQuantidadeVO>() {
+			@Override
+			public int compare(ChamadoQuantidadeVO o1, ChamadoQuantidadeVO o2) {
+ 				return o2.getQtdeAberto().compareTo(o1.getQtdeAberto());
+ 			}
+		});	
+		
 		return listaChamadosHost;
 	}
 

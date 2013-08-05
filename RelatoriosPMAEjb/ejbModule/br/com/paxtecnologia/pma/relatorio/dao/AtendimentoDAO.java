@@ -19,7 +19,7 @@ public class AtendimentoDAO {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND trunc(data_insercao,'MM') = trunc(?,'MM') AND trunc(data_criacao,'MM') = trunc(?,'MM')";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND trunc(data_insercao,'MM') = trunc(?,'MM') AND trunc(data_criacao,'MM') = trunc(?,'MM') order by data_criacao";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
@@ -62,7 +62,7 @@ public class AtendimentoDAO {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND trunc(data_insercao,'MM') = trunc(?,'MM') AND trunc(data_fechamento,'MM') = trunc(?,'MM')";
+		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND trunc(data_insercao,'MM') = trunc(?,'MM') AND trunc(data_fechamento,'MM') = trunc(?,'MM') order by data_criacao";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
@@ -134,7 +134,8 @@ public class AtendimentoDAO {
 				"        			 and trunc(data_fechamento, 'MM') <= trunc(?, 'MM')) "+
 				"        group by p.chamado) x "+
 				" where p.chamado = x.chamado "+
-				"   and p.data_insercao = x.data_insercao";
+				"   and p.data_insercao = x.data_insercao" +
+				" order by p.data_criacao";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);

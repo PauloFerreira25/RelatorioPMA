@@ -197,8 +197,11 @@
 			<p class="sub-titulo2">4.5 Totais</p>
 			<h:outputText
 				value="A PNP esta diretamente relacionada ao PE, onde PNP gera Downtime e PE gera downtime evitado, sendo assim:" />
-			<h:outputText value="PNP: #{paradasBean.getTempoParadasMes('PNP')} hrs e " />
-			<h:outputText value="PE: #{paradasBean.getTempoParadasMes('PE')} hrs" />
+			<div class="centro">
+				<h:outputText value="PNP: #{paradasBean.getTempoParadasMes('PNP')} hrs" class="formatodestaque"/>
+				<br />
+				<h:outputText value="PE: #{paradasBean.getTempoParadasMes('PE')} hrs" class="formatodestaque"/>
+			</div>
 			<div id="princapaloutros_comercial_mes">
 				<div id="graficoPNPPE" class="graph-med"></div>
 				<div align="center">
@@ -209,8 +212,11 @@
 
 			<h:outputText
 				value="A PP esta diretamente relacionada ao PPE, onde PP gera Downtime e PPE gera downtime evitado, sendo assim:" />
-			<h:outputText value="PP: #{paradasBean.getTempoParadasMes('PP')} hrs e " />
-			<h:outputText value="PPE: #{paradasBean.getTempoParadasMes('PPE')} hrs" />
+			<div class="centro">
+				<h:outputText value="PP: #{paradasBean.getTempoParadasMes('PP')} hrs" class="formatodestaque" />
+				<br />
+				<h:outputText value="PPE: #{paradasBean.getTempoParadasMes('PPE')} hrs" class="formatodestaque" />
+			</div>
 			<div id="princapaloutros_comercial_mes">
 				<div id="graficoPPEPP" class="graph-med"></div>
 				<div align="center">
@@ -272,8 +278,8 @@ $(function () {
 	<script type="text/javascript">
 	//<![CDATA[
 $(function () {
-    var d1 = #{paradasBean.getParadas("PPE")};
-    var d2 = #{paradasBean.getParadas("PP")};
+    var d1 = #{paradasBean.getParadas("PP")};
+    var d2 = #{paradasBean.getParadas("PPE")};
     var d3 = [];
 
     for (var i = 0; i <d1.length; i ++)
@@ -300,11 +306,11 @@ $(function () {
                        
     $.plot($("#graficoPPEPP"), [
         {
-            label: "PPE", color:"red", data: d1,
+            label: "PP", color:"red", data: d1,
             bars: { show: true, lineWidth: 8 },
 	},
 	{
-            label: "PP", color:"blue", data: d2,
+            label: "PPE", color:"blue", data: d2,
             bars: { show: true, lineWidth: 8 }
 	},
 	{

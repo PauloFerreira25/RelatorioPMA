@@ -97,7 +97,8 @@ public class ParadasDAO {
                      "                      where a.task_id = d.task_id " + 
                      "                        AND d.host_id = e.host_id " + 
 					 "                        AND e.host_id = f.host_id " +
-					 "                        AND f.ambiente_id = 3) "; //producao
+					 "                        AND f.ambiente_id = 3)" + //producao
+					 "ORDER BY c.data_criacao"; 
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);

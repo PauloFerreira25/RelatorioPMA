@@ -26,6 +26,11 @@ a:hover {
 	text-decoration: none;
 }
 
+.formatodestaque {
+	font-size: 15px;
+	font-weight: bold;
+}
+
 .formato1 {
 	font-size: 19px;
 }
