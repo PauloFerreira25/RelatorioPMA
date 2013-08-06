@@ -27,7 +27,7 @@ public class CapaBean {
 	private String tituloRelatorio = "SUPORTE";
 	private String subtituloRelatorio;
 	private String dataCriacao;
-	private String textoVersao = "Versao 1.0";
+	private String textoVersao = "Versão 1.0";
 	SimpleDateFormat dateFormat;
 	private String nomeCliente;
 	private String mesEAno;
