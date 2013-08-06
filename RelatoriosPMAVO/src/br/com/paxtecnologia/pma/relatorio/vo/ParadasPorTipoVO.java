@@ -7,7 +7,7 @@ public class ParadasPorTipoVO {
 	private String dataParada;
 	private Double horas;
 	private String host;
-	private String descricao;
+	private String titulo;
 	
 	public String getIdchamado() {
 		return idchamado;
@@ -33,11 +33,11 @@ public class ParadasPorTipoVO {
 	public void setHost(String host) {
 		this.host = host;
 	}
-	public String getDescricao() {
-		return descricao;
+	public String getTitulo() {
+		return titulo;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 	public String getDataParada() {
 		return dataParada;

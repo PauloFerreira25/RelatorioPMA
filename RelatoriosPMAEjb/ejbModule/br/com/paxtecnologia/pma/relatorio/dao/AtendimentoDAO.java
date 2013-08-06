@@ -19,7 +19,19 @@ public class AtendimentoDAO {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND trunc(data_insercao,'MM') = trunc(?,'MM') AND trunc(data_criacao,'MM') = trunc(?,'MM') order by data_criacao";
+		String sql = "SELECT chamado, "+
+					 "       titulo, "+
+					 "       solicitante, "+
+					 "		 tipo_chamado, "+
+					 "		 status, "+
+					 "		 segundos_trabalhados, "+
+					 "		 data_criacao, "+
+					 "		 data_fechamento, "+
+					 "       pmp_get_hosts_task(task_id) nome_fantasia "+
+					 "  FROM pmp_task WHERE cliente_id = ? "+
+					 "   AND trunc(data_insercao,'MM') = trunc(?,'MM') "+
+					 "   AND trunc(data_criacao,'MM') = trunc(?,'MM') "+
+					 " order by data_criacao";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
@@ -47,6 +59,7 @@ public class AtendimentoDAO {
 				temp.setTipoChamado(rs.getString("tipo_chamado"));
 				temp.setSolicitante(rs.getString("solicitante"));
 				temp.setSegundosTrabalhos(rs.getInt("segundos_trabalhados"));
+				temp.setHost(rs.getString("nome_fantasia"));
 				retorno.add(temp);
 			}
 		} catch (SQLException e) {
@@ -62,7 +75,20 @@ public class AtendimentoDAO {
 		List<ChamadoVO> retorno = new ArrayList<ChamadoVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT chamado, titulo, solicitante, tipo_chamado, status, segundos_trabalhados, data_criacao, data_fechamento FROM pmp_task WHERE cliente_id = ? AND trunc(data_insercao,'MM') = trunc(?,'MM') AND trunc(data_fechamento,'MM') = trunc(?,'MM') order by data_criacao";
+		String sql = "SELECT chamado, "+
+					 "       titulo, "+
+					 "       solicitante, "+
+					 "       tipo_chamado, "+
+					 "       status, "+
+					 "       segundos_trabalhados, "+
+					 "       data_criacao, "+
+					 "       data_fechamento, "+
+					 "       pmp_get_hosts_task(task_id) nome_fantasia "+
+					 "  FROM pmp_task "+
+					 " WHERE cliente_id = ? "+
+					 "   AND trunc(data_insercao,'MM') = trunc(?,'MM') "+
+					 "   AND trunc(data_fechamento,'MM') = trunc(?,'MM') "+
+					 " order by data_criacao";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setInt(1, idCliente);
@@ -87,6 +113,7 @@ public class AtendimentoDAO {
 				temp.setTipoChamado(rs.getString("tipo_chamado"));
 				temp.setSolicitante(rs.getString("solicitante"));
 				temp.setSegundosTrabalhos(rs.getInt("segundos_trabalhados"));
+				temp.setHost(rs.getString("nome_fantasia"));
 				retorno.add(temp);
 			}
 		} catch (SQLException e) {
@@ -108,7 +135,8 @@ public class AtendimentoDAO {
 				"       p.tipo_chamado, "+
 				"       p.status, "+
 				"       p.segundos_trabalhados, "+
-				"       p.data_criacao "+
+				"       p.data_criacao, "+
+				"       pmp_get_hosts_task(p.task_id) nome_fantasia "+
 				"  from pmp_task p, "+
 				"       ( "+    
 				"        SELECT  p.chamado, "+
@@ -134,7 +162,7 @@ public class AtendimentoDAO {
 				"        			 and trunc(data_fechamento, 'MM') <= trunc(?, 'MM')) "+
 				"        group by p.chamado) x "+
 				" where p.chamado = x.chamado "+
-				"   and p.data_insercao = x.data_insercao" +
+				"   and p.data_insercao = x.data_insercao "+
 				" order by p.data_criacao";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
@@ -159,6 +187,7 @@ public class AtendimentoDAO {
 				temp.setTipoChamado(rs.getString("tipo_chamado"));
 				temp.setSolicitante(rs.getString("solicitante"));
 				temp.setSegundosTrabalhos(rs.getInt("segundos_trabalhados"));
+				temp.setHost(rs.getString("nome_fantasia"));
 				retorno.add(temp);
 			}
 		} catch (SQLException e) {

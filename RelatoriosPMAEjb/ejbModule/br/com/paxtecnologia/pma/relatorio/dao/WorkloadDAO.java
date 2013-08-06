@@ -51,11 +51,12 @@ public class WorkloadDAO {
 		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
-				+ "FROM fato_coleta "
+		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor_medio) valor "
+				+ "FROM pmp_workload_dia "
 				+ "WHERE data between ? and ? "
 				+ "AND metrica_link_id = ? "
-				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " + "ORDER BY data";
+				+ "GROUP BY to_char(data, 'dd/mm/yyyy') " 
+				+ "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setDate(1, FormataDataUtil.formataDataInicio(mesRelatorio));
@@ -86,11 +87,12 @@ public class WorkloadDAO {
 		List<TimeFrameVO> timeFrame = new ArrayList<TimeFrameVO>();
 		connection = new DataSourcePMA();
 		PreparedStatement pstmt;
-		String sql = "SELECT to_char(data, 'mm/yyyy') data, avg(valor) valor "
-				+ "FROM fato_coleta "
+		String sql = "SELECT to_char(data, 'mm/yyyy') data, avg(valor_medio) valor "
+				+ "FROM pmp_workload_mes "
 				+ "WHERE data between ? and ? "
 				+ "AND metrica_link_id = ? "
-				+ "GROUP BY to_char(data, 'mm/yyyy') " + "ORDER BY data";
+				+ "GROUP BY to_char(data, 'mm/yyyy') "
+				+ "ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
 			pstmt.setDate(1, FormataDataUtil.formataAnoInicio(mesRelatorio));
@@ -126,11 +128,11 @@ public class WorkloadDAO {
 		for( int i = 0 ; i < possibleValues.size(); i++ ) {
 		    builder.append("?,");
 		}
-		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor) valor "
-				     + "FROM fato_coleta "
+		String sql = "SELECT to_char(data, 'dd/mm/yyyy') data, avg(valor_medio) valor "
+				     + "FROM pmp_workload_dia "
 				     + "WHERE data between ? and ? "
 				     + "AND metrica_link_id = ? "
-				     + "AND to_char(data,'hh24') in (" + builder.deleteCharAt( builder.length() -1 ).toString() + ") "
+				     + "AND hora in (" + builder.deleteCharAt( builder.length() -1 ).toString() + ") "
 				     + "GROUP BY to_char(data, 'dd/mm/yyyy') ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {
@@ -171,11 +173,11 @@ public class WorkloadDAO {
 		for( int i = 0 ; i < possibleValues.size(); i++ ) {
 		    builder.append("?,");
 		}
-		String sql = "SELECT to_char(data, 'mm/yyyy') data, avg(valor) valor "
-				+ "FROM fato_coleta "
+		String sql = "SELECT to_char(data, 'mm/yyyy') data, avg(valor_medio) valor "
+				+ "FROM pmp_workload_mes "
 				+ "WHERE data between ? and ? "
 				+ "AND metrica_link_id = ? "
-				+ "AND to_char(data,'hh24') in (" + builder.deleteCharAt( builder.length() -1 ).toString() + ") "
+				+ "AND hora in (" + builder.deleteCharAt( builder.length() -1 ).toString() + ") "
 				+ "GROUP BY to_char(data, 'mm/yyyy') ORDER BY data";
 		pstmt = connection.getPreparedStatement(sql);
 		try {

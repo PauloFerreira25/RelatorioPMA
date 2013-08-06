@@ -119,7 +119,7 @@ public class ParadasDAO {
 				paradasPorTipoVO.setDataParada(rs.getString("data_parada"));
 				paradasPorTipoVO.setHoras(rs.getDouble("segundos_trabalhados"));
 				paradasPorTipoVO.setHost(rs.getString("nome_fantasia"));
-				paradasPorTipoVO.setDescricao(rs.getString("titulo"));
+				paradasPorTipoVO.setTitulo(rs.getString("titulo"));
 				listaParadasPorTipoVO.add(paradasPorTipoVO);
 			}
 		} catch (SQLException e) {

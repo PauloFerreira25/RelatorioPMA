@@ -35,22 +35,18 @@
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
 				columnClasses="celluleLeft,celluleCenter,celluleCenter">
-
 				<h:column>
 					<f:facet name="header">Tipo</f:facet>
 					<h:outputText value="#{i.tipo}" />
 				</h:column>
-
 				<h:column>
 					<f:facet name="header">Sigla</f:facet>
 					<h:outputText value="#{i.sigla}" />
 				</h:column>
-
 				<h:column>
 					<f:facet name="header">Quantidade</f:facet>
 					<h:outputText value="#{i.qtde}" />
 				</h:column>
-
 			</h:dataTable>
 			<br />
 			<h:outputText
@@ -63,17 +59,14 @@
 				rowClasses="default-table-odd-row,default-table-even-row"
 				footerClass="default-table-footer"
 				columnClasses="celluleLeft,celluleCenter">
-
 				<h:column>
 					<f:facet name="header">Descrição</f:facet>
 					<h:outputText value="#{i.texto}" />
 				</h:column>
-
 				<h:column>
 					<f:facet name="header">Quantidade</f:facet>
 					<h:outputText value="#{i.valor}" />
 				</h:column>
-
 			</h:dataTable>
 			<div id='chamadossolicitantes'>
 				<p class="sub-titulo2">2.2 Chamados por Solicitante</p>
@@ -85,19 +78,16 @@
 					footerClass="default-table-footer"
 					columnClasses="celluleLeft,celluleCenter,celluleCenter,celluleCenter,celluleCenter"
 					rendered="#{!empty atendimentoBean.listaSolicitante}">
-
 					<h:column footerClass="default-table-footer celluleLeft">
 						<f:facet name="header">Solicitante</f:facet>
 						<h:outputText value="#{i.nome}" />
 						<f:facet name="footer">	Total </f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.qtdeAberto}" />
 						<f:facet name="footer">#{atendimentoBean.qtdeChamadosAbertosSolicitante}</f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">% de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.porcentoAberto}">
@@ -110,13 +100,11 @@
 							</h:outputText>
 						</f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.qtdeFechado}" />
 						<f:facet name="footer">#{atendimentoBean.qtdeChamadosFechadosSolicitante}</f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">% de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.porcentoFechado}">
@@ -129,7 +117,6 @@
 							</h:outputText>
 						</f:facet>
 					</h:column>
-
 				</h:dataTable>
 			</div>
 			<div id='tipochamado'>
@@ -139,19 +126,16 @@
 					rowClasses="default-table-odd-row,default-table-even-row"
 					footerClass="default-table-footer"
 					columnClasses="celluleLeft,celluleCenter,celluleCenter,celluleCenter,celluleCenter">
-
 					<h:column footerClass="default-table-footer celluleLeft">
 						<f:facet name="header">Tipo de Chamado</f:facet>
 						<h:outputText value="#{i.nome}" />
 						<f:facet name="footer">Total</f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.qtdeAberto}" />
 						<f:facet name="footer">#{atendimentoBean.qtdeChamadosAbertosTipo}</f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">% de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.porcentoAberto}">
@@ -162,15 +146,12 @@
 								<f:convertNumber type="percent" />
 							</h:outputText>
 						</f:facet>
-
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.qtdeFechado}" />
 						<f:facet name="footer">#{atendimentoBean.qtdeChamadosFechadosTipo}</f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">% de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.porcentoFechado}">
@@ -195,27 +176,26 @@
 					footerClass="default-table-footer"
 					columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft"
 					rendered="#{!empty atendimentoBean.listaChamadosEmAbertos}">
-
 					<h:column>
-						<f:facet name="header">ID Chamado</f:facet>
+						<f:facet name="header">Chamado</f:facet>
 						<h:outputText value="#{i.idChamado}" />
 					</h:column>
-
+					<h:column>
+						<f:facet name="header">Host</f:facet>
+						<h:outputText value="#{i.host}" />
+					</h:column>
 					<h:column>
 						<f:facet name="header">Titulo</f:facet>
 						<h:outputText value="#{i.titulo}" />
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Data de Abertura</f:facet>
 						<h:outputText value="#{i.dataAbertura}" />
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Status</f:facet>
 						<h:outputText value="#{i.status}" />
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Tipo de Chamado</f:facet>
 						<h:outputText value="#{i.tipoChamado}" />
@@ -233,32 +213,30 @@
 					footerClass="default-table-footer"
 					columnClasses="celluleLeft,celluleLeft,celluleLeft,celluleLeft,celluleLeft"
 					rendered="#{!empty atendimentoBean.listaChamadosFechados}">
-
 					<h:column>
-						<f:facet name="header">ID Chamado</f:facet>
+						<f:facet name="header">Chamado</f:facet>
 						<h:outputText value="#{i.idChamado}" />
 					</h:column>
-
+					<h:column>
+						<f:facet name="header">Host</f:facet>
+						<h:outputText value="#{i.host}" />
+					</h:column>
 					<h:column>
 						<f:facet name="header">Titulo</f:facet>
 						<h:outputText value="#{i.titulo}" />
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Data de Abertura</f:facet>
 						<h:outputText value="#{i.dataAbertura}" />
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Data de Resolução</f:facet>
 						<h:outputText value="#{i.dataFechamento}" />
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Status</f:facet>
 						<h:outputText value="#{i.status}" />
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Tipo de Chamado</f:facet>
 						<h:outputText value="#{i.tipoChamado}" />
@@ -277,19 +255,16 @@
 					rowClasses="default-table-odd-row,default-table-even-row"
 					footerClass="default-table-footer"
 					columnClasses="celluleLeft,celluleCenter,celluleCenter,celluleCenter,celluleCenter">
-
 					<h:column footerClass="default-table-footer celluleLeft">
 						<f:facet name="header">Hostname</f:facet>
 						<h:outputText value="#{i.nome}" />
 						<f:facet name="footer">Total</f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.qtdeAberto}" />
 						<f:facet name="footer">#{atendimentoHostBean.qtdeChamadosAbertosComHost}</f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">% de Chamados Abertos</f:facet>
 						<h:outputText value="#{i.porcentoAberto}">
@@ -302,13 +277,11 @@
 							</h:outputText>
 						</f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">Quantidade de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.qtdeFechado}" />
 						<f:facet name="footer">#{atendimentoHostBean.qtdeChamadosFechadosComHost}</f:facet>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">% de Chamados Fechados</f:facet>
 						<h:outputText value="#{i.porcentoFechado}">
@@ -321,7 +294,6 @@
 							</h:outputText>
 						</f:facet>
 					</h:column>
-
 				</h:dataTable>
 
 				<script type="text/javascript">

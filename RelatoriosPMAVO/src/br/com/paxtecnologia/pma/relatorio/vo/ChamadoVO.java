@@ -10,6 +10,7 @@ public class ChamadoVO {
 	private String tipoChamado;
 	private String solicitante;
 	private Integer segundosTrabalhos;
+	private String host;
 
 	public String getIdChamado() {
 		return idChamado;
@@ -73,6 +74,14 @@ public class ChamadoVO {
 
 	public void setSegundosTrabalhos(Integer segundosTrabalhos) {
 		this.segundosTrabalhos = segundosTrabalhos;
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
 	}
 
 }
